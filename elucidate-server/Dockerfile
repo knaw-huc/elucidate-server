@@ -2,7 +2,7 @@
 # If running manually it should be built from the elucidate-server
 # module after building `annotations.war` artifact.
 
-# We use a JRE 10 image so the JVM is able to discover Docker's
+# We use a JRE 11 image so the JVM is able to discover Docker's
 # memory/cpu cgroup settings.
 FROM tomcat:8-jre11
 EXPOSE 8080
