@@ -19,7 +19,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
+				<version>${maven-war-plugin.version}</version>
 				<configuration>
 					<warName>annotation</warName>
 				</configuration>
@@ -27,7 +27,7 @@
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.13</version>
+				<version>${dockerfile-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>default</id>
@@ -38,7 +38,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<repository>dlcs/elucidate-server</repository>
+					<repository>brambdocker/huc-elucidate-server</repository>
 					<tag>${project.version}</tag>
 					<buildArgs>
 						<ARTIFACT_NAME>${project.build.finalName}.war</ARTIFACT_NAME>
@@ -53,12 +53,12 @@
 		<dependency>
 			<groupId>com.digirati.elucidate</groupId>
 			<artifactId>elucidate-common-lib</artifactId>
-			<version>1.6.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digirati.elucidate</groupId>
 			<artifactId>elucidate-converter</artifactId>
-			<version>1.6.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<!-- JSON-LD Dependencies -->
 		<dependency>
@@ -219,7 +219,7 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.9.9</version>
+			<version>${joda-time.version}</version>
 		</dependency>
 		<!-- Testing Dependencies -->
 		<dependency>
