@@ -18,9 +18,7 @@ import com.digirati.elucidate.web.converter.security.SecurityUserReferenceCollec
 import com.digirati.elucidate.web.converter.security.UserSecurityDetailsMessageConverter;
 import com.digirati.elucidate.web.converter.validationerror.JSONLDValidationErrorMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.annotation.JSONLDW3CAnnotationMessageConverter;
-import com.digirati.elucidate.web.converter.w3c.annotation.TurtleW3CAnnotationMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationcollection.JSONLDW3CAnnotationCollectionMessageConverter;
-import com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationcollection.TurtleW3CAnnotationCollectionMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationpage.JSONLDW3CAnnotationPageMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationpage.TurtleW3CAnnotationPageMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.bulkupdate.JSONLDW3CBatchOperationMessageConverter;
@@ -54,11 +52,11 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private JSONLDW3CAnnotationMessageConverter jsonLdW3CAnnotationMessageConverter;
     @Autowired
-    private TurtleW3CAnnotationMessageConverter turtleW3CAnnotationMessageConverter;
+    private com.digirati.elucidate.web.converter.w3c.annotation.NQuadW3CAnnotationMessageConverter turtleW3CAnnotationMessageConverter;
     @Autowired
     private JSONLDW3CAnnotationCollectionMessageConverter jsonLdW3CAnnotationCollectionMessageConverter;
     @Autowired
-    private TurtleW3CAnnotationCollectionMessageConverter turtleW3CAnnotationCollectionMessageConverter;
+    private com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationcollection.NQuadW3CAnnotationCollectionMessageConverter turtleW3CAnnotationCollectionMessageConverter;
     @Autowired
     private JSONLDW3CAnnotationPageMessageConverter jsonLdW3CAnnotationPageMessageConverter;
     @Autowired

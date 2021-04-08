@@ -1,22 +1,11 @@
 package com.digirati.elucidate.test.repository.impl;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
-import static org.mockito.AdditionalMatchers.aryEq;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-
+import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationCollectionRowMapper;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
+import com.digirati.elucidate.common.test.AbstractTest;
+import com.digirati.elucidate.repository.AnnotationCollectionStoreRepository;
+import com.digirati.elucidate.repository.impl.AnnotationCollectionStoreRepositoryJDBCImpl;
+import com.github.jsonldjava.utils.JsonUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +14,22 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationCollectionRowMapper;
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
-import com.digirati.elucidate.common.test.AbstractTest;
-import com.digirati.elucidate.repository.AnnotationCollectionStoreRepository;
-import com.digirati.elucidate.repository.impl.AnnotationCollectionStoreRepositoryJDBCImpl;
-import com.github.jsonldjava.utils.JsonUtils;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.AdditionalMatchers.aryEq;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(AnnotationCollectionStoreRepositoryJDBCImpl.class)

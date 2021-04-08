@@ -1,22 +1,21 @@
 package com.digirati.elucidate.web.converter.oa.bulkupdate;
 
-import java.util.Map;
-
+import com.digirati.elucidate.model.batch.OABatchOperation;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import com.digirati.elucidate.model.batch.OABatchOperation;
-import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.impl.TurtleTripleCallback;
+import java.util.Map;
 
 @Component
 public class TurtleOABatchOperationMessageConverter extends AbstractOABatchOperationMessageConverter {
 
-    private TurtleTripleCallback turtleTripleCallback;
+    private NQuadTripleCallback turtleTripleCallback;
 
     public TurtleOABatchOperationMessageConverter() {
         super(APPLICATION_TURTLE);
-        this.turtleTripleCallback = new TurtleTripleCallback();
+        this.turtleTripleCallback = new NQuadTripleCallback();
     }
 
     @Override

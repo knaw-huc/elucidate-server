@@ -1,13 +1,12 @@
 package com.digirati.elucidate.test.model.enumeration;
 
+import com.digirati.elucidate.model.enumeration.ClientPreference;
+import org.junit.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
-
-import com.digirati.elucidate.model.enumeration.ClientPreference;
 
 public class ClientPreferenceTest {
 

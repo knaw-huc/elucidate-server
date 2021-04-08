@@ -1,22 +1,21 @@
 package com.digirati.elucidate.web.converter.w3c.bulkupdate;
 
-import java.util.Map;
-
+import com.digirati.elucidate.model.batch.W3CBatchOperation;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import com.digirati.elucidate.model.batch.W3CBatchOperation;
-import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.impl.TurtleTripleCallback;
+import java.util.Map;
 
 @Component
 public class TurtleW3CBatchOperationMessageConverter extends AbstractW3CBatchOperationMessageConverter {
 
-    private TurtleTripleCallback turtleTripleCallback;
+    private NQuadTripleCallback turtleTripleCallback;
 
     public TurtleW3CBatchOperationMessageConverter() {
         super(APPLICATION_TURTLE);
-        this.turtleTripleCallback = new TurtleTripleCallback();
+        this.turtleTripleCallback = new NQuadTripleCallback();
     }
 
     @Override

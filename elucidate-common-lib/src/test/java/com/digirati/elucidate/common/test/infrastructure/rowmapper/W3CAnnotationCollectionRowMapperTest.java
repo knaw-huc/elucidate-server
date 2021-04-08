@@ -6,7 +6,7 @@ import com.digirati.elucidate.common.test.AbstractTest;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -15,9 +15,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

@@ -4,7 +4,7 @@ import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.impl.TurtleTripleCallback;
+import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -14,12 +14,12 @@ import java.util.Map;
 @Component
 public class TurtleW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnotationHistoryMessageConverter {
 
-    private TurtleTripleCallback turtleTripleCallback;
+    private NQuadTripleCallback turtleTripleCallback;
 
     @Autowired
     public TurtleW3CAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService) {
         super(iriBuilderService, w3cAnnotationHistoryService, APPLICATION_TURTLE);
-        this.turtleTripleCallback = new TurtleTripleCallback();
+        this.turtleTripleCallback = new NQuadTripleCallback();
     }
 
     @Override

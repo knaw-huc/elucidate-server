@@ -11,16 +11,18 @@ import com.digirati.elucidate.repository.AnnotationStoreRepository;
 import com.digirati.elucidate.service.query.AbstractAnnotationService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 
 import java.util.Date;
 import java.util.List;
-import org.mockito.Matchers;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -124,7 +126,7 @@ public abstract class AbstractAnnotationServiceImplTest<A extends AbstractAnnota
         w3cAnnotation.setDeleted(false);
         w3cAnnotation.setJsonMap(annotation.getJsonMap());
 
-        when(annotationStoreRepository.createAnnotation(eq(collectionId), eq("test-annotation-id"), anyString(), Matchers.any())).thenReturn(w3cAnnotation);
+        when(annotationStoreRepository.createAnnotation(eq(collectionId), eq("test-annotation-id"), anyString(), ArgumentMatchers.any())).thenReturn(w3cAnnotation);
 
         ServiceResponse<A> serviceResponse = annotationService.createAnnotation(collectionId, null, annotation);
         assertThat(serviceResponse, is(not(nullValue())));

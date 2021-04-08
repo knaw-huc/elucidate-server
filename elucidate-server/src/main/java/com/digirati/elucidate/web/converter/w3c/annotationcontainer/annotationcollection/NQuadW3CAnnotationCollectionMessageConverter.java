@@ -1,0 +1,31 @@
+package com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationcollection;
+
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.impl.NQuadTripleCallback;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+@Component
+public class NQuadW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
+
+  private NQuadTripleCallback nQuadTripleCallback;
+
+  public NQuadW3CAnnotationCollectionMessageConverter() {
+    super(APPLICATION_TURTLE);
+    this.nQuadTripleCallback = new NQuadTripleCallback();
+  }
+
+  @Override
+  protected String getStringRepresentation(W3CAnnotationCollection w3cAnnotationCollection, MediaType contentType) throws Exception {
+    Map<String, Object> jsonMap = w3cAnnotationCollection.getJsonMap();
+    return JsonLdProcessor.toRDF(jsonMap, nQuadTripleCallback, jsonLdOptions).toString();
+  }
+
+  @Override
+  protected W3CAnnotationCollection getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, W3CAnnotationCollection.class));
+  }
+}

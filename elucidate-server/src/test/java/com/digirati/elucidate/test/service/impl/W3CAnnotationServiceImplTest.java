@@ -11,9 +11,10 @@ import com.digirati.elucidate.service.query.impl.W3CAnnotationServiceImpl;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+
 
 @RunWith(PowerMockRunner.class)
 public class W3CAnnotationServiceImplTest extends AbstractAnnotationServiceImplTest<W3CAnnotation, W3CAnnotationCollection> {

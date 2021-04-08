@@ -1,15 +1,15 @@
 package com.digirati.elucidate.common.test.model.annotation;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import com.digirati.elucidate.common.model.annotation.AbstractObject;
+import com.digirati.elucidate.common.test.AbstractTest;
 
 import java.util.Date;
 import java.util.Map;
 
-import com.digirati.elucidate.common.model.annotation.AbstractObject;
-import com.digirati.elucidate.common.test.AbstractTest;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 
 public abstract class AbstractObjectTest<T extends AbstractObject> extends AbstractTest {
 

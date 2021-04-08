@@ -15,12 +15,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 @RunWith(MockitoJUnitRunner.class)
 public class W3CAnnotationRowMapperTest extends AbstractTest {
 

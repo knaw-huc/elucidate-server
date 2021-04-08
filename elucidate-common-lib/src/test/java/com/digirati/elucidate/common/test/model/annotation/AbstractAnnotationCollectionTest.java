@@ -1,11 +1,11 @@
 package com.digirati.elucidate.common.test.model.annotation;
 
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
 
 public class AbstractAnnotationCollectionTest<T extends AbstractAnnotationCollection> extends AbstractObjectTest<T> {
 

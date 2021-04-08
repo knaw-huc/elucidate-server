@@ -1,17 +1,15 @@
 package com.digirati.elucidate.test.model;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
-
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.test.AbstractTest;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
+import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 public class ServiceResponseTest extends AbstractTest {
 
     @Test

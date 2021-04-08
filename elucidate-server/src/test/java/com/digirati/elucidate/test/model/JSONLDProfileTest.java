@@ -1,20 +1,19 @@
 package com.digirati.elucidate.test.model;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 
 public class JSONLDProfileTest {
 

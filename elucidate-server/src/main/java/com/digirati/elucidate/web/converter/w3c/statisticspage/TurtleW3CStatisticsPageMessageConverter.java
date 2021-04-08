@@ -1,22 +1,21 @@
 package com.digirati.elucidate.web.converter.w3c.statisticspage;
 
-import java.util.Map;
-
+import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
-import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.impl.TurtleTripleCallback;
+import java.util.Map;
 
 @Component
 public class TurtleW3CStatisticsPageMessageConverter extends AbstractW3CStatisticsPageMessageConverter {
 
-    private TurtleTripleCallback turtleTripleCallback;
+    private NQuadTripleCallback turtleTripleCallback;
 
     public TurtleW3CStatisticsPageMessageConverter() {
         super(APPLICATION_TURTLE);
-        this.turtleTripleCallback = new TurtleTripleCallback();
+        this.turtleTripleCallback = new NQuadTripleCallback();
     }
 
     @Override

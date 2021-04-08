@@ -1,22 +1,21 @@
 package com.digirati.elucidate.web.converter.oa.annotationcontainer.annotationpage;
 
-import java.util.Map;
-
+import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
-import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.impl.TurtleTripleCallback;
+import java.util.Map;
 
 @Component
 public class TurtleOAAnnotationPageMessageConverter extends AbstractOAAnnotationPageMessageConverter {
 
-    private TurtleTripleCallback turtleTripleCallback;
+    private NQuadTripleCallback turtleTripleCallback;
 
     public TurtleOAAnnotationPageMessageConverter() {
         super(APPLICATION_TURTLE);
-        this.turtleTripleCallback = new TurtleTripleCallback();
+        this.turtleTripleCallback = new NQuadTripleCallback();
     }
 
     @Override
