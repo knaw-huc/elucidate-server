@@ -3,6 +3,8 @@ package com.digirati.elucidate.service.query.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,8 +25,6 @@ import com.digirati.elucidate.repository.AnnotationSearchRepository;
 import com.digirati.elucidate.service.query.OAAnnotationCollectionService;
 import com.digirati.elucidate.service.query.OAAnnotationPageService;
 import com.digirati.elucidate.service.query.OAAnnotationService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service(OAAnnotationCollectionServiceImpl.SERVICE_NAME)
 public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollectionServiceImpl<OAAnnotation, OAAnnotationPage, OAAnnotationCollection> implements OAAnnotationCollectionService {

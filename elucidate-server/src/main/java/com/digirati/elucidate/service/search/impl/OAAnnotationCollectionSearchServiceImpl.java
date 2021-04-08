@@ -1,5 +1,15 @@
 package com.digirati.elucidate.service.search.impl;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
@@ -11,15 +21,6 @@ import com.digirati.elucidate.model.enumeration.ClientPreference;
 import com.digirati.elucidate.service.search.OAAnnotationCollectionSearchService;
 import com.digirati.elucidate.service.search.OAAnnotationPageSearchService;
 import com.digirati.elucidate.service.search.OAAnnotationSearchService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Service(OAAnnotationCollectionSearchServiceImpl.SERVICE_NAME)
 public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationCollectionSearchServiceImpl<OAAnnotation, OAAnnotationPage, OAAnnotationCollection> implements OAAnnotationCollectionSearchService {

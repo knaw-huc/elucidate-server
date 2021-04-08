@@ -1,17 +1,18 @@
 package com.digirati.elucidate.repository.impl;
 
-import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
-import com.digirati.elucidate.infrastructure.database.rowmapper.AnnotationTemporalRowMapper;
-import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
-import com.digirati.elucidate.repository.AnnotationTemporalStoreRepository;
+import java.sql.Types;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Types;
-import java.util.Date;
-import java.util.List;
+import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
+import com.digirati.elucidate.infrastructure.database.rowmapper.AnnotationTemporalRowMapper;
+import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
+import com.digirati.elucidate.repository.AnnotationTemporalStoreRepository;
 
 @Repository
 public class AnnotationTemporalStoreRepositoryJDBCImpl extends AbstractRepositoryJDBCImpl implements AnnotationTemporalStoreRepository {

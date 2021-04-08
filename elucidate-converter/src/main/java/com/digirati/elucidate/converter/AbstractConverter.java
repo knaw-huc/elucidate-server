@@ -4,10 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.digirati.elucidate.converter.exception.AnnotationConversionException;
-import com.digirati.elucidate.converter.node.JSONNodeConverter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -15,6 +11,10 @@ import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+import org.apache.commons.lang3.StringUtils;
+
+import com.digirati.elucidate.converter.exception.AnnotationConversionException;
+import com.digirati.elucidate.converter.node.JSONNodeConverter;
 
 public abstract class AbstractConverter {
 

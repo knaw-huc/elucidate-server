@@ -1,5 +1,12 @@
 package com.digirati.elucidate.service.search.impl;
 
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
@@ -7,12 +14,6 @@ import com.digirati.elucidate.converter.W3CToOAAnnotationConverter;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
 import com.digirati.elucidate.repository.AnnotationSearchRepository;
 import com.digirati.elucidate.service.search.OAAnnotationSearchService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service(OAAnnotationSearchServiceImpl.SERVICE_NAME)
 public class OAAnnotationSearchServiceImpl extends AbstractAnnotationSearchServiceImpl<OAAnnotation> implements OAAnnotationSearchService {

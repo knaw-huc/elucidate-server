@@ -2,6 +2,8 @@ package com.digirati.elucidate.service.query.impl;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,8 +13,6 @@ import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.converter.OAToW3CAnnotationPageConverter;
 import com.digirati.elucidate.service.query.OAAnnotationPageService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service(OAAnnotationPageServiceImpl.SERVICE_NAME)
 public class OAAnnotationPageServiceImpl extends AbstractAnnotationPageServiceImpl<OAAnnotation, OAAnnotationPage> implements OAAnnotationPageService {

@@ -1,8 +1,17 @@
 package com.digirati.elucidate.web.converter;
 
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -24,14 +33,9 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
 
 public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageConverter<T> {
 

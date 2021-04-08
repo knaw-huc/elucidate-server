@@ -1,10 +1,11 @@
 package com.digirati.elucidate.infrastructure.listener;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.digirati.elucidate.common.infrastructure.listener.RegisteredListener;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class AnnotationHistoryRegisteredListenerImpl implements RegisteredListener {
 

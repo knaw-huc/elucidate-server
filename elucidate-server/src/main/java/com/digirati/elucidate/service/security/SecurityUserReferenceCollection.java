@@ -1,7 +1,8 @@
 package com.digirati.elucidate.service.security;
 
-import com.digirati.elucidate.model.security.SecurityUserReference;
 import java.util.List;
+
+import com.digirati.elucidate.model.security.SecurityUserReference;
 
 public final class SecurityUserReferenceCollection {
 

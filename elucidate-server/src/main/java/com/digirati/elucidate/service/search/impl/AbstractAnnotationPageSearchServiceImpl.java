@@ -1,5 +1,11 @@
 package com.digirati.elucidate.service.search.impl;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
 import com.digirati.elucidate.infrastructure.builder.AnnotationPageBuilder;
@@ -7,11 +13,6 @@ import com.digirati.elucidate.infrastructure.builder.function.AnnotationCollecti
 import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIBuilder;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.service.search.AbstractAnnotationPageSearchService;
-import org.apache.log4j.Logger;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractAnnotationPageSearchServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage> implements AbstractAnnotationPageSearchService<A, P> {
 

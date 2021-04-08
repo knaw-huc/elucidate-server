@@ -1,10 +1,10 @@
 package com.digirati.elucidate.service.history;
 
+import java.util.List;
+
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.annotation.history.AbstractAnnotationHistory;
-
-import java.util.List;
 
 public interface AbstractAnnotationHistoryService<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> {
 

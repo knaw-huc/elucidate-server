@@ -1,5 +1,12 @@
 package com.digirati.elucidate.service.search.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
@@ -9,12 +16,6 @@ import com.digirati.elucidate.model.enumeration.ClientPreference;
 import com.digirati.elucidate.service.search.W3CAnnotationCollectionSearchService;
 import com.digirati.elucidate.service.search.W3CAnnotationPageSearchService;
 import com.digirati.elucidate.service.search.W3CAnnotationSearchService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
 
 @Service(W3CAnnotationCollectionSearchServiceImpl.SERVICE_NAME)
 public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotationCollectionSearchServiceImpl<W3CAnnotation, W3CAnnotationPage, W3CAnnotationCollection> implements W3CAnnotationCollectionSearchService {

@@ -1,11 +1,12 @@
 package com.digirati.elucidate.infrastructure.database.rowmapper;
 
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.security.SecurityGroup;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.security.SecurityGroup;
 
 public class SecurityGroupRowMapper implements RowMapper<SecurityGroup> {
     @Override

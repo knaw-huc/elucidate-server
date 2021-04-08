@@ -1,12 +1,13 @@
 package com.digirati.elucidate.test.model;
 
-import com.digirati.elucidate.common.test.AbstractTest;
-import com.digirati.elucidate.model.ValidationError;
+import java.io.IOException;
+import java.util.Map;
+
 import com.github.jsonldjava.utils.JsonUtils;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.util.Map;
+import com.digirati.elucidate.common.test.AbstractTest;
+import com.digirati.elucidate.model.ValidationError;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

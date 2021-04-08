@@ -1,8 +1,8 @@
 package com.digirati.elucidate.repository.security;
 
-import com.digirati.elucidate.model.security.SecurityUser;
-
 import java.util.Optional;
+
+import com.digirati.elucidate.model.security.SecurityUser;
 
 public interface UserRepository {
     Optional<SecurityUser> getUser(String uid);

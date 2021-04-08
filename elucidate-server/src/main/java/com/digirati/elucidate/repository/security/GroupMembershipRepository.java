@@ -1,8 +1,9 @@
 package com.digirati.elucidate.repository.security;
 
+import java.util.List;
+
 import com.digirati.elucidate.model.annotation.AnnotationReference;
 import com.digirati.elucidate.model.security.SecurityUserReference;
-import java.util.List;
 
 public interface GroupMembershipRepository {
     void createAnnotationGroupMembership(int annotationPk, int groupPk);

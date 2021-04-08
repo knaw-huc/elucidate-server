@@ -1,9 +1,9 @@
 package com.digirati.elucidate.infrastructure.config;
 
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
-import javax.sql.DataSource;
-
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +13,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @ComponentScan(basePackages = {RepositoryConfig.REPOSITORY_PACKAGE, RepositoryConfig.COMMON_REPOSITORY_PACKAGE})

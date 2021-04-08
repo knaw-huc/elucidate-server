@@ -1,10 +1,27 @@
 package com.digirati.elucidate.service.extractor.impl;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.infrastructure.extractor.agent.AnnotationCreatorExtractor;
 import com.digirati.elucidate.infrastructure.extractor.agent.AnnotationGeneratorExtractor;
 import com.digirati.elucidate.infrastructure.extractor.body.AnnotationBodyExtractor;
-import com.digirati.elucidate.infrastructure.extractor.selector.*;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationCSSSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationDataPositionSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationFragmentSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationInlineFragmentSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationSVGSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationTextPositionSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationTextQuoteSelectorExtractor;
+import com.digirati.elucidate.infrastructure.extractor.selector.AnnotationXPathSelectorExtractor;
 import com.digirati.elucidate.infrastructure.extractor.targets.AnnotationTargetExtractor;
 import com.digirati.elucidate.infrastructure.extractor.temportal.AnnotationTemporalExtractor;
 import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
@@ -18,17 +35,12 @@ import com.digirati.elucidate.model.annotation.selector.textquote.AnnotationText
 import com.digirati.elucidate.model.annotation.selector.xpath.AnnotationXPathSelector;
 import com.digirati.elucidate.model.annotation.targets.AnnotationTarget;
 import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
-import com.digirati.elucidate.repository.*;
+import com.digirati.elucidate.repository.AnnotationAgentStoreRepository;
+import com.digirati.elucidate.repository.AnnotationBodyStoreRepository;
+import com.digirati.elucidate.repository.AnnotationSelectorStoreRepository;
+import com.digirati.elucidate.repository.AnnotationTargetStoreRepository;
+import com.digirati.elucidate.repository.AnnotationTemporalStoreRepository;
 import com.digirati.elucidate.service.extractor.AnnotationExtractorService;
-import com.github.jsonldjava.utils.JsonUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Service(AnnotationExtractorServiceImpl.SERVICE_NAME)
 public class AnnotationExtractorServiceImpl implements AnnotationExtractorService {

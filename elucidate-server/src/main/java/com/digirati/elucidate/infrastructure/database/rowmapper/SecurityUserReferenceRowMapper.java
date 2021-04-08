@@ -1,10 +1,12 @@
 package com.digirati.elucidate.infrastructure.database.rowmapper;
 
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.security.SecurityUserReference;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
+
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.security.SecurityUserReference;
 
 public class SecurityUserReferenceRowMapper implements RowMapper<SecurityUserReference> {
 

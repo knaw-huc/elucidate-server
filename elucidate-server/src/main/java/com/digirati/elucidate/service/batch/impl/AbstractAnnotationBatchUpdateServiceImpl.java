@@ -1,6 +1,18 @@
 package com.digirati.elucidate.service.batch.impl;
 
-import com.digirati.elucidate.common.infrastructure.constants.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
+import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
+import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
+import com.digirati.elucidate.common.infrastructure.constants.SearchConstants;
+import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.infrastructure.batch.function.AnnotationBatchSearch;
 import com.digirati.elucidate.model.ServiceResponse;
@@ -9,13 +21,6 @@ import com.digirati.elucidate.model.batch.AbstractBatchOperation;
 import com.digirati.elucidate.service.batch.AbstractAnnotationBatchUpdateService;
 import com.digirati.elucidate.service.query.AbstractAnnotationService;
 import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends AbstractAnnotation, B extends AbstractBatchOperation> implements AbstractAnnotationBatchUpdateService<B> {
 

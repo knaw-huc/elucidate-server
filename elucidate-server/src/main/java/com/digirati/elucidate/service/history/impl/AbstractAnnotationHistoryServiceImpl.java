@@ -1,5 +1,13 @@
 package com.digirati.elucidate.service.history.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.log4j.Logger;
+
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.model.ServiceResponse;
@@ -8,13 +16,6 @@ import com.digirati.elucidate.model.annotation.history.AbstractAnnotationHistory
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 import com.digirati.elucidate.repository.AnnotationHistoryRepository;
 import com.digirati.elucidate.service.history.AbstractAnnotationHistoryService;
-import com.github.jsonldjava.utils.JsonUtils;
-import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> implements AbstractAnnotationHistoryService<A, H> {
 

@@ -1,8 +1,8 @@
 package com.digirati.elucidate.model.annotation.history;
 
-import com.digirati.elucidate.common.model.annotation.AbstractObject;
-
 import java.io.Serializable;
+
+import com.digirati.elucidate.common.model.annotation.AbstractObject;
 
 @SuppressWarnings("serial")
 public abstract class AbstractAnnotationHistory extends AbstractObject implements Serializable {

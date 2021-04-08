@@ -1,8 +1,8 @@
 package com.digirati.elucidate.infrastructure.batch.function;
 
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
-
 import java.util.List;
+
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 
 @FunctionalInterface
 public interface AnnotationBatchSearch<A extends AbstractAnnotation> {

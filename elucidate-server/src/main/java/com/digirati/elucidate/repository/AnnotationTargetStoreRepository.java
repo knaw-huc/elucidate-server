@@ -1,8 +1,8 @@
 package com.digirati.elucidate.repository;
 
-import com.digirati.elucidate.model.annotation.targets.AnnotationTarget;
-
 import java.util.List;
+
+import com.digirati.elucidate.model.annotation.targets.AnnotationTarget;
 
 public interface AnnotationTargetStoreRepository {
 

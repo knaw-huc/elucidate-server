@@ -1,5 +1,8 @@
 package com.digirati.elucidate.test.service.impl;
 
+import org.junit.runner.RunWith;
+import org.powermock.modules.junit4.PowerMockRunner;
+
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
 import com.digirati.elucidate.common.service.IRIBuilderService;
@@ -8,8 +11,6 @@ import com.digirati.elucidate.infrastructure.security.impl.DefaultUserSecurityDe
 import com.digirati.elucidate.repository.AnnotationStoreRepository;
 import com.digirati.elucidate.service.query.AbstractAnnotationService;
 import com.digirati.elucidate.service.query.impl.W3CAnnotationServiceImpl;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

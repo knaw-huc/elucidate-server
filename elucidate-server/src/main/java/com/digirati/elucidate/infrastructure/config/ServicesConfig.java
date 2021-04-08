@@ -1,6 +1,5 @@
 package com.digirati.elucidate.infrastructure.config;
 
-import com.digirati.elucidate.infrastructure.generator.IDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +9,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.digirati.elucidate.infrastructure.generator.IDGenerator;
 
 @Configuration
 @EnableAspectJAutoProxy

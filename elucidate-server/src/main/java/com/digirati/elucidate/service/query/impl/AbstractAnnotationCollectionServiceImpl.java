@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.github.jsonldjava.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -24,7 +25,6 @@ import com.digirati.elucidate.model.enumeration.ClientPreference;
 import com.digirati.elucidate.repository.AnnotationCollectionStoreRepository;
 import com.digirati.elucidate.service.query.AbstractAnnotationCollectionService;
 import com.digirati.elucidate.service.query.AbstractAnnotationService;
-import com.github.jsonldjava.utils.JsonUtils;
 
 public abstract class AbstractAnnotationCollectionServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> implements AbstractAnnotationCollectionService<A, C> {
 

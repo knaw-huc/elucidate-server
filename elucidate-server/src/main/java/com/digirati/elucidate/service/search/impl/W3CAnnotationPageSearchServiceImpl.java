@@ -1,16 +1,17 @@
 package com.digirati.elucidate.service.search.impl;
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.service.search.W3CAnnotationPageSearchService;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.service.search.W3CAnnotationPageSearchService;
 
 @Service(W3CAnnotationPageSearchServiceImpl.SERVICE_NAME)
 public class W3CAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSearchServiceImpl<W3CAnnotation, W3CAnnotationPage> implements W3CAnnotationPageSearchService {

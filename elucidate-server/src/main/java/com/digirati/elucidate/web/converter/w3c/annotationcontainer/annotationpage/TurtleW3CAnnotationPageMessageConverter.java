@@ -1,12 +1,13 @@
 package com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationpage;
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
+import java.util.Map;
+
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
 
 @Component
 public class TurtleW3CAnnotationPageMessageConverter extends AbstractW3CAnnotationPageMessageConverter {

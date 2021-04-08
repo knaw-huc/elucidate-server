@@ -1,10 +1,12 @@
 package com.digirati.elucidate.infrastructure.database.rowmapper;
 
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.annotation.AnnotationReference;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
+
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.annotation.AnnotationReference;
 
 public class AnnotationReferenceRowMapper implements RowMapper<AnnotationReference> {
 

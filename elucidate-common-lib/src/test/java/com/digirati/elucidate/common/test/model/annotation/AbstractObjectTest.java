@@ -1,10 +1,10 @@
 package com.digirati.elucidate.common.test.model.annotation;
 
-import com.digirati.elucidate.common.model.annotation.AbstractObject;
-import com.digirati.elucidate.common.test.AbstractTest;
-
 import java.util.Date;
 import java.util.Map;
+
+import com.digirati.elucidate.common.model.annotation.AbstractObject;
+import com.digirati.elucidate.common.test.AbstractTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

@@ -1,5 +1,8 @@
 package com.digirati.elucidate.service.security.impl;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.infrastructure.generator.IDGenerator;
 import com.digirati.elucidate.infrastructure.security.Permission;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
@@ -8,8 +11,6 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.security.SecurityGroup;
 import com.digirati.elucidate.repository.security.GroupRepository;
 import com.digirati.elucidate.service.security.SecurityGroupService;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 @Service(SecurityGroupServiceImpl.SERVICE_NAME)
 public class SecurityGroupServiceImpl implements SecurityGroupService {

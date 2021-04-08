@@ -1,17 +1,18 @@
 package com.digirati.elucidate.repository.impl;
 
-import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationRowMapper;
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
-import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
-import com.digirati.elucidate.repository.AnnotationSearchRepository;
+import java.sql.Types;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Types;
-import java.util.Date;
-import java.util.List;
+import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationRowMapper;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
+import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
+import com.digirati.elucidate.repository.AnnotationSearchRepository;
 
 @Repository(AnnotationSearchRepositoryJDBCImpl.REPOSITORY_NAME)
 public class AnnotationSearchRepositoryJDBCImpl extends AbstractRepositoryJDBCImpl implements AnnotationSearchRepository {

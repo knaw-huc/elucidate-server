@@ -1,5 +1,13 @@
 package com.digirati.elucidate.service.query.impl;
 
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
@@ -9,13 +17,6 @@ import com.digirati.elucidate.infrastructure.generator.IDGenerator;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
 import com.digirati.elucidate.repository.AnnotationStoreRepository;
 import com.digirati.elucidate.service.query.OAAnnotationService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service(OAAnnotationServiceImpl.SERVICE_NAME)
 public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnnotation> implements OAAnnotationService {

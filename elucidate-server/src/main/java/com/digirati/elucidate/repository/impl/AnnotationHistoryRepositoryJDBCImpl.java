@@ -1,16 +1,17 @@
 package com.digirati.elucidate.repository.impl;
 
-import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
-import com.digirati.elucidate.infrastructure.database.rowmapper.W3CAnnotationHistoryRowMapper;
-import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
-import com.digirati.elucidate.repository.AnnotationHistoryRepository;
+import java.sql.Types;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Types;
-import java.util.List;
+import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
+import com.digirati.elucidate.infrastructure.database.rowmapper.W3CAnnotationHistoryRowMapper;
+import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
+import com.digirati.elucidate.repository.AnnotationHistoryRepository;
 
 @Repository(AnnotationHistoryRepositoryJDBCImpl.REPOSITORY_NAME)
 public class AnnotationHistoryRepositoryJDBCImpl extends AbstractRepositoryJDBCImpl implements AnnotationHistoryRepository {

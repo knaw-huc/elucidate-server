@@ -1,9 +1,9 @@
 package com.digirati.elucidate.repository;
 
-import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
-
 import java.util.Date;
 import java.util.List;
+
+import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
 
 public interface AnnotationTemporalStoreRepository {
 

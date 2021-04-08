@@ -1,13 +1,14 @@
 package com.digirati.elucidate.web.controller.security;
 
-import com.digirati.elucidate.infrastructure.config.condition.IsAuthEnabled;
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.digirati.elucidate.infrastructure.config.condition.IsAuthEnabled;
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
 
 @RestController(SecurityUserController.CONTROLLER_NAME)
 @RequestMapping("/user")

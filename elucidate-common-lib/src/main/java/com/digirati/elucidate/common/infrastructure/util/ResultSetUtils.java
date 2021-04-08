@@ -1,13 +1,19 @@
 package com.digirati.elucidate.common.infrastructure.util;
 
-import com.github.jsonldjava.utils.JsonUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class ResultSetUtils {
 

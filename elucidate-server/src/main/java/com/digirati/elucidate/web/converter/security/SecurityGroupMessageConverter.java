@@ -1,15 +1,16 @@
 package com.digirati.elucidate.web.converter.security;
 
-import com.digirati.elucidate.model.security.SecurityGroup;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.digirati.elucidate.model.security.SecurityGroup;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 @Component
 public class SecurityGroupMessageConverter extends AbstractMessageConverter<SecurityGroup> {

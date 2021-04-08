@@ -1,7 +1,8 @@
 package com.digirati.elucidate.converter.node;
 
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 
 public class ItemsNodeConverterImpl implements JSONNodeConverter {
 

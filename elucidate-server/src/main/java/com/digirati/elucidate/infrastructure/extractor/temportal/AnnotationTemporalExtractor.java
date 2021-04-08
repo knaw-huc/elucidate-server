@@ -1,17 +1,18 @@
 package com.digirati.elucidate.infrastructure.extractor.temportal;
 
-import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants;
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
-import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.joda.time.format.ISODateTimeFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.joda.time.format.ISODateTimeFormat;
+
+import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants;
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
+import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
+import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
 
 public class AnnotationTemporalExtractor {
 

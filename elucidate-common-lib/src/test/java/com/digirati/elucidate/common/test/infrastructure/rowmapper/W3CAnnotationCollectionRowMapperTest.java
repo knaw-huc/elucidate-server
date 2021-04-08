@@ -1,19 +1,20 @@
 package com.digirati.elucidate.common.test.infrastructure.rowmapper;
 
-import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationCollectionRowMapper;
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
-import com.digirati.elucidate.common.test.AbstractTest;
-import com.github.jsonldjava.utils.JsonUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
+
+import com.github.jsonldjava.utils.JsonUtils;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationCollectionRowMapper;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
+import com.digirati.elucidate.common.test.AbstractTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

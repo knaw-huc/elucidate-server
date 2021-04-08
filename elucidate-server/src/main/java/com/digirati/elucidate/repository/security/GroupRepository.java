@@ -1,9 +1,9 @@
 package com.digirati.elucidate.repository.security;
 
-import com.digirati.elucidate.model.security.SecurityGroup;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.digirati.elucidate.model.security.SecurityGroup;
 
 public interface GroupRepository {
     List<SecurityGroup> getGroupsByUserId(Integer userPk);

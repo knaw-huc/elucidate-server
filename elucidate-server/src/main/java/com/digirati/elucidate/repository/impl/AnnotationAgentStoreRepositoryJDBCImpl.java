@@ -1,16 +1,17 @@
 package com.digirati.elucidate.repository.impl;
 
-import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
-import com.digirati.elucidate.infrastructure.database.resultsetextractor.AnnotationAgentResultSetExtractor;
-import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
-import com.digirati.elucidate.repository.AnnotationAgentStoreRepository;
+import java.sql.Types;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Types;
-import java.util.List;
+import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
+import com.digirati.elucidate.infrastructure.database.resultsetextractor.AnnotationAgentResultSetExtractor;
+import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
+import com.digirati.elucidate.repository.AnnotationAgentStoreRepository;
 
 @Repository(AnnotationAgentStoreRepositoryJDBCImpl.REPOSITORY_NAME)
 public class AnnotationAgentStoreRepositoryJDBCImpl extends AbstractRepositoryJDBCImpl implements AnnotationAgentStoreRepository {

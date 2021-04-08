@@ -1,5 +1,11 @@
 package com.digirati.elucidate.service.security.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.function.BiConsumer;
+
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.infrastructure.security.Permission;
@@ -17,11 +23,6 @@ import com.digirati.elucidate.service.query.W3CAnnotationService;
 import com.digirati.elucidate.service.security.SecurityGroupMembershipService;
 import com.digirati.elucidate.service.security.SecurityGroupService;
 import com.digirati.elucidate.service.security.SecurityUserReferenceCollection;
-import java.util.List;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.function.BiConsumer;
 
 @Service(SecurityGroupMembershipServiceImpl.SERVICE_NAME)
 public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembershipService {

@@ -1,15 +1,16 @@
 package com.digirati.elucidate.web.converter.oa.history;
 
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.annotation.history.OAAnnotationHistory;
-import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
+import java.util.Map;
+
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.annotation.history.OAAnnotationHistory;
+import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
 
 @Component
 public class TurtleOAAnnotationHistoryMessageConverter extends AbstractOAAnnotationHistoryMessageConverter {

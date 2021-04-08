@@ -1,15 +1,16 @@
 package com.digirati.elucidate.repository.security.impl;
 
+import java.sql.Types;
+import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import com.digirati.elucidate.infrastructure.database.rowmapper.AnnotationReferenceRowMapper;
 import com.digirati.elucidate.infrastructure.database.rowmapper.SecurityUserReferenceRowMapper;
 import com.digirati.elucidate.model.annotation.AnnotationReference;
 import com.digirati.elucidate.model.security.SecurityUserReference;
 import com.digirati.elucidate.repository.security.GroupMembershipRepository;
-import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
-import java.sql.Types;
 
 @Repository(GroupMembershipRepositoryJDBCImpl.REPOSITORY_NAME)
 public class GroupMembershipRepositoryJDBCImpl implements GroupMembershipRepository {

@@ -1,8 +1,8 @@
 package com.digirati.elucidate.repository;
 
-import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
-
 import java.util.List;
+
+import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 
 public interface AnnotationHistoryRepository {
 

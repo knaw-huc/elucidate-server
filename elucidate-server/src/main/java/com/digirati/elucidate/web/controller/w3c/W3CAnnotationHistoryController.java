@@ -1,12 +1,13 @@
 package com.digirati.elucidate.web.controller.w3c;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 import com.digirati.elucidate.web.controller.AbstractAnnotationHistoryController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller(W3CAnnotationHistoryController.CONTROLLER_NAME)
 @RequestMapping(value = "/w3c")

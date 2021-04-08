@@ -1,10 +1,5 @@
 package com.digirati.elucidate.web.controller.security;
 
-import com.digirati.elucidate.infrastructure.config.condition.IsAuthEnabled;
-import com.digirati.elucidate.model.ServiceResponse;
-import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
-import com.digirati.elucidate.service.security.SecurityGroupMembershipService;
-import com.digirati.elucidate.service.security.SecurityUserReferenceCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
@@ -16,6 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.digirati.elucidate.infrastructure.config.condition.IsAuthEnabled;
+import com.digirati.elucidate.model.ServiceResponse;
+import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
+import com.digirati.elucidate.service.security.SecurityGroupMembershipService;
+import com.digirati.elucidate.service.security.SecurityUserReferenceCollection;
 
 @RestController(SecurityGroupMembershipController.CONTROLLER_NAME)
 @RequestMapping("/group")

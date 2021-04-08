@@ -1,5 +1,12 @@
 package com.digirati.elucidate.service.search.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.SearchConstants;
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants;
@@ -14,12 +21,6 @@ import com.digirati.elucidate.model.annotation.selector.fragment.TFragmentSelect
 import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSelector;
 import com.digirati.elucidate.repository.AnnotationSearchRepository;
 import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnnotation> implements AbstractAnnotationSearchService<A> {
 

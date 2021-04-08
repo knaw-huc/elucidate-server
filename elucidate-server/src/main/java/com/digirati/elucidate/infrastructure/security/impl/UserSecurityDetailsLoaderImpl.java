@@ -1,14 +1,14 @@
 package com.digirati.elucidate.infrastructure.security.impl;
 
+import java.util.Collections;
+import java.util.Optional;
+
 import com.digirati.elucidate.infrastructure.generator.IDGenerator;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
 import com.digirati.elucidate.model.security.SecurityUser;
 import com.digirati.elucidate.repository.security.GroupRepository;
 import com.digirati.elucidate.repository.security.UserRepository;
-
-import java.util.Collections;
-import java.util.Optional;
 
 public class UserSecurityDetailsLoaderImpl implements UserSecurityDetailsLoader {
 

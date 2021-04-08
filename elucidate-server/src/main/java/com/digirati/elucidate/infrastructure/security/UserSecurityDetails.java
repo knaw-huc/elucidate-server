@@ -1,12 +1,12 @@
 package com.digirati.elucidate.infrastructure.security;
 
-import com.digirati.elucidate.model.security.SecurityGroup;
-import com.digirati.elucidate.model.security.SecurityUser;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.digirati.elucidate.model.security.SecurityGroup;
+import com.digirati.elucidate.model.security.SecurityUser;
 
 public class UserSecurityDetails {
     private final SecurityUser user;

@@ -1,5 +1,17 @@
 package com.digirati.elucidate.infrastructure.config;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import com.digirati.elucidate.web.converter.oa.annotation.JSONLDOAAnnotationMessageConverter;
 import com.digirati.elucidate.web.converter.oa.annotation.TurtleOAAnnotationMessageConverter;
 import com.digirati.elucidate.web.converter.oa.annotationcontainer.annotationcollection.JSONLDOAAnnotationCollectionMessageConverter;
@@ -27,17 +39,6 @@ import com.digirati.elucidate.web.converter.w3c.history.JSONLDW3CAnnotationHisto
 import com.digirati.elucidate.web.converter.w3c.history.TurtleW3CAnnotationHistoryMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.statisticspage.JSONLDW3CStatisticsPageMessageConverter;
 import com.digirati.elucidate.web.converter.w3c.statisticspage.TurtleW3CStatisticsPageMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.List;
 
 @EnableWebMvc
 @Configuration

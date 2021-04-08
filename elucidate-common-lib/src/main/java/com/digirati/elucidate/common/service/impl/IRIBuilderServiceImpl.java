@@ -1,15 +1,5 @@
 package com.digirati.elucidate.common.service.impl;
 
-import com.digirati.elucidate.common.infrastructure.constants.URLConstants;
-import com.digirati.elucidate.common.infrastructure.exception.InvalidIRIException;
-import com.digirati.elucidate.common.infrastructure.util.URIUtils;
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.utils.URIBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import java.net.URISyntaxException;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -17,6 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.URIBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.digirati.elucidate.common.infrastructure.constants.URLConstants;
+import com.digirati.elucidate.common.infrastructure.exception.InvalidIRIException;
+import com.digirati.elucidate.common.infrastructure.util.URIUtils;
+import com.digirati.elucidate.common.service.IRIBuilderService;
 
 @Service(IRIBuilderServiceImpl.SERVICE_NAME)
 public class IRIBuilderServiceImpl implements IRIBuilderService {

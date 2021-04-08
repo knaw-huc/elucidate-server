@@ -1,7 +1,8 @@
 package com.digirati.elucidate.common.test.model.enumeration;
 
-import com.digirati.elucidate.common.model.enumeration.QueueOperation;
 import org.junit.Test;
+
+import com.digirati.elucidate.common.model.enumeration.QueueOperation;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

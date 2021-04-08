@@ -1,9 +1,9 @@
 package com.digirati.elucidate.repository;
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
-
 import java.util.Date;
 import java.util.List;
+
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 
 public interface AnnotationSearchRepository {
 

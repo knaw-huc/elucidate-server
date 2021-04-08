@@ -1,17 +1,18 @@
 package com.digirati.elucidate.infrastructure.security.impl;
 
 
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
-import com.digirati.elucidate.infrastructure.security.Permission;
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
-import com.digirati.elucidate.model.security.SecurityGroup;
+import java.util.Collection;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.util.Collection;
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
+import com.digirati.elucidate.infrastructure.security.Permission;
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
+import com.digirati.elucidate.model.security.SecurityGroup;
 
 public class JwtUserSecurityDetailsContext implements UserSecurityDetailsContext {
 

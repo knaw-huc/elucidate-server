@@ -1,16 +1,18 @@
 package com.digirati.elucidate.infrastructure.security.impl;
 
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
+
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
 
 public final class JwtUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 

@@ -1,7 +1,8 @@
 package com.digirati.elucidate.infrastructure.aspect;
 
-import com.digirati.elucidate.common.infrastructure.listener.RegisteredListener;
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -15,8 +16,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.digirati.elucidate.common.infrastructure.listener.RegisteredListener;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 
 @Aspect
 @Order(Ordered.LOWEST_PRECEDENCE - 1)

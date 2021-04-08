@@ -1,13 +1,13 @@
 package com.digirati.elucidate.infrastructure.extractor.agent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.FOAFConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class AnnotationGeneratorExtractor {
 

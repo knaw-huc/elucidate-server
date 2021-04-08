@@ -1,20 +1,20 @@
 package com.digirati.elucidate.web.converter.security;
 
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.annotation.AnnotationReference;
-import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
-import com.digirati.elucidate.model.security.SecurityGroup;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
-import com.github.jsonldjava.utils.JsonUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 @Component
 public class AnnotationReferenceCollectionMessageConverter extends

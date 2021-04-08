@@ -1,15 +1,16 @@
 package com.digirati.elucidate.repository.security.impl;
 
-import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
-import com.digirati.elucidate.infrastructure.database.rowmapper.SecurityUserRowMapper;
-import com.digirati.elucidate.model.security.SecurityUser;
-import com.digirati.elucidate.repository.security.UserRepository;
+import java.sql.Types;
+import java.util.Optional;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Types;
-import java.util.Optional;
+import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
+import com.digirati.elucidate.infrastructure.database.rowmapper.SecurityUserRowMapper;
+import com.digirati.elucidate.model.security.SecurityUser;
+import com.digirati.elucidate.repository.security.UserRepository;
 
 @Repository(UserRepositoryJDBCImpl.REPOSITORY_NAME)
 public class UserRepositoryJDBCImpl extends AbstractRepositoryJDBCImpl implements UserRepository {

@@ -1,5 +1,12 @@
 package com.digirati.elucidate.service.history.impl;
 
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.converter.W3CToOAAnnotationCollectionConverter;
@@ -7,12 +14,6 @@ import com.digirati.elucidate.model.annotation.history.OAAnnotationHistory;
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 import com.digirati.elucidate.repository.AnnotationHistoryRepository;
 import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service(OAAnnotationHistoryServiceImpl.SERVICE_NAME)
 public class OAAnnotationHistoryServiceImpl extends AbstractAnnotationHistoryServiceImpl<OAAnnotation, OAAnnotationHistory> implements OAAnnotationHistoryService {

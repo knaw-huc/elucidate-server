@@ -1,14 +1,9 @@
 package com.digirati.elucidate.test.schema;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -22,6 +17,10 @@ import com.github.fge.jsonschema.main.JsonValidator;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.commons.io.IOUtils;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public abstract class AbstractSchemaValidatorTest {
 

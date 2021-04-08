@@ -1,11 +1,11 @@
 package com.digirati.elucidate.service.search;
 
+import java.util.Date;
+import java.util.List;
+
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
-
-import java.util.Date;
-import java.util.List;
 
 public interface AbstractAnnotationCollectionSearchService<C extends AbstractAnnotationCollection> {
 

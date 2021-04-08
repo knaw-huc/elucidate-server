@@ -1,9 +1,9 @@
 package com.digirati.elucidate.model.annotation.temporal;
 
-import com.digirati.elucidate.common.model.annotation.AbstractObject;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import com.digirati.elucidate.common.model.annotation.AbstractObject;
 
 @SuppressWarnings("serial")
 public class AnnotationTemporal extends AbstractObject implements Serializable {

@@ -1,19 +1,20 @@
 package com.digirati.elucidate.service.search.impl;
 
-import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
-import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.converter.OAToW3CAnnotationPageConverter;
-import com.digirati.elucidate.service.search.OAAnnotationPageSearchService;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
+import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.converter.OAToW3CAnnotationPageConverter;
+import com.digirati.elucidate.service.search.OAAnnotationPageSearchService;
 
 @Service(OAAnnotationPageSearchServiceImpl.SERVICE_NAME)
 public class OAAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSearchServiceImpl<OAAnnotation, OAAnnotationPage> implements OAAnnotationPageSearchService {

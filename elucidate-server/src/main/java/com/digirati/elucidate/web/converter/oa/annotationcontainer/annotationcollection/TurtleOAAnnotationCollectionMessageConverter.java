@@ -1,12 +1,13 @@
 package com.digirati.elucidate.web.converter.oa.annotationcontainer.annotationcollection;
 
-import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
+import java.util.Map;
+
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
 
 @Component
 public class TurtleOAAnnotationCollectionMessageConverter extends AbstractOAAnnotationCollectionMessageConverter {

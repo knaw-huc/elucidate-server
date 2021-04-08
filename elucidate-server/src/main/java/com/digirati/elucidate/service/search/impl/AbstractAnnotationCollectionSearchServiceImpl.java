@@ -1,5 +1,11 @@
 package com.digirati.elucidate.service.search.impl;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
@@ -14,11 +20,6 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
 import com.digirati.elucidate.service.search.AbstractAnnotationCollectionSearchService;
 import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
-import org.apache.log4j.Logger;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> implements AbstractAnnotationCollectionSearchService<C> {
 

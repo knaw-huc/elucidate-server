@@ -1,9 +1,9 @@
 package com.digirati.elucidate.common.infrastructure.util;
 
-import org.apache.http.client.utils.URIBuilder;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.http.client.utils.URIBuilder;
 
 public final class URIUtils {
     @SuppressWarnings("serial")

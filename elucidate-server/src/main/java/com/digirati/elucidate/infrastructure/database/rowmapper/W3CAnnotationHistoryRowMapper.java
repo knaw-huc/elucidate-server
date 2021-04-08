@@ -1,11 +1,12 @@
 package com.digirati.elucidate.infrastructure.database.rowmapper;
 
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 
 public class W3CAnnotationHistoryRowMapper implements RowMapper<W3CAnnotationHistory> {
 

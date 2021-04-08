@@ -1,12 +1,13 @@
 package com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationcollection;
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
+import java.util.Map;
+
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
 
 @Component
 public class NQuadW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
