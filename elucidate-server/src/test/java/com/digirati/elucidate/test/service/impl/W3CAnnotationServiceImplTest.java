@@ -1,6 +1,7 @@
 package com.digirati.elucidate.test.service.impl;
 
 import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
@@ -18,6 +19,7 @@ import static org.hamcrest.Matchers.is;
 
 
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore({"javax.script.*", "javax.management.*"})
 public class W3CAnnotationServiceImplTest extends AbstractAnnotationServiceImplTest<W3CAnnotation, W3CAnnotationCollection> {
 
     @Override
