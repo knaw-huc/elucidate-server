@@ -20,7 +20,7 @@ import com.digirati.elucidate.model.batch.OABatchOperation;
 @Component
 public class JSONLDOABatchOperationMessageConverter extends AbstractOABatchOperationMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDOABatchOperationMessageConverter(@Value("${batch.operation.oa.contexts}") String[] defaultContexts) throws IOException {

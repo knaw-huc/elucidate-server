@@ -11,7 +11,7 @@ public class AnnotationHistoryRegisteredListenerImpl implements RegisteredListen
 
     private static final Logger LOGGER = Logger.getLogger(AnnotationHistoryRegisteredListenerImpl.class);
 
-    private W3CAnnotationHistoryService w3cAnnotationHistoryService;
+    private final W3CAnnotationHistoryService w3cAnnotationHistoryService;
 
     @Autowired
     public AnnotationHistoryRegisteredListenerImpl(W3CAnnotationHistoryService w3cAnnotationHistoryService) {

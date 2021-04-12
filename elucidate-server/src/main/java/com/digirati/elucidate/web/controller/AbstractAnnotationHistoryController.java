@@ -20,7 +20,7 @@ public abstract class AbstractAnnotationHistoryController<A extends AbstractAnno
     private static final String VARIABLE_VERSION = "version";
     private static final String REQUEST_PATH = "/services/history/{" + VARIABLE_COLLECTION_ID + "}/{" + VARIABLE_ANNOTATION_ID + "}/{" + VARIABLE_VERSION + "}";
 
-    private AbstractAnnotationHistoryService<A, H> annotationHistoryService;
+    private final AbstractAnnotationHistoryService<A, H> annotationHistoryService;
 
     protected AbstractAnnotationHistoryController(AbstractAnnotationHistoryService<A, H> annotationHistoryService) {
         this.annotationHistoryService = annotationHistoryService;

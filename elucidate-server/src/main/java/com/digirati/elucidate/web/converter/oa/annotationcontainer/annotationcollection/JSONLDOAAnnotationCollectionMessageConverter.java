@@ -20,7 +20,7 @@ import com.digirati.elucidate.model.JSONLDProfile.Format;
 @Component
 public class JSONLDOAAnnotationCollectionMessageConverter extends AbstractOAAnnotationCollectionMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDOAAnnotationCollectionMessageConverter(@Value("${annotation.collection.oa.contexts}") String[] defaultContexts) throws IOException {

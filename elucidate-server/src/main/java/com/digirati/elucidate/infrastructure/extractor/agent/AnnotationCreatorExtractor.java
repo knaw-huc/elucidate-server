@@ -14,7 +14,7 @@ public class AnnotationCreatorExtractor {
     @SuppressWarnings("unchecked")
     public List<AnnotationAgent> extractCreators(Map<String, Object> jsonMap) {
 
-        List<AnnotationAgent> annotationAgents = new ArrayList<AnnotationAgent>();
+        List<AnnotationAgent> annotationAgents = new ArrayList<>();
 
         List<Map<String, Object>> creatorJsonMaps = (List<Map<String, Object>>) jsonMap.get(DCTermsConstants.URI_CREATOR);
         if (creatorJsonMaps != null && !creatorJsonMaps.isEmpty()) {
@@ -41,8 +41,8 @@ public class AnnotationCreatorExtractor {
                 List<Map<String, Object>> nameJsonMaps = (List<Map<String, Object>>) creatorJsonMap.get(FOAFConstants.URI_NAME);
                 if (nameJsonMaps != null && !nameJsonMaps.isEmpty()) {
 
-                    List<String> names = new ArrayList<String>();
-                    List<Map<String, Object>> namesJsonMaps = new ArrayList<Map<String, Object>>();
+                    List<String> names = new ArrayList<>();
+                    List<Map<String, Object>> namesJsonMaps = new ArrayList<>();
 
                     for (Map<String, Object> nameJsonMap : nameJsonMaps) {
 
@@ -58,8 +58,8 @@ public class AnnotationCreatorExtractor {
                 List<Map<String, Object>> emailJsonMaps = (List<Map<String, Object>>) creatorJsonMap.get(FOAFConstants.URI_MBOX);
                 if (emailJsonMaps != null && !emailJsonMaps.isEmpty()) {
 
-                    List<String> emails = new ArrayList<String>();
-                    List<Map<String, Object>> emailsJsonMaps = new ArrayList<Map<String, Object>>();
+                    List<String> emails = new ArrayList<>();
+                    List<Map<String, Object>> emailsJsonMaps = new ArrayList<>();
 
                     for (Map<String, Object> emailJsonMap : emailJsonMaps) {
 
@@ -75,8 +75,8 @@ public class AnnotationCreatorExtractor {
                 List<Map<String, Object>> emailSha1JsonMaps = (List<Map<String, Object>>) creatorJsonMap.get(FOAFConstants.UIRI_MBOX_SHA1SUM);
                 if (emailSha1JsonMaps != null && !emailSha1JsonMaps.isEmpty()) {
 
-                    List<String> emailSha1s = new ArrayList<String>();
-                    List<Map<String, Object>> emailSha1sJsonMaps = new ArrayList<Map<String, Object>>();
+                    List<String> emailSha1s = new ArrayList<>();
+                    List<Map<String, Object>> emailSha1sJsonMaps = new ArrayList<>();
 
                     for (Map<String, Object> emailSha1JsonMap : emailSha1JsonMaps) {
 
@@ -92,8 +92,8 @@ public class AnnotationCreatorExtractor {
                 List<Map<String, Object>> homepageJsonMaps = (List<Map<String, Object>>) creatorJsonMap.get(FOAFConstants.URI_HOMEPAGE);
                 if (homepageJsonMaps != null && !homepageJsonMaps.isEmpty()) {
 
-                    List<String> homepages = new ArrayList<String>();
-                    List<Map<String, Object>> homepagesJsonMaps = new ArrayList<Map<String, Object>>();
+                    List<String> homepages = new ArrayList<>();
+                    List<Map<String, Object>> homepagesJsonMaps = new ArrayList<>();
 
                     for (Map<String, Object> homepageJsonMap : homepageJsonMaps) {
 

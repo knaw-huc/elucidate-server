@@ -16,7 +16,7 @@ public class W3CAnnotationServiceImpl extends AbstractAnnotationServiceImpl<W3CA
 
     public static final String SERVICE_NAME = "w3cAnnotationServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public W3CAnnotationServiceImpl(UserSecurityDetailsContext securityContext, AnnotationStoreRepository annotationStoreRepository, IRIBuilderService iriBuilderService, @Qualifier("annotationIdGenerator") IDGenerator idGenerator) {

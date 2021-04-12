@@ -20,7 +20,7 @@ public class AnnotationTemporalExtractor {
 
     public List<AnnotationTemporal> extractTemporals(Map<String, Object> jsonMap) {
 
-        List<AnnotationTemporal> annotationTemporals = new ArrayList<AnnotationTemporal>();
+        List<AnnotationTemporal> annotationTemporals = new ArrayList<>();
 
         List<Map<String, Object>> createdJsonMaps = (List<Map<String, Object>>) jsonMap.get(DCTermsConstants.URI_CREATED);
         if (createdJsonMaps != null && createdJsonMaps.size() == 1) {

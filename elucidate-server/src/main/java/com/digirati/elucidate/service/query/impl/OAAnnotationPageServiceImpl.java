@@ -19,7 +19,7 @@ public class OAAnnotationPageServiceImpl extends AbstractAnnotationPageServiceIm
 
     public static final String SERVICE_NAME = "oaAnnotationPageServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public OAAnnotationPageServiceImpl(IRIBuilderService iriBuilderService, @Value("${annotation.page.size}") int pageSize) {

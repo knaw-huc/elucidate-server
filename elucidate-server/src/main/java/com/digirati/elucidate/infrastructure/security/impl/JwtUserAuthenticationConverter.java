@@ -16,8 +16,8 @@ import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
 
 public final class JwtUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 
-    private List<String> uidProperties;
-    private UserSecurityDetailsLoader securityDetailsLoader;
+    private final List<String> uidProperties;
+    private final UserSecurityDetailsLoader securityDetailsLoader;
 
     public JwtUserAuthenticationConverter(List<String> uidProperties, UserSecurityDetailsLoader securityDetailsLoader) {
         this.uidProperties = uidProperties;
@@ -39,13 +39,12 @@ public final class JwtUserAuthenticationConverter extends DefaultUserAuthenticat
                 }
 
                 List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles.toArray(new String[0]));
-                Authentication auth = new UsernamePasswordAuthenticationToken(
+
+                return (Authentication) new UsernamePasswordAuthenticationToken(
                     securityDetails,
                     "N/A",
                     authorities
                 );
-
-                return auth;
             })
             .orElse(null);
     }

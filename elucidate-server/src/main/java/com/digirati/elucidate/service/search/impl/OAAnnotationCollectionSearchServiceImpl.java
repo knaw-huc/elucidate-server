@@ -27,8 +27,8 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     public static final String SERVICE_NAME = "oaAnnotationCollectionSearchServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
-    private OAAnnotationPageSearchService oaAnnotationPageSearchService;
+    private final IRIBuilderService iriBuilderService;
+    private final OAAnnotationPageSearchService oaAnnotationPageSearchService;
 
     @Autowired
     public OAAnnotationCollectionSearchServiceImpl(IRIBuilderService iriBuilderService, OAAnnotationSearchService oaAnnotationSearchService, OAAnnotationPageSearchService oaAnnotationPageSearchService, @Value("${annotation.page.size}") int pageSize) {

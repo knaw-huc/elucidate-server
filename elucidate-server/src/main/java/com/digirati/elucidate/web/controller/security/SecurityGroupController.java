@@ -27,7 +27,7 @@ public class SecurityGroupController {
     private static final String VARIABLE_GROUP_ID = "groupId";
     private static final String GROUP_REQUEST_PATH = "/{" + VARIABLE_GROUP_ID + "}";
 
-    private SecurityGroupService securityGroupService;
+    private final SecurityGroupService securityGroupService;
 
     @Autowired
     public SecurityGroupController(SecurityGroupService securityGroupService) {

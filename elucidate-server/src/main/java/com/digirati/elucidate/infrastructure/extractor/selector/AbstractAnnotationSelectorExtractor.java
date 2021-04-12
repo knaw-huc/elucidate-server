@@ -22,7 +22,7 @@ public abstract class AbstractAnnotationSelectorExtractor<T extends AbstractAnno
     @SuppressWarnings("unchecked")
     public List<T> extractSelectors(Map<String, Object> jsonMap) {
 
-        List<T> selectors = new ArrayList<T>();
+        List<T> selectors = new ArrayList<>();
 
         List<Map<String, Object>> jsonSelectors = (List<Map<String, Object>>) jsonMap.get(OAConstants.URI_HAS_SELECTOR);
         if (jsonSelectors != null && !jsonSelectors.isEmpty()) {

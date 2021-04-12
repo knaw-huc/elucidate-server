@@ -14,7 +14,7 @@ public class W3CAnnotationSearchServiceImpl extends AbstractAnnotationSearchServ
 
     public static final String SERVICE_NAME = "w3cAnnotationSearchServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public W3CAnnotationSearchServiceImpl(UserSecurityDetailsContext securityContext, AnnotationSearchRepository annotationSearchRepository, IRIBuilderService iriBuilderService) {

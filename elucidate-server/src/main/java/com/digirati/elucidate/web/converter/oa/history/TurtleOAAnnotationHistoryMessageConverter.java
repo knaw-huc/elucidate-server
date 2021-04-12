@@ -15,7 +15,7 @@ import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
 @Component
 public class TurtleOAAnnotationHistoryMessageConverter extends AbstractOAAnnotationHistoryMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     @Autowired
     public TurtleOAAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService) {

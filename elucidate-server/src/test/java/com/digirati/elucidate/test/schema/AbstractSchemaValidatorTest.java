@@ -2,7 +2,7 @@ package com.digirati.elucidate.test.schema;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -47,9 +47,7 @@ public abstract class AbstractSchemaValidatorTest {
             ArrayNode jsonArray = JsonNodeFactory.instance.arrayNode();
             assertNotNull(jsonArray);
 
-            Iterator<ProcessingMessage> iterator = processingReport.iterator();
-            while (iterator.hasNext()) {
-                ProcessingMessage processingMessage = iterator.next();
+            for (ProcessingMessage processingMessage : processingReport) {
                 jsonArray.add(processingMessage.asJson());
             }
 
@@ -62,7 +60,7 @@ public abstract class AbstractSchemaValidatorTest {
 
     private String getJson(String fileName) throws IOException {
         InputStream inputStream = AbstractSchemaValidatorTest.class.getResourceAsStream(fileName);
-        return IOUtils.toString(inputStream, "UTF-8");
+        return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
     }
 
     private JsonNode getSchema() throws IOException {

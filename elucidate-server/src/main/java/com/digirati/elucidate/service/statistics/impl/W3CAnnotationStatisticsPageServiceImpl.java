@@ -16,7 +16,7 @@ public class W3CAnnotationStatisticsPageServiceImpl extends AbstractAnnotationSt
 
     public static final String SERVICE_NAME = "w3CStatisticsPageServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public W3CAnnotationStatisticsPageServiceImpl(IRIBuilderService iriBuilderService, AnnotationStatisticsRepository statisticsRepository, @Value("${annotation.page.size}") int pageSize) {

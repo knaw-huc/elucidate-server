@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public final class AnnotationReference {
 
-    private String collectionId;
-    private String id;
+    private final String collectionId;
+    private final String id;
 
     public AnnotationReference(String collectionId, String id) {
         this.collectionId = collectionId;

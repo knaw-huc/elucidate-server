@@ -19,7 +19,7 @@ import com.digirati.elucidate.model.JSONLDProfile.Format;
 @Component
 public class JSONLDW3CAnnotationPageMessageConverter extends AbstractW3CAnnotationPageMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDW3CAnnotationPageMessageConverter(@Value("${annotation.page.w3c.contexts}") String[] defaultContexts) {

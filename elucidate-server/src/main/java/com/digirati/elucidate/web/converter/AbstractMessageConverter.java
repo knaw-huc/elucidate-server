@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,13 +68,13 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
             defaultContexts = StringUtils.split(profile, " ");
         }
 
-        List<Format> formats = new ArrayList<Format>();
+        List<Format> formats = new ArrayList<>();
         for (String defaultContext : defaultContexts) {
             formats.add(extractFormat(defaultContext));
         }
         jsonLdProfile.setFormats(formats);
 
-        List<String> contexts = new ArrayList<String>();
+        List<String> contexts = new ArrayList<>();
         for (String defaultContext : defaultContexts) {
             contexts.add(prepareContext(defaultContext));
         }
@@ -164,7 +165,7 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
     }
 
     private void stream(String str, HttpOutputMessage outputMessage) throws IOException {
-        InputStream inputStream = new ByteArrayInputStream(str.getBytes("UTF-8"));
+        InputStream inputStream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
         OutputStream messageOutputStream = outputMessage.getBody();
         IOUtils.copy(inputStream, messageOutputStream);
     }

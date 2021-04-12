@@ -25,7 +25,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_DATE_TIME;
     public static final String SERVICE_NAME = "iriBuilderServiceImpl";
 
-    private String baseUrl;
+    private final String baseUrl;
 
     @Autowired
     public IRIBuilderServiceImpl(@Value("${base.scheme}") String baseScheme, @Value("${base.host}") String baseHost, @Value("${base.port}") int basePort, @Value("${base.path}") String basePath) {

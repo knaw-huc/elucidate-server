@@ -12,7 +12,7 @@ import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
 @Component
 public class TurtleOAAnnotationCollectionMessageConverter extends AbstractOAAnnotationCollectionMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleOAAnnotationCollectionMessageConverter() {
         super(APPLICATION_TURTLE);

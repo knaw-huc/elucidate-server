@@ -28,7 +28,7 @@ public abstract class AbstractTest {
     }
 
     protected List<W3CAnnotation> generateRandomW3CAnnotations(int quantity) {
-        List<W3CAnnotation> w3cAnnotations = new ArrayList<W3CAnnotation>();
+        List<W3CAnnotation> w3cAnnotations = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             w3cAnnotations.add(generateRandomW3CAnnotation());
         }

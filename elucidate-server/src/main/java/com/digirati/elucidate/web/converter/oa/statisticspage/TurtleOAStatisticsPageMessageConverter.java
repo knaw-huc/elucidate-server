@@ -12,7 +12,7 @@ import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 @Component
 public class TurtleOAStatisticsPageMessageConverter extends AbstractOAStatisticsPageMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleOAStatisticsPageMessageConverter() {
         super(APPLICATION_TURTLE);

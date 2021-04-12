@@ -25,8 +25,8 @@ public class W3CAnnotationCollectionServiceImpl extends AbstractAnnotationCollec
 
     public static final String SERVICE_NAME = "w3cAnnotationCollectionServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
-    private W3CAnnotationPageService w3cAnnotationPageService;
+    private final IRIBuilderService iriBuilderService;
+    private final W3CAnnotationPageService w3cAnnotationPageService;
 
     @Autowired
     public W3CAnnotationCollectionServiceImpl(AnnotationCollectionStoreRepository annotationCollectionStoreRepository, AnnotationSearchRepository annotationSearchRepository, IRIBuilderService iriBuilderService, W3CAnnotationService w3cAnnotationService, W3CAnnotationPageService w3cAnnotationPageService, @Qualifier("collectionIdGenerator") IDGenerator idGenerator, @Value("${annotation.page.size}") int pageSize) {

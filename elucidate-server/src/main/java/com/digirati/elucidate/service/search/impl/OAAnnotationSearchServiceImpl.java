@@ -20,7 +20,7 @@ public class OAAnnotationSearchServiceImpl extends AbstractAnnotationSearchServi
 
     public static final String SERVICE_NAME = "oaAnnotationSearchServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public OAAnnotationSearchServiceImpl(UserSecurityDetailsContext securityContext, AnnotationSearchRepository annotationSearchRepository, IRIBuilderService iriBuilderService) {

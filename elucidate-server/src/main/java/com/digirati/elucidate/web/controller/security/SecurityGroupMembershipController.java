@@ -78,15 +78,14 @@ public class SecurityGroupMembershipController {
         return convertServiceToHttpResponse(groupMembershipService.removeUserFromGroup(userId, groupId));
     }
 
-    @SuppressWarnings("unchecked")
     private <T> ResponseEntity<T> convertServiceToHttpResponse(ServiceResponse<T> response) {
         switch (response.getStatus()) {
             case NOT_FOUND:
-                return (ResponseEntity<T>) ResponseEntity.notFound().build();
+                return ResponseEntity.notFound().build();
             case UNAUTHORIZED:
-                return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             case DELETED:
-                return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.GONE).build();
+                return ResponseEntity.status(HttpStatus.GONE).build();
         }
 
         return ResponseEntity.ok(response.getObj());

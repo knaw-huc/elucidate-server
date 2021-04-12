@@ -30,9 +30,9 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private AnnotationCollectionStoreRepository annotationCollectionStoreRepository;
-    private IDGenerator idGenerator;
-    private int pageSize;
+    private final AnnotationCollectionStoreRepository annotationCollectionStoreRepository;
+    private final IDGenerator idGenerator;
+    private final int pageSize;
 
     protected AbstractAnnotationCollectionServiceImpl(AnnotationCollectionStoreRepository annotationCollectionStoreRepository, AbstractAnnotationService<A> annotationService, IDGenerator idGenerator, int pageSize) {
         this.annotationCollectionStoreRepository = annotationCollectionStoreRepository;
@@ -55,7 +55,7 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
 
         W3CAnnotationCollection w3cAnnotationCollection = annotationCollectionStoreRepository.getAnnotationCollectionById(collectionId);
         if (w3cAnnotationCollection == null) {
-            return new ServiceResponse<C>(Status.NOT_FOUND, null);
+            return new ServiceResponse<>(Status.NOT_FOUND, null);
         }
 
         AnnotationCollectionConverter<C> annotationCollectionConverter = () -> convertToAnnotationCollection(w3cAnnotationCollection);
@@ -74,13 +74,13 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
         }
 
         if (!validateCollectionId(collectionId)) {
-            return new ServiceResponse<C>(Status.NON_CONFORMANT, null);
+            return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
 
         ServiceResponse<C> serviceResponse = getAnnotationCollection(collectionId, Collections.emptyList(), ClientPreference.MINIMAL_CONTAINER);
         Status status = serviceResponse.getStatus();
         if (status.equals(Status.OK)) {
-            return new ServiceResponse<C>(Status.ALREADY_EXISTS, null);
+            return new ServiceResponse<>(Status.ALREADY_EXISTS, null);
         }
 
         W3CAnnotationCollection w3cAnnotationCollection = convertFromAnnotationCollection(annotationCollection);
@@ -91,7 +91,7 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
             w3cAnnotationCollectionJson = JsonUtils.toString(w3cAnnotationCollectionMap);
         } catch (IOException e) {
             LOGGER.debug(String.format("Detected invalid JSON on W3C Annotation Collection [%s]", w3cAnnotationCollection), e);
-            return new ServiceResponse<C>(Status.NON_CONFORMANT, null);
+            return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
 
         annotationCollectionStoreRepository.createAnnotationCollection(collectionId, w3cAnnotationCollectionJson);

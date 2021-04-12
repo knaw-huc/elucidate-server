@@ -26,9 +26,9 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private AnnotationStoreRepository annotationStoreRepository;
-    private IDGenerator idGenerator;
-    private UserSecurityDetailsContext securityContext;
+    private final AnnotationStoreRepository annotationStoreRepository;
+    private final IDGenerator idGenerator;
+    private final UserSecurityDetailsContext securityContext;
 
     protected AbstractAnnotationServiceImpl(UserSecurityDetailsContext securityContext, AnnotationStoreRepository annotationStoreRepository, IDGenerator idGenerator) {
         this.securityContext = securityContext;
@@ -52,10 +52,10 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
             int deletedAnnotations = annotationStoreRepository.countDeletedAnnotations(collectionId, annotationId);
 
             if (deletedAnnotations > 0) {
-                return new ServiceResponse<A>(Status.DELETED, null);
+                return new ServiceResponse<>(Status.DELETED, null);
             }
 
-            return new ServiceResponse<A>(Status.NOT_FOUND, null);
+            return new ServiceResponse<>(Status.NOT_FOUND, null);
         }
 
         if (!securityContext.isAuthorized(Permission.READ, w3cAnnotation)) {
@@ -64,7 +64,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
         A annotation = convertToAnnotation(w3cAnnotation);
         annotation.getJsonMap().put(JSONLDConstants.ATTRIBUTE_ID, buildAnnotationIri(collectionId, annotationId));
-        return new ServiceResponse<A>(Status.OK, annotation);
+        return new ServiceResponse<>(Status.OK, annotation);
     }
 
     @Override
@@ -72,7 +72,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
         List<W3CAnnotation> w3cAnnotations = annotationStoreRepository.getAnnotationsByCollectionId(collectionId);
 
-        List<A> annotations = new ArrayList<A>();
+        List<A> annotations = new ArrayList<>();
         for (W3CAnnotation w3cAnnotation : w3cAnnotations) {
             if (securityContext.isAuthorized(Permission.READ, w3cAnnotation)) {
                 A annotation = convertToAnnotation(w3cAnnotation);
@@ -81,7 +81,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
             }
         }
 
-        return new ServiceResponse<List<A>>(Status.OK, annotations);
+        return new ServiceResponse<>(Status.OK, annotations);
     }
 
     @Override
@@ -93,13 +93,13 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         }
 
         if (!validateAnnotationId(annotationId)) {
-            return new ServiceResponse<A>(Status.NON_CONFORMANT, null);
+            return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
 
         ServiceResponse<A> existingAnnotationServiceResponse = getAnnotation(collectionId, annotationId);
         Status existingAnnotationStatus = existingAnnotationServiceResponse.getStatus();
         if (existingAnnotationStatus.equals(Status.OK)) {
-            return new ServiceResponse<A>(Status.ALREADY_EXISTS, null);
+            return new ServiceResponse<>(Status.ALREADY_EXISTS, null);
         }
 
         W3CAnnotation w3cAnnotation = convertFromAnnotation(annotation);
@@ -122,7 +122,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
             annotationJson = JsonUtils.toString(annotationMap);
         } catch (IOException e) {
             LOGGER.debug(String.format("Detected invalid JSON in Annotation Map [%s]", annotationMap), e);
-            return new ServiceResponse<A>(Status.NON_CONFORMANT, null);
+            return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
 
         w3cAnnotation = annotationStoreRepository.createAnnotation(
@@ -134,7 +134,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
         annotation = convertToAnnotation(w3cAnnotation);
         annotation.getJsonMap().put(JSONLDConstants.ATTRIBUTE_ID, buildAnnotationIri(collectionId, annotationId));
-        return new ServiceResponse<A>(Status.OK, annotation);
+        return new ServiceResponse<>(Status.OK, annotation);
     }
 
     @Override
@@ -144,11 +144,11 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         Status existingAnnotationStatus = existingAnnotationServiceResponse.getStatus();
 
         if (existingAnnotationStatus.equals(Status.NOT_FOUND)) {
-            return new ServiceResponse<A>(Status.NOT_FOUND, null);
+            return new ServiceResponse<>(Status.NOT_FOUND, null);
         }
 
         if (existingAnnotationStatus.equals(Status.DELETED)) {
-            return new ServiceResponse<A>(Status.DELETED, null);
+            return new ServiceResponse<>(Status.DELETED, null);
         }
 
         A existingAnnotation = existingAnnotationServiceResponse.getObj();
@@ -159,18 +159,18 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
         String existingCacheKey = existingAnnotation.getCacheKey();
         if (!StringUtils.equals(cacheKey, existingCacheKey)) {
-            return new ServiceResponse<A>(Status.CACHE_KEY_MISS, null);
+            return new ServiceResponse<>(Status.CACHE_KEY_MISS, null);
         }
 
         Map<String, Object> annotationMap = annotation.getJsonMap();
         Map<String, Object> existingAnnotationMap = existingAnnotation.getJsonMap();
 
         if (!StringUtils.equals((String) annotationMap.get("via"), (String) existingAnnotationMap.get("via"))) {
-            return new ServiceResponse<A>(Status.ILLEGAL_MODIFICATION, null);
+            return new ServiceResponse<>(Status.ILLEGAL_MODIFICATION, null);
         }
 
         if (!StringUtils.equals((String) annotationMap.get("canonical"), (String) existingAnnotationMap.get("canonical"))) {
-            return new ServiceResponse<A>(Status.ILLEGAL_MODIFICATION, null);
+            return new ServiceResponse<>(Status.ILLEGAL_MODIFICATION, null);
         }
 
         W3CAnnotation w3cAnnotation = convertFromAnnotation(annotation);
@@ -181,13 +181,13 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
             annotationJson = JsonUtils.toString(annotationMap);
         } catch (IOException e) {
             LOGGER.debug(String.format("Detected invalid JSON in Annotation Map [%s]", annotationMap), e);
-            return new ServiceResponse<A>(Status.NON_CONFORMANT, null);
+            return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
         w3cAnnotation = annotationStoreRepository.updateAnnotation(collectionId, annotationId, annotationJson);
 
         annotation = convertToAnnotation(w3cAnnotation);
         annotation.getJsonMap().put(JSONLDConstants.ATTRIBUTE_ID, buildAnnotationIri(collectionId, annotationId));
-        return new ServiceResponse<A>(Status.OK, annotation);
+        return new ServiceResponse<>(Status.OK, annotation);
     }
 
     @Override
@@ -197,11 +197,11 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         Status existingAnnotationStatus = existingAnnotationServiceResponse.getStatus();
 
         if (existingAnnotationStatus.equals(Status.NOT_FOUND)) {
-            return new ServiceResponse<Void>(Status.NOT_FOUND, null);
+            return new ServiceResponse<>(Status.NOT_FOUND, null);
         }
 
         if (existingAnnotationStatus.equals(Status.DELETED)) {
-            return new ServiceResponse<Void>(Status.DELETED, null);
+            return new ServiceResponse<>(Status.DELETED, null);
         }
 
         A existingAnnotation = existingAnnotationServiceResponse.getObj();
@@ -212,11 +212,11 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
         String existingCacheKey = existingAnnotation.getCacheKey();
         if (!StringUtils.equals(cacheKey, existingCacheKey)) {
-            return new ServiceResponse<Void>(Status.CACHE_KEY_MISS, null);
+            return new ServiceResponse<>(Status.CACHE_KEY_MISS, null);
         }
 
         annotationStoreRepository.deleteAnnotation(collectionId, annotationId);
-        return new ServiceResponse<Void>(Status.OK, null);
+        return new ServiceResponse<>(Status.OK, null);
     }
 
     private boolean validateAnnotationId(String annotationId) {

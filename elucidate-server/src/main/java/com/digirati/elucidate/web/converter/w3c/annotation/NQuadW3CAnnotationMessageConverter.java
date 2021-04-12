@@ -15,7 +15,7 @@ import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 @Component
 public class NQuadW3CAnnotationMessageConverter extends AbstractW3CAnnotationMessageConverter {
 
-    private NQuadTripleCallback nQuadTripleCallback;
+    private final NQuadTripleCallback nQuadTripleCallback;
 
     @Autowired
     public NQuadW3CAnnotationMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService) {

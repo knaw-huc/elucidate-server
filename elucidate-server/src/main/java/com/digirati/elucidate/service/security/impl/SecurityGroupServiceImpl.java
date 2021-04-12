@@ -18,7 +18,7 @@ public class SecurityGroupServiceImpl implements SecurityGroupService {
     public static final String SERVICE_NAME = "securityGroupServiceImpl";
     private final GroupRepository groupRepository;
     private final IDGenerator idGenerator;
-    private UserSecurityDetailsContext securityDetailsContext;
+    private final UserSecurityDetailsContext securityDetailsContext;
 
     public SecurityGroupServiceImpl(
         UserSecurityDetailsContext securityDetailsContext,

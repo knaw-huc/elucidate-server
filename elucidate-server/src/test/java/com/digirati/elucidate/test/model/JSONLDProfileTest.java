@@ -1,6 +1,7 @@
 package com.digirati.elucidate.test.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,9 +75,7 @@ public class JSONLDProfileTest {
     private List<Format> buildFormats() {
         return new ArrayList<JSONLDProfile.Format>() {
             {
-                for (Format format : Format.values()) {
-                    add(format);
-                }
+                this.addAll(Arrays.asList(Format.values()));
             }
         };
     }

@@ -14,8 +14,8 @@ import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractOAAnnotationMessageConverter extends AbstractMessageConverter<OAAnnotation> {
 
-    private IRIBuilderService iriBuilderService;
-    private OAAnnotationHistoryService oaAnnotationHistoryService;
+    private final IRIBuilderService iriBuilderService;
+    private final OAAnnotationHistoryService oaAnnotationHistoryService;
 
     protected AbstractOAAnnotationMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService, MediaType... supportedMediaTypes) {
         super(supportedMediaTypes);

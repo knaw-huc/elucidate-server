@@ -17,7 +17,7 @@ public abstract class AbstractAnnotationPageServiceImpl<A extends AbstractAnnota
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private int pageSize;
+    private final int pageSize;
 
     protected AbstractAnnotationPageServiceImpl(int pageSize) {
         this.pageSize = pageSize;

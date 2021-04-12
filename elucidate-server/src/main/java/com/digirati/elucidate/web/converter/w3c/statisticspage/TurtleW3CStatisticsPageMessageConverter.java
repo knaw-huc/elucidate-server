@@ -12,7 +12,7 @@ import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
 @Component
 public class TurtleW3CStatisticsPageMessageConverter extends AbstractW3CStatisticsPageMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleW3CStatisticsPageMessageConverter() {
         super(APPLICATION_TURTLE);

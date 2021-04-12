@@ -21,7 +21,7 @@ import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
 @Component
 public class JSONLDOAAnnotationHistoryMessageConverter extends AbstractOAAnnotationHistoryMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDOAAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService, @Value("${annotation.history.oa.contexts}") String[] defaultContexts) throws IOException {

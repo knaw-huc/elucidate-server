@@ -31,8 +31,8 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
 
     public static final String SERVICE_NAME = "oaAnnotationCollectionServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
-    private OAAnnotationPageService oaAnnotationPageService;
+    private final IRIBuilderService iriBuilderService;
+    private final OAAnnotationPageService oaAnnotationPageService;
 
     @Autowired
     public OAAnnotationCollectionServiceImpl(AnnotationCollectionStoreRepository annotationCollectionStoreRepository, AnnotationSearchRepository annotationSearchRepository, IRIBuilderService iriBuilderService, OAAnnotationService oaAnnotationService, OAAnnotationPageService oaAnnotationPageService, @Qualifier("collectionIdGenerator") IDGenerator idGenerator, @Value("${annotation.page.size}") int pageSize) {

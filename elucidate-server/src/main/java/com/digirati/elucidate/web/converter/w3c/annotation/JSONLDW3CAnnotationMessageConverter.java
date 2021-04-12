@@ -22,7 +22,7 @@ import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 @Component
 public class JSONLDW3CAnnotationMessageConverter extends AbstractW3CAnnotationMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDW3CAnnotationMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService, @Value("${annotation.w3c.contexts}") String[] defaultContexts) throws IOException {

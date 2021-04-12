@@ -14,8 +14,8 @@ import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMessageConverter<W3CAnnotation> {
 
-    private IRIBuilderService iriBuilderService;
-    private W3CAnnotationHistoryService w3cAnnotationHistoryService;
+    private final IRIBuilderService iriBuilderService;
+    private final W3CAnnotationHistoryService w3cAnnotationHistoryService;
 
     protected AbstractW3CAnnotationMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService, MediaType... supportedMediaTypes) {
         super(supportedMediaTypes);

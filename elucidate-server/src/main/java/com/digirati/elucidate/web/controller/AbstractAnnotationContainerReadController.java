@@ -31,9 +31,9 @@ public abstract class AbstractAnnotationContainerReadController<A extends Abstra
     private static final String PREFER_CONTAINED_IRIS = "http://www.w3.org/ns/oa#prefercontainediris";
     private static final String PREFER_CONTAINED_DESCRIPTIONS = "http://www.w3.org/ns/oa#prefercontaineddescriptions";
 
-    private AbstractAnnotationService<A> annotationService;
-    private AbstractAnnotationPageService<A, P> annotationPageService;
-    private AbstractAnnotationCollectionService<A, C> annotationCollectionService;
+    private final AbstractAnnotationService<A> annotationService;
+    private final AbstractAnnotationPageService<A, P> annotationPageService;
+    private final AbstractAnnotationCollectionService<A, C> annotationCollectionService;
 
     protected AbstractAnnotationContainerReadController(AbstractAnnotationService<A> annotationService, AbstractAnnotationPageService<A, P> annotationPageService, AbstractAnnotationCollectionService<A, C> annotationCollectionService) {
         this.annotationService = annotationService;

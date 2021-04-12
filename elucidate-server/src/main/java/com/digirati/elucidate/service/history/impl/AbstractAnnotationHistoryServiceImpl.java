@@ -21,7 +21,7 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
 
     protected final Logger LOGGER = Logger.getLogger(AbstractAnnotationHistoryServiceImpl.class);
 
-    private AnnotationHistoryRepository annotationHistoryRepository;
+    private final AnnotationHistoryRepository annotationHistoryRepository;
 
     protected AbstractAnnotationHistoryServiceImpl(AnnotationHistoryRepository annotationHistoryRepository) {
         this.annotationHistoryRepository = annotationHistoryRepository;
@@ -42,7 +42,7 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
 
         H annotationHistory = convertToAnnotationHistory(w3cAnnotationHistory);
         annotationHistory.getJsonMap().put(JSONLDConstants.ATTRIBUTE_ID, buildAnnotationIri(annotationHistory.getCollectionId(), annotationHistory.getAnnotationId()));
-        return new ServiceResponse<H>(Status.OK, annotationHistory);
+        return new ServiceResponse<>(Status.OK, annotationHistory);
     }
 
     @Override
@@ -50,15 +50,15 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
 
         List<W3CAnnotationHistory> w3cAnnotationHistories = annotationHistoryRepository.deleteAnnotationHistory(annotation.getPk());
         if (w3cAnnotationHistories == null || w3cAnnotationHistories.isEmpty()) {
-            return new ServiceResponse<List<H>>(Status.NOT_FOUND, null);
+            return new ServiceResponse<>(Status.NOT_FOUND, null);
         }
 
-        List<H> annotationHistories = new ArrayList<H>();
+        List<H> annotationHistories = new ArrayList<>();
         for (W3CAnnotationHistory w3cAnnotationHistory : w3cAnnotationHistories) {
             H annotationHistory = convertToAnnotationHistory(w3cAnnotationHistory);
             annotationHistory.getJsonMap().put(JSONLDConstants.ATTRIBUTE_ID, buildAnnotationIri(annotationHistory.getCollectionId(), annotationHistory.getAnnotationId()));
         }
-        return new ServiceResponse<List<H>>(Status.OK, annotationHistories);
+        return new ServiceResponse<>(Status.OK, annotationHistories);
     }
 
     @Override
@@ -94,12 +94,12 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
     private ServiceResponse<H> processAnnotationHistoryResponse(W3CAnnotationHistory w3cAnnotationHistory) {
 
         if (w3cAnnotationHistory == null) {
-            return new ServiceResponse<H>(Status.NOT_FOUND, null);
+            return new ServiceResponse<>(Status.NOT_FOUND, null);
         }
 
         H annotationHistory = convertToAnnotationHistory(w3cAnnotationHistory);
         annotationHistory.getJsonMap().put(JSONLDConstants.ATTRIBUTE_ID, buildAnnotationIri(annotationHistory.getCollectionId(), annotationHistory.getAnnotationId()));
-        return new ServiceResponse<H>(Status.OK, annotationHistory);
+        return new ServiceResponse<>(Status.OK, annotationHistory);
     }
 
     private String convertJsonMapToString(A annotation) {

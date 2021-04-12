@@ -18,9 +18,9 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 
 public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends AbstractAnnotationPage> {
 
-    private AnnotationPageConverter<P> annotationPageConverter;
-    private AnnotationCollectionIRIBuilder annotationCollectionIriBuilder;
-    private AnnotationPageIRIBuilder annotationPageIriBuilder;
+    private final AnnotationPageConverter<P> annotationPageConverter;
+    private final AnnotationCollectionIRIBuilder annotationCollectionIriBuilder;
+    private final AnnotationPageIRIBuilder annotationPageIriBuilder;
 
     public AnnotationPageBuilder(AnnotationPageConverter<P> annotationPageConverter, AnnotationCollectionIRIBuilder annotationCollectionIriBuilder, AnnotationPageIRIBuilder annotationPageIriBuilder) {
         this.annotationPageConverter = annotationPageConverter;
@@ -36,7 +36,7 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
         int to = Math.min(annotations.size(), (page + 1) * pageSize);
         annotations = annotations.subList(from, to);
 
-        Map<String, Object> jsonMap = new HashMap<String, Object>();
+        Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put(JSONLDConstants.ATTRIBUTE_TYPE, new ArrayList<String>() {
             {
                 add(ActivityStreamConstants.URI_ORDERED_COLLECTION_PAGE);
@@ -128,11 +128,11 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
         }
 
         P annotationPage = annotationPageConverter.convertToAnnotationPage(jsonMap);
-        return new ServiceResponse<P>(Status.OK, annotationPage);
+        return new ServiceResponse<>(Status.OK, annotationPage);
     }
 
     private List<Map<String, Object>> convertToDescriptions(List<A> annotations) {
-        List<Map<String, Object>> descriptions = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> descriptions = new ArrayList<>();
         for (A annotation : annotations) {
             descriptions.add(annotation.getJsonMap());
         }
@@ -141,7 +141,7 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
 
     @SuppressWarnings("serial")
     private List<Map<String, Object>> convertToIris(List<A> annotations) {
-        List<Map<String, Object>> iris = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> iris = new ArrayList<>();
         for (A annotation : annotations) {
             iris.add(new HashMap<String, Object>() {
                 {

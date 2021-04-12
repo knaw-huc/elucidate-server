@@ -19,7 +19,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
     @Override
     public List<AnnotationAgent> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
-        Map<Integer, AnnotationAgent> annotationAgents = new HashMap<Integer, AnnotationAgent>();
+        Map<Integer, AnnotationAgent> annotationAgents = new HashMap<>();
 
         while (rs.next()) {
 
@@ -39,7 +39,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             String email = ResultSetUtils.getString(rs, "email");
             if (StringUtils.isNotBlank(email)) {
                 if (annotationAgent.getEmails() == null) {
-                    annotationAgent.setEmails(new ArrayList<String>());
+                    annotationAgent.setEmails(new ArrayList<>());
                 }
                 annotationAgent.getEmails().add(email);
             }
@@ -47,7 +47,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             Map<String, Object> emailJsonMap = ResultSetUtils.getJsonMap(rs, "emailjson");
             if (emailJsonMap != null && !emailJsonMap.isEmpty()) {
                 if (annotationAgent.getEmailJsonMaps() == null) {
-                    annotationAgent.setEmailJsonMaps(new ArrayList<Map<String, Object>>());
+                    annotationAgent.setEmailJsonMaps(new ArrayList<>());
                 }
                 annotationAgent.getEmailJsonMaps().add(emailJsonMap);
             }
@@ -55,7 +55,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             String emailSha1 = ResultSetUtils.getString(rs, "emailsha1");
             if (StringUtils.isNotBlank(emailSha1)) {
                 if (annotationAgent.getEmailSha1s() == null) {
-                    annotationAgent.setEmailSha1s(new ArrayList<String>());
+                    annotationAgent.setEmailSha1s(new ArrayList<>());
                 }
                 annotationAgent.getEmailSha1s().add(emailSha1);
             }
@@ -63,7 +63,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             Map<String, Object> emailSha1JsonMap = ResultSetUtils.getJsonMap(rs, "emailsha1json");
             if (emailSha1JsonMap != null && !emailSha1JsonMap.isEmpty()) {
                 if (annotationAgent.getEmailSha1JsonMaps() == null) {
-                    annotationAgent.setEmailSha1JsonMaps(new ArrayList<Map<String, Object>>());
+                    annotationAgent.setEmailSha1JsonMaps(new ArrayList<>());
                 }
                 annotationAgent.getEmailSha1JsonMaps().add(emailSha1JsonMap);
             }
@@ -71,7 +71,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             String homepage = ResultSetUtils.getString(rs, "homepage");
             if (StringUtils.isNotBlank(homepage)) {
                 if (annotationAgent.getHomepages() == null) {
-                    annotationAgent.setHomepages(new ArrayList<String>());
+                    annotationAgent.setHomepages(new ArrayList<>());
                 }
                 annotationAgent.getHomepages().add(homepage);
             }
@@ -79,7 +79,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             Map<String, Object> homepageJsonMap = ResultSetUtils.getJsonMap(rs, "homepagejson");
             if (homepageJsonMap != null && !homepageJsonMap.isEmpty()) {
                 if (annotationAgent.getHomepageJsonMaps() == null) {
-                    annotationAgent.setHomepageJsonMaps(new ArrayList<Map<String, Object>>());
+                    annotationAgent.setHomepageJsonMaps(new ArrayList<>());
                 }
                 annotationAgent.getHomepageJsonMaps().add(homepageJsonMap);
             }
@@ -87,7 +87,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             String name = ResultSetUtils.getString(rs, "name");
             if (StringUtils.isNotBlank(name)) {
                 if (annotationAgent.getNames() == null) {
-                    annotationAgent.setNames(new ArrayList<String>());
+                    annotationAgent.setNames(new ArrayList<>());
                 }
                 annotationAgent.getNames().add(name);
             }
@@ -95,7 +95,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             Map<String, Object> nameJsonMap = ResultSetUtils.getJsonMap(rs, "namejson");
             if (nameJsonMap != null && !nameJsonMap.isEmpty()) {
                 if (annotationAgent.getNameJsonMaps() == null) {
-                    annotationAgent.setNameJsonMaps(new ArrayList<Map<String, Object>>());
+                    annotationAgent.setNameJsonMaps(new ArrayList<>());
                 }
                 annotationAgent.getNameJsonMaps().add(nameJsonMap);
             }
@@ -103,7 +103,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             String type = ResultSetUtils.getString(rs, "type");
             if (StringUtils.isNotBlank(type)) {
                 if (annotationAgent.getTypes() == null) {
-                    annotationAgent.setTypes(new ArrayList<String>());
+                    annotationAgent.setTypes(new ArrayList<>());
                 }
                 annotationAgent.getTypes().add(type);
             }
@@ -111,12 +111,12 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
             String typeJson = ResultSetUtils.getString(rs, "typejson");
             if (StringUtils.isNotBlank(typeJson)) {
                 if (annotationAgent.getTypesJsonList() == null) {
-                    annotationAgent.setTypesJsonList(new ArrayList<String>());
+                    annotationAgent.setTypesJsonList(new ArrayList<>());
                 }
                 annotationAgent.getTypesJsonList().add(typeJson);
             }
         }
 
-        return new ArrayList<AnnotationAgent>(annotationAgents.values());
+        return new ArrayList<>(annotationAgents.values());
     }
 }

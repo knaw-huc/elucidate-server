@@ -49,11 +49,11 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
 
     public static final String SERVICE_NAME = "annotationExtractorServiceImpl";
 
-    private AnnotationBodyStoreRepository annotationBodyStoreRepository;
-    private AnnotationTargetStoreRepository annotationTargetStoreRepository;
-    private AnnotationSelectorStoreRepository annotationSelectorStoreRepository;
-    private AnnotationAgentStoreRepository annotationAgentStoreRepository;
-    private AnnotationTemporalStoreRepository annotationTemporalStoreRepository;
+    private final AnnotationBodyStoreRepository annotationBodyStoreRepository;
+    private final AnnotationTargetStoreRepository annotationTargetStoreRepository;
+    private final AnnotationSelectorStoreRepository annotationSelectorStoreRepository;
+    private final AnnotationAgentStoreRepository annotationAgentStoreRepository;
+    private final AnnotationTemporalStoreRepository annotationTemporalStoreRepository;
 
     @Autowired
     public AnnotationExtractorServiceImpl(AnnotationBodyStoreRepository annotationBodyStoreRepository, AnnotationTargetStoreRepository annotationTargetStoreRepository, AnnotationSelectorStoreRepository annotationSelectorStoreRepository, AnnotationAgentStoreRepository annotationAgentStoreRepository, AnnotationTemporalStoreRepository annotationTemporalStoreRepository) {

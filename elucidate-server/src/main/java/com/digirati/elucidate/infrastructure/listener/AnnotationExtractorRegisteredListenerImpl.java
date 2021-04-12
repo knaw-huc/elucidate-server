@@ -11,7 +11,7 @@ public class AnnotationExtractorRegisteredListenerImpl implements RegisteredList
 
     private static final Logger LOGGER = Logger.getLogger(AnnotationExtractorRegisteredListenerImpl.class);
 
-    private AnnotationExtractorService annotationExtractorService;
+    private final AnnotationExtractorService annotationExtractorService;
 
     @Autowired
     public AnnotationExtractorRegisteredListenerImpl(AnnotationExtractorService annotationExtractorService) {

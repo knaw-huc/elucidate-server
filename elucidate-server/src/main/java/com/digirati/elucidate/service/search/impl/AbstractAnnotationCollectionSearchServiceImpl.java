@@ -25,8 +25,8 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private AbstractAnnotationSearchService<A> annotationSearchService;
-    private int pageSize;
+    private final AbstractAnnotationSearchService<A> annotationSearchService;
+    private final int pageSize;
 
     protected AbstractAnnotationCollectionSearchServiceImpl(AbstractAnnotationSearchService<A> annotationSearchService, int pageSize) {
         this.annotationSearchService = annotationSearchService;
@@ -39,14 +39,14 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
     public ServiceResponse<C> searchAnnotationCollectionByBody(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
-        w3cAnnotationCollection.setJsonMap(new HashMap<String, Object>());
+        w3cAnnotationCollection.setJsonMap(new HashMap<>());
 
         ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByBody(fields, value, strict, xywh, t, creatorIri, generatorIri);
         Status status = serviceResponse.getStatus();
 
         if (!status.equals(Status.OK)) {
             LOGGER.warn(String.format("Got unexpected service response code [%s] (expected [%s]", status, Status.OK));
-            return new ServiceResponse<C>(status, null);
+            return new ServiceResponse<>(status, null);
         }
 
         List<A> annotations = serviceResponse.getObj();
@@ -69,14 +69,14 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
     public ServiceResponse<C> searchAnnotationCollectionByTarget(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
-        w3cAnnotationCollection.setJsonMap(new HashMap<String, Object>());
+        w3cAnnotationCollection.setJsonMap(new HashMap<>());
 
         ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByTarget(fields, value, strict, xywh, t, creatorIri, generatorIri);
         Status status = serviceResponse.getStatus();
 
         if (!status.equals(Status.OK)) {
             LOGGER.warn(String.format("Got unexpected service response code [%s] (expected [%s]", status, Status.OK));
-            return new ServiceResponse<C>(status, null);
+            return new ServiceResponse<>(status, null);
         }
 
         List<A> annotations = serviceResponse.getObj();
@@ -99,14 +99,14 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
     public ServiceResponse<C> searchAnnotationCollectionByCreator(List<String> levels, String type, String value, boolean strict, ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
-        w3cAnnotationCollection.setJsonMap(new HashMap<String, Object>());
+        w3cAnnotationCollection.setJsonMap(new HashMap<>());
 
         ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByCreator(levels, type, value, strict);
         Status status = serviceResponse.getStatus();
 
         if (!status.equals(Status.OK)) {
             LOGGER.warn(String.format("Got unexpected service response code [%s] (expected [%s]", status, Status.OK));
-            return new ServiceResponse<C>(status, null);
+            return new ServiceResponse<>(status, null);
         }
 
         List<A> annotations = serviceResponse.getObj();
@@ -129,14 +129,14 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
     public ServiceResponse<C> searchAnnotationCollectionByGenerator(List<String> levels, String type, String value, boolean strict, ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
-        w3cAnnotationCollection.setJsonMap(new HashMap<String, Object>());
+        w3cAnnotationCollection.setJsonMap(new HashMap<>());
 
         ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByGenerator(levels, type, value, strict);
         Status status = serviceResponse.getStatus();
 
         if (!status.equals(Status.OK)) {
             LOGGER.warn(String.format("Got unexpected service response code [%s] (expected [%s]", status, Status.OK));
-            return new ServiceResponse<C>(status, null);
+            return new ServiceResponse<>(status, null);
         }
 
         List<A> annotations = serviceResponse.getObj();
@@ -159,14 +159,14 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
     public ServiceResponse<C> searchAnnotationCollectionByTemporal(List<String> levels, List<String> types, Date since, ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
-        w3cAnnotationCollection.setJsonMap(new HashMap<String, Object>());
+        w3cAnnotationCollection.setJsonMap(new HashMap<>());
 
         ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByTemporal(levels, types, since);
         Status status = serviceResponse.getStatus();
 
         if (!status.equals(Status.OK)) {
             LOGGER.warn(String.format("Got unexpected service response code [%s] (expected [%s]", status, Status.OK));
-            return new ServiceResponse<C>(status, null);
+            return new ServiceResponse<>(status, null);
         }
 
         List<A> annotations = serviceResponse.getObj();

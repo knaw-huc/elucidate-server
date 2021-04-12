@@ -25,7 +25,7 @@ public abstract class AbstractAnnotationContainerWriteController<A extends Abstr
 
     private static final String CREATE_REQUEST_PATH = "/";
 
-    private AbstractAnnotationCollectionService<A, C> annotationCollectionService;
+    private final AbstractAnnotationCollectionService<A, C> annotationCollectionService;
 
     protected AbstractAnnotationContainerWriteController(AbstractAnnotationCollectionService<A, C> annotationCollectionService) {
         this.annotationCollectionService = annotationCollectionService;

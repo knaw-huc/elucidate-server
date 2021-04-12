@@ -34,7 +34,6 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
     private final W3CAnnotationService w3cAnnotationService;
     private final GroupMembershipRepository membershipRepository;
     private final UserRepository userRepository;
-    private final IRIBuilderService iriBuilder;
 
     public SecurityGroupMembershipServiceImpl(
         UserSecurityDetailsContext securityContext,
@@ -49,7 +48,6 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
         this.w3cAnnotationService = w3cAnnotationService;
         this.membershipRepository = membershipRepository;
         this.userRepository = userRepository;
-        this.iriBuilder = iriBuilder;
     }
 
     @Override

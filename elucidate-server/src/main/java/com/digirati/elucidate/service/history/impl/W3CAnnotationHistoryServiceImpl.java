@@ -14,7 +14,7 @@ public class W3CAnnotationHistoryServiceImpl extends AbstractAnnotationHistorySe
 
     public static final String SERVICE_NAME = "w3cAnnotationHistoryServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public W3CAnnotationHistoryServiceImpl(AnnotationHistoryRepository annotationHistoryRepository, IRIBuilderService iriBuilderService) {

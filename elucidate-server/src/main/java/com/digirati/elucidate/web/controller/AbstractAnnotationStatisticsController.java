@@ -17,7 +17,7 @@ public abstract class AbstractAnnotationStatisticsController<S extends AbstractS
     private static final String REQUEST_PATH_BODY = "/services/stats/body";
     private static final String REQUEST_PATH_TARGET = "/services/stats/target";
 
-    private AbstractAnnotationStatisticsPageService<S> statisticsPageService;
+    private final AbstractAnnotationStatisticsPageService<S> statisticsPageService;
 
     protected AbstractAnnotationStatisticsController(AbstractAnnotationStatisticsPageService<S> statisticsPageService) {
         this.statisticsPageService = statisticsPageService;

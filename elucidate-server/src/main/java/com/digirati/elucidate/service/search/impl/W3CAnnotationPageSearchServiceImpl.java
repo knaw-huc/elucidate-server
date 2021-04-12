@@ -18,7 +18,7 @@ public class W3CAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSe
 
     public static final String SERVICE_NAME = "w3cAnnotationPageSearchServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public W3CAnnotationPageSearchServiceImpl(IRIBuilderService iriBuilderService, @Value("${annotation.page.size}") int pageSize) {

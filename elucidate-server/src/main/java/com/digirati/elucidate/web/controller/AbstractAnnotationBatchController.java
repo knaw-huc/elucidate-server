@@ -17,8 +17,8 @@ public abstract class AbstractAnnotationBatchController<B extends AbstractBatchO
     public static final String REQUEST_PATH_UPDATE = "/services/batch/update";
     public static final String REQUEST_PATH_DELETE = "/services/batch/delete";
 
-    private AbstractAnnotationBatchUpdateService<B> annotationBatchUpdateService;
-    private AbstractAnnotationBatchDeleteService<B> annotationBatchDeleteService;
+    private final AbstractAnnotationBatchUpdateService<B> annotationBatchUpdateService;
+    private final AbstractAnnotationBatchDeleteService<B> annotationBatchDeleteService;
 
     protected AbstractAnnotationBatchController(AbstractAnnotationBatchUpdateService<B> annotationBatchUpdateService, AbstractAnnotationBatchDeleteService<B> annotationBatchDeleteService) {
         this.annotationBatchUpdateService = annotationBatchUpdateService;

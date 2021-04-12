@@ -38,9 +38,9 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     private static final String PREFER_CONTAINED_IRIS = "http://www.w3.org/ns/oa#prefercontainediris";
     private static final String PREFER_CONTAINED_DESCRIPTIONS = "http://www.w3.org/ns/oa#prefercontaineddescriptions";
 
-    private AbstractAnnotationSearchService<A> annotationSearchService;
-    private AbstractAnnotationPageSearchService<A, P> annotationPageSearchService;
-    private AbstractAnnotationCollectionSearchService<C> annotationCollectionSearchService;
+    private final AbstractAnnotationSearchService<A> annotationSearchService;
+    private final AbstractAnnotationPageSearchService<A, P> annotationPageSearchService;
+    private final AbstractAnnotationCollectionSearchService<C> annotationCollectionSearchService;
 
     protected AbstractAnnotationSearchController(AbstractAnnotationSearchService<A> annotationSearchService, AbstractAnnotationPageSearchService<A, P> annotationPageSearchService, AbstractAnnotationCollectionSearchService<C> annotationCollectionSearchService) {
         this.annotationSearchService = annotationSearchService;
@@ -63,7 +63,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                 Status status = serviceResponse.getStatus();
 
                 if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<P>(status, null);
+                    return new ServiceResponse<>(status, null);
                 }
 
                 List<A> annotations = serviceResponse.getObj();
@@ -89,7 +89,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                 Status status = serviceResponse.getStatus();
 
                 if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<P>(status, null);
+                    return new ServiceResponse<>(status, null);
                 }
 
                 List<A> annotations = serviceResponse.getObj();
@@ -115,7 +115,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                 Status status = serviceResponse.getStatus();
 
                 if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<P>(status, null);
+                    return new ServiceResponse<>(status, null);
                 }
 
                 List<A> annotations = serviceResponse.getObj();
@@ -141,7 +141,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                 Status status = serviceResponse.getStatus();
 
                 if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<P>(status, null);
+                    return new ServiceResponse<>(status, null);
                 }
 
                 List<A> annotations = serviceResponse.getObj();
@@ -167,7 +167,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                 Status status = serviceResponse.getStatus();
 
                 if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<P>(status, null);
+                    return new ServiceResponse<>(status, null);
                 }
 
                 List<A> annotations = serviceResponse.getObj();

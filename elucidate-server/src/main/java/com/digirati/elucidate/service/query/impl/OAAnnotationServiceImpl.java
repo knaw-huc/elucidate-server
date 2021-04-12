@@ -23,7 +23,7 @@ public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnn
 
     public static final String SERVICE_NAME = "oaAnnotationServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public OAAnnotationServiceImpl(UserSecurityDetailsContext securityContext, AnnotationStoreRepository annotationStoreRepository, IRIBuilderService iriBuilderService, @Qualifier("annotationIdGenerator") IDGenerator idGenerator) {

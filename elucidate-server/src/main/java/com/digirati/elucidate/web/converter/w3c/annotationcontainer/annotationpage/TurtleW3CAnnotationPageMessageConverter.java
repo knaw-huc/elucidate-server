@@ -12,7 +12,7 @@ import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
 @Component
 public class TurtleW3CAnnotationPageMessageConverter extends AbstractW3CAnnotationPageMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleW3CAnnotationPageMessageConverter() {
         super(APPLICATION_TURTLE);

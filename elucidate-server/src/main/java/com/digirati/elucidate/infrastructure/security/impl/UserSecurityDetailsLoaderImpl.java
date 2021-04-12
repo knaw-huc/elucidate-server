@@ -14,7 +14,7 @@ public class UserSecurityDetailsLoaderImpl implements UserSecurityDetailsLoader 
 
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
-    private IDGenerator idGenerator;
+    private final IDGenerator idGenerator;
 
     public UserSecurityDetailsLoaderImpl(IDGenerator idGenerator, UserRepository userRepository, GroupRepository groupRepository) {
         this.idGenerator = idGenerator;
@@ -25,15 +25,12 @@ public class UserSecurityDetailsLoaderImpl implements UserSecurityDetailsLoader 
     @Override
     public UserSecurityDetails createUser(String username) {
         SecurityUser user = userRepository.createUser(idGenerator.generateId(), username);
-        UserSecurityDetails userSecurityDetails = new UserSecurityDetails(user, Collections.emptyList());
 
-        return userSecurityDetails;
+        return new UserSecurityDetails(user, Collections.emptyList());
     }
 
     @Override
     public Optional<UserSecurityDetails> getUser(String username) {
-        return userRepository.getUser(username).map(user -> {
-            return new UserSecurityDetails(user, groupRepository.getGroupsByUserId(user.getPk()));
-        });
+        return userRepository.getUser(username).map(user -> new UserSecurityDetails(user, groupRepository.getGroupsByUserId(user.getPk())));
     }
 }

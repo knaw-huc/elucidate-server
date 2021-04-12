@@ -12,7 +12,7 @@ import com.digirati.elucidate.model.batch.W3CBatchOperation;
 @Component
 public class TurtleW3CBatchOperationMessageConverter extends AbstractW3CBatchOperationMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleW3CBatchOperationMessageConverter() {
         super(APPLICATION_TURTLE);

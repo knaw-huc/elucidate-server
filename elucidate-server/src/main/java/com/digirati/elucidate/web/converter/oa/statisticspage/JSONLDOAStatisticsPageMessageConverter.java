@@ -19,7 +19,7 @@ import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 @Component
 public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatisticsPageMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDOAStatisticsPageMessageConverter(@Value("${statistics.page.oa.contexts}") String[] defaultContexts) {

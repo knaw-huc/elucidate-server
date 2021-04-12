@@ -18,7 +18,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private int pageSize;
+    private final int pageSize;
 
     protected AbstractAnnotationPageSearchServiceImpl(int pageSize) {
         this.pageSize = pageSize;

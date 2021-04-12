@@ -20,7 +20,7 @@ public class OAAnnotationHistoryServiceImpl extends AbstractAnnotationHistorySer
 
     public static final String SERVICE_NAME = "oaAnnotationHistoryServiceImpl";
 
-    private IRIBuilderService iriBuilderService;
+    private final IRIBuilderService iriBuilderService;
 
     @Autowired
     public OAAnnotationHistoryServiceImpl(AnnotationHistoryRepository annotationHistoryRepository, IRIBuilderService iriBuilderService) {

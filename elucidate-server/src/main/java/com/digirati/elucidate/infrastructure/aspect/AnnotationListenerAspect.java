@@ -28,17 +28,17 @@ public class AnnotationListenerAspect {
 
     public static final String COMPONENT_NAME = "annotationListenerAspect";
 
-    private ApplicationContext applicationContext;
-    private TaskExecutor taskExecutor;
-    private List<RegisteredListener> synchronousRegisteredListeners;
-    private List<RegisteredListener> asynchronousRegisteredListeners;
+    private final ApplicationContext applicationContext;
+    private final TaskExecutor taskExecutor;
+    private final List<RegisteredListener> synchronousRegisteredListeners;
+    private final List<RegisteredListener> asynchronousRegisteredListeners;
 
     @Autowired
     public AnnotationListenerAspect(ApplicationContext applicationContext, @Qualifier("listenerTaskExecutor") TaskExecutor taskExecutor, @Value("#{'${listeners.registered}'.split(',')}") List<String> configuredListeners) throws ClassNotFoundException {
         this.applicationContext = applicationContext;
         this.taskExecutor = taskExecutor;
-        this.synchronousRegisteredListeners = new ArrayList<RegisteredListener>();
-        this.asynchronousRegisteredListeners = new ArrayList<RegisteredListener>();
+        this.synchronousRegisteredListeners = new ArrayList<>();
+        this.asynchronousRegisteredListeners = new ArrayList<>();
         initialiseConfiguredListeners(configuredListeners);
     }
 

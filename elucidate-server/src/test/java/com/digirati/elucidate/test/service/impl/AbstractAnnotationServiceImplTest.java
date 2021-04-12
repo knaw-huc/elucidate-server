@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 
 public abstract class AbstractAnnotationServiceImplTest<A extends AbstractAnnotation, C extends AbstractAnnotationCollection> extends AbstractTest {
 
-    private IRIBuilderService iriBuilderService;
     private AnnotationStoreRepository annotationStoreRepository;
     private AbstractAnnotationService<A> annotationService;
 
@@ -41,7 +40,7 @@ public abstract class AbstractAnnotationServiceImplTest<A extends AbstractAnnota
 
     @Before
     public void before() {
-        this.iriBuilderService = mock(IRIBuilderService.class);
+        IRIBuilderService iriBuilderService = mock(IRIBuilderService.class);
         this.annotationStoreRepository = mock(AnnotationStoreRepository.class);
         this.annotationService = createAnnotationService(iriBuilderService, annotationStoreRepository);
     }

@@ -17,7 +17,7 @@ public class AnnotationBodyExtractor {
     @SuppressWarnings("unchecked")
     public List<AnnotationBody> extractBodies(Map<String, Object> jsonMap) {
 
-        List<AnnotationBody> annotationBodies = new ArrayList<AnnotationBody>();
+        List<AnnotationBody> annotationBodies = new ArrayList<>();
 
         List<Map<String, Object>> bodyJsonMaps = (List<Map<String, Object>>) jsonMap.get(OAConstants.URI_HAS_BODY);
         if (bodyJsonMaps != null && !bodyJsonMaps.isEmpty()) {

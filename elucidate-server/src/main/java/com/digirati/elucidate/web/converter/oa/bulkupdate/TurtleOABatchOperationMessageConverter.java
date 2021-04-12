@@ -12,7 +12,7 @@ import com.digirati.elucidate.model.batch.OABatchOperation;
 @Component
 public class TurtleOABatchOperationMessageConverter extends AbstractOABatchOperationMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleOABatchOperationMessageConverter() {
         super(APPLICATION_TURTLE);

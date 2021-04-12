@@ -25,8 +25,8 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private AnnotationStatisticsRepository statisticsRepository;
-    private int pageSize;
+    private final AnnotationStatisticsRepository statisticsRepository;
+    private final int pageSize;
 
     @Autowired
     protected AbstractAnnotationStatisticsPageServiceImpl(AnnotationStatisticsRepository statisticsRepository, int pageSize) {
@@ -52,7 +52,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
                 break;
             default:
                 LOGGER.warn(String.format("Invalid search parameter [%s] with value [%s] - one of [%s] or [%s] must be provided", URLConstants.PARAM_FIELD, field, SearchConstants.FIELD_ID, SearchConstants.FIELD_SOURCE));
-                return new ServiceResponse<S>(Status.NON_CONFORMANT, null);
+                return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
 
         return buildStatisticsPage("body", counts, field, page);
@@ -72,7 +72,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
                 break;
             default:
                 LOGGER.warn(String.format("Invalid search parameter [%s] with value [%s] - one of [%s] or [%s] must be provided", URLConstants.PARAM_FIELD, field, SearchConstants.FIELD_ID, SearchConstants.FIELD_SOURCE));
-                return new ServiceResponse<S>(Status.NON_CONFORMANT, null);
+                return new ServiceResponse<>(Status.NON_CONFORMANT, null);
         }
 
         return buildStatisticsPage("target", counts, field, page);
@@ -86,7 +86,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
         int to = Math.min(counts.size(), (page + 1) * pageSize);
         counts = counts.subList(from, to);
 
-        Map<String, Object> jsonMap = new HashMap<String, Object>();
+        Map<String, Object> jsonMap = new HashMap<>();
 
         jsonMap.put(ActivityStreamConstants.URI_START_INDEX, new ArrayList<Map<String, Object>>() {
             {
@@ -141,12 +141,12 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
         });
 
         S statisticsPage = convertToStatisticsPage(jsonMap);
-        return new ServiceResponse<S>(Status.OK, statisticsPage);
+        return new ServiceResponse<>(Status.OK, statisticsPage);
     }
 
     @SuppressWarnings("serial")
     private List<Map<String, Object>> convertToJsonMaps(List<Pair<String, Integer>> counts) {
-        List<Map<String, Object>> jsonMaps = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> jsonMaps = new ArrayList<>();
         for (Pair<String, Integer> count : counts) {
             jsonMaps.add(new HashMap<String, Object>() {
                 {

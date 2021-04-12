@@ -17,7 +17,7 @@ public class AnnotationTargetExtractor {
     @SuppressWarnings("unchecked")
     public List<AnnotationTarget> extractTargets(Map<String, Object> jsonMap) {
 
-        List<AnnotationTarget> annotationTargets = new ArrayList<AnnotationTarget>();
+        List<AnnotationTarget> annotationTargets = new ArrayList<>();
 
         List<Map<String, Object>> targetJsonMaps = (List<Map<String, Object>>) jsonMap.get(OAConstants.URI_HAS_TARGET);
         if (targetJsonMaps != null && !targetJsonMaps.isEmpty()) {

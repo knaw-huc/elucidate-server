@@ -19,7 +19,7 @@ import com.digirati.elucidate.model.JSONLDProfile.Format;
 @Component
 public class JSONLDOAAnnotationPageMessageConverter extends AbstractOAAnnotationPageMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDOAAnnotationPageMessageConverter(@Value("${annotation.page.oa.contexts}") String[] defaultContexts) {

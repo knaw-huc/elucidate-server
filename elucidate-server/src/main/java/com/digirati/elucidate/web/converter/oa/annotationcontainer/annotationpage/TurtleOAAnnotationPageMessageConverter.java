@@ -12,7 +12,7 @@ import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
 @Component
 public class TurtleOAAnnotationPageMessageConverter extends AbstractOAAnnotationPageMessageConverter {
 
-    private NQuadTripleCallback turtleTripleCallback;
+    private final NQuadTripleCallback turtleTripleCallback;
 
     public TurtleOAAnnotationPageMessageConverter() {
         super(APPLICATION_TURTLE);

@@ -13,7 +13,7 @@ public abstract class AbstractRepositoryJDBCImpl {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     protected AbstractRepositoryJDBCImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

@@ -20,7 +20,7 @@ import com.digirati.elucidate.model.batch.W3CBatchOperation;
 @Component
 public class JSONLDW3CBatchOperationMessageConverter extends AbstractW3CBatchOperationMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDW3CBatchOperationMessageConverter(@Value("${batch.operation.w3c.contexts}") String[] defaultContexts) throws IOException {

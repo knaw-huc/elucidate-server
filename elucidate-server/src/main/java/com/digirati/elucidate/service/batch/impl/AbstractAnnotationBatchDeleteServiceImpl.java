@@ -26,8 +26,8 @@ public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends Abstrac
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private AbstractAnnotationService<A> annotationService;
-    private AbstractAnnotationSearchService<A> annotationSearchService;
+    private final AbstractAnnotationService<A> annotationService;
+    private final AbstractAnnotationSearchService<A> annotationSearchService;
 
     protected AbstractAnnotationBatchDeleteServiceImpl(AbstractAnnotationService<A> annotationService, AbstractAnnotationSearchService<A> annotationSearchService) {
         this.annotationService = annotationService;
@@ -49,7 +49,7 @@ public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends Abstrac
             return serviceResponse.getObj();
         });
 
-        return new ServiceResponse<B>(Status.OK, batchOperation);
+        return new ServiceResponse<>(Status.OK, batchOperation);
     }
 
     @SuppressWarnings({"unchecked", "serial"})

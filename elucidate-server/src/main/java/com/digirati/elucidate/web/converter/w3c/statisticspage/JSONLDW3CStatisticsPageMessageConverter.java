@@ -19,7 +19,7 @@ import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
 @Component
 public class JSONLDW3CStatisticsPageMessageConverter extends AbstractW3CStatisticsPageMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDW3CStatisticsPageMessageConverter(@Value("${statistics.page.w3c.contexts}") String[] defaultContexts) {

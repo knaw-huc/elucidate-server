@@ -20,7 +20,7 @@ import com.digirati.elucidate.model.JSONLDProfile.Format;
 @Component
 public class JSONLDW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
 
-    private String[] defaultContexts;
+    private final String[] defaultContexts;
 
     @Autowired
     public JSONLDW3CAnnotationCollectionMessageConverter(@Value("${annotation.collection.w3c.contexts}") String[] defaultContexts) throws IOException {

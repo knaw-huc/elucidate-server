@@ -22,10 +22,10 @@ import com.digirati.elucidate.model.enumeration.ClientPreference;
 
 public class AnnotationCollectionBuilder<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> {
 
-    private AnnotationCollectionConverter<C> annotationCollectionConverter;
-    private AnnotationCollectionIRIBuilder annotationCollectionIriBuilder;
-    private AnnotationPageIRIBuilder annotationPageIriBuilder;
-    private FirstAnnotationPageBuilder<P> firstAnnotationPageBuilder;
+    private final AnnotationCollectionConverter<C> annotationCollectionConverter;
+    private final AnnotationCollectionIRIBuilder annotationCollectionIriBuilder;
+    private final AnnotationPageIRIBuilder annotationPageIriBuilder;
+    private final FirstAnnotationPageBuilder<P> firstAnnotationPageBuilder;
 
     public AnnotationCollectionBuilder(AnnotationCollectionConverter<C> annotationCollectionConverter, AnnotationCollectionIRIBuilder annotationCollectionIriBuilder, AnnotationPageIRIBuilder annotationPageIriBuilder, FirstAnnotationPageBuilder<P> firstAnnotationPageBuilder) {
         this.annotationCollectionConverter = annotationCollectionConverter;
@@ -82,7 +82,7 @@ public class AnnotationCollectionBuilder<A extends AbstractAnnotation, P extends
 
             Status status = serviceResponse.getStatus();
             if (!status.equals(Status.OK)) {
-                return new ServiceResponse<C>(status, null);
+                return new ServiceResponse<>(status, null);
             }
 
             firstObject = serviceResponse.getObj().getJsonMap();
@@ -111,6 +111,6 @@ public class AnnotationCollectionBuilder<A extends AbstractAnnotation, P extends
             }
         });
 
-        return new ServiceResponse<C>(Status.OK, annotationCollection);
+        return new ServiceResponse<>(Status.OK, annotationCollection);
     }
 }

@@ -19,7 +19,7 @@ public abstract class AbstractAnnotationReadController<A extends AbstractAnnotat
     private static final String VARIABLE_ANNOTATION_ID = "annotationId";
     private static final String REQUEST_PATH = "/{" + VARIABLE_COLLECTION_ID + "}/{" + VARIABLE_ANNOTATION_ID + "}";
 
-    private AbstractAnnotationService<A> annotationService;
+    private final AbstractAnnotationService<A> annotationService;
 
     protected AbstractAnnotationReadController(AbstractAnnotationService<A> annotationService) {
         this.annotationService = annotationService;

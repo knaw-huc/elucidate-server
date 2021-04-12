@@ -32,8 +32,8 @@ public abstract class AbstractAnnotationWriteController<A extends AbstractAnnota
     private static final String CREATE_REQUEST_PATH = "/{" + VARIABLE_COLLECTION_ID + "}/";
     private static final String UPDATE_REQUEST_PATH = "/{" + VARIABLE_COLLECTION_ID + "}/{" + VARIABLE_ANNOTATION_ID + "}";
 
-    private AbstractAnnotationService<A> annotationService;
-    private AbstractAnnotationCollectionService<A, C> annotationCollectionService;
+    private final AbstractAnnotationService<A> annotationService;
+    private final AbstractAnnotationCollectionService<A, C> annotationCollectionService;
 
     protected AbstractAnnotationWriteController(AbstractAnnotationService<A> annotationService, AbstractAnnotationCollectionService<A, C> annotationCollectionService) {
         this.annotationService = annotationService;

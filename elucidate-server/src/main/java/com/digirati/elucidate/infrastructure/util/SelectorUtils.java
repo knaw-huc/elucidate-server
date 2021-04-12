@@ -12,7 +12,7 @@ import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSel
 public class SelectorUtils {
 
     private static final Pattern XYWH_MATCHER = Pattern.compile("xywh=(\\d+),(\\d+),(\\d+),(\\d+)");
-    private static final Pattern T_MATCHER = Pattern.compile("t\\=(\\d+)?(,)?(\\d+)?");
+    private static final Pattern T_MATCHER = Pattern.compile("t=(\\d+)?(,)?(\\d+)?");
 
     public static XYWHFragmentSelector extractXywhFragmentSelector(String str) {
 

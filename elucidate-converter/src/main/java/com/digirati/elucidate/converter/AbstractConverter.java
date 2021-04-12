@@ -18,9 +18,9 @@ import com.digirati.elucidate.converter.node.JSONNodeConverter;
 
 public abstract class AbstractConverter {
 
-    private Map<String, String> fieldMappings;
-    private Map<String, String> typeMappings;
-    private Map<String, JSONNodeConverter> nodeConverterMappings;
+    private final Map<String, String> fieldMappings;
+    private final Map<String, String> typeMappings;
+    private final Map<String, JSONNodeConverter> nodeConverterMappings;
 
     protected AbstractConverter(Map<String, String> fieldMappings, Map<String, String> typeMappings, Map<String, JSONNodeConverter> nodeConverterMappings) {
         this.fieldMappings = fieldMappings;

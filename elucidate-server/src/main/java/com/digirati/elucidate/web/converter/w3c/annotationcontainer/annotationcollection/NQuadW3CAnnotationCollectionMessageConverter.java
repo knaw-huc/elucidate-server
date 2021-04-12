@@ -12,7 +12,7 @@ import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollectio
 @Component
 public class NQuadW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
 
-  private NQuadTripleCallback nQuadTripleCallback;
+  private final NQuadTripleCallback nQuadTripleCallback;
 
   public NQuadW3CAnnotationCollectionMessageConverter() {
     super(APPLICATION_TURTLE);

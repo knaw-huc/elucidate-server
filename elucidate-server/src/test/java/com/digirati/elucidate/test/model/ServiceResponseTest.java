@@ -69,7 +69,7 @@ public class ServiceResponseTest extends AbstractTest {
 
             W3CAnnotation w3cAnnotation = generateRandomW3CAnnotation();
 
-            ServiceResponse<W3CAnnotation> serviceResponse = new ServiceResponse<W3CAnnotation>(status, w3cAnnotation);
+            ServiceResponse<W3CAnnotation> serviceResponse = new ServiceResponse<>(status, w3cAnnotation);
 
             assertThat(w3cAnnotation, is(equalTo(serviceResponse.getObj())));
             assertThat(status, is(equalTo(serviceResponse.getStatus())));
