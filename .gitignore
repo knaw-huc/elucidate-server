@@ -114,3 +114,4 @@ modules.xml
 .idea
 .local
 logs
+**/.dcignore
