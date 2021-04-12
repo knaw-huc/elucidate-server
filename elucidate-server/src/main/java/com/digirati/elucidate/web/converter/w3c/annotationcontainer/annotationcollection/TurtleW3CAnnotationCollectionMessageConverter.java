@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
 
 @Component
-public class NQuadW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
+public class TurtleW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
 
   private final NQuadTripleCallback nQuadTripleCallback;
 
-  public NQuadW3CAnnotationCollectionMessageConverter() {
+  public TurtleW3CAnnotationCollectionMessageConverter() {
     super(APPLICATION_TURTLE);
     this.nQuadTripleCallback = new NQuadTripleCallback();
   }

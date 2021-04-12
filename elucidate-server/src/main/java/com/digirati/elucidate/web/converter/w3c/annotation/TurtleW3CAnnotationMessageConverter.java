@@ -13,12 +13,12 @@ import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 
 @Component
-public class NQuadW3CAnnotationMessageConverter extends AbstractW3CAnnotationMessageConverter {
+public class TurtleW3CAnnotationMessageConverter extends AbstractW3CAnnotationMessageConverter {
 
     private final NQuadTripleCallback nQuadTripleCallback;
 
     @Autowired
-    public NQuadW3CAnnotationMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService) {
+    public TurtleW3CAnnotationMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService) {
         super(iriBuilderService, w3cAnnotationHistoryService, APPLICATION_TURTLE);
         this.nQuadTripleCallback = new NQuadTripleCallback();
     }
