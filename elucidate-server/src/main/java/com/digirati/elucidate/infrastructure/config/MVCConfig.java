@@ -10,7 +10,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.digirati.elucidate.web.converter.oa.annotation.JSONLDOAAnnotationMessageConverter;
 import com.digirati.elucidate.web.converter.oa.annotation.TurtleOAAnnotationMessageConverter;
@@ -43,7 +43,7 @@ import com.digirati.elucidate.web.converter.w3c.statisticspage.TurtleW3CStatisti
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = MVCConfig.WEB_PACKAGE)
-public class MVCConfig extends WebMvcConfigurerAdapter {
+public class MVCConfig implements WebMvcConfigurer {
 
     public static final String WEB_PACKAGE = "com.digirati.elucidate.web";
 
@@ -112,7 +112,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         configurer.setUseTrailingSlashMatch(false);
-        configurer.setUseSuffixPatternMatch(false);
+//        configurer.setUseSuffixPatternMatch(false);
     }
 
     @Override

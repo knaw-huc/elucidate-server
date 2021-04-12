@@ -10,7 +10,7 @@ import java.util.Map;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.digirati.elucidate.common.infrastructure.database.rowmapper.W3CAnnotationRowMapper;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @RunWith(MockitoJUnitRunner.class)
 public class W3CAnnotationRowMapperTest extends AbstractTest {
 

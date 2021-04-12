@@ -148,7 +148,7 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
             String str = consume(inputMessage);
             return getObjectRepresentation(str, contentType);
         } catch (Exception e) {
-            throw new HttpMessageNotReadableException(String.format("Unable to read HttpInputMessage [%s] to class [%s]", inputMessage, clazz), e);
+            throw new HttpMessageNotReadableException(String.format("Unable to read HttpInputMessage [%s] to class [%s]", inputMessage, clazz), e, inputMessage);
         }
     }
 
