@@ -20,4 +20,4 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
-        run: cd elucidate-server && mvn --batch-mode --update-snapshots verify
+        run: cd elucidate-parent && mvn --batch-mode --update-snapshots verify
