@@ -4,7 +4,7 @@
 
 # We use a JRE 10 image so the JVM is able to discover Docker's
 # memory/cpu cgroup settings.
-FROM tomcat:jdk8-corretto
+FROM tomcat:10.0-jdk11-adoptopenjdk-hotspot
 EXPOSE 8080
 
 ARG ARTIFACT_NAME="annotation.war"
