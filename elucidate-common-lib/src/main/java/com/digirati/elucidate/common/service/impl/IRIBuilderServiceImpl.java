@@ -1,6 +1,7 @@
 package com.digirati.elucidate.common.service.impl;
 
 import java.net.URISyntaxException;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
@@ -267,7 +268,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
                 put(URLConstants.PARAM_TYPES, StringUtils.join(types, ","));
-                put(URLConstants.PARAM_SINCE, DATE_FORMAT.format(since.toInstant()));
+                put(URLConstants.PARAM_SINCE, IRIBuilderServiceImpl.toString(since));
                 put(URLConstants.PARAM_PAGE, page);
                 if (embeddedDescriptions) {
                     put(URLConstants.PARAM_DESC, 1);
@@ -513,7 +514,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
                 put(URLConstants.PARAM_TYPES, StringUtils.join(types, ","));
-                put(URLConstants.PARAM_SINCE, DATE_FORMAT.format(since.toInstant()));
+                put(URLConstants.PARAM_SINCE, IRIBuilderServiceImpl.toString(since));
             }
         });
     }
@@ -524,7 +525,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
                 put(URLConstants.PARAM_TYPES, StringUtils.join(types, ","));
-                put(URLConstants.PARAM_SINCE, DATE_FORMAT.format(since.toInstant()));
+                put(URLConstants.PARAM_SINCE, IRIBuilderServiceImpl.toString(since));
                 put(URLConstants.PARAM_PAGE, page);
                 if (embeddedDescriptions) {
                     put(URLConstants.PARAM_DESC, 1);
@@ -541,8 +542,9 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
                 put(URLConstants.PARAM_TYPES, StringUtils.join(types, ","));
-                put(URLConstants.PARAM_SINCE, DATE_FORMAT.format(since.toInstant()));
+                put(URLConstants.PARAM_SINCE, IRIBuilderServiceImpl.toString(since));
             }
+
         });
     }
 
@@ -560,4 +562,11 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
             throw new InvalidIRIException(String.format("An error occurred building IRI with base URL [%s] with ID [%s] and parameters [%s]", baseUrl, id, params), e);
         }
     }
+
+    static String toString(Date since) {
+        return DATE_FORMAT.format(since.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime());
+    }
+
 }
