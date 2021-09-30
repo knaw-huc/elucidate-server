@@ -1,8 +1,5 @@
-package com.digirati.elucidate.common.infrastructure.constants;
+package com.digirati.elucidate.common.infrastructure.constants
 
-public class SelectorConstants {
-
-    public static final String MEDIA_FRAGS = "http://www.w3.org/TR/media-frags/";
-
-    private SelectorConstants() {}
+object SelectorConstants {
+    const val MEDIA_FRAGS = "http://www.w3.org/TR/media-frags/"
 }

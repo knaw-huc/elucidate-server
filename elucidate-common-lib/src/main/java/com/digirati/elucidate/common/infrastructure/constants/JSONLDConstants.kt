@@ -1,12 +1,9 @@
-package com.digirati.elucidate.common.infrastructure.constants;
+package com.digirati.elucidate.common.infrastructure.constants
 
-public class JSONLDConstants {
-
-    public static final String ATTRIBUTE_CONTEXT = "@context";
-    public static final String ATTRIBUTE_ID = "@id";
-    public static final String ATTRIBUTE_TYPE = "@type";
-    public static final String ATTRIBUTE_VALUE = "@value";
-    public static final String ATTRIBUTE_LIST = "@list";
-
-    private JSONLDConstants() {}
+object JSONLDConstants {
+    const val ATTRIBUTE_CONTEXT = "@context"
+    const val ATTRIBUTE_ID = "@id"
+    const val ATTRIBUTE_TYPE = "@type"
+    const val ATTRIBUTE_VALUE = "@value"
+    const val ATTRIBUTE_LIST = "@list"
 }

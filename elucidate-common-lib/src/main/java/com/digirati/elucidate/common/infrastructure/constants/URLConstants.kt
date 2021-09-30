@@ -1,22 +1,19 @@
-package com.digirati.elucidate.common.infrastructure.constants;
+package com.digirati.elucidate.common.infrastructure.constants
 
-public class URLConstants {
-
-    public static final String PARAM_PAGE = "page";
-    public static final String PARAM_IRIS = "iris";
-    public static final String PARAM_DESC = "desc";
-    public static final String PARAM_FIELDS = "fields";
-    public static final String PARAM_VALUE = "value";
-    public static final String PARAM_STRICT = "strict";
-    public static final String PARAM_XYWH = "xywh";
-    public static final String PARAM_T = "t";
-    public static final String PARAM_CREATOR = "creator";
-    public static final String PARAM_LEVELS = "levels";
-    public static final String PARAM_TYPE = "type";
-    public static final String PARAM_FIELD = "field";
-    public static final String PARAM_GENERATOR = "generator";
-    public static final String PARAM_TYPES = "types";
-    public static final String PARAM_SINCE = "since";
-
-    private URLConstants() {}
+object URLConstants {
+    const val PARAM_PAGE = "page"
+    const val PARAM_IRIS = "iris"
+    const val PARAM_DESC = "desc"
+    const val PARAM_FIELDS = "fields"
+    const val PARAM_VALUE = "value"
+    const val PARAM_STRICT = "strict"
+    const val PARAM_XYWH = "xywh"
+    const val PARAM_T = "t"
+    const val PARAM_CREATOR = "creator"
+    const val PARAM_LEVELS = "levels"
+    const val PARAM_TYPE = "type"
+    const val PARAM_FIELD = "field"
+    const val PARAM_GENERATOR = "generator"
+    const val PARAM_TYPES = "types"
+    const val PARAM_SINCE = "since"
 }
