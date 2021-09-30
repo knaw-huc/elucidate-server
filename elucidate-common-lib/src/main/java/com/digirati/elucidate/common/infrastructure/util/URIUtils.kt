@@ -1,29 +1,23 @@
-package com.digirati.elucidate.common.infrastructure.util;
+package com.digirati.elucidate.common.infrastructure.util
 
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.http.client.utils.URIBuilder
+import java.util.*
 
-import org.apache.http.client.utils.URIBuilder;
+object URIUtils {
+    private val DEFAULT_PORTS: Map<String, Int> = mapOf(
+            "http" to 80,
+            "https" to 443
+    )
 
-public final class URIUtils {
-    @SuppressWarnings("serial")
-    private static final Map<String, Integer> DEFAULT_PORTS = new HashMap<String, Integer>() {
-        {
-            put("http", 80);
-            put("https", 443);
+    @JvmStatic
+    fun buildBaseUrl(baseScheme: String, baseHost: String?, basePort: Int, basePath: String?): String {
+        val builder = URIBuilder()
+        builder.scheme = baseScheme
+        builder.host = baseHost
+        if (!DEFAULT_PORTS.containsKey(baseScheme.lowercase(Locale.getDefault())) || DEFAULT_PORTS[baseScheme] != basePort) {
+            builder.port = basePort
         }
-    };
-
-    public static String buildBaseUrl(String baseScheme, String baseHost, int basePort, String basePath) {
-        URIBuilder builder = new URIBuilder();
-        builder.setScheme(baseScheme);
-        builder.setHost(baseHost);
-
-        if (!DEFAULT_PORTS.containsKey(baseScheme.toLowerCase()) || DEFAULT_PORTS.get(baseScheme) != basePort) {
-            builder.setPort(basePort);
-        }
-
-        builder.setPath(basePath);
-        return builder.toString();
+        builder.path = basePath
+        return builder.toString()
     }
 }
