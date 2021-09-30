@@ -1,9 +1,5 @@
 package com.digirati.elucidate.web.converter.w3c.annotation;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.ServiceResponse;
@@ -11,6 +7,10 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 
 public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMessageConverter<W3CAnnotation> {
 
@@ -24,7 +24,7 @@ public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMess
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return W3CAnnotation.class.equals(clazz);
     }
 

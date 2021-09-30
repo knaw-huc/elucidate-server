@@ -1,10 +1,10 @@
 package com.digirati.elucidate.web.converter.validationerror;
 
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-
 import com.digirati.elucidate.model.ValidationError;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 
 public abstract class AbstractValidationErrorMessageConverter extends AbstractMessageConverter<ValidationError> {
 
@@ -13,10 +13,11 @@ public abstract class AbstractValidationErrorMessageConverter extends AbstractMe
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return ValidationError.class.equals(clazz);
     }
 
     @Override
-    protected void decorateHeaders(ValidationError validationError, HttpOutputMessage outputMessage) {}
+    protected void decorateHeaders(ValidationError validationError, HttpOutputMessage outputMessage) {
+    }
 }

@@ -1,12 +1,12 @@
 package com.digirati.elucidate.web.converter.oa.annotationcontainer.annotationcollection;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 
 public abstract class AbstractOAAnnotationCollectionMessageConverter extends AbstractMessageConverter<OAAnnotationCollection> {
 
@@ -15,7 +15,7 @@ public abstract class AbstractOAAnnotationCollectionMessageConverter extends Abs
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return OAAnnotationCollection.class.equals(clazz);
     }
 

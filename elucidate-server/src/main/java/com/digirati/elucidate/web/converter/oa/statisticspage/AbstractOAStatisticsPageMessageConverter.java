@@ -1,11 +1,11 @@
 package com.digirati.elucidate.web.converter.oa.statisticspage;
 
+import com.digirati.elucidate.model.statistics.OAStatisticsPage;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
-
-import com.digirati.elucidate.model.statistics.OAStatisticsPage;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractOAStatisticsPageMessageConverter extends AbstractMessageConverter<OAStatisticsPage> {
 
@@ -14,7 +14,7 @@ public abstract class AbstractOAStatisticsPageMessageConverter extends AbstractM
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return OAStatisticsPage.class.equals(clazz);
     }
 

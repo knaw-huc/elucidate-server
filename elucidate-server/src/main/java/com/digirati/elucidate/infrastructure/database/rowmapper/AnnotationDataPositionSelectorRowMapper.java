@@ -3,15 +3,15 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
 import com.digirati.elucidate.model.annotation.selector.dataposition.AnnotationDataPositionSelector;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.jdbc.core.RowMapper;
 
 public class AnnotationDataPositionSelectorRowMapper implements RowMapper<AnnotationDataPositionSelector> {
 
     @Override
-    public AnnotationDataPositionSelector mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AnnotationDataPositionSelector mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
         AnnotationDataPositionSelector annotationDataPositionSelector = new AnnotationDataPositionSelector();
         annotationDataPositionSelector.setPk(ResultSetUtils.getInt(rs, "id"));
         annotationDataPositionSelector.setBodyiri(ResultSetUtils.getString(rs, "bodyiri"));

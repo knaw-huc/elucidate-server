@@ -1,10 +1,10 @@
 package com.digirati.elucidate.web.converter.oa.bulkupdate;
 
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-
 import com.digirati.elucidate.model.batch.OABatchOperation;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 
 public abstract class AbstractOABatchOperationMessageConverter extends AbstractMessageConverter<OABatchOperation> {
 
@@ -13,10 +13,11 @@ public abstract class AbstractOABatchOperationMessageConverter extends AbstractM
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return OABatchOperation.class.equals(clazz);
     }
 
     @Override
-    protected void decorateHeaders(OABatchOperation oaBatchOperation, HttpOutputMessage outputMessage) {}
+    protected void decorateHeaders(OABatchOperation oaBatchOperation, HttpOutputMessage outputMessage) {
+    }
 }

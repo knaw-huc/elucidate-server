@@ -3,15 +3,15 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
 import com.digirati.elucidate.model.annotation.temporal.AnnotationTemporal;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.jdbc.core.RowMapper;
 
 public class AnnotationTemporalRowMapper implements RowMapper<AnnotationTemporal> {
 
     @Override
-    public AnnotationTemporal mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AnnotationTemporal mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
         AnnotationTemporal annotationTemporal = new AnnotationTemporal();
         annotationTemporal.setPk(ResultSetUtils.getInt(rs, "id"));
         annotationTemporal.setType(ResultSetUtils.getString(rs, "type"));

@@ -3,15 +3,15 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
 import com.digirati.elucidate.model.annotation.selector.svg.AnnotationSVGSelector;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.jdbc.core.RowMapper;
 
 public class AnnotationSVGSelectorRowMapper implements RowMapper<AnnotationSVGSelector> {
 
     @Override
-    public AnnotationSVGSelector mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AnnotationSVGSelector mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
         AnnotationSVGSelector annotationSvgSelector = new AnnotationSVGSelector();
         annotationSvgSelector.setPk(ResultSetUtils.getInt(rs, "id"));
         annotationSvgSelector.setBodyiri(ResultSetUtils.getString(rs, "bodyiri"));

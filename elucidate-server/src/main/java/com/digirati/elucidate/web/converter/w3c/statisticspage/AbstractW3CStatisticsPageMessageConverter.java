@@ -1,11 +1,11 @@
 package com.digirati.elucidate.web.converter.w3c.statisticspage;
 
+import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
-
-import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractW3CStatisticsPageMessageConverter extends AbstractMessageConverter<W3CStatisticsPage> {
 
@@ -14,7 +14,7 @@ public abstract class AbstractW3CStatisticsPageMessageConverter extends Abstract
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return W3CStatisticsPage.class.equals(clazz);
     }
 

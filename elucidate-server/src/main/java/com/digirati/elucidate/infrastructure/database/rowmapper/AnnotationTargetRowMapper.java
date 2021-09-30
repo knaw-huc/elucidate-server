@@ -3,15 +3,15 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
 import com.digirati.elucidate.model.annotation.targets.AnnotationTarget;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.jdbc.core.RowMapper;
 
 public class AnnotationTargetRowMapper implements RowMapper<AnnotationTarget> {
 
     @Override
-    public AnnotationTarget mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AnnotationTarget mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
         AnnotationTarget annotationTarget = new AnnotationTarget();
         annotationTarget.setPk(ResultSetUtils.getInt(rs, "id"));
         annotationTarget.setAnnotationId(ResultSetUtils.getString(rs, "annotationid"));

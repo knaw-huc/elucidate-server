@@ -1,15 +1,15 @@
 package com.digirati.elucidate.web.converter.oa.history;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.annotation.history.OAAnnotationHistory;
 import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 
 public abstract class AbstractOAAnnotationHistoryMessageConverter extends AbstractMessageConverter<OAAnnotationHistory> {
 
@@ -23,7 +23,7 @@ public abstract class AbstractOAAnnotationHistoryMessageConverter extends Abstra
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return OAAnnotationHistory.class.equals(clazz);
     }
 

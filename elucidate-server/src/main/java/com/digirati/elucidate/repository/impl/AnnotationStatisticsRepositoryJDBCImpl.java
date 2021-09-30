@@ -4,16 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
+import com.digirati.elucidate.repository.AnnotationStatisticsRepository;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.common.repository.impl.AbstractRepositoryJDBCImpl;
-import com.digirati.elucidate.repository.AnnotationStatisticsRepository;
 
 @Repository(AnnotationStatisticsRepositoryJDBCImpl.REPOSITORY_NAME)
 public class AnnotationStatisticsRepositoryJDBCImpl extends AbstractRepositoryJDBCImpl implements AnnotationStatisticsRepository {
@@ -60,7 +60,7 @@ public class AnnotationStatisticsRepositoryJDBCImpl extends AbstractRepositoryJD
     private static class CountRowMapper implements RowMapper<Pair<String, Integer>> {
 
         @Override
-        public Pair<String, Integer> mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public Pair<String, Integer> mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
             return Pair.of(ResultSetUtils.getString(rs, "value"), ResultSetUtils.getInt(rs, "count"));
         }
     }

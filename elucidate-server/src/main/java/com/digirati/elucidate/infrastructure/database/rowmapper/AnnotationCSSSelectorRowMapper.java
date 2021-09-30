@@ -3,15 +3,15 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
 import com.digirati.elucidate.model.annotation.selector.css.AnnotationCSSSelector;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.jdbc.core.RowMapper;
 
 public class AnnotationCSSSelectorRowMapper implements RowMapper<AnnotationCSSSelector> {
 
     @Override
-    public AnnotationCSSSelector mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AnnotationCSSSelector mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
         AnnotationCSSSelector annotationCssSelector = new AnnotationCSSSelector();
         annotationCssSelector.setPk(ResultSetUtils.getInt(rs, "id"));
         annotationCssSelector.setBodyiri(ResultSetUtils.getString(rs, "bodyiri"));

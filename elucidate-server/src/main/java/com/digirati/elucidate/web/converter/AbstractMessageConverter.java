@@ -30,6 +30,7 @@ import com.github.jsonldjava.utils.JsonUtils;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -140,8 +141,9 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
         return StringUtils.strip(profile, "\"");
     }
 
+    @NotNull
     @Override
-    protected T readInternal(Class<? extends T> clazz, HttpInputMessage inputMessage) throws HttpMessageNotReadableException {
+    protected T readInternal(@NotNull Class<? extends T> clazz, @NotNull HttpInputMessage inputMessage) throws HttpMessageNotReadableException {
         try {
             MediaType contentType = inputMessage.getHeaders().getContentType();
             String str = consume(inputMessage);
@@ -152,7 +154,7 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
     }
 
     @Override
-    protected void writeInternal(T obj, HttpOutputMessage outputMessage) throws HttpMessageNotWritableException {
+    protected void writeInternal(@NotNull T obj, @NotNull HttpOutputMessage outputMessage) throws HttpMessageNotWritableException {
         try {
             decorateHeaders(obj, outputMessage);
             MediaType contentType = outputMessage.getHeaders().getContentType();

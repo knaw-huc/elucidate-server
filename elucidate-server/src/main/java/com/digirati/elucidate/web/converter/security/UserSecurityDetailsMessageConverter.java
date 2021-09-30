@@ -9,6 +9,7 @@ import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
 import com.digirati.elucidate.model.security.SecurityUser;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -60,7 +61,7 @@ public class UserSecurityDetailsMessageConverter extends AbstractMessageConverte
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return clazz == UserSecurityDetails.class;
     }
 }

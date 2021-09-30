@@ -1,6 +1,7 @@
 package com.digirati.elucidate.infrastructure.config.condition;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Environment;
@@ -18,7 +19,7 @@ public class IsAuthEnabled implements Condition {
     public static final String AUTH_ENABLED_KEY = "auth.enabled";
 
     @Override
-    public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
+    public boolean matches(ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
         Environment env = conditionContext.getEnvironment();
         return env.getProperty(AUTH_ENABLED_KEY, Boolean.class);
     }

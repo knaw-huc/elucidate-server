@@ -3,15 +3,15 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
 import com.digirati.elucidate.model.annotation.selector.textquote.AnnotationTextQuoteSelector;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.jdbc.core.RowMapper;
 
 public class AnnotationTextQuoteSelectorRowMapper implements RowMapper<AnnotationTextQuoteSelector> {
 
     @Override
-    public AnnotationTextQuoteSelector mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public AnnotationTextQuoteSelector mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
         AnnotationTextQuoteSelector annotationTextQuoteSelector = new AnnotationTextQuoteSelector();
         annotationTextQuoteSelector.setPk(ResultSetUtils.getInt(rs, "id"));
         annotationTextQuoteSelector.setBodyiri(ResultSetUtils.getString(rs, "bodyiri"));
