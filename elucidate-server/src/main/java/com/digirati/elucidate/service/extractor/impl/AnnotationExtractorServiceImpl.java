@@ -5,11 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.github.jsonldjava.utils.JsonUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.infrastructure.extractor.agent.AnnotationCreatorExtractor;
 import com.digirati.elucidate.infrastructure.extractor.agent.AnnotationGeneratorExtractor;
@@ -41,6 +36,10 @@ import com.digirati.elucidate.repository.AnnotationSelectorStoreRepository;
 import com.digirati.elucidate.repository.AnnotationTargetStoreRepository;
 import com.digirati.elucidate.repository.AnnotationTemporalStoreRepository;
 import com.digirati.elucidate.service.extractor.AnnotationExtractorService;
+import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service(AnnotationExtractorServiceImpl.SERVICE_NAME)
 public class AnnotationExtractorServiceImpl implements AnnotationExtractorService {
@@ -286,7 +285,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
             String creatorIri = annotationCreator.getAgentIri();
             String creatorJson = JsonUtils.toString(annotationCreator.getJsonMap());
 
-            String[] types = annotationCreator.getTypes() != null ? annotationCreator.getTypes().stream().toArray(String[]::new) : new String[]{};
+            String[] types = annotationCreator.getTypes() != null ? annotationCreator.getTypes().toArray(new String[0]) : new String[]{};
             String[] typesJson = new String[types.length];
             if (types.length > 0) {
                 for (int i = 0; i < typesJson.length; i++) {
@@ -294,7 +293,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
                 }
             }
 
-            String[] names = annotationCreator.getNames() != null ? annotationCreator.getNames().stream().toArray(String[]::new) : new String[]{};
+            String[] names = annotationCreator.getNames() != null ? annotationCreator.getNames().toArray(new String[0]) : new String[]{};
             String[] namesJson = new String[names.length];
             if (names.length > 0) {
                 for (int i = 0; i < namesJson.length; i++) {
@@ -304,7 +303,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
 
             String nickname = annotationCreator.getNickname();
 
-            String[] emails = annotationCreator.getEmails() != null ? annotationCreator.getEmails().stream().toArray(String[]::new) : new String[]{};
+            String[] emails = annotationCreator.getEmails() != null ? annotationCreator.getEmails().toArray(new String[0]) : new String[]{};
             String[] emailsJson = new String[emails.length];
             if (emails.length > 0) {
                 for (int i = 0; i < emailsJson.length; i++) {
@@ -312,7 +311,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
                 }
             }
 
-            String[] emailSha1s = annotationCreator.getEmailSha1s() != null ? annotationCreator.getEmailSha1s().stream().toArray(String[]::new) : new String[]{};
+            String[] emailSha1s = annotationCreator.getEmailSha1s() != null ? annotationCreator.getEmailSha1s().toArray(new String[0]) : new String[]{};
             String[] emailSha1sJson = new String[emailSha1s.length];
             if (emailSha1s.length > 0) {
                 for (int i = 0; i < emailSha1sJson.length; i++) {
@@ -320,7 +319,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
                 }
             }
 
-            String[] homepages = annotationCreator.getHomepages() != null ? annotationCreator.getHomepages().stream().toArray(String[]::new) : new String[]{};
+            String[] homepages = annotationCreator.getHomepages() != null ? annotationCreator.getHomepages().toArray(new String[0]) : new String[]{};
             String[] homepagesJson = new String[homepages.length];
             if (homepages.length > 0) {
                 for (int i = 0; i < homepagesJson.length; i++) {
@@ -345,7 +344,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
             String generatorIri = annotationGenerator.getAgentIri();
             String generatorJson = JsonUtils.toString(annotationGenerator.getJsonMap());
 
-            String[] types = annotationGenerator.getTypes() != null ? annotationGenerator.getTypes().stream().toArray(String[]::new) : new String[]{};
+            String[] types = annotationGenerator.getTypes() != null ? annotationGenerator.getTypes().toArray(new String[0]) : new String[]{};
             String[] typesJson = new String[types.length];
             if (types.length > 0) {
                 for (int i = 0; i < typesJson.length; i++) {
@@ -353,7 +352,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
                 }
             }
 
-            String[] names = annotationGenerator.getNames() != null ? annotationGenerator.getNames().stream().toArray(String[]::new) : new String[]{};
+            String[] names = annotationGenerator.getNames() != null ? annotationGenerator.getNames().toArray(new String[0]) : new String[]{};
             String[] namesJson = new String[names.length];
             if (names.length > 0) {
                 for (int i = 0; i < namesJson.length; i++) {
@@ -363,7 +362,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
 
             String nickname = annotationGenerator.getNickname();
 
-            String[] emails = annotationGenerator.getEmails() != null ? annotationGenerator.getEmails().stream().toArray(String[]::new) : new String[]{};
+            String[] emails = annotationGenerator.getEmails() != null ? annotationGenerator.getEmails().toArray(new String[0]) : new String[]{};
             String[] emailsJson = new String[emails.length];
             if (emails.length > 0) {
                 for (int i = 0; i < emailsJson.length; i++) {
@@ -371,7 +370,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
                 }
             }
 
-            String[] emailSha1s = annotationGenerator.getEmailSha1s() != null ? annotationGenerator.getEmailSha1s().stream().toArray(String[]::new) : new String[]{};
+            String[] emailSha1s = annotationGenerator.getEmailSha1s() != null ? annotationGenerator.getEmailSha1s().toArray(new String[0]) : new String[]{};
             String[] emailSha1sJson = new String[emailSha1s.length];
             if (emailSha1s.length > 0) {
                 for (int i = 0; i < emailSha1sJson.length; i++) {
@@ -379,7 +378,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
                 }
             }
 
-            String[] homepages = annotationGenerator.getHomepages() != null ? annotationGenerator.getHomepages().stream().toArray(String[]::new) : new String[]{};
+            String[] homepages = annotationGenerator.getHomepages() != null ? annotationGenerator.getHomepages().toArray(new String[0]) : new String[]{};
             String[] homepagesJson = new String[homepages.length];
             if (homepages.length > 0) {
                 for (int i = 0; i < homepagesJson.length; i++) {

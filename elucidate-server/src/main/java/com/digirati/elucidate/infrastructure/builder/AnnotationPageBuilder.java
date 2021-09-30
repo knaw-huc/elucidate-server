@@ -52,7 +52,6 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
                 add(new HashMap<String, Object>() {
                     {
                         put(JSONLDConstants.ATTRIBUTE_ID, partOfIri);
-
                     }
                 });
             }
