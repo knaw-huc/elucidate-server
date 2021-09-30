@@ -1,26 +1,32 @@
-package com.digirati.elucidate.common.test.model.annotation;
+package com.digirati.elucidate.common.test.model.annotation
 
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers
+import org.hamcrest.Matchers.equalTo
+import org.junit.Assert
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-
-public class AbstractAnnotationCollectionTest<T extends AbstractAnnotationCollection> extends AbstractObjectTest<T> {
-
-    protected void testAbstractAnnotationCollection(T abstractAnnotationCollection) {
-
-        assertNotNull(abstractAnnotationCollection);
-
-        String cacheKey = generateRandomCacheKey();
-        abstractAnnotationCollection.setCacheKey(cacheKey);
-        assertThat(cacheKey, is(equalTo(abstractAnnotationCollection.getCacheKey())));
-
-        String collectionId = generateRandomId();
-        abstractAnnotationCollection.setCollectionId(collectionId);
-        assertThat(collectionId, is(equalTo(abstractAnnotationCollection.getCollectionId())));
-
-        testAbstractObject(abstractAnnotationCollection);
+open class AbstractAnnotationCollectionTest<T : AbstractAnnotationCollection?> : AbstractObjectTest<T>() {
+    protected fun testAbstractAnnotationCollection(abstractAnnotationCollection: T) {
+        Assert.assertNotNull(abstractAnnotationCollection)
+        val cacheKey = generateRandomCacheKey()
+        abstractAnnotationCollection!!.cacheKey = cacheKey
+        assertThat(
+            cacheKey, Matchers.`is`(
+                equalTo(
+                    abstractAnnotationCollection.cacheKey
+                )
+            )
+        )
+        val collectionId = generateRandomId()
+        abstractAnnotationCollection.collectionId = collectionId
+        assertThat(
+            collectionId, Matchers.`is`(
+                equalTo(
+                    abstractAnnotationCollection.collectionId
+                )
+            )
+        )
+        testAbstractObject(abstractAnnotationCollection)
     }
 }

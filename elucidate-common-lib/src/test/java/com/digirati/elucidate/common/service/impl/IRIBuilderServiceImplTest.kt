@@ -1,18 +1,15 @@
-package com.digirati.elucidate.common.service.impl;
+package com.digirati.elucidate.common.service.impl
 
-import java.util.Date;
+import org.junit.Assert.assertNotNull
+import org.junit.Test
+import java.util.*
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
-
-public class IRIBuilderServiceImplTest {
-
+class IRIBuilderServiceImplTest {
     @Test
-    public void testToString() {
-        Date since = new Date();
-        String dateString = IRIBuilderServiceImpl.toString(since);
-        System.out.println(dateString);
-        assertNotNull(dateString);
+    fun testToString() {
+        val since = Date()
+        val dateString = IRIBuilderServiceImpl.toString(since)
+        println(dateString)
+        assertNotNull(dateString)
     }
 }

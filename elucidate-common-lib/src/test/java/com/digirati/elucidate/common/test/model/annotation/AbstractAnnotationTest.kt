@@ -1,30 +1,40 @@
-package com.digirati.elucidate.common.test.model.annotation;
+package com.digirati.elucidate.common.test.model.annotation
 
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotation
+import org.hamcrest.MatcherAssert
+import org.hamcrest.Matchers
+import org.junit.Assert.assertNotNull
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-
-public abstract class AbstractAnnotationTest<T extends AbstractAnnotation> extends AbstractObjectTest<T> {
-
-    protected void testAbstractAnnotation(T abstractAnnotation) {
-
-        assertNotNull(abstractAnnotation);
-
-        String cacheKey = generateRandomCacheKey();
-        abstractAnnotation.setCacheKey(cacheKey);
-        assertThat(cacheKey, is(equalTo(abstractAnnotation.getCacheKey())));
-
-        String collectionId = generateRandomId();
-        abstractAnnotation.setCollectionId(collectionId);
-        assertThat(collectionId, is(equalTo(abstractAnnotation.getCollectionId())));
-
-        String annotationId = generateRandomId();
-        abstractAnnotation.setAnnotationId(annotationId);
-        assertThat(annotationId, is(equalTo(abstractAnnotation.getAnnotationId())));
-
-        testAbstractObject(abstractAnnotation);
+abstract class AbstractAnnotationTest<T : AbstractAnnotation?> : AbstractObjectTest<T>() {
+    protected fun testAbstractAnnotation(abstractAnnotation: T) {
+        assertNotNull(abstractAnnotation)
+        val cacheKey = generateRandomCacheKey()
+        abstractAnnotation!!.cacheKey = cacheKey
+        MatcherAssert.assertThat(
+            cacheKey, Matchers.`is`(
+                Matchers.equalTo(
+                    abstractAnnotation.cacheKey
+                )
+            )
+        )
+        val collectionId = generateRandomId()
+        abstractAnnotation.collectionId = collectionId
+        MatcherAssert.assertThat(
+            collectionId, Matchers.`is`(
+                Matchers.equalTo(
+                    abstractAnnotation.collectionId
+                )
+            )
+        )
+        val annotationId = generateRandomId()
+        abstractAnnotation.annotationId = annotationId
+        MatcherAssert.assertThat(
+            annotationId, Matchers.`is`(
+                Matchers.equalTo(
+                    abstractAnnotation.annotationId
+                )
+            )
+        )
+        testAbstractObject(abstractAnnotation)
     }
 }

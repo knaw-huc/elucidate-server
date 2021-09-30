@@ -1,15 +1,13 @@
-package com.digirati.elucidate.common.test.model.annotation.w3c;
+package com.digirati.elucidate.common.test.model.annotation.w3c
 
-import org.junit.Test;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage
+import com.digirati.elucidate.common.test.model.annotation.AbstractAnnotationPageTest
+import org.junit.Test
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
-import com.digirati.elucidate.common.test.model.annotation.AbstractAnnotationPageTest;
-
-public class W3CAnnotationPageTest extends AbstractAnnotationPageTest<W3CAnnotationPage> {
-
+class W3CAnnotationPageTest : AbstractAnnotationPageTest<W3CAnnotationPage?>() {
     @Test
-    public void testW3CAnnotationPage() {
-        W3CAnnotationPage w3cAnnotationPage = new W3CAnnotationPage();
-        testAbstractAnnotationPage(w3cAnnotationPage);
+    fun testW3CAnnotationPage() {
+        val w3cAnnotationPage = W3CAnnotationPage()
+        testAbstractAnnotationPage(w3cAnnotationPage)
     }
 }
