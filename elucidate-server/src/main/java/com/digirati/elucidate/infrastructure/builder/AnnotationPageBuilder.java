@@ -8,6 +8,7 @@ import java.util.Map;
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
+import com.digirati.elucidate.common.infrastructure.util.PaginationUtils;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
 import com.digirati.elucidate.infrastructure.builder.function.AnnotationCollectionIRIBuilder;
@@ -16,7 +17,6 @@ import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIB
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 
-import static java.lang.Math.floor;
 import static java.lang.Math.max;
 
 public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends AbstractAnnotationPage> {
@@ -34,7 +34,7 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
     @SuppressWarnings("serial")
     public ServiceResponse<P> buildAnnotationPage(List<A> annotations, int page, boolean embeddedDescriptions, int pageSize) {
 
-        int lastPage = (int) floor(max(0, ((double) annotations.size() - 1)) / pageSize);
+        int lastPage = PaginationUtils.calculateLastPage(annotations.size(), pageSize);
         int from = Math.min(annotations.size(), max(0, page * pageSize));
         int to = Math.min(annotations.size(), (page + 1) * pageSize);
         annotations = annotations.subList(from, to);

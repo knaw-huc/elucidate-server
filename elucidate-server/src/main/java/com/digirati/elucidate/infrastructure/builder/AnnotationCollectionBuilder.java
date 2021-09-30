@@ -8,6 +8,7 @@ import java.util.Map;
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
+import com.digirati.elucidate.common.infrastructure.util.PaginationUtils;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
@@ -38,7 +39,7 @@ public class AnnotationCollectionBuilder<A extends AbstractAnnotation, P extends
     public ServiceResponse<C> buildAnnotationCollection(W3CAnnotationCollection w3cAnnotationCollection, List<A> annotations, int pageSize, ClientPreference clientPref) {
 
         int totalAnnotations = annotations.size();
-        int totalPages = (int) Math.floor((double) totalAnnotations / pageSize);
+        int lastPage = PaginationUtils.calculateLastPage(totalAnnotations, pageSize);
 
         C annotationCollection = annotationCollectionConverter.convertToAnnotationCollection();
         Map<String, Object> jsonMap = annotationCollection.getJsonMap();
@@ -91,7 +92,7 @@ public class AnnotationCollectionBuilder<A extends AbstractAnnotation, P extends
                 {
                     add(new HashMap<String, Object>() {
                         {
-                            put(JSONLDConstants.ATTRIBUTE_ID, annotationPageIriBuilder.buildAnnotationPageIri(totalPages, true));
+                            put(JSONLDConstants.ATTRIBUTE_ID, annotationPageIriBuilder.buildAnnotationPageIri(lastPage, true));
                         }
                     });
                 }

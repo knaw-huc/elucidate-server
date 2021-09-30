@@ -5,21 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.RDFConstants;
 import com.digirati.elucidate.common.infrastructure.constants.SearchConstants;
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants;
 import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
+import com.digirati.elucidate.common.infrastructure.util.PaginationUtils;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.statistics.AbstractStatisticsPage;
 import com.digirati.elucidate.repository.AnnotationStatisticsRepository;
 import com.digirati.elucidate.service.statistics.AbstractAnnotationStatisticsPageService;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends AbstractStatisticsPage> implements AbstractAnnotationStatisticsPageService<S> {
 
@@ -81,7 +81,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
     @SuppressWarnings("serial")
     public ServiceResponse<S> buildStatisticsPage(String type, List<Pair<String, Integer>> counts, String field, int page) {
 
-        int totalPages = (int) Math.floor((double) counts.size() / pageSize);
+        int lastPage = PaginationUtils.calculateLastPage(counts.size(), pageSize);
         int from = Math.min(counts.size(), Math.max(0, page * pageSize));
         int to = Math.min(counts.size(), (page + 1) * pageSize);
         counts = counts.subList(from, to);
@@ -112,7 +112,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
             });
         }
 
-        if (page < totalPages) {
+        if (page < lastPage) {
             String nextIri = buildPageIri(type, field, page + 1);
             jsonMap.put(ActivityStreamConstants.URI_NEXT, new ArrayList<Map<String, Object>>() {
                 {
