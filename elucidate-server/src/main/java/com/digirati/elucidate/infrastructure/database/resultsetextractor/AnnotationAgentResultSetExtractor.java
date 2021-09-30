@@ -7,12 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
-
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
 
 public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<List<AnnotationAgent>> {
 
@@ -22,7 +21,6 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
         Map<Integer, AnnotationAgent> annotationAgents = new HashMap<>();
 
         while (rs.next()) {
-
             Integer pk = ResultSetUtils.getInt(rs, "id");
             AnnotationAgent annotationAgent = annotationAgents.get(pk);
             if (annotationAgent == null) {
@@ -34,6 +32,7 @@ public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<Lis
                 annotationAgent.setJsonMap(ResultSetUtils.getJsonMap(rs, "json"));
                 annotationAgent.setModifiedDateTime(ResultSetUtils.getDate(rs, "modifieddatetime"));
                 annotationAgent.setNickname(ResultSetUtils.getString(rs, "nickname"));
+                annotationAgents.put(annotationAgent.getPk(), annotationAgent);
             }
 
             String email = ResultSetUtils.getString(rs, "email");
