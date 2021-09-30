@@ -1,10 +1,10 @@
-package com.digirati.elucidate.common.infrastructure.util;
+package com.digirati.elucidate.common.infrastructure.util
 
-import static java.lang.Math.floor;
-import static java.lang.Math.max;
+import kotlin.math.floor
 
-public class PaginationUtils {
-    public static int calculateLastPage(int totalItems, int pageSize) {
-        return (int) floor(max(0, ((double) totalItems - 1)) / pageSize);
+object PaginationUtils {
+    @JvmStatic
+    fun calculateLastPage(totalItems: Int, pageSize: Int): Int {
+        return floor(0.0.coerceAtLeast(totalItems.toDouble() - 1) / pageSize).toInt()
     }
 }
