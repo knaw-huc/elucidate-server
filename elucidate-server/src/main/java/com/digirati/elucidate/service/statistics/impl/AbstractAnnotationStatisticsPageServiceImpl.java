@@ -41,7 +41,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
     @Override
     public ServiceResponse<S> buildBodyStatisticsPage(String field, int page) {
 
-        List<Pair<String, Integer>> counts = null;
+        List<Pair<String, Integer>> counts;
 
         switch (field) {
             case SearchConstants.FIELD_ID:
@@ -61,7 +61,7 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
     @Override
     public ServiceResponse<S> buildTargetStatisticsPage(String field, int page) {
 
-        List<Pair<String, Integer>> counts = null;
+        List<Pair<String, Integer>> counts;
 
         switch (field) {
             case SearchConstants.FIELD_ID:
