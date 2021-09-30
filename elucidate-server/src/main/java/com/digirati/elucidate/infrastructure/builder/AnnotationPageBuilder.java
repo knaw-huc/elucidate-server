@@ -16,6 +16,9 @@ import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIB
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 
+import static java.lang.Math.floor;
+import static java.lang.Math.max;
+
 public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends AbstractAnnotationPage> {
 
     private final AnnotationPageConverter<P> annotationPageConverter;
@@ -31,8 +34,8 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
     @SuppressWarnings("serial")
     public ServiceResponse<P> buildAnnotationPage(List<A> annotations, int page, boolean embeddedDescriptions, int pageSize) {
 
-        int totalPages = (int) Math.floor((double) annotations.size() / pageSize);
-        int from = Math.min(annotations.size(), Math.max(0, page * pageSize));
+        int lastPage = (int) floor(max(0, ((double) annotations.size() - 1)) / pageSize);
+        int from = Math.min(annotations.size(), max(0, page * pageSize));
         int to = Math.min(annotations.size(), (page + 1) * pageSize);
         annotations = annotations.subList(from, to);
 
@@ -79,7 +82,7 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
             });
         }
 
-        if (page < totalPages) {
+        if (page < lastPage) {
             String nextIri = annotationPageIriBuilder.buildAnnotationPageIri(page + 1, embeddedDescriptions);
             jsonMap.put(ActivityStreamConstants.URI_NEXT, new ArrayList<Map<String, Object>>() {
                 {
