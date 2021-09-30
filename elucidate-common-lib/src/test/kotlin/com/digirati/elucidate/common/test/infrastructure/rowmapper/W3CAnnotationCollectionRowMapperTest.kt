@@ -45,14 +45,14 @@ class W3CAnnotationCollectionRowMapperTest : AbstractTest() {
         MatcherAssert.assertThat(cacheKey, Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.cacheKey)))
         MatcherAssert.assertThat(collectionId, Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.collectionId)))
         MatcherAssert.assertThat(
-            createdDateTime,
-            Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.createdDateTime))
+                createdDateTime,
+                Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.createdDateTime))
         )
         MatcherAssert.assertThat(deleted, Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.isDeleted)))
         MatcherAssert.assertThat(jsonMap, Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.jsonMap)))
         MatcherAssert.assertThat(
-            modifiedDateTime,
-            Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.modifiedDateTime))
+                modifiedDateTime,
+                Matchers.`is`(Matchers.equalTo(w3cAnnotationCollection.modifiedDateTime))
         )
     }
 }

@@ -26,8 +26,8 @@ class ClientPreferenceTest {
         val clientPreference = ClientPreference.CONTAINED_DESCRIPTIONS
         Assert.assertNotNull(clientPreference)
         MatcherAssert.assertThat(
-            clientPreference,
-            Matchers.`is`(Matchers.equalTo(ClientPreference.CONTAINED_DESCRIPTIONS))
+                clientPreference,
+                Matchers.`is`(Matchers.equalTo(ClientPreference.CONTAINED_DESCRIPTIONS))
         )
     }
 }
