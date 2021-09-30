@@ -2,10 +2,7 @@ package com.digirati.elucidate.test.service.impl;
 
 import java.util.Date;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.ArgumentMatchers;
+import java.util.Map;
 
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
@@ -16,9 +13,13 @@ import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.repository.AnnotationStoreRepository;
 import com.digirati.elucidate.service.query.AbstractAnnotationService;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
@@ -138,11 +139,41 @@ public abstract class AbstractAnnotationServiceImplTest<A extends AbstractAnnota
         assertThat(targetAnnotation.getAnnotationId(), is(not(nullValue())));
     }
 
-    public void testUpdateAnnotation() {
-        // TODO
+    @Test
+    public void testCreateAnnotationWithContextlessCustomFields() {
+
+        String collectionId = generateRandomId();
+        A annotation = generateAnnotationWithJsonMapOnly();
+
+        W3CAnnotation w3cAnnotation = new W3CAnnotation();
+        w3cAnnotation.setAnnotationId("test-annotation-id");
+        w3cAnnotation.setCollectionId(collectionId);
+        w3cAnnotation.setCreatedDateTime(new Date());
+        w3cAnnotation.setDeleted(false);
+        Map<String, Object> jsonMap = annotation.getJsonMap();
+        jsonMap.put("custom_field","custom_value");
+        w3cAnnotation.setJsonMap(jsonMap);
+
+        when(annotationStoreRepository.createAnnotation(eq(collectionId), eq("test-annotation-id"), anyString(), ArgumentMatchers.any())).thenReturn(w3cAnnotation);
+
+        ServiceResponse<A> serviceResponse = annotationService.createAnnotation(collectionId, null, annotation);
+        assertThat(serviceResponse, is(not(nullValue())));
+        assertThat(serviceResponse.getStatus(), is(equalTo(ServiceResponse.Status.OK)));
+
+        A targetAnnotation = serviceResponse.getObj();
+        assertThat(targetAnnotation, is(not(nullValue())));
+        assertThat(targetAnnotation.getCollectionId(), is(equalTo(collectionId)));
+        assertThat(targetAnnotation.getAnnotationId(), is(not(nullValue())));
+        assertThat(targetAnnotation.getJsonMap(), hasKey("custom_field"));
+        assertThat(targetAnnotation.getJsonMap().get("custom_field"), is("custom_value"));
     }
 
-    public void testDeleteAnnotation() {
-        // TODO
-    }
+
+//    public void testUpdateAnnotation() {
+//        // TODO
+//    }
+//
+//    public void testDeleteAnnotation() {
+//        // TODO
+//    }
 }
