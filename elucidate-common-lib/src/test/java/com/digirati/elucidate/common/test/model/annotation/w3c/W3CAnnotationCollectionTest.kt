@@ -4,7 +4,7 @@ import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollectio
 import com.digirati.elucidate.common.test.model.annotation.AbstractAnnotationCollectionTest
 import org.junit.Test
 
-class W3CAnnotationCollectionTest : AbstractAnnotationCollectionTest<W3CAnnotationCollection?>() {
+class W3CAnnotationCollectionTest : AbstractAnnotationCollectionTest<W3CAnnotationCollection>() {
     @Test
     fun testW3CAnnotationCollection() {
         val w3cAnnotationCollection = W3CAnnotationCollection()

@@ -4,7 +4,7 @@ import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection
 import com.digirati.elucidate.common.test.model.annotation.AbstractAnnotationCollectionTest
 import org.junit.Test
 
-class OAAnnotationCollectionTest : AbstractAnnotationCollectionTest<OAAnnotationCollection?>() {
+class OAAnnotationCollectionTest : AbstractAnnotationCollectionTest<OAAnnotationCollection>() {
     @Test
     fun testOAAnnotationCollection() {
         val oaAnnotationCollection = OAAnnotationCollection()

@@ -17,13 +17,13 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import java.util.*
 
-abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation?, C : AbstractAnnotationCollection?> :
+abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : AbstractAnnotationCollection> :
         AbstractTest() {
     private var annotationStoreRepository: AnnotationStoreRepository? = null
     private var annotationService: AbstractAnnotationService<A>? = null
 
     protected abstract fun createAnnotationService(
-            iriBuilderService: IRIBuilderService,
+            iriBuilderService: IRIBuilderService?,
             annotationStoreRepository: AnnotationStoreRepository?
     ): AbstractAnnotationService<A>
 
@@ -121,7 +121,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation?, C : Ab
         w3cAnnotation.collectionId = collectionId
         w3cAnnotation.createdDateTime = Date()
         w3cAnnotation.isDeleted = false
-        w3cAnnotation.jsonMap = annotation!!.jsonMap
+        w3cAnnotation.jsonMap = annotation.jsonMap
         `when`(
                 annotationStoreRepository!!.createAnnotation(
                         ArgumentMatchers.eq(collectionId),
@@ -148,7 +148,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation?, C : Ab
         w3cAnnotation.collectionId = collectionId
         w3cAnnotation.createdDateTime = Date()
         w3cAnnotation.isDeleted = false
-        val jsonMap = annotation!!.jsonMap
+        val jsonMap = annotation.jsonMap
         jsonMap["custom_field"] = "custom_value"
         w3cAnnotation.jsonMap = jsonMap
         `when`(

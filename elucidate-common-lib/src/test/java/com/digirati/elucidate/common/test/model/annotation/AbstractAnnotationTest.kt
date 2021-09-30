@@ -5,35 +5,35 @@ import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
 import org.junit.Assert.assertNotNull
 
-abstract class AbstractAnnotationTest<T : AbstractAnnotation?> : AbstractObjectTest<T>() {
+abstract class AbstractAnnotationTest<T : AbstractAnnotation> : AbstractObjectTest<T>() {
     protected fun testAbstractAnnotation(abstractAnnotation: T) {
         assertNotNull(abstractAnnotation)
         val cacheKey = generateRandomCacheKey()
-        abstractAnnotation!!.cacheKey = cacheKey
+        abstractAnnotation.cacheKey = cacheKey
         MatcherAssert.assertThat(
-            cacheKey, Matchers.`is`(
+                cacheKey, Matchers.`is`(
                 Matchers.equalTo(
-                    abstractAnnotation.cacheKey
+                        abstractAnnotation.cacheKey
                 )
-            )
+        )
         )
         val collectionId = generateRandomId()
         abstractAnnotation.collectionId = collectionId
         MatcherAssert.assertThat(
-            collectionId, Matchers.`is`(
+                collectionId, Matchers.`is`(
                 Matchers.equalTo(
-                    abstractAnnotation.collectionId
+                        abstractAnnotation.collectionId
                 )
-            )
+        )
         )
         val annotationId = generateRandomId()
         abstractAnnotation.annotationId = annotationId
         MatcherAssert.assertThat(
-            annotationId, Matchers.`is`(
+                annotationId, Matchers.`is`(
                 Matchers.equalTo(
-                    abstractAnnotation.annotationId
+                        abstractAnnotation.annotationId
                 )
-            )
+        )
         )
         testAbstractObject(abstractAnnotation)
     }
