@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
+import com.digirati.elucidate.model.security.SecurityUser;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
-import com.digirati.elucidate.model.security.SecurityUser;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 @Component
 public class UserSecurityDetailsMessageConverter extends AbstractMessageConverter<UserSecurityDetails> {
@@ -52,7 +51,7 @@ public class UserSecurityDetailsMessageConverter extends AbstractMessageConverte
     }
 
     @Override
-    protected UserSecurityDetails getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected UserSecurityDetails getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format(
             "Conversion from Content Type [%s] to [%s] is not supported",
             contentType,

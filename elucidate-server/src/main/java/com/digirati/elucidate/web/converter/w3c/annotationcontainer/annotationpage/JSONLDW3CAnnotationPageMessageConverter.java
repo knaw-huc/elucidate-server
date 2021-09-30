@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
-
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
 
 @Component
 public class JSONLDW3CAnnotationPageMessageConverter extends AbstractW3CAnnotationPageMessageConverter {
@@ -77,7 +76,7 @@ public class JSONLDW3CAnnotationPageMessageConverter extends AbstractW3CAnnotati
     }
 
     @Override
-    protected W3CAnnotationPage getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected W3CAnnotationPage getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, W3CAnnotationPage.class));
     }
 }

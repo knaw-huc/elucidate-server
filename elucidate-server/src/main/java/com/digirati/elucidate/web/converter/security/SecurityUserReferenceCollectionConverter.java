@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.digirati.elucidate.service.security.SecurityUserReferenceCollection;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import com.github.jsonldjava.utils.JsonUtils;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import com.digirati.elucidate.service.security.SecurityUserReferenceCollection;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 @Component
 public class SecurityUserReferenceCollectionConverter extends AbstractMessageConverter<SecurityUserReferenceCollection> {
@@ -44,7 +43,7 @@ public class SecurityUserReferenceCollectionConverter extends AbstractMessageCon
     }
 
     @Override
-    protected SecurityUserReferenceCollection getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected SecurityUserReferenceCollection getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException("Unable to demarshall a SecurityUserReferenceCollection object.");
     }
 

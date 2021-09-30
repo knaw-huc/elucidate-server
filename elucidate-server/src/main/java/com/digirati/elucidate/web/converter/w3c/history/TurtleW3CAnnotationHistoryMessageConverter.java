@@ -2,15 +2,14 @@ package com.digirati.elucidate.web.converter.w3c.history;
 
 import java.util.Map;
 
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
+import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
-import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 
 @Component
 public class TurtleW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnotationHistoryMessageConverter {
@@ -24,13 +23,13 @@ public class TurtleW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnot
     }
 
     @Override
-    protected String getStringRepresentation(W3CAnnotationHistory w3CAnnotationHistory, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(W3CAnnotationHistory w3CAnnotationHistory, MediaType contentType) {
         Map<String, Object> jsonMap = w3CAnnotationHistory.getJsonMap();
         return JsonLdProcessor.toRDF(jsonMap, turtleTripleCallback, jsonLdOptions).toString();
     }
 
     @Override
-    protected W3CAnnotationHistory getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected W3CAnnotationHistory getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, W3CAnnotationHistory.class));
     }
 }

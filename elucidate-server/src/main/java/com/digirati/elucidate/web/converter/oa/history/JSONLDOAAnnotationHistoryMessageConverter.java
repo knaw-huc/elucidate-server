@@ -1,10 +1,13 @@
 package com.digirati.elucidate.web.converter.oa.history;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.annotation.history.OAAnnotationHistory;
+import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +16,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.annotation.history.OAAnnotationHistory;
-import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
-
 @Component
 public class JSONLDOAAnnotationHistoryMessageConverter extends AbstractOAAnnotationHistoryMessageConverter {
 
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDOAAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService, @Value("${annotation.history.oa.contexts}") String[] defaultContexts) throws IOException {
+    public JSONLDOAAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService, @Value("${annotation.history.oa.contexts}") String[] defaultContexts) {
         super(iriBuilderService, oaAnnotationHistoryService, APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }

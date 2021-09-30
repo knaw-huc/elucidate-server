@@ -1,10 +1,12 @@
 package com.digirati.elucidate.web.converter.w3c.bulkupdate;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
+import com.digirati.elucidate.model.batch.W3CBatchOperation;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
-import com.digirati.elucidate.model.batch.W3CBatchOperation;
-
 @Component
 public class JSONLDW3CBatchOperationMessageConverter extends AbstractW3CBatchOperationMessageConverter {
 
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDW3CBatchOperationMessageConverter(@Value("${batch.operation.w3c.contexts}") String[] defaultContexts) throws IOException {
+    public JSONLDW3CBatchOperationMessageConverter(@Value("${batch.operation.w3c.contexts}") String[] defaultContexts) {
         super(APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }

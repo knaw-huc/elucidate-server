@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
+import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
-
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
-import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 
 @Component
 public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatisticsPageMessageConverter {
@@ -77,7 +76,7 @@ public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatistics
     }
 
     @Override
-    protected OAStatisticsPage getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected OAStatisticsPage getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, OAStatisticsPage.class));
     }
 }

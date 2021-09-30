@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 @Component
 public class AnnotationReferenceCollectionMessageConverter extends
@@ -48,7 +47,7 @@ public class AnnotationReferenceCollectionMessageConverter extends
     }
 
     @Override
-    protected AnnotationReferenceCollection getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected AnnotationReferenceCollection getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException("AnnotatationReferenceCollection is not deserializable");
     }
 

@@ -2,12 +2,11 @@ package com.digirati.elucidate.web.converter.oa.annotationcontainer.annotationpa
 
 import java.util.Map;
 
+import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
 
 @Component
 public class TurtleOAAnnotationPageMessageConverter extends AbstractOAAnnotationPageMessageConverter {
@@ -20,13 +19,13 @@ public class TurtleOAAnnotationPageMessageConverter extends AbstractOAAnnotation
     }
 
     @Override
-    protected String getStringRepresentation(OAAnnotationPage oaAnnotationPage, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(OAAnnotationPage oaAnnotationPage, MediaType contentType) {
         Map<String, Object> jsonMap = oaAnnotationPage.getJsonMap();
         return JsonLdProcessor.toRDF(jsonMap, turtleTripleCallback, jsonLdOptions).toString();
     }
 
     @Override
-    protected OAAnnotationPage getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected OAAnnotationPage getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, OAAnnotationPage.class));
     }
 }
