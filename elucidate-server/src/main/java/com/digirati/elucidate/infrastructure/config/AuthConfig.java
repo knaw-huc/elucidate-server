@@ -3,16 +3,6 @@ package com.digirati.elucidate.infrastructure.config;
 import java.util.Arrays;
 import java.util.List;
 
-import com.digirati.elucidate.common.infrastructure.util.URIUtils;
-import com.digirati.elucidate.infrastructure.generator.IDGenerator;
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
-import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
-import com.digirati.elucidate.infrastructure.security.impl.DefaultUserSecurityDetailsContext;
-import com.digirati.elucidate.infrastructure.security.impl.JwtUserAuthenticationConverter;
-import com.digirati.elucidate.infrastructure.security.impl.JwtUserSecurityDetailsContext;
-import com.digirati.elucidate.infrastructure.security.impl.UserSecurityDetailsLoaderImpl;
-import com.digirati.elucidate.repository.security.GroupRepository;
-import com.digirati.elucidate.repository.security.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +26,17 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import com.digirati.elucidate.common.infrastructure.util.URIUtils;
+import com.digirati.elucidate.infrastructure.generator.IDGenerator;
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
+import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
+import com.digirati.elucidate.infrastructure.security.impl.DefaultUserSecurityDetailsContext;
+import com.digirati.elucidate.infrastructure.security.impl.JwtUserAuthenticationConverter;
+import com.digirati.elucidate.infrastructure.security.impl.JwtUserSecurityDetailsContext;
+import com.digirati.elucidate.infrastructure.security.impl.UserSecurityDetailsLoaderImpl;
+import com.digirati.elucidate.repository.security.GroupRepository;
+import com.digirati.elucidate.repository.security.UserRepository;
 
 @Configuration
 @EnableResourceServer
@@ -116,18 +117,18 @@ public class AuthConfig implements ResourceServerConfigurer {
     public void configure(ResourceServerSecurityConfigurer resources) {
         if (authEnabled) {
             resources
-                .tokenServices(tokenServices())
-                .resourceId(URIUtils.buildBaseUrl(baseScheme, baseHost, basePort, basePath));
+                    .tokenServices(tokenServices())
+                    .resourceId(URIUtils.buildBaseUrl(baseScheme, baseHost, basePort, basePath));
         }
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         AuthorizedUrl authorizationConfigurer = http
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-            .anyRequest();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .anyRequest();
 
         if (authEnabled) {
             authorizationConfigurer.authenticated();

@@ -4,11 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
-import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
+import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 
 @Component
 public class JSONLDW3CAnnotationMessageConverter extends AbstractW3CAnnotationMessageConverter {

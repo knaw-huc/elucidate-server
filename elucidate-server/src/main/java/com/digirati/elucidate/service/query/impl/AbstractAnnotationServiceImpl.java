@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
 import com.digirati.elucidate.common.infrastructure.constants.ElucidateConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
@@ -18,9 +22,6 @@ import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.repository.AnnotationStoreRepository;
 import com.digirati.elucidate.service.query.AbstractAnnotationService;
-import com.github.jsonldjava.utils.JsonUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
 public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation> implements AbstractAnnotationService<A> {
 
@@ -126,10 +127,10 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         }
 
         w3cAnnotation = annotationStoreRepository.createAnnotation(
-            collectionId,
-            annotationId,
-            annotationJson,
-            securityContext.getAuthenticationId()
+                collectionId,
+                annotationId,
+                annotationJson,
+                securityContext.getAuthenticationId()
         );
 
         annotation = convertToAnnotation(w3cAnnotation);
