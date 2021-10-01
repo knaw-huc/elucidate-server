@@ -10,7 +10,7 @@ import java.util.*
 object ResultSetUtils {
     @JvmStatic
     @Throws(SQLException::class)
-    fun getString(rs: ResultSet, columnName: String): String {
+    fun getString(rs: ResultSet, columnName: String): String? {
         return rs.getString(columnName)
     }
 
@@ -22,7 +22,7 @@ object ResultSetUtils {
 
     @JvmStatic
     @Throws(SQLException::class)
-    fun getDate(rs: ResultSet, columnName: String): Date {
+    fun getDate(rs: ResultSet, columnName: String): Date? {
         return rs.getTimestamp(columnName)
     }
 
