@@ -18,14 +18,14 @@ import org.powermock.modules.junit4.PowerMockRunner
 @PowerMockIgnore("javax.script.*", "javax.management.*")
 class W3CAnnotationServiceImplTest : AbstractAnnotationServiceImplTest<W3CAnnotation, W3CAnnotationCollection>() {
     override fun createAnnotationService(
-            iriBuilderService: IRIBuilderService?,
-            annotationStoreRepository: AnnotationStoreRepository?
+        iriBuilderService: IRIBuilderService?,
+        annotationStoreRepository: AnnotationStoreRepository?
     ): AbstractAnnotationService<W3CAnnotation> {
         return W3CAnnotationServiceImpl(
-                DefaultUserSecurityDetailsContext(),
-                annotationStoreRepository,
-                iriBuilderService,
-                StaticIDGenerator()
+            DefaultUserSecurityDetailsContext(),
+            annotationStoreRepository,
+            iriBuilderService,
+            StaticIDGenerator()
         )
     }
 
