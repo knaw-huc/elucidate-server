@@ -18,4 +18,6 @@ public interface AbstractAnnotationCollectionSearchService<C extends AbstractAnn
     ServiceResponse<C> searchAnnotationCollectionByGenerator(List<String> levels, String type, String value, boolean strict, ClientPreference clientPref);
 
     ServiceResponse<C> searchAnnotationCollectionByTemporal(List<String> levels, List<String> types, Date since, ClientPreference clientPref);
+
+    ServiceResponse<C> searchAnnotationCollectionByOverlap(int lowerLimit, int upperLimit, ClientPreference clientPref);
 }

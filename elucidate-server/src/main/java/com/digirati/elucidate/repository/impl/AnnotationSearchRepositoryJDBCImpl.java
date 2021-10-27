@@ -73,4 +73,14 @@ public class AnnotationSearchRepositoryJDBCImpl extends AbstractRepositoryJDBCIm
 
         return queryForList(sql, params, sqlTypes, new W3CAnnotationRowMapper());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<W3CAnnotation> getAnnotationsByOverlap(int lowerLevel, int upperLevel) {
+        String sql = "SELECT * FROM annotation_search_by_overlap(?, ?)";
+        Object[] params = {upperLevel, lowerLevel};
+        int[] sqlTypes = {Types.INTEGER, Types.INTEGER};
+
+        return queryForList(sql, params, sqlTypes, new W3CAnnotationRowMapper());
+    }
 }

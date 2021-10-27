@@ -184,4 +184,35 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
     protected abstract String buildTemporalSearchCollectionIri(List<String> levels, List<String> types, Date since);
 
     protected abstract String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
+
+    @Override
+    public ServiceResponse<C> searchAnnotationCollectionByOverlap(int lowerLimit, int upperLimit, ClientPreference clientPref) {
+
+        W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
+        w3cAnnotationCollection.setJsonMap(new HashMap<>());
+
+        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(lowerLimit, upperLimit);
+        Status status = serviceResponse.getStatus();
+
+        if (!status.equals(Status.OK)) {
+            LOGGER.warn(String.format("Got unexpected service response code [%s] (expected [%s]", status, Status.OK));
+            return new ServiceResponse<>(status, null);
+        }
+
+        List<A> annotations = serviceResponse.getObj();
+
+        AnnotationCollectionConverter<C> annotationCollectionConverter = () -> convertToAnnotationCollection(w3cAnnotationCollection);
+        AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildOverlapSearchCollectionIri(lowerLimit, upperLimit);
+        AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(lowerLimit, upperLimit, _page, _embeddedDescriptions);
+        FirstAnnotationPageBuilder<P> firstAnnotationPageBuilder = () -> buildOverlapSearchFirstAnnotationPage(annotations, lowerLimit, upperLimit, clientPref);
+
+        return new AnnotationCollectionBuilder<A, P, C>(annotationCollectionConverter, annotationCollectionIriBuilder, annotationPageIriBuilder, firstAnnotationPageBuilder).buildAnnotationCollection(w3cAnnotationCollection, annotations, pageSize, clientPref);
+    }
+
+    protected abstract String buildOverlapSearchCollectionIri(int lowerLimit, int upperLimit);
+
+    protected abstract String buildOverlapSearchPageIri(int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions);
+
+    protected abstract ServiceResponse<P> buildOverlapSearchFirstAnnotationPage(List<A> annotations, int lowerLimit, int upperLimit, ClientPreference clientPref);
+
 }

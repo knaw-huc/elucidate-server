@@ -90,4 +90,18 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildTemporalSearchCollectionIri(List<String> levels, List<String> types, Date since);
 
     protected abstract String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
+
+    @Override
+    public ServiceResponse<P> buildAnnotationPageByOverlap(List<A> annotations, int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
+
+        AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildOverlapSearchCollectionIri(lowerLevel, upperLevel);
+        AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(lowerLevel, upperLevel, page, embeddedDescriptions);
+
+        return new AnnotationPageBuilder<A, P>(this::convertToAnnotationPage, annotationCollectionIriBuilder, annotationPageIriBuilder).buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
+    }
+
+    protected abstract String buildOverlapSearchCollectionIri(int lowerLevel, int upperLevel);
+
+    protected abstract String buildOverlapSearchPageIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions);
+
 }

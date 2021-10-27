@@ -131,4 +131,22 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     protected String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildW3CPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
+
+    @Override
+    protected String buildOverlapSearchCollectionIri(int lowerLimit, int upperLimit) {
+//        TODO
+        return null;
+    }
+
+    @Override
+    protected String buildOverlapSearchPageIri(int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
+//        TODO
+        return null;
+    }
+
+    @Override
+    protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, int lowerLimit, int upperLimit, ClientPreference clientPref) {
+//        TODO
+        return null;
+    }
 }

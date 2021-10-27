@@ -17,4 +17,6 @@ public interface AbstractAnnotationSearchService<A extends AbstractAnnotation> {
     ServiceResponse<List<A>> searchAnnotationsByGenerator(List<String> levels, String type, String value, boolean strict);
 
     ServiceResponse<List<A>> searchAnnotationsByTemporal(List<String> levels, List<String> types, Date since);
+
+    ServiceResponse<List<A>> searchAnnotationsByOverlap(int lowerLimit, int upperLimit);
 }

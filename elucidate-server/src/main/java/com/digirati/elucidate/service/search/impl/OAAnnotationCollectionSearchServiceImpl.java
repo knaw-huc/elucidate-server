@@ -152,4 +152,23 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
     protected String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildOAPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
+
+    @Override
+    protected ServiceResponse<OAAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, int lowerLevel, int upperLevel, ClientPreference clientPref) {
+        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
+            return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, lowerLevel, upperLevel, 0, false);
+        } else {
+            return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, lowerLevel, upperLevel, 0, true);
+        }
+    }
+
+    @Override
+    protected String buildOverlapSearchCollectionIri(int lowerLevel, int upperLevel) {
+        return iriBuilderService.buildOACollectionOverlapSearchIri(lowerLevel, upperLevel);
+    }
+
+    @Override
+    protected String buildOverlapSearchPageIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildOAPageOverlapSearchIri(lowerLevel, upperLevel, page, embeddedDescriptions);
+    }
 }

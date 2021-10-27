@@ -64,4 +64,8 @@ public interface IRIBuilderService {
     String buildOACollectionTemporalSearchIri(List<String> levels, List<String> types, Date since);
 
     String buildOAPageTemporalSearchIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
+
+    String buildOACollectionOverlapSearchIri(int lowerLevel, int upperLevel);
+
+    String buildOAPageOverlapSearchIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions);
 }
