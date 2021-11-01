@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.github.jsonldjava.utils.JsonUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.infrastructure.extractor.agent.AnnotationCreatorExtractor;
 import com.digirati.elucidate.infrastructure.extractor.agent.AnnotationGeneratorExtractor;
@@ -36,10 +41,6 @@ import com.digirati.elucidate.repository.AnnotationSelectorStoreRepository;
 import com.digirati.elucidate.repository.AnnotationTargetStoreRepository;
 import com.digirati.elucidate.repository.AnnotationTemporalStoreRepository;
 import com.digirati.elucidate.service.extractor.AnnotationExtractorService;
-import com.github.jsonldjava.utils.JsonUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service(AnnotationExtractorServiceImpl.SERVICE_NAME)
 public class AnnotationExtractorServiceImpl implements AnnotationExtractorService {

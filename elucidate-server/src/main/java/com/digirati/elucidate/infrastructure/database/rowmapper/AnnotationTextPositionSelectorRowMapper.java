@@ -3,10 +3,11 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.annotation.selector.textposition.AnnotationTextPositionSelector;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.annotation.selector.textposition.AnnotationTextPositionSelector;
 
 public class AnnotationTextPositionSelectorRowMapper implements RowMapper<AnnotationTextPositionSelector> {
 

@@ -2,11 +2,12 @@ package com.digirati.elucidate.web.converter.oa.statisticspage;
 
 import java.util.Map;
 
-import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+
+import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 
 @Component
 public class TurtleOAStatisticsPageMessageConverter extends AbstractOAStatisticsPageMessageConverter {

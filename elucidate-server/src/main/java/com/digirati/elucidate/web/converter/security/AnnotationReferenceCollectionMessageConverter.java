@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,9 +12,13 @@ import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
+
 @Component
 public class AnnotationReferenceCollectionMessageConverter extends
-    AbstractMessageConverter<AnnotationReferenceCollection> {
+        AbstractMessageConverter<AnnotationReferenceCollection> {
 
     private final IRIBuilderService iriBuilder;
 
@@ -36,11 +37,11 @@ public class AnnotationReferenceCollectionMessageConverter extends
 
     @Override
     protected String getStringRepresentation(AnnotationReferenceCollection obj, MediaType contentType)
-        throws Exception {
+            throws Exception {
         Map<String, Object> jsonMap = new HashMap<>();
         List<String> iris = obj.getAnnotations().stream()
-            .map(ref -> iriBuilder.buildW3CAnnotationIri(ref.getCollectionId(), ref.getId()))
-            .collect(Collectors.toList());
+                .map(ref -> iriBuilder.buildW3CAnnotationIri(ref.getCollectionId(), ref.getId()))
+                .collect(Collectors.toList());
 
         jsonMap.put("annotations", iris);
         return JsonUtils.toString(jsonMap);

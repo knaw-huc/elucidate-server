@@ -3,10 +3,11 @@ package com.digirati.elucidate.infrastructure.database.rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
-import com.digirati.elucidate.model.annotation.selector.textquote.AnnotationTextQuoteSelector;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.digirati.elucidate.common.infrastructure.util.ResultSetUtils;
+import com.digirati.elucidate.model.annotation.selector.textquote.AnnotationTextQuoteSelector;
 
 public class AnnotationTextQuoteSelectorRowMapper implements RowMapper<AnnotationTextQuoteSelector> {
 

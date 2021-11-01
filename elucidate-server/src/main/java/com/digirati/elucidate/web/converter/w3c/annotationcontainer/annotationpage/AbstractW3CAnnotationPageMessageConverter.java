@@ -1,11 +1,12 @@
 package com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationpage;
 
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractW3CAnnotationPageMessageConverter extends AbstractMessageConverter<W3CAnnotationPage> {
 

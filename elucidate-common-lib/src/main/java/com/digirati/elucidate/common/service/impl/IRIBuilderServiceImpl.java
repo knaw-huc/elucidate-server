@@ -537,6 +537,32 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     }
 
     @Override
+    public String buildOACollectionOverlapSearchIri(int lowerLevel, int upperLevel) {
+        return buildIri("oa/services/search/overlap", new HashMap<String, Object>() {
+            {
+                put(URLConstants.PARAM_LOWER_LEVEL, lowerLevel);
+                put(URLConstants.PARAM_UPPER_LEVEL, upperLevel);
+            }
+        });
+    }
+
+    @Override
+    public String buildOAPageOverlapSearchIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
+        return buildIri("oa/services/search/overlap", new HashMap<String, Object>() {
+            {
+                put(URLConstants.PARAM_LOWER_LEVEL, lowerLevel);
+                put(URLConstants.PARAM_UPPER_LEVEL, upperLevel);
+                put(URLConstants.PARAM_PAGE, page);
+                if (embeddedDescriptions) {
+                    put(URLConstants.PARAM_DESC, 1);
+                } else {
+                    put(URLConstants.PARAM_IRIS, 1);
+                }
+            }
+        });
+    }
+
+    @Override
     public String buildW3CCollectionTemporalSearchIri(List<String> levels, List<String> types, Date since) {
         return buildIri("w3c/services/search/temporal", new HashMap<String, Object>() {
             {

@@ -1,10 +1,11 @@
 package com.digirati.elucidate.web.converter.w3c.bulkupdate;
 
-import com.digirati.elucidate.model.batch.W3CBatchOperation;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+
+import com.digirati.elucidate.model.batch.W3CBatchOperation;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractW3CBatchOperationMessageConverter extends AbstractMessageConverter<W3CBatchOperation> {
 

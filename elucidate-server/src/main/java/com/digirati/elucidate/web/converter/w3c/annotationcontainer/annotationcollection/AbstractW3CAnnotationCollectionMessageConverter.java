@@ -1,12 +1,13 @@
 package com.digirati.elucidate.web.converter.w3c.annotationcontainer.annotationcollection;
 
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
-import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
+import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
+import com.digirati.elucidate.web.converter.AbstractMessageConverter;
 
 public abstract class AbstractW3CAnnotationCollectionMessageConverter extends AbstractMessageConverter<W3CAnnotationCollection> {
 

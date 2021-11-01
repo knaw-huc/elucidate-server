@@ -5,13 +5,14 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.SelectorConstants;
 import com.digirati.elucidate.infrastructure.util.SelectorUtils;
 import com.digirati.elucidate.model.annotation.selector.fragment.AnnotationFragmentSelector;
 import com.digirati.elucidate.model.annotation.selector.fragment.TFragmentSelector;
 import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSelector;
-import org.apache.commons.lang3.StringUtils;
 
 public class AnnotationInlineFragmentSelectorExtractor {
 

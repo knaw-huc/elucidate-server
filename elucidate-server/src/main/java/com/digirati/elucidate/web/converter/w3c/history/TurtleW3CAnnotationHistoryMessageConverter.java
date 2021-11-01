@@ -2,14 +2,15 @@ package com.digirati.elucidate.web.converter.w3c.history;
 
 import java.util.Map;
 
-import com.digirati.elucidate.common.service.IRIBuilderService;
-import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
-import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+
+import com.digirati.elucidate.common.service.IRIBuilderService;
+import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
+import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 
 @Component
 public class TurtleW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnotationHistoryMessageConverter {

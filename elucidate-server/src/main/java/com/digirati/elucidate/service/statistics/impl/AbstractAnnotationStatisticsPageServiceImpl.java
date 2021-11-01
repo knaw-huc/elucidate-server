@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.RDFConstants;
@@ -17,9 +21,6 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.statistics.AbstractStatisticsPage;
 import com.digirati.elucidate.repository.AnnotationStatisticsRepository;
 import com.digirati.elucidate.service.statistics.AbstractAnnotationStatisticsPageService;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends AbstractStatisticsPage> implements AbstractAnnotationStatisticsPageService<S> {
 
