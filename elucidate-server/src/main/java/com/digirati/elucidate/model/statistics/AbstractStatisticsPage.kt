@@ -1,10 +1,6 @@
-package com.digirati.elucidate.model.statistics;
+package com.digirati.elucidate.model.statistics
 
-import java.io.Serializable;
+import com.digirati.elucidate.common.model.annotation.AbstractObject
+import java.io.Serializable
 
-import com.digirati.elucidate.common.model.annotation.AbstractObject;
-
-@SuppressWarnings("serial")
-public abstract class AbstractStatisticsPage extends AbstractObject implements Serializable {
-
-}
+abstract class AbstractStatisticsPage : AbstractObject(), Serializable

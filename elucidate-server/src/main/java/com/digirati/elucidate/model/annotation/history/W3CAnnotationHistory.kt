@@ -1,8 +1,5 @@
-package com.digirati.elucidate.model.annotation.history;
+package com.digirati.elucidate.model.annotation.history
 
-import java.io.Serializable;
+import java.io.Serializable
 
-@SuppressWarnings("serial")
-public class W3CAnnotationHistory extends AbstractAnnotationHistory implements Serializable {
-
-}
+class W3CAnnotationHistory : AbstractAnnotationHistory(), Serializable

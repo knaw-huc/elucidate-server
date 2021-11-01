@@ -1,8 +1,5 @@
-package com.digirati.elucidate.model.batch;
+package com.digirati.elucidate.model.batch
 
-import java.io.Serializable;
+import java.io.Serializable
 
-@SuppressWarnings("serial")
-public class W3CBatchOperation extends AbstractBatchOperation implements Serializable {
-
-}
+class W3CBatchOperation : AbstractBatchOperation(), Serializable

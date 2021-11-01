@@ -1,28 +1,9 @@
-package com.digirati.elucidate.model.annotation.selector.textposition;
+package com.digirati.elucidate.model.annotation.selector.textposition
 
-import java.io.Serializable;
+import com.digirati.elucidate.model.annotation.selector.AbstractAnnotationSelector
+import java.io.Serializable
 
-import com.digirati.elucidate.model.annotation.selector.AbstractAnnotationSelector;
-
-@SuppressWarnings("serial")
-public class AnnotationTextPositionSelector extends AbstractAnnotationSelector implements Serializable {
-
-    private Integer start;
-    private Integer end;
-
-    public Integer getStart() {
-        return start;
-    }
-
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getEnd() {
-        return end;
-    }
-
-    public void setEnd(Integer end) {
-        this.end = end;
-    }
+class AnnotationTextPositionSelector : AbstractAnnotationSelector(), Serializable {
+    var start: Int? = null
+    var end: Int? = null
 }

@@ -1,17 +1,7 @@
-package com.digirati.elucidate.model;
+package com.digirati.elucidate.model
 
-import java.io.Serializable;
+import java.io.Serializable
 
-@SuppressWarnings("serial")
-public class ValidationError implements Serializable {
-
-    private String jsonError;
-
-    public String getJsonError() {
-        return jsonError;
-    }
-
-    public void setJsonError(String jsonError) {
-        this.jsonError = jsonError;
-    }
+class ValidationError : Serializable {
+    var jsonError: String? = null
 }

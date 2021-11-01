@@ -18,13 +18,13 @@ import org.mockito.Mockito.`when`
 import java.util.*
 
 abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : AbstractAnnotationCollection> :
-        AbstractTest() {
+    AbstractTest() {
     private var annotationStoreRepository: AnnotationStoreRepository? = null
     private var annotationService: AbstractAnnotationService<A>? = null
 
     protected abstract fun createAnnotationService(
-            iriBuilderService: IRIBuilderService?,
-            annotationStoreRepository: AnnotationStoreRepository?
+        iriBuilderService: IRIBuilderService?,
+        annotationStoreRepository: AnnotationStoreRepository?
     ): AbstractAnnotationService<A>
 
     protected abstract fun validateConversionToAnnotation(w3cAnnotation: W3CAnnotation, targetAnnotation: A)
@@ -43,15 +43,15 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val collectionId = w3cAnnotation.collectionId
         val annotationId = w3cAnnotation.annotationId
         `when`(
-                annotationStoreRepository!!.getAnnotationByCollectionIdAndAnnotationId(
-                        collectionId,
-                        annotationId
-                )
+            annotationStoreRepository!!.getAnnotationByCollectionIdAndAnnotationId(
+                collectionId,
+                annotationId
+            )
         ).thenReturn(w3cAnnotation)
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(serviceResponse.status, `is`(equalTo(ServiceResponse.Status.OK)))
-        validateConversionToAnnotation(w3cAnnotation, serviceResponse.obj)
+        validateConversionToAnnotation(w3cAnnotation, serviceResponse.obj!!)
     }
 
     @Test
@@ -60,16 +60,16 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val collectionId = w3cAnnotation.collectionId
         val annotationId = w3cAnnotation.annotationId
         `when`(
-                annotationStoreRepository!!.getAnnotationByCollectionIdAndAnnotationId(
-                        collectionId,
-                        annotationId
-                )
+            annotationStoreRepository!!.getAnnotationByCollectionIdAndAnnotationId(
+                collectionId,
+                annotationId
+            )
         ).thenReturn(null)
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(
-                serviceResponse.status,
-                `is`(equalTo(ServiceResponse.Status.NOT_FOUND))
+            serviceResponse.status,
+            `is`(equalTo(ServiceResponse.Status.NOT_FOUND))
         )
         assertThat(serviceResponse.obj, `is`(nullValue()))
     }
@@ -81,16 +81,16 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val annotationId = w3cAnnotation.annotationId
         `when`(annotationStoreRepository!!.countDeletedAnnotations(collectionId, annotationId)).thenReturn(1)
         `when`(
-                annotationStoreRepository!!.getAnnotationByCollectionIdAndAnnotationId(
-                        collectionId,
-                        annotationId
-                )
+            annotationStoreRepository!!.getAnnotationByCollectionIdAndAnnotationId(
+                collectionId,
+                annotationId
+            )
         ).thenReturn(null)
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(
-                serviceResponse.status,
-                `is`(equalTo(ServiceResponse.Status.DELETED))
+            serviceResponse.status,
+            `is`(equalTo(ServiceResponse.Status.DELETED))
         )
         assertThat(serviceResponse.obj, `is`(nullValue()))
     }
@@ -100,11 +100,11 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val collectionId = generateRandomId()
         val w3cAnnotations = generateRandomW3CAnnotations(10)
         `when`(annotationStoreRepository!!.getAnnotationsByCollectionId(collectionId))
-                .thenReturn(w3cAnnotations)
+            .thenReturn(w3cAnnotations)
         val serviceResponse = annotationService!!.getAnnotations(collectionId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(serviceResponse.status, `is`(equalTo(ServiceResponse.Status.OK)))
-        val targetAnnotations = serviceResponse.obj
+        val targetAnnotations = serviceResponse.obj!!
         assertThat(targetAnnotations, `is`(not(nullValue())))
         assertThat(targetAnnotations.size, `is`(equalTo(10)))
         for (i in 0..9) {
@@ -123,12 +123,12 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         w3cAnnotation.isDeleted = false
         w3cAnnotation.jsonMap = annotation.jsonMap
         `when`(
-                annotationStoreRepository!!.createAnnotation(
-                        ArgumentMatchers.eq(collectionId),
-                        ArgumentMatchers.eq("test-annotation-id"),
-                        ArgumentMatchers.anyString(),
-                        ArgumentMatchers.any()
-                )
+            annotationStoreRepository!!.createAnnotation(
+                ArgumentMatchers.eq(collectionId),
+                ArgumentMatchers.eq("test-annotation-id"),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any()
+            )
         ).thenReturn(w3cAnnotation)
         val serviceResponse = annotationService!!.createAnnotation(collectionId, null, annotation)
         assertThat(serviceResponse, `is`(not(nullValue())))
@@ -148,16 +148,16 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         w3cAnnotation.collectionId = collectionId
         w3cAnnotation.createdDateTime = Date()
         w3cAnnotation.isDeleted = false
-        val jsonMap = annotation.jsonMap
+        val jsonMap = annotation.jsonMap!!.toMutableMap()
         jsonMap["custom_field"] = "custom_value"
         w3cAnnotation.jsonMap = jsonMap
         `when`(
-                annotationStoreRepository!!.createAnnotation(
-                        ArgumentMatchers.eq(collectionId),
-                        ArgumentMatchers.eq("test-annotation-id"),
-                        ArgumentMatchers.anyString(),
-                        ArgumentMatchers.any()
-                )
+            annotationStoreRepository!!.createAnnotation(
+                ArgumentMatchers.eq(collectionId),
+                ArgumentMatchers.eq("test-annotation-id"),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any()
+            )
         ).thenReturn(w3cAnnotation)
         val serviceResponse = annotationService!!.createAnnotation(collectionId, null, annotation)
         assertThat(serviceResponse, `is`(not(nullValue())))
@@ -167,7 +167,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         assertThat(targetAnnotation!!.collectionId, `is`(equalTo(collectionId)))
         assertThat(targetAnnotation.annotationId, `is`(not(nullValue())))
         assertThat(targetAnnotation.jsonMap, hasKey("custom_field"))
-        assertThat(targetAnnotation.jsonMap["custom_field"], `is`("custom_value"))
+        assertThat(targetAnnotation.jsonMap!!["custom_field"], `is`("custom_value"))
     }
 
     //    public void testUpdateAnnotation() {

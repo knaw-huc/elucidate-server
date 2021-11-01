@@ -1,8 +1,5 @@
-package com.digirati.elucidate.model.statistics;
+package com.digirati.elucidate.model.statistics
 
-import java.io.Serializable;
+import java.io.Serializable
 
-@SuppressWarnings("serial")
-public class W3CStatisticsPage extends AbstractStatisticsPage implements Serializable {
-
-}
+class W3CStatisticsPage : AbstractStatisticsPage(), Serializable
