@@ -50,8 +50,8 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         ).thenReturn(w3cAnnotation)
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
-        assertThat(serviceResponse.status, `is`(equalTo(ServiceResponse.Status.OK)))
-        validateConversionToAnnotation(w3cAnnotation, serviceResponse.obj!!)
+        assertThat(serviceResponse!!.status, `is`(equalTo(ServiceResponse.Status.OK)))
+        validateConversionToAnnotation(w3cAnnotation, serviceResponse!!.obj!!)
     }
 
     @Test
@@ -68,7 +68,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(
-            serviceResponse.status,
+            serviceResponse!!.status,
             `is`(equalTo(ServiceResponse.Status.NOT_FOUND))
         )
         assertThat(serviceResponse.obj, `is`(nullValue()))
@@ -89,7 +89,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(
-            serviceResponse.status,
+            serviceResponse!!.status,
             `is`(equalTo(ServiceResponse.Status.DELETED))
         )
         assertThat(serviceResponse.obj, `is`(nullValue()))
@@ -132,7 +132,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         ).thenReturn(w3cAnnotation)
         val serviceResponse = annotationService!!.createAnnotation(collectionId, null, annotation)
         assertThat(serviceResponse, `is`(not(nullValue())))
-        assertThat(serviceResponse.status, `is`(equalTo(ServiceResponse.Status.OK)))
+        assertThat(serviceResponse!!.status, `is`(equalTo(ServiceResponse.Status.OK)))
         val targetAnnotation = serviceResponse.obj
         assertThat(targetAnnotation, `is`(not(nullValue())))
         assertThat(targetAnnotation!!.collectionId, `is`(equalTo(collectionId)))
@@ -161,7 +161,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         ).thenReturn(w3cAnnotation)
         val serviceResponse = annotationService!!.createAnnotation(collectionId, null, annotation)
         assertThat(serviceResponse, `is`(not(nullValue())))
-        assertThat(serviceResponse.status, `is`(equalTo(ServiceResponse.Status.OK)))
+        assertThat(serviceResponse!!.status, `is`(equalTo(ServiceResponse.Status.OK)))
         val targetAnnotation = serviceResponse.obj
         assertThat(targetAnnotation, `is`(not(nullValue())))
         assertThat(targetAnnotation!!.collectionId, `is`(equalTo(collectionId)))
