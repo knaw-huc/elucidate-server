@@ -10,5 +10,4 @@ object W3CToOAAnnotationCollectionConverter : AbstractConverter(
     fieldMappings = FIELD_MAPPINGS,
     typeMappings = TYPE_MAPPINGS,
     nodeConverterMappings = NODE_CONVERTER_MAPPINGS
-) {
-}
+)

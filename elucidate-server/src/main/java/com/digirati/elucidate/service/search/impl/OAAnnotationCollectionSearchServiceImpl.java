@@ -44,7 +44,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
         Map<String, Object> w3cAnnotationCollectionMap = w3cAnnotationCollection.getJsonMap();
         JsonNode w3cAnnotationCollectionNode = new ObjectMapper().convertValue(w3cAnnotationCollectionMap, JsonNode.class);
 
-        JsonNode oaAnnotationCollectionNode = new W3CToOAAnnotationCollectionConverter().convert(w3cAnnotationCollectionNode);
+        JsonNode oaAnnotationCollectionNode = W3CToOAAnnotationCollectionConverter.INSTANCE.convert(w3cAnnotationCollectionNode);
         Map<String, Object> oaAnnotationCollectionMap = new ObjectMapper().convertValue(oaAnnotationCollectionNode, Map.class);
 
         OAAnnotationCollection oaAnnotationCollection = new OAAnnotationCollection();

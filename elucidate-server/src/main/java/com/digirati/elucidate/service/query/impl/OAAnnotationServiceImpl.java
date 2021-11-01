@@ -26,7 +26,10 @@ public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnn
     private final IRIBuilderService iriBuilderService;
 
     @Autowired
-    public OAAnnotationServiceImpl(UserSecurityDetailsContext securityContext, AnnotationStoreRepository annotationStoreRepository, IRIBuilderService iriBuilderService, @Qualifier("annotationIdGenerator") IDGenerator idGenerator) {
+    public OAAnnotationServiceImpl(UserSecurityDetailsContext securityContext,
+                                   AnnotationStoreRepository annotationStoreRepository,
+                                   IRIBuilderService iriBuilderService,
+                                   @Qualifier("annotationIdGenerator") IDGenerator idGenerator) {
         super(securityContext, annotationStoreRepository, idGenerator);
         this.iriBuilderService = iriBuilderService;
     }
@@ -38,7 +41,7 @@ public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnn
         Map<String, Object> w3cAnnotationMap = w3cAnnotation.getJsonMap();
         JsonNode w3cAnnotationNode = new ObjectMapper().convertValue(w3cAnnotationMap, JsonNode.class);
 
-        JsonNode oaAnnotationNode = new W3CToOAAnnotationConverter().convert(w3cAnnotationNode);
+        JsonNode oaAnnotationNode = W3CToOAAnnotationConverter.INSTANCE.convert(w3cAnnotationNode);
         Map<String, Object> oaAnnotationMap = new ObjectMapper().convertValue(oaAnnotationNode, Map.class);
 
         OAAnnotation oaAnnotation = new OAAnnotation();
@@ -60,7 +63,7 @@ public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnn
         Map<String, Object> oaAnnotationMap = oaAnnotation.getJsonMap();
         JsonNode oaAnnotationNode = new ObjectMapper().convertValue(oaAnnotationMap, JsonNode.class);
 
-        JsonNode w3cAnnotationNode = new OAToW3CAnnotationConverter().convert(oaAnnotationNode);
+        JsonNode w3cAnnotationNode = OAToW3CAnnotationConverter.INSTANCE.convert(oaAnnotationNode);
         Map<String, Object> w3cAnnotationMap = new ObjectMapper().convertValue(w3cAnnotationNode, Map.class);
 
         W3CAnnotation w3cAnnotation = new W3CAnnotation();

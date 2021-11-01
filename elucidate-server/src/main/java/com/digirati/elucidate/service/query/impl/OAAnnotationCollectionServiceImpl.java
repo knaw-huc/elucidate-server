@@ -48,7 +48,7 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
         Map<String, Object> w3cAnnotationCollectionMap = w3cAnnotationCollection.getJsonMap();
         JsonNode w3cAnnotationCollectionNode = new ObjectMapper().convertValue(w3cAnnotationCollectionMap, JsonNode.class);
 
-        JsonNode oaAnnotationCollectionNode = new W3CToOAAnnotationCollectionConverter().convert(w3cAnnotationCollectionNode);
+        JsonNode oaAnnotationCollectionNode = W3CToOAAnnotationCollectionConverter.INSTANCE.convert(w3cAnnotationCollectionNode);
         Map<String, Object> oaAnnotationCollectionMap = new ObjectMapper().convertValue(oaAnnotationCollectionNode, Map.class);
 
         OAAnnotationCollection oaAnnotationCollection = new OAAnnotationCollection();
@@ -69,7 +69,7 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
         Map<String, Object> oaAnnotationCollectionMap = oaAnnotationCollection.getJsonMap();
         JsonNode oaAnnotationCollectionNode = new ObjectMapper().convertValue(oaAnnotationCollectionMap, JsonNode.class);
 
-        JsonNode w3cAnnotationCollectionNode = new OAToW3CAnnotationCollectionConverter().convert(oaAnnotationCollectionNode);
+        JsonNode w3cAnnotationCollectionNode = OAToW3CAnnotationCollectionConverter.INSTANCE.convert(oaAnnotationCollectionNode);
         Map<String, Object> w3cAnnotationCollectionMap = new ObjectMapper().convertValue(w3cAnnotationCollectionNode, Map.class);
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();

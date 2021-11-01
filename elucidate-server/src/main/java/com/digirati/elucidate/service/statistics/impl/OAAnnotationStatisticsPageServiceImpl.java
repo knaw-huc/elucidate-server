@@ -33,7 +33,7 @@ public class OAAnnotationStatisticsPageServiceImpl extends AbstractAnnotationSta
 
         JsonNode w3cAnnotationPageNode = new ObjectMapper().convertValue(w3cAnnotationPageMap, JsonNode.class);
 
-        JsonNode oaAnnotationPageNode = new OAToW3CAnnotationPageConverter().convert(w3cAnnotationPageNode);
+        JsonNode oaAnnotationPageNode = OAToW3CAnnotationPageConverter.INSTANCE.convert(w3cAnnotationPageNode);
         Map<String, Object> oaAnnotationPageMap = new ObjectMapper().convertValue(oaAnnotationPageNode, Map.class);
 
         OAStatisticsPage oaStatisticsPage = new OAStatisticsPage();

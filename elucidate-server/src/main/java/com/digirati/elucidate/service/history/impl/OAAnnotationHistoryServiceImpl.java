@@ -35,7 +35,7 @@ public class OAAnnotationHistoryServiceImpl extends AbstractAnnotationHistorySer
         Map<String, Object> w3cAnnotationHistoryMap = w3CAnnotationHistory.getJsonMap();
         JsonNode w3cAnnotationHistoryNode = new ObjectMapper().convertValue(w3cAnnotationHistoryMap, JsonNode.class);
 
-        JsonNode oaAnnotationHistoryNode = new W3CToOAAnnotationCollectionConverter().convert(w3cAnnotationHistoryNode);
+        JsonNode oaAnnotationHistoryNode = W3CToOAAnnotationCollectionConverter.INSTANCE.convert(w3cAnnotationHistoryNode);
         Map<String, Object> oaAnnotationHistoryMap = new ObjectMapper().convertValue(oaAnnotationHistoryNode, Map.class);
 
         OAAnnotationHistory oaAnnotationHistory = new OAAnnotationHistory();

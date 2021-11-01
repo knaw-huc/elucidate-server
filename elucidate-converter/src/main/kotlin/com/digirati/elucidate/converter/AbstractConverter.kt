@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.*
 import org.apache.commons.lang3.StringUtils
 
-abstract class AbstractConverter protected constructor(
+abstract class AbstractConverter(
     private val fieldMappings: Map<String, String>,
     private val typeMappings: Map<String, String>,
     private val nodeConverterMappings: Map<String, JSONNodeConverter>
