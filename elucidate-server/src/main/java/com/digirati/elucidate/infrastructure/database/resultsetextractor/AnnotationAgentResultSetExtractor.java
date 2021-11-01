@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -17,7 +18,7 @@ import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
 public class AnnotationAgentResultSetExtractor implements ResultSetExtractor<List<AnnotationAgent>> {
 
     @Override
-    public List<AnnotationAgent> extractData(ResultSet rs) throws SQLException, DataAccessException {
+    public List<AnnotationAgent> extractData(@NotNull ResultSet rs) throws SQLException, DataAccessException {
 
         Map<Integer, AnnotationAgent> annotationAgents = new HashMap<>();
 

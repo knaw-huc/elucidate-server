@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller.security;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,14 @@ public class SecurityGroupController {
         this.securityGroupService = securityGroupService;
     }
 
+    @NotNull
     @PostMapping
-    public ResponseEntity<SecurityGroup> createGroup(@RequestBody SecurityGroup group) {
+    public ResponseEntity<SecurityGroup> createGroup(@NotNull @RequestBody SecurityGroup group) {
         ServiceResponse<SecurityGroup> response = securityGroupService.createGroup(group.getLabel());
         return ResponseEntity.status(HttpStatus.CREATED).body(response.getObj());
     }
 
+    @NotNull
     @GetMapping(GROUP_REQUEST_PATH)
     public ResponseEntity<SecurityGroup> getGroup(@PathVariable(VARIABLE_GROUP_ID) String groupId) {
         ServiceResponse<SecurityGroup> response = securityGroupService.getGroup(groupId);

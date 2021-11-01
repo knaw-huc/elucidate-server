@@ -21,7 +21,7 @@ public abstract class AbstractOAAnnotationCollectionMessageConverter extends Abs
     }
 
     @Override
-    protected void decorateHeaders(OAAnnotationCollection oaAnnotationCollection, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(@NotNull OAAnnotationCollection oaAnnotationCollection, @NotNull HttpOutputMessage outputMessage) {
         outputMessage.getHeaders().add(HttpHeaders.LINK, "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\"");
         outputMessage.getHeaders().add(HttpHeaders.LINK, "<http://www.w3.org/TR/annotation-protocol/>; rel=\"http://www.w3.org/ns/ldp#constrainedBy\"");
         outputMessage.getHeaders().add(HttpHeaders.ALLOW, "POST,GET,OPTIONS,HEAD");

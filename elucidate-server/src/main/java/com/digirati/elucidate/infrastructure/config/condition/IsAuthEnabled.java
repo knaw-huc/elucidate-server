@@ -19,7 +19,7 @@ public class IsAuthEnabled implements Condition {
     public static final String AUTH_ENABLED_KEY = "auth.enabled";
 
     @Override
-    public boolean matches(ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
+    public boolean matches(@NotNull ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
         Environment env = conditionContext.getEnvironment();
         return env.getProperty(AUTH_ENABLED_KEY, Boolean.class);
     }

@@ -20,7 +20,7 @@ public abstract class AbstractW3CAnnotationPageMessageConverter extends Abstract
     }
 
     @Override
-    protected void decorateHeaders(W3CAnnotationPage w3cAnnotationPage, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(W3CAnnotationPage w3cAnnotationPage, @NotNull HttpOutputMessage outputMessage) {
         outputMessage.getHeaders().add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
         outputMessage.getHeaders().add(HttpHeaders.VARY, "Accept");
         outputMessage.getHeaders().add("Accept-Post", "application/ld+json; profile=\"http://www.w3.org/ns/anno.jsonld\", text/turtle");

@@ -29,18 +29,18 @@ public abstract class AbstractOAAnnotationHistoryMessageConverter extends Abstra
     }
 
     @Override
-    protected void decorateHeaders(OAAnnotationHistory oaAnnotationHistory, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(@NotNull OAAnnotationHistory oaAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
         decorateMementoDatetimeHeader(oaAnnotationHistory, outputMessage);
         decorateNextVersionHeader(oaAnnotationHistory, outputMessage);
         decoratePreviousVersionHeader(oaAnnotationHistory, outputMessage);
     }
 
-    private void decorateMementoDatetimeHeader(OAAnnotationHistory oaAnnotationHistory, HttpOutputMessage outputMessage) {
+    private void decorateMementoDatetimeHeader(@NotNull OAAnnotationHistory oaAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
         String dateStr = MEMENTO_DATE_FORMAT.format(oaAnnotationHistory.getCreatedDateTime());
         outputMessage.getHeaders().add("Memento-Datetime", dateStr);
     }
 
-    private void decorateNextVersionHeader(OAAnnotationHistory oaAnnotationHistory, HttpOutputMessage outputMessage) {
+    private void decorateNextVersionHeader(@NotNull OAAnnotationHistory oaAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = oaAnnotationHistory.getCollectionId();
         String annotationId = oaAnnotationHistory.getAnnotationId();
@@ -57,7 +57,7 @@ public abstract class AbstractOAAnnotationHistoryMessageConverter extends Abstra
         }
     }
 
-    private void decoratePreviousVersionHeader(OAAnnotationHistory oaAnnotationHistory, HttpOutputMessage outputMessage) {
+    private void decoratePreviousVersionHeader(@NotNull OAAnnotationHistory oaAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = oaAnnotationHistory.getCollectionId();
         String annotationId = oaAnnotationHistory.getAnnotationId();

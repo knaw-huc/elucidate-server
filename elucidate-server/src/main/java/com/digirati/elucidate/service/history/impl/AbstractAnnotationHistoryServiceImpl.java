@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.github.jsonldjava.utils.JsonUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
@@ -31,8 +33,9 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
 
     protected abstract String buildAnnotationIri(String collectionId, String annotationId);
 
+    @NotNull
     @Override
-    public ServiceResponse<H> recordAnnotationHistory(A annotation) {
+    public ServiceResponse<H> recordAnnotationHistory(@NotNull A annotation) {
 
         int annotationPK = annotation.getPk();
         String jsonStr = convertJsonMapToString(annotation);
@@ -45,8 +48,9 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
         return new ServiceResponse<>(Status.OK, annotationHistory);
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<List<H>> deleteAnnotationHistory(A annotation) {
+    public ServiceResponse<List<H>> deleteAnnotationHistory(@NotNull A annotation) {
 
         List<W3CAnnotationHistory> w3cAnnotationHistories = annotationHistoryRepository.deleteAnnotationHistory(annotation.getPk());
         if (w3cAnnotationHistories == null || w3cAnnotationHistories.isEmpty()) {
@@ -61,37 +65,43 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
         return new ServiceResponse<>(Status.OK, annotationHistories);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<H> getVersionedAnnotation(String collectionId, String annotationId, int version) {
         W3CAnnotationHistory w3cAnnotationHistory = annotationHistoryRepository.getAnnotationHistory(collectionId, annotationId, version);
         return processAnnotationHistoryResponse(w3cAnnotationHistory);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<H> getLatestAnnotationVersion(String collectionId, String annotationId) {
         W3CAnnotationHistory w3cAnnotationHistory = annotationHistoryRepository.getLatestAnnotationHistory(collectionId, annotationId);
         return processAnnotationHistoryResponse(w3cAnnotationHistory);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<H> getPenultimateAnnotationVersion(String collectionId, String annotationId) {
         W3CAnnotationHistory w3cAnnotationHistory = annotationHistoryRepository.getPenultimateAnnotationHistory(collectionId, annotationId);
         return processAnnotationHistoryResponse(w3cAnnotationHistory);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<H> getNextAnnotationVersion(String collectionId, String annotationId, int version) {
         W3CAnnotationHistory w3cAnnotationHistory = annotationHistoryRepository.getNextAnnotationHistory(collectionId, annotationId, version);
         return processAnnotationHistoryResponse(w3cAnnotationHistory);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<H> getPreviousAnnotationVersion(String collectionId, String annotationId, int version) {
         W3CAnnotationHistory w3cAnnotationHistory = annotationHistoryRepository.getPreviousAnnotationHistory(collectionId, annotationId, version);
         return processAnnotationHistoryResponse(w3cAnnotationHistory);
     }
 
-    private ServiceResponse<H> processAnnotationHistoryResponse(W3CAnnotationHistory w3cAnnotationHistory) {
+    @Nullable
+    private ServiceResponse<H> processAnnotationHistoryResponse(@Nullable W3CAnnotationHistory w3cAnnotationHistory) {
 
         if (w3cAnnotationHistory == null) {
             return new ServiceResponse<>(Status.NOT_FOUND, null);
@@ -102,7 +112,7 @@ public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnn
         return new ServiceResponse<>(Status.OK, annotationHistory);
     }
 
-    private String convertJsonMapToString(A annotation) {
+    private String convertJsonMapToString(@NotNull A annotation) {
         Map<String, Object> jsonMap = annotation.getJsonMap();
         try {
             return JsonUtils.toPrettyString(jsonMap);

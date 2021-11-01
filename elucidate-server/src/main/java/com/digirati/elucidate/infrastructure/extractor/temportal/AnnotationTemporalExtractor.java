@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.format.ISODateTimeFormat;
 
 import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants;
@@ -18,7 +20,8 @@ public class AnnotationTemporalExtractor {
 
     private static final Logger LOGGER = Logger.getLogger(AnnotationTemporalExtractor.class);
 
-    public List<AnnotationTemporal> extractTemporals(Map<String, Object> jsonMap) {
+    @NotNull
+    public List<AnnotationTemporal> extractTemporals(@NotNull Map<String, Object> jsonMap) {
 
         List<AnnotationTemporal> annotationTemporals = new ArrayList<>();
 
@@ -49,7 +52,8 @@ public class AnnotationTemporalExtractor {
         return annotationTemporals;
     }
 
-    private AnnotationTemporal createAnnotationTemporal(String type, Map<String, Object> jsonMap) {
+    @Nullable
+    private AnnotationTemporal createAnnotationTemporal(String type, @NotNull Map<String, Object> jsonMap) {
 
         Date value = extractDate(jsonMap);
         if (value == null) {
@@ -63,7 +67,8 @@ public class AnnotationTemporalExtractor {
         return annotationTemporal;
     }
 
-    private Date extractDate(Map<String, Object> jsonMap) {
+    @Nullable
+    private Date extractDate(@NotNull Map<String, Object> jsonMap) {
 
         String type = (String) jsonMap.get(JSONLDConstants.ATTRIBUTE_TYPE);
         if (!StringUtils.equalsIgnoreCase(type, XMLSchemaConstants.URI_DATE_TIME)) {

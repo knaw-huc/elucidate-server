@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -19,16 +21,17 @@ import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
 @Component
 public class JSONLDW3CStatisticsPageMessageConverter extends AbstractW3CStatisticsPageMessageConverter {
 
+    @NotNull
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDW3CStatisticsPageMessageConverter(@Value("${statistics.page.w3c.contexts}") String[] defaultContexts) {
+    public JSONLDW3CStatisticsPageMessageConverter(@NotNull @Value("${statistics.page.w3c.contexts}") String[] defaultContexts) {
         super(APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }
 
     @Override
-    protected boolean canRead(MediaType mediaType) {
+    protected boolean canRead(@Nullable MediaType mediaType) {
         if (mediaType == null) {
             return true;
         }
@@ -41,7 +44,7 @@ public class JSONLDW3CStatisticsPageMessageConverter extends AbstractW3CStatisti
     }
 
     @Override
-    protected boolean canWrite(MediaType mediaType) {
+    protected boolean canWrite(@Nullable MediaType mediaType) {
         if (mediaType == null || MediaType.ALL.equals(mediaType)) {
             return true;
         }
@@ -55,7 +58,7 @@ public class JSONLDW3CStatisticsPageMessageConverter extends AbstractW3CStatisti
 
     @Override
     @SuppressWarnings("unchecked")
-    protected String getStringRepresentation(W3CStatisticsPage w3cStatisticsPage, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull W3CStatisticsPage w3cStatisticsPage, @NotNull MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = w3cStatisticsPage.getJsonMap();
 
         JSONLDProfile jsonLdProfile = getJsonLdProfile(contentType, defaultContexts);
@@ -76,6 +79,7 @@ public class JSONLDW3CStatisticsPageMessageConverter extends AbstractW3CStatisti
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     protected W3CStatisticsPage getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, W3CStatisticsPage.class));

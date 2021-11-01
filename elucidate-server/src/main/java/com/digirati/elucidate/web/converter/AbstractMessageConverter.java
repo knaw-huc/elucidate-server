@@ -28,6 +28,7 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -56,10 +57,12 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
 
     protected abstract String getStringRepresentation(T obj, MediaType contentType) throws Exception;
 
+    @NotNull
     protected abstract T getObjectRepresentation(String str, MediaType contentType) throws Exception;
 
+    @NotNull
     @SuppressWarnings("serial")
-    protected JSONLDProfile getJsonLdProfile(MediaType contentType, String... defaultContexts) {
+    protected JSONLDProfile getJsonLdProfile(@NotNull MediaType contentType, String... defaultContexts) {
 
         JSONLDProfile jsonLdProfile = new JSONLDProfile();
 
@@ -90,6 +93,7 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
     }
 
 
+    @NotNull
     @SuppressWarnings("unchecked")
     protected Map<String, Object> reorderJsonAttributes(Map<String, Object> jsonMap) {
 
@@ -105,7 +109,8 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
         return orderedJsonMap;
     }
 
-    protected String validate(String jsonStr, JsonNode validationSchema) throws ProcessingException, IOException {
+    @Nullable
+    protected String validate(@NotNull String jsonStr, @NotNull JsonNode validationSchema) throws ProcessingException, IOException {
 
         JsonNode json = JsonLoader.fromString(jsonStr);
 
@@ -166,13 +171,13 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
         }
     }
 
-    private void stream(String str, HttpOutputMessage outputMessage) throws IOException {
+    private void stream(@NotNull String str, @NotNull HttpOutputMessage outputMessage) throws IOException {
         InputStream inputStream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
         OutputStream messageOutputStream = outputMessage.getBody();
         IOUtils.copy(inputStream, messageOutputStream);
     }
 
-    private String consume(HttpInputMessage inputMessage) throws IOException {
+    private String consume(@NotNull HttpInputMessage inputMessage) throws IOException {
         InputStream messageInputStream = inputMessage.getBody();
         return IOUtils.toString(messageInputStream, Charset.defaultCharset());
     }

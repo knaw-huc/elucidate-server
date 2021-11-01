@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
@@ -34,8 +35,9 @@ public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends Abstrac
         this.annotationSearchService = annotationSearchService;
     }
 
+    @NotNull
     @Override
-    public ServiceResponse<B> processBatchUpdate(B batchOperation) {
+    public ServiceResponse<B> processBatchUpdate(@NotNull B batchOperation) {
 
         Map<String, Object> jsonMap = batchOperation.getJsonMap();
 
@@ -53,7 +55,7 @@ public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings("unchecked")
-    private void processBatchUpdates(Map<String, Object> batchJsonMap, String jsonKey, AnnotationBatchSearch<A> annotationBatchSearch) {
+    private void processBatchUpdates(@NotNull Map<String, Object> batchJsonMap, String jsonKey, @NotNull AnnotationBatchSearch<A> annotationBatchSearch) {
 
         List<Map<String, Object>> jsonMaps = (List<Map<String, Object>>) batchJsonMap.get(jsonKey);
         if (jsonMaps != null && !jsonMaps.isEmpty()) {
@@ -81,7 +83,7 @@ public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings({"unchecked", "serial"})
-    private void processBatchUpdate(Map<String, Object> jsonMap, String jsonSelector, AnnotationBatchSearch<A> annotationBatchSearch, String searchField, String searchValue) {
+    private void processBatchUpdate(@NotNull Map<String, Object> jsonMap, String jsonSelector, @NotNull AnnotationBatchSearch<A> annotationBatchSearch, String searchField, String searchValue) {
 
         List<Map<String, Object>> isReplacedBys = (List<Map<String, Object>>) jsonMap.get(OAConstants.URI_IS_REPLACED_BY);
         if (isReplacedBys != null && isReplacedBys.size() == 1) {
@@ -108,7 +110,7 @@ public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings("unchecked")
-    private int replaceAnnotationIds(List<A> annotations, String jsonSelector, String oldId, String newId) {
+    private int replaceAnnotationIds(@NotNull List<A> annotations, String jsonSelector, String oldId, String newId) {
 
         int total = annotations.size();
         int processed = 0;
@@ -144,7 +146,7 @@ public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings("unchecked")
-    private int replaceAnnotationSourceIris(List<A> annotations, String jsonSelector, String oldSourceIri, String newSourceIri) {
+    private int replaceAnnotationSourceIris(@NotNull List<A> annotations, String jsonSelector, String oldSourceIri, String newSourceIri) {
 
         int total = annotations.size();
         int processed = 0;
@@ -187,7 +189,7 @@ public abstract class AbstractAnnotationBatchUpdateServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings("serial")
-    private void insertTotal(Map<String, Object> jsonMap, int total) {
+    private void insertTotal(@NotNull Map<String, Object> jsonMap, int total) {
 
         jsonMap.put(ActivityStreamConstants.URI_TOTAL_ITEMS, new ArrayList<Map<String, Object>>() {
             {

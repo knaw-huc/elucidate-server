@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,8 +43,9 @@ public abstract class AbstractAnnotationContainerReadController<A extends Abstra
         this.annotationCollectionService = annotationCollectionService;
     }
 
+    @NotNull
     @RequestMapping(value = REQUEST_PATH, method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ResponseEntity<?> get(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page, @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris, @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions, HttpServletRequest request) {
+    public ResponseEntity<?> get(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page, @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris, @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions, @NotNull HttpServletRequest request) {
         if (page == null) {
             return processCollectionRequest(collectionId, request);
         } else {
@@ -50,7 +53,8 @@ public abstract class AbstractAnnotationContainerReadController<A extends Abstra
         }
     }
 
-    private ResponseEntity<C> processCollectionRequest(String collectionId, HttpServletRequest request) {
+    @NotNull
+    private ResponseEntity<C> processCollectionRequest(String collectionId, @NotNull HttpServletRequest request) {
 
         ClientPreference clientPref = determineClientPreference(request);
         if (clientPref == null) {
@@ -71,6 +75,7 @@ public abstract class AbstractAnnotationContainerReadController<A extends Abstra
         return ResponseEntity.ok(serviceResponse.getObj());
     }
 
+    @NotNull
     private ResponseEntity<P> processPageRequest(String collectionId, int page, boolean iris, boolean descs) {
 
         if (iris && descs) {
@@ -101,7 +106,8 @@ public abstract class AbstractAnnotationContainerReadController<A extends Abstra
         return ResponseEntity.ok(annotationPageServiceResponse.getObj());
     }
 
-    private ClientPreference determineClientPreference(HttpServletRequest request) {
+    @Nullable
+    private ClientPreference determineClientPreference(@NotNull HttpServletRequest request) {
 
         String preferHeader = request.getHeader("Prefer");
 

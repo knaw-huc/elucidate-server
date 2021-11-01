@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.SelectorConstants;
@@ -16,8 +18,9 @@ import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSel
 
 public class AnnotationInlineFragmentSelectorExtractor {
 
+    @Nullable
     @SuppressWarnings("serial")
-    public AnnotationFragmentSelector extractAnnotationInlineFragmentSelector(Map<String, Object> jsonMap) {
+    public AnnotationFragmentSelector extractAnnotationInlineFragmentSelector(@NotNull Map<String, Object> jsonMap) {
 
         String iriStr = (String) jsonMap.get(JSONLDConstants.ATTRIBUTE_ID);
         if (StringUtils.isNotBlank(iriStr)) {

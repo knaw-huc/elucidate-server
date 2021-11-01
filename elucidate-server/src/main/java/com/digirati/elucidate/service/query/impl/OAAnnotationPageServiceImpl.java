@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class OAAnnotationPageServiceImpl extends AbstractAnnotationPageServiceIm
         this.iriBuilderService = iriBuilderService;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
     protected OAAnnotationPage convertToAnnotationPage(Map<String, Object> w3cAnnotationPageMap) {

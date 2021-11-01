@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +32,9 @@ public class AnnotationListenerAspect {
 
     private final ApplicationContext applicationContext;
     private final TaskExecutor taskExecutor;
+    @NotNull
     private final List<RegisteredListener> synchronousRegisteredListeners;
+    @NotNull
     private final List<RegisteredListener> asynchronousRegisteredListeners;
 
     @Autowired
@@ -43,7 +47,7 @@ public class AnnotationListenerAspect {
     }
 
     @SuppressWarnings("unchecked")
-    private void initialiseConfiguredListeners(List<String> configuredListeners) throws ClassNotFoundException {
+    private void initialiseConfiguredListeners(@Nullable List<String> configuredListeners) throws ClassNotFoundException {
 
         if (configuredListeners != null && !configuredListeners.isEmpty()) {
             for (String configuredListener : configuredListeners) {

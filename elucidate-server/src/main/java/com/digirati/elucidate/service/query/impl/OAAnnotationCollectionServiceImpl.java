@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,9 +42,10 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
         this.oaAnnotationPageService = oaAnnotationPageService;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected OAAnnotationCollection convertToAnnotationCollection(W3CAnnotationCollection w3cAnnotationCollection) {
+    protected OAAnnotationCollection convertToAnnotationCollection(@NotNull W3CAnnotationCollection w3cAnnotationCollection) {
 
         Map<String, Object> w3cAnnotationCollectionMap = w3cAnnotationCollection.getJsonMap();
         JsonNode w3cAnnotationCollectionNode = new ObjectMapper().convertValue(w3cAnnotationCollectionMap, JsonNode.class);
@@ -62,9 +64,10 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
         return oaAnnotationCollection;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected W3CAnnotationCollection convertFromAnnotationCollection(OAAnnotationCollection oaAnnotationCollection) {
+    protected W3CAnnotationCollection convertFromAnnotationCollection(@NotNull OAAnnotationCollection oaAnnotationCollection) {
 
         Map<String, Object> oaAnnotationCollectionMap = oaAnnotationCollection.getJsonMap();
         JsonNode oaAnnotationCollectionNode = new ObjectMapper().convertValue(oaAnnotationCollectionMap, JsonNode.class);
@@ -83,7 +86,7 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
     }
 
     @Override
-    protected ServiceResponse<OAAnnotationPage> buildFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String collectionId, ClientPreference clientPref) {
+    protected ServiceResponse<OAAnnotationPage> buildFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String collectionId, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return oaAnnotationPageService.buildAnnotationPage(oaAnnotations, collectionId, 0, false);
         } else {

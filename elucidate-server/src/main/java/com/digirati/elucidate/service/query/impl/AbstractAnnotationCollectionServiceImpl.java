@@ -8,6 +8,8 @@ import java.util.Map;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.ElucidateConstants;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
@@ -51,8 +53,9 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
 
     protected abstract String buildPageIri(String collectionId, int page, boolean embeddedDescriptions);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> getAnnotationCollection(String collectionId, List<A> annotations, ClientPreference clientPref) {
+    public ServiceResponse<C> getAnnotationCollection(String collectionId, @NotNull List<A> annotations, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = annotationCollectionStoreRepository.getAnnotationCollectionById(collectionId);
         if (w3cAnnotationCollection == null) {
@@ -67,6 +70,7 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
         return new AnnotationCollectionBuilder<A, P, C>(annotationCollectionConverter, annotationCollectionIriBuilder, annotationPageIriBuilder, firstAnnotationPageBuilder).buildAnnotationCollection(w3cAnnotationCollection, annotations, pageSize, clientPref);
     }
 
+    @Nullable
     @Override
     public ServiceResponse<C> createAnnotationCollection(String collectionId, C annotationCollection) {
 
@@ -99,7 +103,7 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
         return getAnnotationCollection(collectionId, Collections.emptyList(), ClientPreference.CONTAINED_DESCRIPTIONS);
     }
 
-    private boolean validateCollectionId(String collectionId) {
+    private boolean validateCollectionId(@NotNull String collectionId) {
         return StringUtils.isNotBlank(collectionId) && collectionId.length() <= ElucidateConstants.MAX_ID_SIZE;
     }
 }

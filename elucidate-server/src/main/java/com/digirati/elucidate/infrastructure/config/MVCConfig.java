@@ -2,6 +2,7 @@ package com.digirati.elucidate.infrastructure.config;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -112,13 +113,13 @@ public class MVCConfig implements WebMvcConfigurer {
     private SecurityUserReferenceCollectionConverter securityUserReferenceCollectionConverter;
 
     @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
+    public void configurePathMatch(@NotNull PathMatchConfigurer configurer) {
         configurer.setUseTrailingSlashMatch(false);
 //        configurer.setUseSuffixPatternMatch(false);
     }
 
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    public void configureMessageConverters(@NotNull List<HttpMessageConverter<?>> converters) {
         converters.add(jsonLdW3CAnnotationMessageConverter);
         converters.add(turtleW3CAnnotationMessageConverter);
         converters.add(jsonLdW3CAnnotationCollectionMessageConverter);
@@ -151,7 +152,7 @@ public class MVCConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(@NotNull CorsRegistry registry) {
         registry.addMapping("/w3c/*/")
                 .allowedOrigins(env.getRequiredProperty("annotation.w3c.collection.origins", String[].class))
                 .allowedMethods(env.getRequiredProperty("annotation.w3c.collection.methods", String[].class))

@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
 
 public abstract class AbstractTest {
 
+    @NotNull
     protected W3CAnnotation generateRandomW3CAnnotation() {
 
         W3CAnnotation w3cAnnotation = new W3CAnnotation();
@@ -27,6 +29,7 @@ public abstract class AbstractTest {
         return w3cAnnotation;
     }
 
+    @NotNull
     protected List<W3CAnnotation> generateRandomW3CAnnotations(int quantity) {
         List<W3CAnnotation> w3cAnnotations = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
@@ -35,6 +38,7 @@ public abstract class AbstractTest {
         return w3cAnnotations;
     }
 
+    @NotNull
     protected W3CAnnotationCollection generateRandomW3CAnnotationCollection() {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
@@ -47,14 +51,17 @@ public abstract class AbstractTest {
         return w3cAnnotationCollection;
     }
 
+    @NotNull
     protected String generateRandomId() {
         return RandomStringUtils.randomAlphanumeric(64);
     }
 
+    @NotNull
     protected String generateRandomCacheKey() {
         return RandomStringUtils.randomAlphanumeric(32);
     }
 
+    @NotNull
     protected Date generateRandomDate() {
         long beginTime = Timestamp.valueOf("2000-01-01 00:00:00").getTime();
         long endTime = Timestamp.valueOf("2016-12-31 23:59:59").getTime();
@@ -66,6 +73,7 @@ public abstract class AbstractTest {
         return Math.random() < 0.5;
     }
 
+    @NotNull
     @SuppressWarnings("serial")
     protected Map<String, Object> generateRandomJsonMap() {
         return new HashMap<String, Object>() {

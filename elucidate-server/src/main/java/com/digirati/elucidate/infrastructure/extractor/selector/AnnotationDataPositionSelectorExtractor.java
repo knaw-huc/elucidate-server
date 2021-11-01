@@ -3,20 +3,24 @@ package com.digirati.elucidate.infrastructure.extractor.selector;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
 import com.digirati.elucidate.model.annotation.selector.dataposition.AnnotationDataPositionSelector;
 
 public class AnnotationDataPositionSelectorExtractor extends AbstractAnnotationSelectorExtractor<AnnotationDataPositionSelector> {
 
+    @NotNull
     @Override
     protected String getSelectorType() {
         return OAConstants.URI_DATA_POSITION_SELECTOR;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected AnnotationDataPositionSelector buildSelector(Map<String, Object> jsonMap) {
+    protected AnnotationDataPositionSelector buildSelector(@NotNull Map<String, Object> jsonMap) {
 
         AnnotationDataPositionSelector annotationDataPositionSelector = new AnnotationDataPositionSelector();
 

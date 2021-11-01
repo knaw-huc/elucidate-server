@@ -60,6 +60,7 @@ public class AnnotationStatisticsRepositoryJDBCImpl extends AbstractRepositoryJD
 
     private static class CountRowMapper implements RowMapper<Pair<String, Integer>> {
 
+        @NotNull
         @Override
         public Pair<String, Integer> mapRow(@NotNull ResultSet rs, int rowNum) throws SQLException {
             return Pair.of(ResultSetUtils.getString(rs, "value"), ResultSetUtils.getInt(rs, "count"));

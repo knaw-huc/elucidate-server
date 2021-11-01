@@ -29,18 +29,18 @@ public abstract class AbstractW3CAnnotationHistoryMessageConverter extends Abstr
     }
 
     @Override
-    protected void decorateHeaders(W3CAnnotationHistory w3cAnnotationHistory, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(@NotNull W3CAnnotationHistory w3cAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
         decorateMementoDatetimeHeader(w3cAnnotationHistory, outputMessage);
         decorateNextVersionHeader(w3cAnnotationHistory, outputMessage);
         decoratePreviousVersionHeader(w3cAnnotationHistory, outputMessage);
     }
 
-    private void decorateMementoDatetimeHeader(W3CAnnotationHistory w3cAnnotationHistory, HttpOutputMessage outputMessage) {
+    private void decorateMementoDatetimeHeader(@NotNull W3CAnnotationHistory w3cAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
         String dateStr = MEMENTO_DATE_FORMAT.format(w3cAnnotationHistory.getCreatedDateTime());
         outputMessage.getHeaders().add("Memento-Datetime", dateStr);
     }
 
-    private void decorateNextVersionHeader(W3CAnnotationHistory w3cAnnotationHistory, HttpOutputMessage outputMessage) {
+    private void decorateNextVersionHeader(@NotNull W3CAnnotationHistory w3cAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = w3cAnnotationHistory.getCollectionId();
         String annotationId = w3cAnnotationHistory.getAnnotationId();
@@ -57,7 +57,7 @@ public abstract class AbstractW3CAnnotationHistoryMessageConverter extends Abstr
         }
     }
 
-    private void decoratePreviousVersionHeader(W3CAnnotationHistory w3cAnnotationHistory, HttpOutputMessage outputMessage) {
+    private void decoratePreviousVersionHeader(@NotNull W3CAnnotationHistory w3cAnnotationHistory, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = w3cAnnotationHistory.getCollectionId();
         String annotationId = w3cAnnotationHistory.getAnnotationId();

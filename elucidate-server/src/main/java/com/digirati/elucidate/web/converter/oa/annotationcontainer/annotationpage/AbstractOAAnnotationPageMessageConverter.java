@@ -20,7 +20,7 @@ public abstract class AbstractOAAnnotationPageMessageConverter extends AbstractM
     }
 
     @Override
-    protected void decorateHeaders(OAAnnotationPage oaAnnotationPage, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(OAAnnotationPage oaAnnotationPage, @NotNull HttpOutputMessage outputMessage) {
         outputMessage.getHeaders().add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
         outputMessage.getHeaders().add(HttpHeaders.VARY, "Accept");
         outputMessage.getHeaders().add("Accept-Post", "application/ld+json; profile=\"http://www.w3.org/ns/anno.jsonld\", text/turtle");

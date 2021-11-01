@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller.security;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,9 @@ public class SecurityUserController {
 
     private static final String CURRENT_USER_REQUEST_PATH = "/current";
 
+    @NotNull
     @RequestMapping(CURRENT_USER_REQUEST_PATH)
-    public ResponseEntity<UserSecurityDetails> getCurrentUser(Authentication authentication) {
+    public ResponseEntity<UserSecurityDetails> getCurrentUser(@NotNull Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body((UserSecurityDetails) authentication.getPrincipal());
     }
 }

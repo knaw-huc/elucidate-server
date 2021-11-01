@@ -2,6 +2,7 @@ package com.digirati.elucidate.service.query.impl;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +47,7 @@ public class W3CAnnotationCollectionServiceImpl extends AbstractAnnotationCollec
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, String collectionId, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, String collectionId, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return w3cAnnotationPageService.buildAnnotationPage(w3cAnnotations, collectionId, 0, false);
         } else {

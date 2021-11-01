@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
@@ -31,8 +33,9 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
         this.annotationPageIriBuilder = annotationPageIriBuilder;
     }
 
+    @NotNull
     @SuppressWarnings("serial")
-    public ServiceResponse<P> buildAnnotationPage(List<A> annotations, int page, boolean embeddedDescriptions, int pageSize) {
+    public ServiceResponse<P> buildAnnotationPage(@NotNull List<A> annotations, int page, boolean embeddedDescriptions, int pageSize) {
 
         int lastPage = PaginationUtils.calculateLastPage(annotations.size(), pageSize);
         int from = Math.min(annotations.size(), max(0, page * pageSize));
@@ -133,7 +136,8 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
         return new ServiceResponse<>(Status.OK, annotationPage);
     }
 
-    private List<Map<String, Object>> convertToDescriptions(List<A> annotations) {
+    @NotNull
+    private List<Map<String, Object>> convertToDescriptions(@NotNull List<A> annotations) {
         List<Map<String, Object>> descriptions = new ArrayList<>();
         for (A annotation : annotations) {
             descriptions.add(annotation.getJsonMap());
@@ -141,8 +145,9 @@ public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends Abstr
         return descriptions;
     }
 
+    @NotNull
     @SuppressWarnings("serial")
-    private List<Map<String, Object>> convertToIris(List<A> annotations) {
+    private List<Map<String, Object>> convertToIris(@NotNull List<A> annotations) {
         List<Map<String, Object>> iris = new ArrayList<>();
         for (A annotation : annotations) {
             iris.add(new HashMap<String, Object>() {

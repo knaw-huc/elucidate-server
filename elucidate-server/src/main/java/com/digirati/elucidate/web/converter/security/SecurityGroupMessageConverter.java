@@ -21,14 +21,14 @@ public class SecurityGroupMessageConverter extends AbstractMessageConverter<Secu
     }
 
     @Override
-    protected void decorateHeaders(SecurityGroup obj, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(SecurityGroup obj, @NotNull HttpOutputMessage outputMessage) {
         HttpHeaders headers = outputMessage.getHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
     }
 
     @Override
-    protected String getStringRepresentation(SecurityGroup obj, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull SecurityGroup obj, MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put("id", obj.getId());
         jsonMap.put("label", obj.getLabel());
@@ -36,9 +36,10 @@ public class SecurityGroupMessageConverter extends AbstractMessageConverter<Secu
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected SecurityGroup getObjectRepresentation(String str, MediaType contentType) throws Exception {
+    protected SecurityGroup getObjectRepresentation(@NotNull String str, MediaType contentType) throws Exception {
         Map<String, ?> jsonMap = (Map<String, ?>) JsonUtils.fromString(str);
         SecurityGroup group = new SecurityGroup();
         group.setId((String) jsonMap.get("id"));

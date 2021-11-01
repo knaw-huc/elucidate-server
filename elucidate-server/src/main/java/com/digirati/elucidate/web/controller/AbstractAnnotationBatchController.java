@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ public abstract class AbstractAnnotationBatchController<B extends AbstractBatchO
         this.annotationBatchDeleteService = annotationBatchDeleteService;
     }
 
+    @NotNull
     @RequestMapping(value = REQUEST_PATH_UPDATE, method = RequestMethod.POST)
     public ResponseEntity<B> postUpdate(@RequestBody B batchOperation) {
 
@@ -39,6 +41,7 @@ public abstract class AbstractAnnotationBatchController<B extends AbstractBatchO
         return ResponseEntity.status(HttpStatus.OK).body(batchOperation);
     }
 
+    @NotNull
     @RequestMapping(value = REQUEST_PATH_DELETE, method = RequestMethod.POST)
     public ResponseEntity<B> postDelete(@RequestBody B batchOperation) {
 

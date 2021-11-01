@@ -9,6 +9,8 @@ import java.util.Map;
 import com.github.jsonldjava.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.ElucidateConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
@@ -43,6 +45,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
 
     protected abstract String buildAnnotationIri(String collectionId, String annotationId);
 
+    @Nullable
     @Override
     public ServiceResponse<A> getAnnotation(String collectionId, String annotationId) {
 
@@ -68,6 +71,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         return new ServiceResponse<>(Status.OK, annotation);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<List<A>> getAnnotations(String collectionId) {
 
@@ -85,6 +89,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
+    @Nullable
     @Override
     @SuppressWarnings("serial")
     public ServiceResponse<A> createAnnotation(String collectionId, String annotationId, A annotation) {
@@ -138,8 +143,9 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         return new ServiceResponse<>(Status.OK, annotation);
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<A> updateAnnotation(String collectionId, String annotationId, A annotation, String cacheKey) {
+    public ServiceResponse<A> updateAnnotation(String collectionId, String annotationId, @NotNull A annotation, String cacheKey) {
 
         ServiceResponse<A> existingAnnotationServiceResponse = getAnnotation(collectionId, annotationId);
         Status existingAnnotationStatus = existingAnnotationServiceResponse.getStatus();
@@ -191,6 +197,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         return new ServiceResponse<>(Status.OK, annotation);
     }
 
+    @Nullable
     @Override
     public ServiceResponse<Void> deleteAnnotation(String collectionId, String annotationId, String cacheKey) {
 
@@ -220,7 +227,7 @@ public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation
         return new ServiceResponse<>(Status.OK, null);
     }
 
-    private boolean validateAnnotationId(String annotationId) {
+    private boolean validateAnnotationId(@NotNull String annotationId) {
         return StringUtils.isNotBlank(annotationId) && annotationId.length() <= ElucidateConstants.MAX_ID_SIZE;
     }
 }

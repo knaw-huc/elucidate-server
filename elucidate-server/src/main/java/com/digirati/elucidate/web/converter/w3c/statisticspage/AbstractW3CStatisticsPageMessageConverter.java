@@ -20,7 +20,7 @@ public abstract class AbstractW3CStatisticsPageMessageConverter extends Abstract
     }
 
     @Override
-    protected void decorateHeaders(W3CStatisticsPage w3cStatisticsPage, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(W3CStatisticsPage w3cStatisticsPage, @NotNull HttpOutputMessage outputMessage) {
         outputMessage.getHeaders().add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
         outputMessage.getHeaders().add(HttpHeaders.VARY, "Accept");
         outputMessage.getHeaders().add("Accept-Post", "application/ld+json; profile=\"http://www.w3.org/ns/anno.jsonld\", text/turtle");

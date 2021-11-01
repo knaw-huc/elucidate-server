@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
@@ -35,12 +37,14 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
         this.pageSize = pageSize;
     }
 
+    @NotNull
     protected abstract S convertToStatisticsPage(Map<String, Object> jsonMap);
 
     protected abstract String buildPageIri(String type, String field, int page);
 
+    @Nullable
     @Override
-    public ServiceResponse<S> buildBodyStatisticsPage(String field, int page) {
+    public ServiceResponse<S> buildBodyStatisticsPage(@NotNull String field, int page) {
 
         List<Pair<String, Integer>> counts;
 
@@ -59,8 +63,9 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
         return buildStatisticsPage("body", counts, field, page);
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<S> buildTargetStatisticsPage(String field, int page) {
+    public ServiceResponse<S> buildTargetStatisticsPage(@NotNull String field, int page) {
 
         List<Pair<String, Integer>> counts;
 
@@ -79,8 +84,9 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
         return buildStatisticsPage("target", counts, field, page);
     }
 
+    @NotNull
     @SuppressWarnings("serial")
-    public ServiceResponse<S> buildStatisticsPage(String type, List<Pair<String, Integer>> counts, String field, int page) {
+    public ServiceResponse<S> buildStatisticsPage(String type, @NotNull List<Pair<String, Integer>> counts, String field, int page) {
 
         int lastPage = PaginationUtils.calculateLastPage(counts.size(), pageSize);
         int from = Math.min(counts.size(), Math.max(0, page * pageSize));
@@ -145,8 +151,9 @@ public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends Abst
         return new ServiceResponse<>(Status.OK, statisticsPage);
     }
 
+    @NotNull
     @SuppressWarnings("serial")
-    private List<Map<String, Object>> convertToJsonMaps(List<Pair<String, Integer>> counts) {
+    private List<Map<String, Object>> convertToJsonMaps(@NotNull List<Pair<String, Integer>> counts) {
         List<Map<String, Object>> jsonMaps = new ArrayList<>();
         for (Pair<String, Integer> count : counts) {
             jsonMaps.add(new HashMap<String, Object>() {

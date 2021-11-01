@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
@@ -23,6 +24,7 @@ public abstract class AbstractAnnotationPageServiceImpl<A extends AbstractAnnota
         this.pageSize = pageSize;
     }
 
+    @NotNull
     protected abstract P convertToAnnotationPage(Map<String, Object> jsonMap);
 
     protected abstract String buildCollectionIri(String collectionId);
@@ -30,7 +32,7 @@ public abstract class AbstractAnnotationPageServiceImpl<A extends AbstractAnnota
     protected abstract String buildPageIri(String collectionId, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPage(List<A> annotations, String collectionId, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPage(@NotNull List<A> annotations, String collectionId, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIRIBuilder = () -> buildCollectionIri(collectionId);
         AnnotationPageIRIBuilder annotationPageIRIBuilder = (int _page, boolean _embeddedDescriptions) -> buildPageIri(collectionId, _page, _embeddedDescriptions);

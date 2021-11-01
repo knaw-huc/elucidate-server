@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,10 @@ public class OAAnnotationHistoryServiceImpl extends AbstractAnnotationHistorySer
         this.iriBuilderService = iriBuilderService;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    public OAAnnotationHistory convertToAnnotationHistory(W3CAnnotationHistory w3CAnnotationHistory) {
+    public OAAnnotationHistory convertToAnnotationHistory(@NotNull W3CAnnotationHistory w3CAnnotationHistory) {
 
         Map<String, Object> w3cAnnotationHistoryMap = w3CAnnotationHistory.getJsonMap();
         JsonNode w3cAnnotationHistoryNode = new ObjectMapper().convertValue(w3cAnnotationHistoryMap, JsonNode.class);

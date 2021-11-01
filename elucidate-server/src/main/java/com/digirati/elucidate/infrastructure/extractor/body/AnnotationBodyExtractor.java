@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
@@ -14,8 +16,9 @@ import com.digirati.elucidate.model.annotation.body.AnnotationBody;
 
 public class AnnotationBodyExtractor {
 
+    @NotNull
     @SuppressWarnings("unchecked")
-    public List<AnnotationBody> extractBodies(Map<String, Object> jsonMap) {
+    public List<AnnotationBody> extractBodies(@NotNull Map<String, Object> jsonMap) {
 
         List<AnnotationBody> annotationBodies = new ArrayList<>();
 
@@ -44,7 +47,8 @@ public class AnnotationBodyExtractor {
         return annotationBodies;
     }
 
-    private String stripFragment(String bodyIriStr) {
+    @Nullable
+    private String stripFragment(@NotNull String bodyIriStr) {
         if (StringUtils.isNotBlank(bodyIriStr)) {
             try {
                 URI bodyIri = new URI(bodyIriStr);

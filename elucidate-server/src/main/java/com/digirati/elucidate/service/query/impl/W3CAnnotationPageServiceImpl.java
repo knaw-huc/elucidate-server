@@ -2,6 +2,7 @@ package com.digirati.elucidate.service.query.impl;
 
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class W3CAnnotationPageServiceImpl extends AbstractAnnotationPageServiceI
         this.iriBuilderService = iriBuilderService;
     }
 
+    @NotNull
     @Override
     protected W3CAnnotationPage convertToAnnotationPage(Map<String, Object> w3cAnnotationPageMap) {
 

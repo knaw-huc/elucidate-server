@@ -2,12 +2,15 @@ package com.digirati.elucidate.infrastructure.security;
 
 import java.util.Optional;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Security detail loader for users that have already been authenticated
  * by an authorization server.
  */
 public interface UserSecurityDetailsLoader {
 
+    @NotNull
     UserSecurityDetails createUser(String username);
 
     Optional<UserSecurityDetails> getUser(String username);

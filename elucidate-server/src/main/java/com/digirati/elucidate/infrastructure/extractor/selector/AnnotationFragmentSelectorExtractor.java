@@ -3,6 +3,8 @@ package com.digirati.elucidate.infrastructure.extractor.selector;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
@@ -14,14 +16,16 @@ import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSel
 
 public class AnnotationFragmentSelectorExtractor extends AbstractAnnotationSelectorExtractor<AnnotationFragmentSelector> {
 
+    @NotNull
     @Override
     protected String getSelectorType() {
         return OAConstants.URI_FRAGMENT_SELECTOR;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected AnnotationFragmentSelector buildSelector(Map<String, Object> jsonMap) {
+    protected AnnotationFragmentSelector buildSelector(@NotNull Map<String, Object> jsonMap) {
 
         AnnotationFragmentSelector annotationFragmentSelector = new AnnotationFragmentSelector();
 

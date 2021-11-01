@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller.security;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,7 @@ public class SecurityGroupMembershipController {
         this.groupMembershipService = groupMembershipService;
     }
 
+    @NotNull
     @GetMapping(GROUP_ANNOTATIONS_REQUEST_PATH)
     @ResponseBody
     public ResponseEntity<AnnotationReferenceCollection> getGroupAnnotations(@PathVariable(VARIABLE_GROUP_ID) String groupId) {
@@ -49,18 +51,21 @@ public class SecurityGroupMembershipController {
         return convertServiceToHttpResponse(response);
     }
 
+    @NotNull
     @PostMapping(ANNOTATION_REQUEST_PATH)
     public ResponseEntity<Void> addAnnotationToGroup(@PathVariable(VARIABLE_GROUP_ID) String groupId, @PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId) {
         ServiceResponse<Void> response = groupMembershipService.addAnnotationToGroup(collectionId, annotationId, groupId);
         return convertServiceToHttpResponse(response);
     }
 
+    @NotNull
     @DeleteMapping(ANNOTATION_REQUEST_PATH)
     public ResponseEntity<Void> removeAnnotationFromGroup(@PathVariable(VARIABLE_GROUP_ID) String groupId, @PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId) {
         ServiceResponse<Void> response = groupMembershipService.removeAnnotationFromGroup(collectionId, annotationId, groupId);
         return convertServiceToHttpResponse(response);
     }
 
+    @NotNull
     @GetMapping(GROUP_USERS_REQUEST_PATH)
     @ResponseBody
     public ResponseEntity<SecurityUserReferenceCollection> getGroupUsers(@PathVariable(VARIABLE_GROUP_ID) String groupId) {
@@ -68,17 +73,20 @@ public class SecurityGroupMembershipController {
         return convertServiceToHttpResponse(response);
     }
 
+    @NotNull
     @PostMapping(USER_REQUEST_PATH)
     public ResponseEntity<Void> addUserToGroup(@PathVariable(VARIABLE_GROUP_ID) String groupId, @PathVariable(VARIABLE_USER_ID) String userId) {
         return convertServiceToHttpResponse(groupMembershipService.addUserToGroup(userId, groupId));
     }
 
+    @NotNull
     @DeleteMapping(USER_REQUEST_PATH)
     public ResponseEntity<Void> removeUserFromGroup(@PathVariable(VARIABLE_GROUP_ID) String groupId, @PathVariable(VARIABLE_USER_ID) String userId) {
         return convertServiceToHttpResponse(groupMembershipService.removeUserFromGroup(userId, groupId));
     }
 
-    private <T> ResponseEntity<T> convertServiceToHttpResponse(ServiceResponse<T> response) {
+    @NotNull
+    private <T> ResponseEntity<T> convertServiceToHttpResponse(@NotNull ServiceResponse<T> response) {
         switch (response.getStatus()) {
             case NOT_FOUND:
                 return ResponseEntity.notFound().build();

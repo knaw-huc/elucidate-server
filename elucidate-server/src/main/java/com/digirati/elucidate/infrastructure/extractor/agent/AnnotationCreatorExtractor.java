@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants;
 import com.digirati.elucidate.common.infrastructure.constants.FOAFConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
@@ -11,8 +13,9 @@ import com.digirati.elucidate.model.annotation.agent.AnnotationAgent;
 
 public class AnnotationCreatorExtractor {
 
+    @NotNull
     @SuppressWarnings("unchecked")
-    public List<AnnotationAgent> extractCreators(Map<String, Object> jsonMap) {
+    public List<AnnotationAgent> extractCreators(@NotNull Map<String, Object> jsonMap) {
 
         List<AnnotationAgent> annotationAgents = new ArrayList<>();
 

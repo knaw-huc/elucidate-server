@@ -1,5 +1,7 @@
 package com.digirati.elucidate.infrastructure.security;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.model.security.SecurityGroup;
 import com.digirati.elucidate.model.security.SecurityUser;
@@ -9,7 +11,7 @@ public interface UserSecurityDetailsContext {
      * Check if the current security principal in the {@link org.springframework.security.core.context.SecurityContext}
      * has access to the read/write {@code operation} on the given {@code annotation}.
      *
-     * @param operation The operation being authorized.
+     * @param operation  The operation being authorized.
      * @param annotation The object the operation is being authorized on.
      * @return {@code true} iff the operation was authorized.
      */
@@ -20,7 +22,7 @@ public interface UserSecurityDetailsContext {
      * has access to the read/write {@code operation} on the given {@code annotation}.
      *
      * @param operation The operation being authorized.
-     * @param group The object the operation is being authorized on.
+     * @param group     The object the operation is being authorized on.
      * @return {@code true} iff the operation was authorized.
      */
     boolean isAuthorized(Permission operation, SecurityGroup group);
@@ -30,5 +32,6 @@ public interface UserSecurityDetailsContext {
      *
      * @return An optional user authentication ID.
      */
+    @Nullable
     Integer getAuthenticationId();
 }

@@ -5,6 +5,7 @@ import java.beans.PropertyVetoException;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import liquibase.integration.spring.SpringLiquibase;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +25,7 @@ public class RepositoryConfig {
     @Autowired
     private Environment environment;
 
+    @NotNull
     @Bean(name = "liquibaseMigrations")
     public SpringLiquibase liquibaseMigrations() throws PropertyVetoException {
         SpringLiquibase liquibase = new SpringLiquibase();
@@ -33,11 +35,13 @@ public class RepositoryConfig {
         return liquibase;
     }
 
+    @NotNull
     @Bean(name = "jdbcTemplate")
     public JdbcTemplate jdbcTemplate() throws PropertyVetoException {
         return new JdbcTemplate(dataSource());
     }
 
+    @NotNull
     @Bean(name = "dataSource", destroyMethod = "close")
     public DataSource dataSource() throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -58,6 +62,7 @@ public class RepositoryConfig {
         return dataSource;
     }
 
+    @NotNull
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager() throws PropertyVetoException {
         return new DataSourceTransactionManager(dataSource());

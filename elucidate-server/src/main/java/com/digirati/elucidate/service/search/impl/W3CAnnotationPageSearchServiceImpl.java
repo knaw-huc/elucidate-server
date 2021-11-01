@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class W3CAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSe
         this.iriBuilderService = iriBuilderService;
     }
 
+    @NotNull
     @Override
     protected W3CAnnotationPage convertToAnnotationPage(Map<String, Object> w3cAnnotationPageMap) {
 
@@ -84,11 +87,13 @@ public class W3CAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSe
         return iriBuilderService.buildW3CPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
 
+    @Nullable
     @Override
     protected String buildOverlapSearchCollectionIri(int lowerLevel, int upperLevel) {
         return null;
     }
 
+    @Nullable
     @Override
     protected String buildOverlapSearchPageIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
         return null;

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -20,16 +22,17 @@ import com.digirati.elucidate.service.history.OAAnnotationHistoryService;
 @Component
 public class JSONLDOAAnnotationHistoryMessageConverter extends AbstractOAAnnotationHistoryMessageConverter {
 
+    @NotNull
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDOAAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService, @Value("${annotation.history.oa.contexts}") String[] defaultContexts) {
+    public JSONLDOAAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, OAAnnotationHistoryService oaAnnotationHistoryService, @NotNull @Value("${annotation.history.oa.contexts}") String[] defaultContexts) {
         super(iriBuilderService, oaAnnotationHistoryService, APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }
 
     @Override
-    protected boolean canRead(MediaType mediaType) {
+    protected boolean canRead(@Nullable MediaType mediaType) {
         if (mediaType == null) {
             return true;
         }
@@ -42,7 +45,7 @@ public class JSONLDOAAnnotationHistoryMessageConverter extends AbstractOAAnnotat
     }
 
     @Override
-    protected boolean canWrite(MediaType mediaType) {
+    protected boolean canWrite(@Nullable MediaType mediaType) {
         if (mediaType == null || MediaType.ALL.equals(mediaType)) {
             return true;
         }
@@ -56,7 +59,7 @@ public class JSONLDOAAnnotationHistoryMessageConverter extends AbstractOAAnnotat
 
     @Override
     @SuppressWarnings("unchecked")
-    protected String getStringRepresentation(OAAnnotationHistory oaAnnotationHistory, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull OAAnnotationHistory oaAnnotationHistory, @NotNull MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = oaAnnotationHistory.getJsonMap();
 
         JSONLDProfile jsonLdProfile = getJsonLdProfile(contentType, defaultContexts);
@@ -77,9 +80,10 @@ public class JSONLDOAAnnotationHistoryMessageConverter extends AbstractOAAnnotat
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected OAAnnotationHistory getObjectRepresentation(String jsonStr, MediaType contentType) throws Exception {
+    protected OAAnnotationHistory getObjectRepresentation(@NotNull String jsonStr, MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = (Map<String, Object>) JsonUtils.fromString(jsonStr);
         List<Object> jsonList = JsonLdProcessor.expand(jsonMap, jsonLdOptions);
         jsonMap = (Map<String, Object>) jsonList.get(0);

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
@@ -34,8 +35,9 @@ public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends Abstrac
         this.annotationSearchService = annotationSearchService;
     }
 
+    @NotNull
     @Override
-    public ServiceResponse<B> processBatchDelete(B batchOperation) {
+    public ServiceResponse<B> processBatchDelete(@NotNull B batchOperation) {
 
         Map<String, Object> jsonMap = batchOperation.getJsonMap();
 
@@ -53,7 +55,7 @@ public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings({"unchecked", "serial"})
-    private void processBatchDeletes(Map<String, Object> batchJsonMap, String jsonKey, AnnotationBatchSearch<A> annotationBatchSearch) {
+    private void processBatchDeletes(@NotNull Map<String, Object> batchJsonMap, String jsonKey, @NotNull AnnotationBatchSearch<A> annotationBatchSearch) {
 
         List<Map<String, Object>> jsonMaps = (List<Map<String, Object>>) batchJsonMap.get(jsonKey);
         if (jsonMaps != null && !jsonMaps.isEmpty()) {
@@ -90,7 +92,7 @@ public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends Abstrac
         }
     }
 
-    private int processBatchDelete(Map<String, Object> jsonMap, AnnotationBatchSearch<A> annotationBatchSearch, List<String> searchFields, String searchValue) {
+    private int processBatchDelete(Map<String, Object> jsonMap, @NotNull AnnotationBatchSearch<A> annotationBatchSearch, List<String> searchFields, String searchValue) {
 
         List<A> annotations = annotationBatchSearch.searchForAnnotations(searchFields, searchValue);
         if (annotations != null && !annotations.isEmpty()) {
@@ -103,7 +105,7 @@ public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends Abstrac
     }
 
     @SuppressWarnings("serial")
-    private void insertTotal(Map<String, Object> jsonMap, int total) {
+    private void insertTotal(@NotNull Map<String, Object> jsonMap, int total) {
 
         jsonMap.put(ActivityStreamConstants.URI_TOTAL_ITEMS, new ArrayList<Map<String, Object>>() {
             {

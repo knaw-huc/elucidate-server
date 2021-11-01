@@ -3,6 +3,8 @@ package com.digirati.elucidate.service.search.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,7 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildBodySearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildBodySearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return w3cAnnotationPageSearchService.buildAnnotationPageByBody(w3cAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, false);
         } else {
@@ -57,7 +59,7 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildTargetSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildTargetSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return w3cAnnotationPageSearchService.buildAnnotationPageByTarget(w3cAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, false);
         } else {
@@ -76,7 +78,7 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildCreatorSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> levels, String type, String value, boolean strict, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildCreatorSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return w3cAnnotationPageSearchService.buildAnnotationPageByCreator(w3cAnnotations, levels, type, value, strict, 0, false);
         } else {
@@ -95,7 +97,7 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildGeneratorSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> levels, String type, String value, boolean strict, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildGeneratorSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return w3cAnnotationPageSearchService.buildAnnotationPageByGenerator(w3cAnnotations, levels, type, value, strict, 0, false);
         } else {
@@ -114,7 +116,7 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildTemporalSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> levels, List<String> types, Date since, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildTemporalSearchFirstAnnotationPage(List<W3CAnnotation> w3cAnnotations, List<String> levels, List<String> types, Date since, @NotNull ClientPreference clientPref) {
         if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
             return w3cAnnotationPageSearchService.buildAnnotationPageByTemporal(w3cAnnotations, levels, types, since, 0, false);
         } else {
@@ -132,18 +134,21 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
         return iriBuilderService.buildW3CPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
 
+    @Nullable
     @Override
     protected String buildOverlapSearchCollectionIri(int lowerLimit, int upperLimit) {
 //        TODO
         return null;
     }
 
+    @Nullable
     @Override
     protected String buildOverlapSearchPageIri(int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
 //        TODO
         return null;
     }
 
+    @Nullable
     @Override
     protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, int lowerLimit, int upperLimit, ClientPreference clientPref) {
 //        TODO

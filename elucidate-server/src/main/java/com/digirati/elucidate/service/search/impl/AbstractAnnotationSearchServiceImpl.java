@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.SearchConstants;
@@ -38,8 +40,9 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
 
     protected abstract String buildAnnotationIri(String collectionId, String annotationId);
 
+    @Nullable
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByBody(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri) {
+    public ServiceResponse<List<A>> searchAnnotationsByBody(@NotNull List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri) {
 
         boolean searchIds = fields.contains(SearchConstants.FIELD_ID);
         boolean searchSources = fields.contains(SearchConstants.FIELD_SOURCE);
@@ -59,8 +62,9 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByTarget(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri) {
+    public ServiceResponse<List<A>> searchAnnotationsByTarget(@NotNull List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri) {
 
         boolean searchIds = fields.contains(SearchConstants.FIELD_ID);
         boolean searchSources = fields.contains(SearchConstants.FIELD_SOURCE);
@@ -80,6 +84,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
+    @Nullable
     private Integer[] buildXywhParameters(String xywh) {
 
         if (StringUtils.isNotBlank(xywh)) {
@@ -95,6 +100,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new Integer[]{null, null, null, null};
     }
 
+    @Nullable
     private Integer[] buildTParameters(String t) {
 
         if (StringUtils.isNotBlank(t)) {
@@ -110,8 +116,9 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new Integer[]{null, null};
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByCreator(List<String> levels, String type, String value, boolean strict) {
+    public ServiceResponse<List<A>> searchAnnotationsByCreator(@NotNull List<String> levels, @NotNull String type, String value, boolean strict) {
 
         boolean searchAnnotations = levels.contains(SearchConstants.LEVEL_ANNOTATION);
         boolean searchBodies = levels.contains(SearchConstants.LEVEL_BODY);
@@ -135,8 +142,9 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByGenerator(List<String> levels, String type, String value, boolean strict) {
+    public ServiceResponse<List<A>> searchAnnotationsByGenerator(@NotNull List<String> levels, @NotNull String type, String value, boolean strict) {
 
         boolean searchAnnotations = levels.contains(SearchConstants.LEVEL_ANNOTATION);
         boolean searchBodies = levels.contains(SearchConstants.LEVEL_BODY);
@@ -160,8 +168,9 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
+    @Nullable
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByTemporal(List<String> levels, List<String> types, Date since) {
+    public ServiceResponse<List<A>> searchAnnotationsByTemporal(@NotNull List<String> levels, @NotNull List<String> types, Date since) {
 
         boolean searchAnnotations = levels.contains(SearchConstants.LEVEL_ANNOTATION);
         boolean searchBodies = levels.contains(SearchConstants.LEVEL_BODY);
@@ -185,6 +194,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<List<A>> searchAnnotationsByOverlap(int lowerLevel, int upperLevel) {
 
@@ -196,7 +206,8 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
-    private List<A> convertAnnotations(List<W3CAnnotation> w3cAnnotations) {
+    @NotNull
+    private List<A> convertAnnotations(@NotNull List<W3CAnnotation> w3cAnnotations) {
         List<A> annotations = new ArrayList<>();
         for (W3CAnnotation w3cAnnotation : w3cAnnotations) {
             if (securityContext.isAuthorized(Permission.READ, w3cAnnotation)) {

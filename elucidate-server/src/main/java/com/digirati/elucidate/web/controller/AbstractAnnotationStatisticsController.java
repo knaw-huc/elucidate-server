@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public abstract class AbstractAnnotationStatisticsController<S extends AbstractS
         this.statisticsPageService = statisticsPageService;
     }
 
+    @NotNull
     @RequestMapping(value = REQUEST_PATH_BODY, method = RequestMethod.GET)
     public ResponseEntity<S> getBodyStatistics(@RequestParam(value = URLConstants.PARAM_FIELD, required = true) String field, @RequestParam(value = URLConstants.PARAM_PAGE, required = false, defaultValue = "0") Integer page) {
 
@@ -30,6 +32,7 @@ public abstract class AbstractAnnotationStatisticsController<S extends AbstractS
         return getStatistics(serviceResponse);
     }
 
+    @NotNull
     @RequestMapping(value = REQUEST_PATH_TARGET, method = RequestMethod.GET)
     public ResponseEntity<S> getTargetStatistics(@RequestParam(value = URLConstants.PARAM_FIELD, required = true) String field, @RequestParam(value = URLConstants.PARAM_PAGE, required = false, defaultValue = "0") Integer page) {
 
@@ -37,7 +40,8 @@ public abstract class AbstractAnnotationStatisticsController<S extends AbstractS
         return getStatistics(serviceResponse);
     }
 
-    private ResponseEntity<S> getStatistics(ServiceResponse<S> serviceResponse) {
+    @NotNull
+    private ResponseEntity<S> getStatistics(@NotNull ServiceResponse<S> serviceResponse) {
 
         Status status = serviceResponse.getStatus();
 

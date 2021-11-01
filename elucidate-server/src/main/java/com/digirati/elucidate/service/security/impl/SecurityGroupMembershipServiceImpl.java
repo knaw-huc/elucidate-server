@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
@@ -36,12 +38,12 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
     private final UserRepository userRepository;
 
     public SecurityGroupMembershipServiceImpl(
-        UserSecurityDetailsContext securityContext,
-        SecurityGroupService securityGroupService,
-        W3CAnnotationService w3cAnnotationService,
-        GroupMembershipRepository membershipRepository,
-        UserRepository userRepository,
-        IRIBuilderService iriBuilder) {
+            UserSecurityDetailsContext securityContext,
+            SecurityGroupService securityGroupService,
+            W3CAnnotationService w3cAnnotationService,
+            GroupMembershipRepository membershipRepository,
+            UserRepository userRepository,
+            IRIBuilderService iriBuilder) {
 
         this.securityContext = securityContext;
         this.securityGroupService = securityGroupService;
@@ -50,26 +52,29 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
         this.userRepository = userRepository;
     }
 
+    @NotNull
     @Override
     public ServiceResponse<Void> addAnnotationToGroup(String collectionId, String annotationId, String groupId) {
         return handleAnnotationAndGroup(
-            collectionId,
-            annotationId,
-            groupId,
-            membershipRepository::createAnnotationGroupMembership
+                collectionId,
+                annotationId,
+                groupId,
+                membershipRepository::createAnnotationGroupMembership
         );
     }
 
+    @NotNull
     @Override
     public ServiceResponse<Void> removeAnnotationFromGroup(String collectionId, String annotationId, String groupId) {
         return handleAnnotationAndGroup(
-            collectionId,
-            annotationId,
-            groupId,
-            membershipRepository::removeAnnotationGroupMembership
+                collectionId,
+                annotationId,
+                groupId,
+                membershipRepository::removeAnnotationGroupMembership
         );
     }
 
+    @NotNull
     @Override
     public ServiceResponse<AnnotationReferenceCollection> getGroupAnnotations(String groupId) {
         ServiceResponse<SecurityGroup> groupRes = securityGroupService.getGroup(groupId);
@@ -90,16 +95,19 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
         return new ServiceResponse<>(Status.OK, collection);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<Void> addUserToGroup(String userId, String groupId) {
         return handleUserAndGroup(userId, groupId, membershipRepository::createUserGroupMembership);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<Void> removeUserFromGroup(String userId, String groupId) {
         return handleUserAndGroup(userId, groupId, membershipRepository::removeUserGroupMembership);
     }
 
+    @NotNull
     @Override
     public ServiceResponse<SecurityUserReferenceCollection> getGroupUsers(String groupId) {
         ServiceResponse<SecurityGroup> groupRes = securityGroupService.getGroup(groupId);
@@ -120,7 +128,8 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
         return new ServiceResponse<>(Status.OK, collection);
     }
 
-    private ServiceResponse<Void> handleAnnotationAndGroup(String collectionId, String annotationId, String groupId, BiConsumer<Integer, Integer> consumer) {
+    @Nullable
+    private ServiceResponse<Void> handleAnnotationAndGroup(String collectionId, String annotationId, String groupId, @NotNull BiConsumer<Integer, Integer> consumer) {
         ServiceResponse<SecurityGroup> groupRes = securityGroupService.getGroup(groupId);
         if (groupRes.getStatus() != Status.OK) {
             return new ServiceResponse<>(groupRes.getStatus(), null);
@@ -135,7 +144,7 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
         SecurityGroup group = groupRes.getObj();
 
         if (!securityContext.isAuthorized(Permission.MANAGE, annotation)
-            || !securityContext.isAuthorized(Permission.MANAGE, group)) {
+                || !securityContext.isAuthorized(Permission.MANAGE, group)) {
             return new ServiceResponse<>(Status.UNAUTHORIZED, null);
         }
 
@@ -143,7 +152,8 @@ public class SecurityGroupMembershipServiceImpl implements SecurityGroupMembersh
         return new ServiceResponse<>(Status.OK, null);
     }
 
-    private ServiceResponse<Void> handleUserAndGroup(String userId, String groupId, BiConsumer<Integer, Integer> consumer) {
+    @Nullable
+    private ServiceResponse<Void> handleUserAndGroup(String userId, String groupId, @NotNull BiConsumer<Integer, Integer> consumer) {
         ServiceResponse<SecurityGroup> groupRes = securityGroupService.getGroup(groupId);
 
         if (groupRes.getStatus() != Status.OK) {

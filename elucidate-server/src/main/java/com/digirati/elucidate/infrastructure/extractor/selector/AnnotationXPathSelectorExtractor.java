@@ -3,6 +3,8 @@ package com.digirati.elucidate.infrastructure.extractor.selector;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
 import com.digirati.elucidate.common.infrastructure.constants.RDFConstants;
@@ -10,14 +12,16 @@ import com.digirati.elucidate.model.annotation.selector.xpath.AnnotationXPathSel
 
 public class AnnotationXPathSelectorExtractor extends AbstractAnnotationSelectorExtractor<AnnotationXPathSelector> {
 
+    @NotNull
     @Override
     protected String getSelectorType() {
         return OAConstants.URI_XPATH_SELECTOR;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected AnnotationXPathSelector buildSelector(Map<String, Object> jsonMap) {
+    protected AnnotationXPathSelector buildSelector(@NotNull Map<String, Object> jsonMap) {
 
         AnnotationXPathSelector annotationXPathSelector = new AnnotationXPathSelector();
 

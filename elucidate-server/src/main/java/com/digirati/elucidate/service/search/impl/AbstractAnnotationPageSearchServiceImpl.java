@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
@@ -24,10 +26,11 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
         this.pageSize = pageSize;
     }
 
+    @NotNull
     protected abstract P convertToAnnotationPage(Map<String, Object> jsonMap);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByBody(List<A> annotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByBody(@NotNull List<A> annotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildBodySearchCollectionIri(fields, value, strict, xywh, t, creatorIri, generatorIri);
         AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildBodySearchPageIri(fields, value, strict, xywh, t, creatorIri, generatorIri, _page, _embeddedDescriptions);
@@ -40,7 +43,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildBodySearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByTarget(List<A> annotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByTarget(@NotNull List<A> annotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildTargetSearchCollectionIri(fields, value, strict, xywh, t, creatorIri, generatorIri);
         AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildTargetSearchPageIri(fields, value, strict, xywh, t, creatorIri, generatorIri, _page, _embeddedDescriptions);
@@ -53,7 +56,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildTargetSearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByCreator(List<A> annotations, List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByCreator(@NotNull List<A> annotations, List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildCreatorSearchCollectionIri(levels, type, value, strict);
         AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildCreatorSearchPageIri(levels, type, value, strict, page, embeddedDescriptions);
@@ -66,7 +69,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildCreatorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByGenerator(List<A> annotations, List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByGenerator(@NotNull List<A> annotations, List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildGeneratorSearchCollectionIri(levels, type, value, strict);
         AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildGeneratorSearchPageIri(levels, type, value, strict, page, embeddedDescriptions);
@@ -79,7 +82,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildGeneratorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByTemporal(List<A> annotations, List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByTemporal(@NotNull List<A> annotations, List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildTemporalSearchCollectionIri(levels, types, since);
         AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildTemporalSearchPageIri(levels, types, since, page, embeddedDescriptions);
@@ -92,7 +95,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByOverlap(List<A> annotations, int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildOverlapSearchCollectionIri(lowerLevel, upperLevel);
         AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(lowerLevel, upperLevel, page, embeddedDescriptions);
@@ -100,8 +103,10 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
         return new AnnotationPageBuilder<A, P>(this::convertToAnnotationPage, annotationCollectionIriBuilder, annotationPageIriBuilder).buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
     }
 
+    @Nullable
     protected abstract String buildOverlapSearchCollectionIri(int lowerLevel, int upperLevel);
 
+    @Nullable
     protected abstract String buildOverlapSearchPageIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions);
 
 }

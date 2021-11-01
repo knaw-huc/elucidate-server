@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.model.annotation.selector.fragment.TFragmentSelector;
 import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSelector;
@@ -14,7 +16,8 @@ public class SelectorUtils {
     private static final Pattern XYWH_MATCHER = Pattern.compile("xywh=(\\d+),(\\d+),(\\d+),(\\d+)");
     private static final Pattern T_MATCHER = Pattern.compile("t=(\\d+)?(,)?(\\d+)?");
 
-    public static XYWHFragmentSelector extractXywhFragmentSelector(String str) {
+    @Nullable
+    public static XYWHFragmentSelector extractXywhFragmentSelector(@NotNull String str) {
 
         if (StringUtils.isNotBlank(str)) {
 
@@ -41,7 +44,8 @@ public class SelectorUtils {
         return null;
     }
 
-    public static TFragmentSelector extractTFragmentSelector(String str) {
+    @Nullable
+    public static TFragmentSelector extractTFragmentSelector(@NotNull String str) {
 
         if (StringUtils.isNotBlank(str)) {
 

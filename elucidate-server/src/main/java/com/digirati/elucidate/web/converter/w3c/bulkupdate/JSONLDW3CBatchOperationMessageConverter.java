@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -19,16 +21,17 @@ import com.digirati.elucidate.model.batch.W3CBatchOperation;
 @Component
 public class JSONLDW3CBatchOperationMessageConverter extends AbstractW3CBatchOperationMessageConverter {
 
+    @NotNull
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDW3CBatchOperationMessageConverter(@Value("${batch.operation.w3c.contexts}") String[] defaultContexts) {
+    public JSONLDW3CBatchOperationMessageConverter(@NotNull @Value("${batch.operation.w3c.contexts}") String[] defaultContexts) {
         super(APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }
 
     @Override
-    protected boolean canRead(MediaType mediaType) {
+    protected boolean canRead(@Nullable MediaType mediaType) {
         if (mediaType == null) {
             return true;
         }
@@ -41,7 +44,7 @@ public class JSONLDW3CBatchOperationMessageConverter extends AbstractW3CBatchOpe
     }
 
     @Override
-    protected boolean canWrite(MediaType mediaType) {
+    protected boolean canWrite(@Nullable MediaType mediaType) {
         if (mediaType == null || MediaType.ALL.equals(mediaType)) {
             return true;
         }
@@ -55,7 +58,7 @@ public class JSONLDW3CBatchOperationMessageConverter extends AbstractW3CBatchOpe
 
     @Override
     @SuppressWarnings("unchecked")
-    protected String getStringRepresentation(W3CBatchOperation w3cBatchOperation, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull W3CBatchOperation w3cBatchOperation, @NotNull MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = w3cBatchOperation.getJsonMap();
 
         JSONLDProfile jsonLdProfile = getJsonLdProfile(contentType, defaultContexts);
@@ -76,9 +79,10 @@ public class JSONLDW3CBatchOperationMessageConverter extends AbstractW3CBatchOpe
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected W3CBatchOperation getObjectRepresentation(String jsonStr, MediaType contentType) throws Exception {
+    protected W3CBatchOperation getObjectRepresentation(@NotNull String jsonStr, MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = (Map<String, Object>) JsonUtils.fromString(jsonStr);
         List<Object> jsonList = JsonLdProcessor.expand(jsonMap, jsonLdOptions);
         jsonMap = (Map<String, Object>) jsonList.get(0);

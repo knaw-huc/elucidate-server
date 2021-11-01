@@ -11,6 +11,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,10 +28,11 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_DATE_TIME;
     public static final String SERVICE_NAME = "iriBuilderServiceImpl";
 
+    @NotNull
     private final String baseUrl;
 
     @Autowired
-    public IRIBuilderServiceImpl(@Value("${base.scheme}") String baseScheme, @Value("${base.host}") String baseHost, @Value("${base.port}") int basePort, @Value("${base.path}") String basePath) {
+    public IRIBuilderServiceImpl(@NotNull @Value("${base.scheme}") String baseScheme, @Value("${base.host}") String baseHost, @Value("${base.port}") int basePort, @Value("${base.path}") String basePath) {
         this.baseUrl = URIUtils.buildBaseUrl(baseScheme, baseHost, basePort, basePath);
     }
 
@@ -263,7 +266,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     }
 
     @Override
-    public String buildW3CPageTemporalSearchIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
+    public String buildW3CPageTemporalSearchIri(List<String> levels, List<String> types, @NotNull Date since, int page, boolean embeddedDescriptions) {
         return buildIri("w3c/services/search/temporal", new HashMap<String, Object>() {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
@@ -509,7 +512,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     }
 
     @Override
-    public String buildOACollectionTemporalSearchIri(List<String> levels, List<String> types, Date since) {
+    public String buildOACollectionTemporalSearchIri(List<String> levels, List<String> types, @NotNull Date since) {
         return buildIri("oa/services/search/temporal", new HashMap<String, Object>() {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
@@ -520,7 +523,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     }
 
     @Override
-    public String buildOAPageTemporalSearchIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
+    public String buildOAPageTemporalSearchIri(List<String> levels, List<String> types, @NotNull Date since, int page, boolean embeddedDescriptions) {
         return buildIri("oa/services/search/temporal", new HashMap<String, Object>() {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
@@ -563,7 +566,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
     }
 
     @Override
-    public String buildW3CCollectionTemporalSearchIri(List<String> levels, List<String> types, Date since) {
+    public String buildW3CCollectionTemporalSearchIri(List<String> levels, List<String> types, @NotNull Date since) {
         return buildIri("w3c/services/search/temporal", new HashMap<String, Object>() {
             {
                 put(URLConstants.PARAM_LEVELS, StringUtils.join(levels, ","));
@@ -574,7 +577,7 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
         });
     }
 
-    private String buildIri(String id, Map<String, Object> params) {
+    private String buildIri(String id, @Nullable Map<String, Object> params) {
         try {
             URIBuilder builder = new URIBuilder(baseUrl);
             builder.setPath(String.format("%s/%s", builder.getPath(), id));
@@ -589,7 +592,8 @@ public class IRIBuilderServiceImpl implements IRIBuilderService {
         }
     }
 
-    static String toString(Date since) {
+    @NotNull
+    static String toString(@NotNull Date since) {
         return DATE_FORMAT.format(since.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime());

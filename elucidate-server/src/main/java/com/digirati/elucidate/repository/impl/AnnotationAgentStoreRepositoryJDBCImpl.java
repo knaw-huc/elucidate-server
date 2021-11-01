@@ -3,6 +3,7 @@ package com.digirati.elucidate.repository.impl;
 import java.sql.Types;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +24,7 @@ public class AnnotationAgentStoreRepositoryJDBCImpl extends AbstractRepositoryJD
         super(jdbcTemplate);
     }
 
+    @Nullable
     @Override
     public AnnotationAgent createAnnotationCreator(Integer annotationPK, Integer bodyPK, Integer targetPK, String creatorIri, String creatorJson, String[] types, String[] typesJson, String[] names, String[] namesJson, String nickname, String[] emails, String[] emailsJson, String[] emailSha1s, String[] emailSha1sJson, String[] homepages, String[] homepagesJson) {
         String sql = "SELECT * FROM annotation_creator_create(?, ?, ?, ?, ?, string_to_array(?, ','), string_to_array(?, ',')::jsonb[], string_to_array(?, ','), string_to_array(?, ',')::jsonb[], ?, string_to_array(?, ','), string_to_array(?, ',')::jsonb[], string_to_array(?, ','), string_to_array(?, ',')::jsonb[], string_to_array(?, ','), string_to_array(?, ',')::jsonb[])";
@@ -39,6 +41,7 @@ public class AnnotationAgentStoreRepositoryJDBCImpl extends AbstractRepositoryJD
         }
     }
 
+    @Nullable
     @Override
     public AnnotationAgent deleteAnnotationCreators(Integer annotationPK, Integer bodyPK, Integer targetPK) {
         String sql = "SELECT * FROM annotation_creator_delete(?, ?, ?)";
@@ -55,6 +58,7 @@ public class AnnotationAgentStoreRepositoryJDBCImpl extends AbstractRepositoryJD
         }
     }
 
+    @Nullable
     @Override
     public AnnotationAgent createAnnotationGenerator(Integer annotationPK, Integer bodyPK, Integer targetPK, String generatorIri, String generatorJson, String[] types, String[] typesJson, String[] names, String[] namesJson, String nickname, String[] emails, String[] emailsJson, String[] emailSha1s, String[] emailSha1sJson, String[] homepages, String[] homepagesJson) {
         String sql = "SELECT * FROM annotation_generator_create(?, ?, ?, ?, ?, string_to_array(?, ','), string_to_array(?, ',')::jsonb[], string_to_array(?, ','), string_to_array(?, ',')::jsonb[], ?, string_to_array(?, ','), string_to_array(?, ',')::jsonb[], string_to_array(?, ','), string_to_array(?, ',')::jsonb[], string_to_array(?, ','), string_to_array(?, ',')::jsonb[])";
@@ -71,6 +75,7 @@ public class AnnotationAgentStoreRepositoryJDBCImpl extends AbstractRepositoryJD
         }
     }
 
+    @Nullable
     @Override
     public AnnotationAgent deleteAnnotationGenerators(Integer annotationPK, Integer bodyPK, Integer targetPK) {
         String sql = "SELECT * FROM annotation_generator_delete(?, ?, ?)";

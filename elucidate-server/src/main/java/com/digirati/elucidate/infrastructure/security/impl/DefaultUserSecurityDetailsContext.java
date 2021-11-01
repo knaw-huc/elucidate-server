@@ -1,5 +1,7 @@
 package com.digirati.elucidate.infrastructure.security.impl;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.infrastructure.security.Permission;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext;
@@ -16,6 +18,7 @@ public class DefaultUserSecurityDetailsContext implements UserSecurityDetailsCon
         return true;
     }
 
+    @Nullable
     @Override
     public Integer getAuthenticationId() {
         return null;

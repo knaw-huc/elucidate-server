@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public abstract class AbstractAnnotationHistoryController<A extends AbstractAnno
         this.annotationHistoryService = annotationHistoryService;
     }
 
+    @NotNull
     @RequestMapping(value = REQUEST_PATH, method = RequestMethod.GET)
     public ResponseEntity<H> get(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId, @PathVariable(VARIABLE_VERSION) int version) {
 

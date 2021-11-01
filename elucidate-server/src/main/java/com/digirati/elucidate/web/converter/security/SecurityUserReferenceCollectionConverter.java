@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.github.jsonldjava.utils.JsonUtils;
 import com.google.common.collect.ImmutableMap;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -23,14 +24,14 @@ public class SecurityUserReferenceCollectionConverter extends AbstractMessageCon
     }
 
     @Override
-    protected void decorateHeaders(SecurityUserReferenceCollection obj, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(SecurityUserReferenceCollection obj, @NotNull HttpOutputMessage outputMessage) {
         HttpHeaders headers = outputMessage.getHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
     }
 
     @Override
-    protected String getStringRepresentation(SecurityUserReferenceCollection obj, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull SecurityUserReferenceCollection obj, MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = new HashMap<>();
         List<Map<String, String>> userJsonMaps = obj.getUsers().stream()
                 .map(user -> ImmutableMap.of(
@@ -43,13 +44,14 @@ public class SecurityUserReferenceCollectionConverter extends AbstractMessageCon
         return JsonUtils.toString(jsonMap);
     }
 
+    @NotNull
     @Override
     protected SecurityUserReferenceCollection getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException("Unable to demarshall a SecurityUserReferenceCollection object.");
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return clazz.isAssignableFrom(SecurityUserReferenceCollection.class);
     }
 }

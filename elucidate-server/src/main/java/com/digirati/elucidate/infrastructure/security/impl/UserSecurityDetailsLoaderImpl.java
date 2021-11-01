@@ -3,6 +3,8 @@ package com.digirati.elucidate.infrastructure.security.impl;
 import java.util.Collections;
 import java.util.Optional;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.infrastructure.generator.IDGenerator;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetails;
 import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsLoader;
@@ -22,6 +24,7 @@ public class UserSecurityDetailsLoaderImpl implements UserSecurityDetailsLoader 
         this.groupRepository = groupRepository;
     }
 
+    @NotNull
     @Override
     public UserSecurityDetails createUser(String username) {
         SecurityUser user = userRepository.createUser(idGenerator.generateId(), username);

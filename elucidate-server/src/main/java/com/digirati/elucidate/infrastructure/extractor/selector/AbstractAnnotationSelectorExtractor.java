@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
@@ -19,8 +21,9 @@ public abstract class AbstractAnnotationSelectorExtractor<T extends AbstractAnno
 
     protected abstract T buildSelector(Map<String, Object> jsonMap);
 
+    @Nullable
     @SuppressWarnings("unchecked")
-    public List<T> extractSelectors(Map<String, Object> jsonMap) {
+    public List<T> extractSelectors(@NotNull Map<String, Object> jsonMap) {
 
         List<T> selectors = new ArrayList<>();
 

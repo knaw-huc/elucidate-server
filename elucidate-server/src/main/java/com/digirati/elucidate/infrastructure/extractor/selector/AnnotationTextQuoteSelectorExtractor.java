@@ -3,20 +3,24 @@ package com.digirati.elucidate.infrastructure.extractor.selector;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
 import com.digirati.elucidate.model.annotation.selector.textquote.AnnotationTextQuoteSelector;
 
 public class AnnotationTextQuoteSelectorExtractor extends AbstractAnnotationSelectorExtractor<AnnotationTextQuoteSelector> {
 
+    @NotNull
     @Override
     protected String getSelectorType() {
         return OAConstants.URI_TEXT_QUOTE_SELECTOR;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected AnnotationTextQuoteSelector buildSelector(Map<String, Object> jsonMap) {
+    protected AnnotationTextQuoteSelector buildSelector(@NotNull Map<String, Object> jsonMap) {
 
         AnnotationTextQuoteSelector annotationTextQuoteSelector = new AnnotationTextQuoteSelector();
 

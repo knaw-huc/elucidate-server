@@ -3,6 +3,7 @@ package com.digirati.elucidate.infrastructure.security.impl;
 
 import java.util.Collection;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +20,7 @@ public class JwtUserSecurityDetailsContext implements UserSecurityDetailsContext
     private static final GrantedAuthority ROLE_ADMIN = new SimpleGrantedAuthority("admin");
 
     @Override
-    public boolean isAuthorized(Permission operation, AbstractAnnotation annotation) {
+    public boolean isAuthorized(Permission operation, @NotNull AbstractAnnotation annotation) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserSecurityDetails details = (UserSecurityDetails) auth.getPrincipal();
         Collection<? extends GrantedAuthority> roles = auth.getAuthorities();
@@ -32,7 +33,7 @@ public class JwtUserSecurityDetailsContext implements UserSecurityDetailsContext
     }
 
     @Override
-    public boolean isAuthorized(Permission operation, SecurityGroup group) {
+    public boolean isAuthorized(Permission operation, @NotNull SecurityGroup group) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> roles = auth.getAuthorities();
         UserSecurityDetails details = (UserSecurityDetails) auth.getPrincipal();

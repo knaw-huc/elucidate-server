@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -19,16 +21,17 @@ import com.digirati.elucidate.model.statistics.OAStatisticsPage;
 @Component
 public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatisticsPageMessageConverter {
 
+    @NotNull
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDOAStatisticsPageMessageConverter(@Value("${statistics.page.oa.contexts}") String[] defaultContexts) {
+    public JSONLDOAStatisticsPageMessageConverter(@NotNull @Value("${statistics.page.oa.contexts}") String[] defaultContexts) {
         super(APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }
 
     @Override
-    protected boolean canRead(MediaType mediaType) {
+    protected boolean canRead(@Nullable MediaType mediaType) {
         if (mediaType == null) {
             return true;
         }
@@ -41,7 +44,7 @@ public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatistics
     }
 
     @Override
-    protected boolean canWrite(MediaType mediaType) {
+    protected boolean canWrite(@Nullable MediaType mediaType) {
         if (mediaType == null || MediaType.ALL.equals(mediaType)) {
             return true;
         }
@@ -55,7 +58,7 @@ public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatistics
 
     @Override
     @SuppressWarnings("unchecked")
-    protected String getStringRepresentation(OAStatisticsPage oaStatisticsPage, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull OAStatisticsPage oaStatisticsPage, @NotNull MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = oaStatisticsPage.getJsonMap();
 
         JSONLDProfile jsonLdProfile = getJsonLdProfile(contentType, defaultContexts);
@@ -76,6 +79,7 @@ public class JSONLDOAStatisticsPageMessageConverter extends AbstractOAStatistics
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     protected OAStatisticsPage getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, OAStatisticsPage.class));

@@ -24,14 +24,14 @@ public class UserSecurityDetailsMessageConverter extends AbstractMessageConverte
     }
 
     @Override
-    protected void decorateHeaders(UserSecurityDetails obj, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(UserSecurityDetails obj, @NotNull HttpOutputMessage outputMessage) {
         HttpHeaders headers = outputMessage.getHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
     }
 
     @Override
-    protected String getStringRepresentation(UserSecurityDetails obj, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull UserSecurityDetails obj, MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = new HashMap<>();
         List<Map<String, Object>> groupMaps = obj.getGroups()
                 .stream()
@@ -52,6 +52,7 @@ public class UserSecurityDetailsMessageConverter extends AbstractMessageConverte
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     protected UserSecurityDetails getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format(

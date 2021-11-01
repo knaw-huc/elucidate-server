@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
@@ -35,8 +37,9 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract C convertToAnnotationCollection(W3CAnnotationCollection w3cAnnotationCollection);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByBody(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByBody(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -65,8 +68,9 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract String buildBodySearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByTarget(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByTarget(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -95,8 +99,9 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract String buildTargetSearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByCreator(List<String> levels, String type, String value, boolean strict, ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByCreator(List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -125,8 +130,9 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract String buildCreatorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByGenerator(List<String> levels, String type, String value, boolean strict, ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByGenerator(List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -155,8 +161,9 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract String buildGeneratorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByTemporal(List<String> levels, List<String> types, Date since, ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByTemporal(List<String> levels, List<String> types, Date since, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -185,8 +192,9 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
 
+    @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByOverlap(int lowerLimit, int upperLimit, ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByOverlap(int lowerLimit, int upperLimit, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -209,10 +217,13 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
         return new AnnotationCollectionBuilder<A, P, C>(annotationCollectionConverter, annotationCollectionIriBuilder, annotationPageIriBuilder, firstAnnotationPageBuilder).buildAnnotationCollection(w3cAnnotationCollection, annotations, pageSize, clientPref);
     }
 
+    @Nullable
     protected abstract String buildOverlapSearchCollectionIri(int lowerLimit, int upperLimit);
 
+    @Nullable
     protected abstract String buildOverlapSearchPageIri(int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions);
 
+    @Nullable
     protected abstract ServiceResponse<P> buildOverlapSearchFirstAnnotationPage(List<A> annotations, int lowerLimit, int upperLimit, ClientPreference clientPref);
 
 }

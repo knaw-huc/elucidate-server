@@ -30,7 +30,7 @@ public abstract class AbstractOAAnnotationMessageConverter extends AbstractMessa
     }
 
     @Override
-    protected void decorateHeaders(OAAnnotation oaAnnotation, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(@NotNull OAAnnotation oaAnnotation, @NotNull HttpOutputMessage outputMessage) {
         outputMessage.getHeaders().add(HttpHeaders.ETAG, String.format("W/\"%s\"", oaAnnotation.getCacheKey()));
         outputMessage.getHeaders().add(HttpHeaders.LINK, "<http://www.w3.org/ns/ldp#Resource>; rel=\"type\"");
         outputMessage.getHeaders().add(HttpHeaders.ALLOW, "PUT,GET,OPTIONS,HEAD,DELETE");
@@ -39,7 +39,7 @@ public abstract class AbstractOAAnnotationMessageConverter extends AbstractMessa
         decoratePenultimateVersionHeader(oaAnnotation, outputMessage);
     }
 
-    private void decorateMementoDatetimeHeader(OAAnnotation oaAnnotation, HttpOutputMessage outputMessage) {
+    private void decorateMementoDatetimeHeader(@NotNull OAAnnotation oaAnnotation, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = oaAnnotation.getCollectionId();
         String annotationId = oaAnnotation.getAnnotationId();
@@ -54,7 +54,7 @@ public abstract class AbstractOAAnnotationMessageConverter extends AbstractMessa
         }
     }
 
-    private void decoratePenultimateVersionHeader(OAAnnotation oaAnnotation, HttpOutputMessage outputMessage) {
+    private void decoratePenultimateVersionHeader(@NotNull OAAnnotation oaAnnotation, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = oaAnnotation.getCollectionId();
         String annotationId = oaAnnotation.getAnnotationId();

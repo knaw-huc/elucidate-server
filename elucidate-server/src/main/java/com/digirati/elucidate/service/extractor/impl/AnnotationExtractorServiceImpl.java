@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.github.jsonldjava.utils.JsonUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +66,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
     }
 
     @Override
-    public void processAnnotationCreate(W3CAnnotation w3cAnnotation) {
+    public void processAnnotationCreate(@NotNull W3CAnnotation w3cAnnotation) {
         try {
             LOGGER.info(String.format("Processing CREATE for W3CAnnotation [%s]", w3cAnnotation));
             createAnnotationBodies(w3cAnnotation);
@@ -80,14 +81,14 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
     }
 
     @Override
-    public void processAnnotationUpdate(W3CAnnotation w3cAnnotation) {
+    public void processAnnotationUpdate(@NotNull W3CAnnotation w3cAnnotation) {
         LOGGER.info(String.format("Processing UPDATE for W3CAnnotation [%s]", w3cAnnotation));
         processAnnotationDelete(w3cAnnotation);
         processAnnotationCreate(w3cAnnotation);
     }
 
     @Override
-    public void processAnnotationDelete(W3CAnnotation w3cAnnotation) {
+    public void processAnnotationDelete(@NotNull W3CAnnotation w3cAnnotation) {
         LOGGER.info(String.format("Processing DELETE for W3CAnnotation [%s]", w3cAnnotation));
 
         deleteAnnotationCreators(w3cAnnotation);
@@ -113,7 +114,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationBodies(W3CAnnotation w3cAnnotation) throws IOException {
+    private void createAnnotationBodies(@NotNull W3CAnnotation w3cAnnotation) throws IOException {
         int annotationPk = w3cAnnotation.getPk();
         Map<String, Object> jsonMap = w3cAnnotation.getJsonMap();
 
@@ -138,7 +139,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationTargets(W3CAnnotation w3cAnnotation) throws IOException {
+    private void createAnnotationTargets(@NotNull W3CAnnotation w3cAnnotation) throws IOException {
         int annotationPk = w3cAnnotation.getPk();
         Map<String, Object> jsonMap = w3cAnnotation.getJsonMap();
 
@@ -163,7 +164,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         createAnnotationCssSelectors(bodyPk, targetPk, jsonMap);
         createAnnotationDataPositionSelectors(bodyPk, targetPk, jsonMap);
         createAnnotationInlineFragmentSelector(bodyPk, targetPk, jsonMap);
@@ -174,7 +175,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         createAnnotationXPathSelectors(bodyPk, targetPk, jsonMap);
     }
 
-    private void createAnnotationCssSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationCssSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationCSSSelector> annotationCssSelectors = new AnnotationCSSSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationCSSSelector annotationCssSelector : annotationCssSelectors) {
 
@@ -185,7 +186,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationDataPositionSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationDataPositionSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationDataPositionSelector> annotationDataPositionSelectors = new AnnotationDataPositionSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationDataPositionSelector annotationDataPositionSelector : annotationDataPositionSelectors) {
 
@@ -197,21 +198,21 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationInlineFragmentSelector(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationInlineFragmentSelector(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         AnnotationFragmentSelector annotationFragmentSelector = new AnnotationInlineFragmentSelectorExtractor().extractAnnotationInlineFragmentSelector(jsonMap);
         if (annotationFragmentSelector != null) {
             createAnnotationFragmentSelector(bodyPk, targetPk, annotationFragmentSelector);
         }
     }
 
-    private void createAnnotationFragmentSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationFragmentSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationFragmentSelector> annotationFragmentSelectors = new AnnotationFragmentSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationFragmentSelector annotationFragmentSelector : annotationFragmentSelectors) {
             createAnnotationFragmentSelector(bodyPk, targetPk, annotationFragmentSelector);
         }
     }
 
-    private void createAnnotationFragmentSelector(Integer bodyPk, Integer targetPk, AnnotationFragmentSelector annotationFragmentSelector) throws IOException {
+    private void createAnnotationFragmentSelector(Integer bodyPk, Integer targetPk, @NotNull AnnotationFragmentSelector annotationFragmentSelector) throws IOException {
 
         String selectorIri = annotationFragmentSelector.getSelectorIri();
         String conformsTo = annotationFragmentSelector.getConformsTo();
@@ -226,7 +227,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         annotationSelectorStoreRepository.createAnnotationFragmentSelector(bodyPk, targetPk, selectorIri, conformsTo, value, x, y, w, h, start, end, selectorJson);
     }
 
-    private void createAnnotationSvgSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationSvgSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationSVGSelector> annotationSvgSelectors = new AnnotationSVGSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationSVGSelector annotationSvgSelector : annotationSvgSelectors) {
 
@@ -237,7 +238,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationTextPositionSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationTextPositionSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationTextPositionSelector> annotationTextPositionSelectors = new AnnotationTextPositionSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationTextPositionSelector annotationTextPositionSelector : annotationTextPositionSelectors) {
 
@@ -249,7 +250,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationTextQuoteSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationTextQuoteSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationTextQuoteSelector> annotationTextQuoteSelectors = new AnnotationTextQuoteSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationTextQuoteSelector annotationTextQuoteSelector : annotationTextQuoteSelectors) {
 
@@ -262,7 +263,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationXPathSelectors(Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationXPathSelectors(Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationXPathSelector> annotationXPathSelectors = new AnnotationXPathSelectorExtractor().extractSelectors(jsonMap);
         for (AnnotationXPathSelector annotationXPathSelector : annotationXPathSelectors) {
 
@@ -273,13 +274,13 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationCreators(W3CAnnotation w3cAnnotation) throws IOException {
+    private void createAnnotationCreators(@NotNull W3CAnnotation w3cAnnotation) throws IOException {
         int annotationPk = w3cAnnotation.getPk();
         Map<String, Object> jsonMap = w3cAnnotation.getJsonMap();
         createAnnotationCreators(annotationPk, null, null, jsonMap);
     }
 
-    private void createAnnotationCreators(Integer annotationPk, Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationCreators(Integer annotationPk, Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationAgent> annotationCreators = new AnnotationCreatorExtractor().extractCreators(jsonMap);
         for (AnnotationAgent annotationCreator : annotationCreators) {
 
@@ -332,13 +333,13 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationGenerators(W3CAnnotation w3cAnnotation) throws IOException {
+    private void createAnnotationGenerators(@NotNull W3CAnnotation w3cAnnotation) throws IOException {
         int annotationPk = w3cAnnotation.getPk();
         Map<String, Object> jsonMap = w3cAnnotation.getJsonMap();
         createAnnotationGenerators(annotationPk, null, null, jsonMap);
     }
 
-    private void createAnnotationGenerators(Integer annotationPk, Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationGenerators(Integer annotationPk, Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationAgent> annotationGenerators = new AnnotationGeneratorExtractor().extractGenerators(jsonMap);
         for (AnnotationAgent annotationGenerator : annotationGenerators) {
 
@@ -391,13 +392,13 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private void createAnnotationTemporals(W3CAnnotation w3cAnnotation) throws IOException {
+    private void createAnnotationTemporals(@NotNull W3CAnnotation w3cAnnotation) throws IOException {
         int annotationPk = w3cAnnotation.getPk();
         Map<String, Object> jsonMap = w3cAnnotation.getJsonMap();
         createAnnotationTemporals(annotationPk, null, null, jsonMap);
     }
 
-    private void createAnnotationTemporals(Integer annotationPk, Integer bodyPk, Integer targetPk, Map<String, Object> jsonMap) throws IOException {
+    private void createAnnotationTemporals(Integer annotationPk, Integer bodyPk, Integer targetPk, @NotNull Map<String, Object> jsonMap) throws IOException {
         List<AnnotationTemporal> annotationTemporals = new AnnotationTemporalExtractor().extractTemporals(jsonMap);
         for (AnnotationTemporal annotationTemporal : annotationTemporals) {
             String type = annotationTemporal.getType();
@@ -407,12 +408,12 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         }
     }
 
-    private List<AnnotationBody> deleteBodies(W3CAnnotation w3cAnnotation) {
+    private List<AnnotationBody> deleteBodies(@NotNull W3CAnnotation w3cAnnotation) {
         int annotationPk = w3cAnnotation.getPk();
         return annotationBodyStoreRepository.deletedAnnotationBodies(annotationPk);
     }
 
-    private List<AnnotationTarget> deleteTargets(W3CAnnotation w3cAnnotation) {
+    private List<AnnotationTarget> deleteTargets(@NotNull W3CAnnotation w3cAnnotation) {
         int annotationPk = w3cAnnotation.getPk();
         return annotationTargetStoreRepository.deleteAnnotationTargets(annotationPk);
     }
@@ -455,7 +456,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         annotationSelectorStoreRepository.deleteAnnotationXPathSelectors(bodyPk, targetPk);
     }
 
-    private void deleteAnnotationCreators(W3CAnnotation w3cAnnotation) {
+    private void deleteAnnotationCreators(@NotNull W3CAnnotation w3cAnnotation) {
         int annotationPk = w3cAnnotation.getPk();
         deleteAnnotationCreators(annotationPk, null, null);
     }
@@ -464,7 +465,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         annotationAgentStoreRepository.deleteAnnotationCreators(annotationPk, bodyPk, targetPk);
     }
 
-    private void deleteAnnotationGenerators(W3CAnnotation w3cAnnotation) {
+    private void deleteAnnotationGenerators(@NotNull W3CAnnotation w3cAnnotation) {
         int annotationPk = w3cAnnotation.getPk();
         deleteAnnotationGenerators(annotationPk, null, null);
     }
@@ -473,7 +474,7 @@ public class AnnotationExtractorServiceImpl implements AnnotationExtractorServic
         annotationAgentStoreRepository.deleteAnnotationGenerators(annotationPk, bodyPk, targetPk);
     }
 
-    private void deleteAnnotationTemporals(W3CAnnotation w3cAnnotation) {
+    private void deleteAnnotationTemporals(@NotNull W3CAnnotation w3cAnnotation) {
         int annotationPk = w3cAnnotation.getPk();
         deleteAnnotationTemporals(annotationPk, null, null);
     }

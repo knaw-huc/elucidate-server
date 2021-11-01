@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
 import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
 import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
@@ -35,8 +38,9 @@ public class AnnotationCollectionBuilder<A extends AbstractAnnotation, P extends
         this.firstAnnotationPageBuilder = firstAnnotationPageBuilder;
     }
 
+    @Nullable
     @SuppressWarnings("serial")
-    public ServiceResponse<C> buildAnnotationCollection(W3CAnnotationCollection w3cAnnotationCollection, List<A> annotations, int pageSize, ClientPreference clientPref) {
+    public ServiceResponse<C> buildAnnotationCollection(W3CAnnotationCollection w3cAnnotationCollection, @NotNull List<A> annotations, int pageSize, @NotNull ClientPreference clientPref) {
 
         int totalAnnotations = annotations.size();
         int lastPage = PaginationUtils.calculateLastPage(totalAnnotations, pageSize);

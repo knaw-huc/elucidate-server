@@ -3,6 +3,7 @@ package com.digirati.elucidate.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,9 @@ public abstract class AbstractAnnotationContainerWriteController<A extends Abstr
         this.annotationCollectionService = annotationCollectionService;
     }
 
+    @NotNull
     @RequestMapping(value = CREATE_REQUEST_PATH, method = RequestMethod.POST)
-    public ResponseEntity<C> create(@RequestBody C annotationCollection, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<C> create(@RequestBody C annotationCollection, @NotNull HttpServletRequest request, @NotNull HttpServletResponse response) {
 
         String collectionId = request.getHeader("Slug");
 
@@ -60,11 +62,10 @@ public abstract class AbstractAnnotationContainerWriteController<A extends Abstr
         throw new IllegalArgumentException(String.format("Unexpected service response status [%s]", status));
     }
 
+    @NotNull
     @ExceptionHandler(InvalidAnnotationCollectionException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ValidationError handleException(InvalidAnnotationCollectionException invalidAnnotationCollectionException) {
-        ValidationError validationError = new ValidationError();
-        validationError.setJsonError(invalidAnnotationCollectionException.getErrorJson());
-        return validationError;
+    public ValidationError handleException(@NotNull InvalidAnnotationCollectionException invalidAnnotationCollectionException) {
+        return new ValidationError(invalidAnnotationCollectionException.getErrorJson());
     }
 }

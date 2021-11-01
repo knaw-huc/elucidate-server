@@ -3,6 +3,7 @@ package com.digirati.elucidate.repository.security.impl;
 import java.sql.Types;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -42,6 +43,7 @@ public class GroupMembershipRepositoryJDBCImpl implements GroupMembershipReposit
         });
     }
 
+    @NotNull
     @Override
     public List<AnnotationReference> getAnnotationGroupMemberships(int groupPk) {
         String sql = "select * from security_group_annotations where groupid = ?";
@@ -71,6 +73,7 @@ public class GroupMembershipRepositoryJDBCImpl implements GroupMembershipReposit
         });
     }
 
+    @NotNull
     @Override
     public List<SecurityUserReference> getUserGroupMemberships(int groupPk) {
         String sql = "select * from security_group_users where groupid = ?";

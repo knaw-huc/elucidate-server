@@ -1,5 +1,6 @@
 package com.digirati.elucidate.service.security.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,16 @@ public class SecurityGroupServiceImpl implements SecurityGroupService {
     private final UserSecurityDetailsContext securityDetailsContext;
 
     public SecurityGroupServiceImpl(
-        UserSecurityDetailsContext securityDetailsContext,
-        GroupRepository groupRepository,
-        @Qualifier("groupIdGenerator") IDGenerator idGenerator
+            UserSecurityDetailsContext securityDetailsContext,
+            GroupRepository groupRepository,
+            @Qualifier("groupIdGenerator") IDGenerator idGenerator
     ) {
         this.securityDetailsContext = securityDetailsContext;
         this.groupRepository = groupRepository;
         this.idGenerator = idGenerator;
     }
 
+    @NotNull
     @Override
     public ServiceResponse<SecurityGroup> createGroup(String label) {
         String id = idGenerator.generateId();
@@ -41,13 +43,13 @@ public class SecurityGroupServiceImpl implements SecurityGroupService {
     @Override
     public ServiceResponse<SecurityGroup> getGroup(String id) {
         return groupRepository.getGroup(id)
-            .map(group -> {
-                if (!securityDetailsContext.isAuthorized(Permission.READ, group)) {
-                    return new ServiceResponse<SecurityGroup>(Status.UNAUTHORIZED, null);
-                }
+                .map(group -> {
+                    if (!securityDetailsContext.isAuthorized(Permission.READ, group)) {
+                        return new ServiceResponse<SecurityGroup>(Status.UNAUTHORIZED, null);
+                    }
 
-                return new ServiceResponse<>(Status.OK, group);
-            })
-            .orElseGet(() -> new ServiceResponse<>(Status.NOT_FOUND, null));
+                    return new ServiceResponse<>(Status.OK, group);
+                })
+                .orElseGet(() -> new ServiceResponse<>(Status.NOT_FOUND, null));
     }
 }

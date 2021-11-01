@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 @Component
 public class TurtleW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnotationHistoryMessageConverter {
 
+    @NotNull
     private final NQuadTripleCallback turtleTripleCallback;
 
     @Autowired
@@ -24,11 +26,12 @@ public class TurtleW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnot
     }
 
     @Override
-    protected String getStringRepresentation(W3CAnnotationHistory w3CAnnotationHistory, MediaType contentType) {
+    protected String getStringRepresentation(@NotNull W3CAnnotationHistory w3CAnnotationHistory, MediaType contentType) {
         Map<String, Object> jsonMap = w3CAnnotationHistory.getJsonMap();
         return JsonLdProcessor.toRDF(jsonMap, turtleTripleCallback, jsonLdOptions).toString();
     }
 
+    @NotNull
     @Override
     protected W3CAnnotationHistory getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException(String.format("Conversion from Content Type [%s] to [%s] is not supported", contentType, W3CAnnotationHistory.class));

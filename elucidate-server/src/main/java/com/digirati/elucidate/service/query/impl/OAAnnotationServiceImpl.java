@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -34,9 +35,10 @@ public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnn
         this.iriBuilderService = iriBuilderService;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected OAAnnotation convertToAnnotation(W3CAnnotation w3cAnnotation) {
+    protected OAAnnotation convertToAnnotation(@NotNull W3CAnnotation w3cAnnotation) {
 
         Map<String, Object> w3cAnnotationMap = w3cAnnotation.getJsonMap();
         JsonNode w3cAnnotationNode = new ObjectMapper().convertValue(w3cAnnotationMap, JsonNode.class);
@@ -56,9 +58,10 @@ public class OAAnnotationServiceImpl extends AbstractAnnotationServiceImpl<OAAnn
         return oaAnnotation;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected W3CAnnotation convertFromAnnotation(OAAnnotation oaAnnotation) {
+    protected W3CAnnotation convertFromAnnotation(@NotNull OAAnnotation oaAnnotation) {
 
         Map<String, Object> oaAnnotationMap = oaAnnotation.getJsonMap();
         JsonNode oaAnnotationNode = new ObjectMapper().convertValue(oaAnnotationMap, JsonNode.class);

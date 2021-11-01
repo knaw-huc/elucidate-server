@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -20,16 +22,17 @@ import com.digirati.elucidate.service.history.W3CAnnotationHistoryService;
 @Component
 public class JSONLDW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnotationHistoryMessageConverter {
 
+    @NotNull
     private final String[] defaultContexts;
 
     @Autowired
-    public JSONLDW3CAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService, @Value("${annotation.history.w3c.contexts}") String[] defaultContexts) {
+    public JSONLDW3CAnnotationHistoryMessageConverter(IRIBuilderService iriBuilderService, W3CAnnotationHistoryService w3cAnnotationHistoryService, @NotNull @Value("${annotation.history.w3c.contexts}") String[] defaultContexts) {
         super(iriBuilderService, w3cAnnotationHistoryService, APPLICATION_JSON_LD);
         this.defaultContexts = Arrays.copyOf(defaultContexts, defaultContexts.length);
     }
 
     @Override
-    protected boolean canRead(MediaType mediaType) {
+    protected boolean canRead(@Nullable MediaType mediaType) {
         if (mediaType == null) {
             return true;
         }
@@ -42,7 +45,7 @@ public class JSONLDW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnot
     }
 
     @Override
-    protected boolean canWrite(MediaType mediaType) {
+    protected boolean canWrite(@Nullable MediaType mediaType) {
         if (mediaType == null || MediaType.ALL.equals(mediaType)) {
             return true;
         }
@@ -56,7 +59,7 @@ public class JSONLDW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnot
 
     @Override
     @SuppressWarnings("unchecked")
-    protected String getStringRepresentation(W3CAnnotationHistory w3cAnnotationHistory, MediaType contentType) throws Exception {
+    protected String getStringRepresentation(@NotNull W3CAnnotationHistory w3cAnnotationHistory, @NotNull MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = w3cAnnotationHistory.getJsonMap();
 
         JSONLDProfile jsonLdProfile = getJsonLdProfile(contentType, defaultContexts);
@@ -77,9 +80,10 @@ public class JSONLDW3CAnnotationHistoryMessageConverter extends AbstractW3CAnnot
         return JsonUtils.toPrettyString(jsonMap);
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
-    protected W3CAnnotationHistory getObjectRepresentation(String jsonStr, MediaType contentType) throws Exception {
+    protected W3CAnnotationHistory getObjectRepresentation(@NotNull String jsonStr, MediaType contentType) throws Exception {
         Map<String, Object> jsonMap = (Map<String, Object>) JsonUtils.fromString(jsonStr);
         List<Object> jsonList = JsonLdProcessor.expand(jsonMap, jsonLdOptions);
         jsonMap = (Map<String, Object>) jsonList.get(0);

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -114,7 +115,7 @@ public class AuthConfig implements ResourceServerConfigurer {
     private IDGenerator userIdGenerator;
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
+    public void configure(@NotNull ResourceServerSecurityConfigurer resources) {
         if (authEnabled) {
             resources
                     .tokenServices(tokenServices())
@@ -123,7 +124,7 @@ public class AuthConfig implements ResourceServerConfigurer {
     }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure(@NotNull HttpSecurity http) throws Exception {
         AuthorizedUrl authorizationConfigurer = http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -137,11 +138,13 @@ public class AuthConfig implements ResourceServerConfigurer {
         }
     }
 
+    @NotNull
     @Bean
     UserSecurityDetailsContext annotationSecurityContext() {
         return authEnabled ? new JwtUserSecurityDetailsContext() : new DefaultUserSecurityDetailsContext();
     }
 
+    @NotNull
     @Bean
     ResourceServerTokenServices tokenServices() {
         DefaultTokenServices services = new DefaultTokenServices();
@@ -149,11 +152,13 @@ public class AuthConfig implements ResourceServerConfigurer {
         return services;
     }
 
+    @NotNull
     @Bean
     TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
     }
 
+    @NotNull
     @Bean
     JwtAccessTokenConverter accessTokenConverter() {
         if (StringUtils.isEmpty(verifierKey)) {
@@ -174,6 +179,7 @@ public class AuthConfig implements ResourceServerConfigurer {
         return converter;
     }
 
+    @NotNull
     @Bean
     UserAuthenticationConverter userAuthenticationConverter() {
         List<String> uidProperties = Arrays.asList(this.uidProperties.split(","));
@@ -184,6 +190,7 @@ public class AuthConfig implements ResourceServerConfigurer {
         return new JwtUserAuthenticationConverter(uidProperties, securityDetailsLoader());
     }
 
+    @NotNull
     @Bean
     UserSecurityDetailsLoader securityDetailsLoader() {
         return new UserSecurityDetailsLoaderImpl(userIdGenerator, users, groups);

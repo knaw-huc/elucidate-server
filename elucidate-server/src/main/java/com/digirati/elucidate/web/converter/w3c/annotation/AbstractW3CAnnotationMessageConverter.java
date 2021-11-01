@@ -30,7 +30,7 @@ public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMess
     }
 
     @Override
-    protected void decorateHeaders(W3CAnnotation w3cAnnotation, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(@NotNull W3CAnnotation w3cAnnotation, @NotNull HttpOutputMessage outputMessage) {
         outputMessage.getHeaders().add(HttpHeaders.ETAG, String.format("W/\"%s\"", w3cAnnotation.getCacheKey()));
         outputMessage.getHeaders().add(HttpHeaders.LINK, "<http://www.w3.org/ns/ldp#Resource>; rel=\"type\"");
         outputMessage.getHeaders().add(HttpHeaders.ALLOW, "PUT,GET,OPTIONS,HEAD,DELETE");
@@ -39,7 +39,7 @@ public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMess
         decoratePenultimateVersionHeader(w3cAnnotation, outputMessage);
     }
 
-    private void decorateMementoDatetimeHeader(W3CAnnotation w3cAnnotation, HttpOutputMessage outputMessage) {
+    private void decorateMementoDatetimeHeader(@NotNull W3CAnnotation w3cAnnotation, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = w3cAnnotation.getCollectionId();
         String annotationId = w3cAnnotation.getAnnotationId();
@@ -54,7 +54,7 @@ public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMess
         }
     }
 
-    private void decoratePenultimateVersionHeader(W3CAnnotation w3cAnnotation, HttpOutputMessage outputMessage) {
+    private void decoratePenultimateVersionHeader(@NotNull W3CAnnotation w3cAnnotation, @NotNull HttpOutputMessage outputMessage) {
 
         String collectionId = w3cAnnotation.getCollectionId();
         String annotationId = w3cAnnotation.getAnnotationId();

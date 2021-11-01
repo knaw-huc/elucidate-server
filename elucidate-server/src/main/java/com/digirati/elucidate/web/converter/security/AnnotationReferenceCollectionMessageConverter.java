@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.github.jsonldjava.utils.JsonUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
@@ -29,14 +30,14 @@ public class AnnotationReferenceCollectionMessageConverter extends
     }
 
     @Override
-    protected void decorateHeaders(AnnotationReferenceCollection obj, HttpOutputMessage outputMessage) {
+    protected void decorateHeaders(AnnotationReferenceCollection obj, @NotNull HttpOutputMessage outputMessage) {
         HttpHeaders headers = outputMessage.getHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.ALLOW, "GET,OPTIONS,HEAD");
     }
 
     @Override
-    protected String getStringRepresentation(AnnotationReferenceCollection obj, MediaType contentType)
+    protected String getStringRepresentation(@NotNull AnnotationReferenceCollection obj, MediaType contentType)
             throws Exception {
         Map<String, Object> jsonMap = new HashMap<>();
         List<String> iris = obj.getAnnotations().stream()
@@ -47,13 +48,14 @@ public class AnnotationReferenceCollectionMessageConverter extends
         return JsonUtils.toString(jsonMap);
     }
 
+    @NotNull
     @Override
     protected AnnotationReferenceCollection getObjectRepresentation(String str, MediaType contentType) {
         throw new UnsupportedOperationException("AnnotatationReferenceCollection is not deserializable");
     }
 
     @Override
-    protected boolean supports(Class<?> clazz) {
+    protected boolean supports(@NotNull Class<?> clazz) {
         return clazz.isAssignableFrom(AnnotationReferenceCollection.class);
     }
 }

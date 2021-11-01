@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,9 @@ public abstract class AbstractAnnotationWriteController<A extends AbstractAnnota
         this.annotationCollectionService = annotationCollectionService;
     }
 
+    @NotNull
     @RequestMapping(value = CREATE_REQUEST_PATH, method = RequestMethod.POST)
-    public ResponseEntity<A> postCreate(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @RequestBody A annotation, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<A> postCreate(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @RequestBody A annotation, @NotNull HttpServletRequest request, @NotNull HttpServletResponse response) {
 
         ServiceResponse<C> annotationCollectionServiceResponse = annotationCollectionService.getAnnotationCollection(collectionId, Collections.emptyList(), ClientPreference.MINIMAL_CONTAINER);
         Status annotationCollectionStatus = annotationCollectionServiceResponse.getStatus();
@@ -72,8 +74,9 @@ public abstract class AbstractAnnotationWriteController<A extends AbstractAnnota
         throw new IllegalArgumentException(String.format("Unexpected service response status [%s]", annotationStatus));
     }
 
+    @NotNull
     @RequestMapping(value = UPDATE_REQUEST_PATH, method = RequestMethod.PUT)
-    public ResponseEntity<A> postUpdate(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId, @RequestBody A annotation, HttpServletRequest request) {
+    public ResponseEntity<A> postUpdate(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId, @RequestBody A annotation, @NotNull HttpServletRequest request) {
 
         String cacheKey = request.getHeader(HttpHeaders.IF_MATCH);
 
@@ -107,8 +110,9 @@ public abstract class AbstractAnnotationWriteController<A extends AbstractAnnota
         throw new IllegalArgumentException(String.format("Unexpected service response status [%s]", status));
     }
 
+    @NotNull
     @RequestMapping(value = UPDATE_REQUEST_PATH, method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId, HttpServletRequest request) {
+    public ResponseEntity<Void> delete(@PathVariable(VARIABLE_COLLECTION_ID) String collectionId, @PathVariable(VARIABLE_ANNOTATION_ID) String annotationId, @NotNull HttpServletRequest request) {
 
         String cacheKey = request.getHeader(HttpHeaders.IF_MATCH);
 
@@ -134,11 +138,10 @@ public abstract class AbstractAnnotationWriteController<A extends AbstractAnnota
         throw new IllegalArgumentException(String.format("Unexpected service response status [%s]", status));
     }
 
+    @NotNull
     @ExceptionHandler(InvalidAnnotationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ValidationError handleException(InvalidAnnotationException invalidAnnotationException) {
-        ValidationError validationError = new ValidationError();
-        validationError.setJsonError(invalidAnnotationException.getErrorJson());
-        return validationError;
+    public ValidationError handleException(@NotNull InvalidAnnotationException invalidAnnotationException) {
+        return new ValidationError(invalidAnnotationException.getErrorJson());
     }
 }

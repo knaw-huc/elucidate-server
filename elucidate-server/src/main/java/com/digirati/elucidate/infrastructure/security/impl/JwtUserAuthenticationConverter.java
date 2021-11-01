@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,27 +26,27 @@ public final class JwtUserAuthenticationConverter extends DefaultUserAuthenticat
     }
 
     @Override
-    public Authentication extractAuthentication(Map<String, ?> details) {
+    public Authentication extractAuthentication(@NotNull Map<String, ?> details) {
         return uidProperties.stream()
-            .filter(details::containsKey)
-            .map(prop -> (String) details.get(prop))
-            .findFirst()
-            .map(uid -> {
-                UserSecurityDetails securityDetails = securityDetailsLoader.findOrCreateUserDetails(uid);
-                Collection<String> roles = (Collection<String>) details.get(AUTHORITIES);
+                .filter(details::containsKey)
+                .map(prop -> (String) details.get(prop))
+                .findFirst()
+                .map(uid -> {
+                    UserSecurityDetails securityDetails = securityDetailsLoader.findOrCreateUserDetails(uid);
+                    Collection<String> roles = (Collection<String>) details.get(AUTHORITIES);
 
-                if (roles == null) {
-                    roles = Collections.emptyList();
-                }
+                    if (roles == null) {
+                        roles = Collections.emptyList();
+                    }
 
-                List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles.toArray(new String[0]));
+                    List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles.toArray(new String[0]));
 
-                return (Authentication) new UsernamePasswordAuthenticationToken(
-                    securityDetails,
-                    "N/A",
-                    authorities
-                );
-            })
-            .orElse(null);
+                    return (Authentication) new UsernamePasswordAuthenticationToken(
+                            securityDetails,
+                            "N/A",
+                            authorities
+                    );
+                })
+                .orElse(null);
     }
 }
