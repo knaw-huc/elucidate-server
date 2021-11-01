@@ -113,11 +113,12 @@ public class AnnotationCollectionStoreRepositoryJDBCImplTest extends AbstractTes
 
         Object[] params = {collectionId, jsonStr};
         int[] sqlTypes = {Types.VARCHAR, Types.OTHER};
-        when(jdbcTemplate.query(anyString(), aryEq(params), aryEq(sqlTypes), (W3CAnnotationCollectionRowMapper) any())).thenReturn(new ArrayList<W3CAnnotationCollection>() {
-            {
-                add(w3cAnnotationCollection);
-            }
-        });
+        when(jdbcTemplate.query(anyString(), aryEq(params), aryEq(sqlTypes), (W3CAnnotationCollectionRowMapper) any()))
+                .thenReturn(new ArrayList<W3CAnnotationCollection>() {
+                    {
+                        add(w3cAnnotationCollection);
+                    }
+                });
         W3CAnnotationCollection returnedW3CAnnotationCollection = annotationCollectionStoreRepository.createAnnotationCollection(collectionId, jsonStr);
         verify(jdbcTemplate, times(1)).query(anyString(), aryEq(params), aryEq(sqlTypes), (W3CAnnotationCollectionRowMapper) any());
 

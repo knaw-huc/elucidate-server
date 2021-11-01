@@ -10,27 +10,23 @@ import java.util.*
 object ResultSetUtils {
     @JvmStatic
     @Throws(SQLException::class)
-    fun getString(rs: ResultSet, columnName: String): String? {
-        return rs.getString(columnName)
-    }
+    fun getString(rs: ResultSet, columnName: String): String? =
+        rs.getString(columnName)
 
     @JvmStatic
     @Throws(SQLException::class)
-    fun getBoolean(rs: ResultSet, columnName: String): Boolean {
-        return rs.getBoolean(columnName)
-    }
+    fun getBoolean(rs: ResultSet, columnName: String): Boolean =
+        rs.getBoolean(columnName)
 
     @JvmStatic
     @Throws(SQLException::class)
-    fun getDate(rs: ResultSet, columnName: String): Date? {
-        return rs.getTimestamp(columnName)
-    }
+    fun getDate(rs: ResultSet, columnName: String): Date? =
+        rs.getTimestamp(columnName)
 
     @JvmStatic
     @Throws(SQLException::class)
-    fun getInt(rs: ResultSet, columnName: String): Int {
-        return rs.getInt(columnName)
-    }
+    fun getInt(rs: ResultSet, columnName: String): Int =
+        rs.getInt(columnName)
 
     @JvmStatic
     @Throws(SQLException::class)

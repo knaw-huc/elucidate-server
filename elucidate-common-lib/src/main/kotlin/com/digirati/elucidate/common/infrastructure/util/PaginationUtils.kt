@@ -4,7 +4,6 @@ import kotlin.math.floor
 
 object PaginationUtils {
     @JvmStatic
-    fun calculateLastPage(totalItems: Int, pageSize: Int): Int {
-        return floor(0.0.coerceAtLeast(totalItems.toDouble() - 1) / pageSize).toInt()
-    }
+    fun calculateLastPage(totalItems: Int, pageSize: Int): Int =
+        floor(0.0.coerceAtLeast(totalItems.toDouble() - 1) / pageSize).toInt()
 }
