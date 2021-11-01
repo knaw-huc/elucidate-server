@@ -1,13 +1,10 @@
-package com.digirati.elucidate.converter.node;
+package com.digirati.elucidate.converter.node
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants
+import com.fasterxml.jackson.databind.JsonNode
 
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-
-public class ItemsNodeConverterImpl implements JSONNodeConverter {
-
-    @Override
-    public JsonNode convertJsonNode(JsonNode inputNode) {
-        return inputNode.get(0).get(JSONLDConstants.ATTRIBUTE_LIST);
+class ItemsNodeConverterImpl : JSONNodeConverter {
+    override fun convertJsonNode(inputNode: JsonNode): JsonNode {
+        return inputNode[0][JSONLDConstants.ATTRIBUTE_LIST]
     }
 }

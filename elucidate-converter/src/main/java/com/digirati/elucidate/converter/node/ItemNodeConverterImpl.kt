@@ -1,23 +1,15 @@
-package com.digirati.elucidate.converter.node;
+package com.digirati.elucidate.converter.node
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.node.JsonNodeFactory
 
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-
-public class ItemNodeConverterImpl implements JSONNodeConverter {
-
-    @Override
-    public JsonNode convertJsonNode(JsonNode inputNode) {
-
-        ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
-        objectNode.set(JSONLDConstants.ATTRIBUTE_LIST, inputNode);
-
-        ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
-        arrayNode.add(objectNode);
-
-        return arrayNode;
+class ItemNodeConverterImpl : JSONNodeConverter {
+    override fun convertJsonNode(inputNode: JsonNode): JsonNode {
+        val objectNode = JsonNodeFactory.instance.objectNode()
+        objectNode.set<JsonNode>(JSONLDConstants.ATTRIBUTE_LIST, inputNode)
+        val arrayNode = JsonNodeFactory.instance.arrayNode()
+        arrayNode.add(objectNode)
+        return arrayNode
     }
 }

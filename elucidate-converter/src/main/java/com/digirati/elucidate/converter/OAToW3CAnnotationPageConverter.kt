@@ -1,17 +1,13 @@
-package com.digirati.elucidate.converter;
+package com.digirati.elucidate.converter
 
-import java.util.HashMap;
-import java.util.Map;
+import com.digirati.elucidate.converter.node.JSONNodeConverter
 
-import com.digirati.elucidate.converter.node.JSONNodeConverter;
+private val FIELD_MAPPINGS: Map<String, String> = HashMap()
+private val TYPE_MAPPINGS: Map<String, String> = HashMap()
+private val NODE_CONVERTER_MAPPINGS: Map<String, JSONNodeConverter> = HashMap()
 
-public class OAToW3CAnnotationPageConverter extends AbstractConverter {
-
-    private static final Map<String, String> FIELD_MAPPINGS = new HashMap<>();
-    private static final Map<String, String> TYPE_MAPPINGS = new HashMap<>();
-    private static final Map<String, JSONNodeConverter> NODE_CONVERTER_MAPPINGS = new HashMap<>();
-
-    public OAToW3CAnnotationPageConverter() {
-        super(FIELD_MAPPINGS, TYPE_MAPPINGS, NODE_CONVERTER_MAPPINGS);
-    }
-}
+object OAToW3CAnnotationPageConverter : AbstractConverter(
+    fieldMappings = FIELD_MAPPINGS,
+    typeMappings = TYPE_MAPPINGS,
+    nodeConverterMappings = NODE_CONVERTER_MAPPINGS
+)

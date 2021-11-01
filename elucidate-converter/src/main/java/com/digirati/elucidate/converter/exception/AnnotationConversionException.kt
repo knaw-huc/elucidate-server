@@ -1,9 +1,3 @@
-package com.digirati.elucidate.converter.exception;
+package com.digirati.elucidate.converter.exception
 
-@SuppressWarnings("serial")
-public class AnnotationConversionException extends RuntimeException {
-
-    public AnnotationConversionException(String msg) {
-        super(msg);
-    }
-}
+class AnnotationConversionException(msg: String?) : RuntimeException(msg)

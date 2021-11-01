@@ -1,45 +1,32 @@
-package com.digirati.elucidate.converter;
+package com.digirati.elucidate.converter
 
-import java.util.HashMap;
-import java.util.Map;
+import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants
+import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants
+import com.digirati.elucidate.common.infrastructure.constants.OAConstants
+import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants
+import com.digirati.elucidate.converter.node.ItemsNodeConverterImpl
+import com.digirati.elucidate.converter.node.JSONNodeConverter
 
-import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
-import com.digirati.elucidate.common.infrastructure.constants.DCTermsConstants;
-import com.digirati.elucidate.common.infrastructure.constants.OAConstants;
-import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
-import com.digirati.elucidate.converter.node.ItemsNodeConverterImpl;
-import com.digirati.elucidate.converter.node.JSONNodeConverter;
+private val FIELD_MAPPINGS: Map<String, String> = mapOf(
+    DCTermsConstants.URI_CREATOR to OAConstants.URI_ANNOTATED_BY,
+    DCTermsConstants.URI_CREATED to OAConstants.URI_ANNOTATED_AT,
+    ActivityStreamConstants.URI_GENERATOR to OAConstants.URI_SERIALIZED_BY,
+    DCTermsConstants.URI_ISSUED to OAConstants.URI_SERIALIZED_AT,
+    ActivityStreamConstants.URI_ITEMS to OAConstants.URI_ITEM
+)
 
-public class W3CToOAAnnotationConverter extends AbstractConverter {
+private val TYPE_MAPPINGS: Map<String, String> = mapOf(
+    XMLSchemaConstants.URI_DATE_TIME to XMLSchemaConstants.URI_DATE_TIME_STAMP
+)
 
-    @SuppressWarnings("serial")
-    private static final Map<String, String> FIELD_MAPPINGS = new HashMap<String, String>() {
-        {
-            put(DCTermsConstants.URI_CREATOR, OAConstants.URI_ANNOTATED_BY);
-            put(DCTermsConstants.URI_CREATED, OAConstants.URI_ANNOTATED_AT);
+private val NODE_CONVERTER_MAPPINGS: Map<String, JSONNodeConverter> = mapOf(
+    ActivityStreamConstants.URI_ITEMS to ItemsNodeConverterImpl()
+)
 
-            put(ActivityStreamConstants.URI_GENERATOR, OAConstants.URI_SERIALIZED_BY);
-            put(DCTermsConstants.URI_ISSUED, OAConstants.URI_SERIALIZED_AT);
+object W3CToOAAnnotationConverter : AbstractConverter(
+    fieldMappings = FIELD_MAPPINGS,
+    typeMappings = TYPE_MAPPINGS,
+    nodeConverterMappings = NODE_CONVERTER_MAPPINGS
+) {
 
-            put(ActivityStreamConstants.URI_ITEMS, OAConstants.URI_ITEM);
-        }
-    };
-
-    @SuppressWarnings("serial")
-    private static final Map<String, String> TYPE_MAPPINGS = new HashMap<String, String>() {
-        {
-            put(XMLSchemaConstants.URI_DATE_TIME, XMLSchemaConstants.URI_DATE_TIME_STAMP);
-        }
-    };
-
-    @SuppressWarnings("serial")
-    private static final Map<String, JSONNodeConverter> NODE_CONVERTER_MAPPINGS = new HashMap<String, JSONNodeConverter>() {
-        {
-            put(ActivityStreamConstants.URI_ITEMS, new ItemsNodeConverterImpl());
-        }
-    };
-
-    public W3CToOAAnnotationConverter() {
-        super(FIELD_MAPPINGS, TYPE_MAPPINGS, NODE_CONVERTER_MAPPINGS);
-    }
 }
