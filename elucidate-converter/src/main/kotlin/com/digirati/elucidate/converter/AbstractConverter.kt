@@ -26,23 +26,18 @@ abstract class AbstractConverter protected constructor(
 
     private fun processNode(node: JsonNode): JsonNode =
         when {
-            node.isObjectNode() -> {
-                processObjectNode(node)
-            }
-            node.isArrayNode() -> {
-                processArrayNode(node)
-            }
-            node.isTextNode() -> {
-                processTextNode(node)
-            }
-            node.isNumericNode() -> {
-                processNumericNode(node)
-            }
-            else -> {
-                throw AnnotationConversionException(
-                    "Unexpected JSON Node Type [${node.nodeType}] for JSON Node [$node]"
-                )
-            }
+            node.isObjectNode() -> processObjectNode(node)
+
+            node.isArrayNode() -> processArrayNode(node)
+
+            node.isTextNode() -> processTextNode(node)
+
+            node.isNumericNode() -> processNumericNode(node)
+
+            else -> throw AnnotationConversionException(
+                "Unexpected JSON Node Type [${node.nodeType}] for JSON Node [$node]"
+            )
+
         }
 
     private fun processObjectNode(objectNode: JsonNode): ObjectNode {
