@@ -13,9 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-import com.digirati.elucidate.model.JSONLDProfile;
-import com.digirati.elucidate.model.JSONLDProfile.Format;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -37,6 +34,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
+import com.digirati.elucidate.model.JSONLDProfile;
+import com.digirati.elucidate.model.JSONLDProfile.Format;
 
 public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageConverter<T> {
 
