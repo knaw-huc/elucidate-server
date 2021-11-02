@@ -5,5 +5,4 @@ object OAToW3CAnnotationCollectionConverter :
         fieldMappings = HashMap(),
         typeMappings = HashMap(),
         nodeConverterMappings = HashMap()
-    ) {
-}
+    )

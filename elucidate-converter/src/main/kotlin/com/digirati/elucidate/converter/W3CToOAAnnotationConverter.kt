@@ -27,6 +27,4 @@ object W3CToOAAnnotationConverter : AbstractConverter(
     fieldMappings = FIELD_MAPPINGS,
     typeMappings = TYPE_MAPPINGS,
     nodeConverterMappings = NODE_CONVERTER_MAPPINGS
-) {
-
-}
+)

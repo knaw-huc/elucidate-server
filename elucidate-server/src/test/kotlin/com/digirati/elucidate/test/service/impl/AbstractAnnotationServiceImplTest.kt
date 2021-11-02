@@ -51,7 +51,7 @@ abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : Abs
         val serviceResponse = annotationService!!.getAnnotation(collectionId, annotationId)
         assertThat(serviceResponse, `is`(not(nullValue())))
         assertThat(serviceResponse!!.status, `is`(equalTo(ServiceResponse.Status.OK)))
-        validateConversionToAnnotation(w3cAnnotation, serviceResponse!!.obj!!)
+        validateConversionToAnnotation(w3cAnnotation, serviceResponse.obj!!)
     }
 
     @Test
