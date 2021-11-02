@@ -1,10 +1,5 @@
-package com.digirati.elucidate.infrastructure.builder.function;
+package com.digirati.elucidate.infrastructure.builder.function
 
-import org.jetbrains.annotations.NotNull;
-
-@FunctionalInterface
-public interface AnnotationPageIRIBuilder {
-
-    @NotNull
-    String buildAnnotationPageIri(int page, boolean embeddedDescriptions);
+fun interface AnnotationPageIRIBuilder {
+    fun buildAnnotationPageIri(page: Int, embeddedDescriptions: Boolean): String
 }

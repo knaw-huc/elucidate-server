@@ -1,14 +1,7 @@
-package com.digirati.elucidate.infrastructure.builder.function;
+package com.digirati.elucidate.infrastructure.builder.function
 
-import java.util.Map;
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage
 
-import org.jetbrains.annotations.NotNull;
-
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
-
-@FunctionalInterface
-public interface AnnotationPageConverter<P extends AbstractAnnotationPage> {
-
-    @NotNull
-    P convertToAnnotationPage(Map<String, Object> jsonMap);
+fun interface AnnotationPageConverter<P : AbstractAnnotationPage?> {
+    fun convertToAnnotationPage(jsonMap: Map<String?, Any?>?): P
 }

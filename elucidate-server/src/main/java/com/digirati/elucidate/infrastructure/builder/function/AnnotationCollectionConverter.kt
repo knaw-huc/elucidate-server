@@ -1,12 +1,7 @@
-package com.digirati.elucidate.infrastructure.builder.function;
+package com.digirati.elucidate.infrastructure.builder.function
 
-import org.jetbrains.annotations.NotNull;
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection
 
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollection;
-
-@FunctionalInterface
-public interface AnnotationCollectionConverter<C extends AbstractAnnotationCollection> {
-
-    @NotNull
-    C convertToAnnotationCollection();
+fun interface AnnotationCollectionConverter<C : AbstractAnnotationCollection?> {
+    fun convertToAnnotationCollection(): C
 }

@@ -1,161 +1,140 @@
-package com.digirati.elucidate.infrastructure.builder;
+package com.digirati.elucidate.infrastructure.builder
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants
+import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants
+import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants
+import com.digirati.elucidate.common.infrastructure.util.PaginationUtils.calculateLastPage
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotation
+import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage
+import com.digirati.elucidate.infrastructure.builder.function.AnnotationCollectionIRIBuilder
+import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageConverter
+import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIBuilder
+import com.digirati.elucidate.model.ServiceResponse
+import kotlin.math.max
+import kotlin.math.min
 
-import org.jetbrains.annotations.NotNull;
-
-import com.digirati.elucidate.common.infrastructure.constants.ActivityStreamConstants;
-import com.digirati.elucidate.common.infrastructure.constants.JSONLDConstants;
-import com.digirati.elucidate.common.infrastructure.constants.XMLSchemaConstants;
-import com.digirati.elucidate.common.infrastructure.util.PaginationUtils;
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
-import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
-import com.digirati.elucidate.infrastructure.builder.function.AnnotationCollectionIRIBuilder;
-import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageConverter;
-import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIBuilder;
-import com.digirati.elucidate.model.ServiceResponse;
-import com.digirati.elucidate.model.ServiceResponse.Status;
-
-import static java.lang.Math.max;
-
-public class AnnotationPageBuilder<A extends AbstractAnnotation, P extends AbstractAnnotationPage> {
-
-    private final AnnotationPageConverter<P> annotationPageConverter;
-    private final AnnotationCollectionIRIBuilder annotationCollectionIriBuilder;
-    private final AnnotationPageIRIBuilder annotationPageIriBuilder;
-
-    public AnnotationPageBuilder(AnnotationPageConverter<P> annotationPageConverter, AnnotationCollectionIRIBuilder annotationCollectionIriBuilder, AnnotationPageIRIBuilder annotationPageIriBuilder) {
-        this.annotationPageConverter = annotationPageConverter;
-        this.annotationCollectionIriBuilder = annotationCollectionIriBuilder;
-        this.annotationPageIriBuilder = annotationPageIriBuilder;
-    }
-
-    @NotNull
-    @SuppressWarnings("serial")
-    public ServiceResponse<P> buildAnnotationPage(@NotNull List<A> annotations, int page, boolean embeddedDescriptions, int pageSize) {
-
-        int lastPage = PaginationUtils.calculateLastPage(annotations.size(), pageSize);
-        int from = Math.min(annotations.size(), max(0, page * pageSize));
-        int to = Math.min(annotations.size(), (page + 1) * pageSize);
-        annotations = annotations.subList(from, to);
-
-        Map<String, Object> jsonMap = new HashMap<>();
-        jsonMap.put(JSONLDConstants.ATTRIBUTE_TYPE, new ArrayList<String>() {
-            {
-                add(ActivityStreamConstants.URI_ORDERED_COLLECTION_PAGE);
+class AnnotationPageBuilder<A : AbstractAnnotation, P : AbstractAnnotationPage>(
+    private val annotationPageConverter: AnnotationPageConverter<P>,
+    private val annotationCollectionIriBuilder: AnnotationCollectionIRIBuilder,
+    private val annotationPageIriBuilder: AnnotationPageIRIBuilder
+) {
+    fun buildAnnotationPage(
+        annotations: List<A>,
+        page: Int,
+        embeddedDescriptions: Boolean,
+        pageSize: Int
+    ): ServiceResponse<P> {
+        var annotationSelection = annotations
+        val lastPage = calculateLastPage(annotationSelection.size, pageSize)
+        val from = min(annotationSelection.size, max(0, page * pageSize))
+        val to = min(annotationSelection.size, (page + 1) * pageSize)
+        annotationSelection = annotationSelection.subList(from, to)
+        val jsonMap: MutableMap<String, Any> = HashMap()
+        jsonMap[JSONLDConstants.ATTRIBUTE_TYPE] = object : ArrayList<String>() {
+            init {
+                add(ActivityStreamConstants.URI_ORDERED_COLLECTION_PAGE)
             }
-        });
-
-        String partOfIri = annotationCollectionIriBuilder.buildAnnotationCollectionIri();
-        jsonMap.put(ActivityStreamConstants.URI_PART_OF, new ArrayList<Map<String, Object>>() {
-            {
-                add(new HashMap<String, Object>() {
-                    {
-                        put(JSONLDConstants.ATTRIBUTE_ID, partOfIri);
-                    }
-                });
+        }
+        val partOfIri = annotationCollectionIriBuilder.buildAnnotationCollectionIri()
+        jsonMap[ActivityStreamConstants.URI_PART_OF] =
+            object : ArrayList<Map<String, Any>>() {
+                init {
+                    add(object : HashMap<String, Any>() {
+                        init {
+                            put(JSONLDConstants.ATTRIBUTE_ID, partOfIri)
+                        }
+                    })
+                }
             }
-        });
-
-        jsonMap.put(ActivityStreamConstants.URI_START_INDEX, new ArrayList<Map<String, Object>>() {
-            {
-                add(new HashMap<String, Object>() {
-                    {
-                        put(JSONLDConstants.ATTRIBUTE_TYPE, XMLSchemaConstants.URI_NON_NEGATIVE_INTEGER);
-                        put(JSONLDConstants.ATTRIBUTE_VALUE, from);
-                    }
-                });
+        jsonMap[ActivityStreamConstants.URI_START_INDEX] =
+            object : ArrayList<Map<String, Any>>() {
+                init {
+                    add(object : HashMap<String, Any>() {
+                        init {
+                            put(JSONLDConstants.ATTRIBUTE_TYPE, XMLSchemaConstants.URI_NON_NEGATIVE_INTEGER)
+                            put(JSONLDConstants.ATTRIBUTE_VALUE, from)
+                        }
+                    })
+                }
             }
-        });
-
         if (page > 0) {
-            String prevIri = annotationPageIriBuilder.buildAnnotationPageIri(page - 1, embeddedDescriptions);
-            jsonMap.put(ActivityStreamConstants.URI_PREV, new ArrayList<Map<String, Object>>() {
-                {
-                    add(new HashMap<String, Object>() {
-                        {
-                            put(JSONLDConstants.ATTRIBUTE_ID, prevIri);
+            val prevIri = annotationPageIriBuilder.buildAnnotationPageIri(page - 1, embeddedDescriptions)
+            jsonMap[ActivityStreamConstants.URI_PREV] = object : ArrayList<Map<String, Any>>() {
+                init {
+                    add(object : HashMap<String, Any>() {
+                        init {
+                            put(JSONLDConstants.ATTRIBUTE_ID, prevIri)
                         }
-                    });
+                    })
                 }
-            });
+            }
         }
-
         if (page < lastPage) {
-            String nextIri = annotationPageIriBuilder.buildAnnotationPageIri(page + 1, embeddedDescriptions);
-            jsonMap.put(ActivityStreamConstants.URI_NEXT, new ArrayList<Map<String, Object>>() {
-                {
-                    add(new HashMap<String, Object>() {
-                        {
-                            put(JSONLDConstants.ATTRIBUTE_ID, nextIri);
-                        }
-                    });
+            val nextIri = annotationPageIriBuilder.buildAnnotationPageIri(page + 1, embeddedDescriptions)
+            jsonMap[ActivityStreamConstants.URI_NEXT] =
+                object : ArrayList<Map<String, Any>>() {
+                    init {
+                        add(object : HashMap<String, Any>() {
+                            init {
+                                put(JSONLDConstants.ATTRIBUTE_ID, nextIri)
+                            }
+                        })
+                    }
                 }
-            });
         }
-
         if (embeddedDescriptions) {
-            List<Map<String, Object>> annotationDescriptions = convertToDescriptions(annotations);
-            jsonMap.put(ActivityStreamConstants.URI_ITEMS, new ArrayList<Map<String, Object>>() {
-                {
-                    add(new HashMap<String, Object>() {
-                        {
-                            put(JSONLDConstants.ATTRIBUTE_LIST, new ArrayList<Map<String, Object>>() {
-                                {
-                                    addAll(annotationDescriptions);
-                                }
-                            });
+            val annotationDescriptions = convertToDescriptions(annotationSelection)
+            jsonMap[ActivityStreamConstants.URI_ITEMS] = object : ArrayList<Map<String, Any>>() {
+                init {
+                    add(object : HashMap<String, Any>() {
+                        init {
+                            put(
+                                JSONLDConstants.ATTRIBUTE_LIST,
+                                object : ArrayList<Map<String, Any>>() {
+                                    init {
+                                        addAll(annotationDescriptions)
+                                    }
+                                })
                         }
-                    });
-
+                    })
                 }
-            });
-
+            }
         } else {
-            List<Map<String, Object>> annotationIris = convertToIris(annotations);
-            jsonMap.put(ActivityStreamConstants.URI_ITEMS, new ArrayList<Map<String, Object>>() {
-                {
-                    add(new HashMap<String, Object>() {
-                        {
-                            put(JSONLDConstants.ATTRIBUTE_LIST, new ArrayList<Map<String, Object>>() {
-                                {
-                                    addAll(annotationIris);
-                                }
-                            });
+            val annotationIris = convertToIris(annotationSelection)
+            jsonMap[ActivityStreamConstants.URI_ITEMS] = object : ArrayList<Map<String, Any>>() {
+                init {
+                    add(object : HashMap<String, Any>() {
+                        init {
+                            put(
+                                JSONLDConstants.ATTRIBUTE_LIST,
+                                object : ArrayList<Map<String, Any>>() {
+                                    init {
+                                        addAll(annotationIris)
+                                    }
+                                })
                         }
-                    });
-
+                    })
                 }
-            });
+            }
         }
-
-        P annotationPage = annotationPageConverter.convertToAnnotationPage(jsonMap);
-        return new ServiceResponse<>(Status.OK, annotationPage);
+        val annotationPage = annotationPageConverter.convertToAnnotationPage(jsonMap.toMap())
+        return ServiceResponse(ServiceResponse.Status.OK, annotationPage)
     }
 
-    @NotNull
-    private List<Map<String, Object>> convertToDescriptions(@NotNull List<A> annotations) {
-        List<Map<String, Object>> descriptions = new ArrayList<>();
-        for (A annotation : annotations) {
-            descriptions.add(annotation.getJsonMap());
+    private fun convertToDescriptions(annotations: List<A>): List<Map<String, Any>> {
+        val descriptions: MutableList<Map<String, Any>> = ArrayList()
+        for (annotation in annotations) {
+            descriptions.add(annotation.jsonMap!!)
         }
-        return descriptions;
+        return descriptions
     }
 
-    @NotNull
-    @SuppressWarnings("serial")
-    private List<Map<String, Object>> convertToIris(@NotNull List<A> annotations) {
-        List<Map<String, Object>> iris = new ArrayList<>();
-        for (A annotation : annotations) {
-            iris.add(new HashMap<String, Object>() {
-                {
-                    put(JSONLDConstants.ATTRIBUTE_ID, annotation.getJsonMap().get(JSONLDConstants.ATTRIBUTE_ID));
-                }
-            });
-        }
-        return iris;
+    private fun convertToIris(annotations: List<A>): List<Map<String, Any>> {
+        return annotations.map { a -> mapOf(JSONLDConstants.ATTRIBUTE_ID to a.jsonMap!![JSONLDConstants.ATTRIBUTE_ID]!!) }
+//        val iris: MutableList<Map<String, Any>> = ArrayList()
+//        for (annotation in annotations) {
+//            iris.add(mapOf(JSONLDConstants.ATTRIBUTE_ID to annotation.jsonMap!![JSONLDConstants.ATTRIBUTE_ID]!!))
+//        }
+//        return iris
     }
 }
