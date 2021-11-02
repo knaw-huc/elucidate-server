@@ -21,7 +21,7 @@ class W3CAnnotationRowMapper : RowMapper<W3CAnnotation> {
             collectionId = getString(rs, "collectionid")
             createdDateTime = getDate(rs, "createddatetime")
             isDeleted = getBoolean(rs, "deleted")
-            jsonMap = getJsonMap(rs, "json")
+            jsonMap = getJsonMap(rs, "json")?.toMutableMap()
             modifiedDateTime = getDate(rs, "modifieddatetime")
             ownerId = getInt(rs, "ownerid")
             groups = getArrayAsSet(rs, "group_ids")

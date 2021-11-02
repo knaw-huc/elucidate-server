@@ -19,7 +19,7 @@ class W3CAnnotationCollectionRowMapper : RowMapper<W3CAnnotationCollection> {
             collectionId = getString(rs, "collectionid")
             createdDateTime = getDate(rs, "createddatetime")
             isDeleted = getBoolean(rs, "deleted")
-            jsonMap = getJsonMap(rs, "json")
+            jsonMap = getJsonMap(rs, "json")?.toMutableMap()
             modifiedDateTime = getDate(rs, "modifieddatetime")
         }
 }
