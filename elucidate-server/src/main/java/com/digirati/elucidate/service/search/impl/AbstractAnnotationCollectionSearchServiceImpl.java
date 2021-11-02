@@ -64,6 +64,10 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     protected abstract ServiceResponse<P> buildBodySearchFirstAnnotationPage(List<A> annotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref);
 
+    protected boolean useEmbeddedDescriptions(@NotNull ClientPreference clientPref) {
+        return !clientPref.equals(ClientPreference.CONTAINED_IRIS);
+    }
+
     protected abstract String buildBodySearchCollectionIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri);
 
     protected abstract String buildBodySearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);

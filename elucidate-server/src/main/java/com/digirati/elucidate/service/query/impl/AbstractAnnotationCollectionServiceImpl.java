@@ -106,4 +106,8 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
     private boolean validateCollectionId(@NotNull String collectionId) {
         return StringUtils.isNotBlank(collectionId) && collectionId.length() <= ElucidateConstants.MAX_ID_SIZE;
     }
+
+    protected boolean useEmbeddedDescriptions(@NotNull ClientPreference clientPref) {
+        return !clientPref.equals(ClientPreference.CONTAINED_IRIS);
+    }
 }

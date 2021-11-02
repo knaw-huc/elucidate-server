@@ -87,11 +87,7 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String collectionId, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageService.buildAnnotationPage(oaAnnotations, collectionId, 0, false);
-        } else {
-            return oaAnnotationPageService.buildAnnotationPage(oaAnnotations, collectionId, 0, true);
-        }
+        return oaAnnotationPageService.buildAnnotationPage(oaAnnotations, collectionId, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
@@ -103,4 +99,5 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
     protected String buildPageIri(String searchQuery, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildOAPageIri(searchQuery, page, embeddedDescriptions);
     }
+
 }

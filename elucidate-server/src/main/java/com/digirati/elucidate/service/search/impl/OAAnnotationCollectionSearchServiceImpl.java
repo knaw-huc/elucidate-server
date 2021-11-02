@@ -62,11 +62,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildBodySearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageSearchService.buildAnnotationPageByBody(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, false);
-        } else {
-            return oaAnnotationPageSearchService.buildAnnotationPageByBody(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, true);
-        }
+        return oaAnnotationPageSearchService.buildAnnotationPageByBody(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
@@ -81,11 +77,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildTargetSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageSearchService.buildAnnotationPageByTarget(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, false);
-        } else {
-            return oaAnnotationPageSearchService.buildAnnotationPageByTarget(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, true);
-        }
+        return oaAnnotationPageSearchService.buildAnnotationPageByTarget(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
@@ -100,11 +92,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildCreatorSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageSearchService.buildAnnotationPageByCreator(oaAnnotations, levels, type, value, strict, 0, false);
-        } else {
-            return oaAnnotationPageSearchService.buildAnnotationPageByCreator(oaAnnotations, levels, type, value, strict, 0, true);
-        }
+        return oaAnnotationPageSearchService.buildAnnotationPageByCreator(oaAnnotations, levels, type, value, strict, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
@@ -119,11 +107,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildGeneratorSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageSearchService.buildAnnotationPageByGenerator(oaAnnotations, levels, type, value, strict, 0, false);
-        } else {
-            return oaAnnotationPageSearchService.buildAnnotationPageByGenerator(oaAnnotations, levels, type, value, strict, 0, true);
-        }
+        return oaAnnotationPageSearchService.buildAnnotationPageByGenerator(oaAnnotations, levels, type, value, strict, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
@@ -138,11 +122,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildTemporalSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> levels, List<String> types, Date since, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageSearchService.buildAnnotationPageByTemporal(oaAnnotations, levels, types, since, 0, false);
-        } else {
-            return oaAnnotationPageSearchService.buildAnnotationPageByTemporal(oaAnnotations, levels, types, since, 0, true);
-        }
+        return oaAnnotationPageSearchService.buildAnnotationPageByTemporal(oaAnnotations, levels, types, since, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
@@ -157,11 +137,7 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, int lowerLevel, int upperLevel, @NotNull ClientPreference clientPref) {
-        if (clientPref.equals(ClientPreference.CONTAINED_IRIS)) {
-            return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, lowerLevel, upperLevel, 0, false);
-        } else {
-            return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, lowerLevel, upperLevel, 0, true);
-        }
+        return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, lowerLevel, upperLevel, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
