@@ -215,12 +215,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        ServiceResponse<P> serviceResponse;
-        if (!iris) {
-            serviceResponse = annotationPageSearch.searchAnnotationPage(true);
-        } else {
-            serviceResponse = annotationPageSearch.searchAnnotationPage(false);
-        }
+        ServiceResponse<P> serviceResponse = annotationPageSearch.searchAnnotationPage(!iris);
         Status status = serviceResponse.getStatus();
 
         if (status.equals(Status.NON_CONFORMANT)) {
