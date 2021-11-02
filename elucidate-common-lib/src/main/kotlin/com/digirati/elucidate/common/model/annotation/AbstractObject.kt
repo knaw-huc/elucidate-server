@@ -5,7 +5,7 @@ import java.util.*
 
 abstract class AbstractObject : Serializable {
     var pk: Int? = null
-    var jsonMap: Map<String, Any>? = null
+    var jsonMap: MutableMap<String, Any>? = null
     var isDeleted = false
     var createdDateTime: Date? = null
     var modifiedDateTime: Date? = null
