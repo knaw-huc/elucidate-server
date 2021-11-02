@@ -14,9 +14,9 @@ import com.digirati.elucidate.infrastructure.builder.AnnotationPageBuilder;
 import com.digirati.elucidate.infrastructure.builder.function.AnnotationCollectionIRIBuilder;
 import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIBuilder;
 import com.digirati.elucidate.model.ServiceResponse;
-import com.digirati.elucidate.service.search.AbstractAnnotationPageSearchService;
+import com.digirati.elucidate.service.search.AnnotationPageSearchService;
 
-public abstract class AbstractAnnotationPageSearchServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage> implements AbstractAnnotationPageSearchService<A, P> {
+public abstract class AbstractAnnotationPageSearchServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage> implements AnnotationPageSearchService<A, P> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 

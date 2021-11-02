@@ -12,7 +12,7 @@ import com.digirati.elucidate.infrastructure.exception.InvalidServiceResponseExc
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.annotation.history.AbstractAnnotationHistory;
-import com.digirati.elucidate.service.history.AbstractAnnotationHistoryService;
+import com.digirati.elucidate.service.history.AnnotationHistoryService;
 
 public abstract class AbstractAnnotationHistoryController<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> {
 
@@ -21,9 +21,9 @@ public abstract class AbstractAnnotationHistoryController<A extends AbstractAnno
     private static final String VARIABLE_VERSION = "version";
     private static final String REQUEST_PATH = "/services/history/{" + VARIABLE_COLLECTION_ID + "}/{" + VARIABLE_ANNOTATION_ID + "}/{" + VARIABLE_VERSION + "}";
 
-    private final AbstractAnnotationHistoryService<A, H> annotationHistoryService;
+    private final AnnotationHistoryService<A, H> annotationHistoryService;
 
-    protected AbstractAnnotationHistoryController(AbstractAnnotationHistoryService<A, H> annotationHistoryService) {
+    protected AbstractAnnotationHistoryController(AnnotationHistoryService<A, H> annotationHistoryService) {
         this.annotationHistoryService = annotationHistoryService;
     }
 

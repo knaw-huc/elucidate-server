@@ -20,15 +20,15 @@ import com.digirati.elucidate.infrastructure.exception.InvalidAnnotationCollecti
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.ValidationError;
-import com.digirati.elucidate.service.query.AbstractAnnotationCollectionService;
+import com.digirati.elucidate.service.query.AnnotationCollectionService;
 
 public abstract class AbstractAnnotationContainerWriteController<A extends AbstractAnnotation, C extends AbstractAnnotationCollection> {
 
     private static final String CREATE_REQUEST_PATH = "/";
 
-    private final AbstractAnnotationCollectionService<A, C> annotationCollectionService;
+    private final AnnotationCollectionService<A, C> annotationCollectionService;
 
-    protected AbstractAnnotationContainerWriteController(AbstractAnnotationCollectionService<A, C> annotationCollectionService) {
+    protected AbstractAnnotationContainerWriteController(AnnotationCollectionService<A, C> annotationCollectionService) {
         this.annotationCollectionService = annotationCollectionService;
     }
 

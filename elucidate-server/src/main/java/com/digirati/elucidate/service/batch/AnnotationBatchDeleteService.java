@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.batch.AbstractBatchOperation;
 
-public interface AbstractAnnotationBatchUpdateService<B extends AbstractBatchOperation> {
+public interface AnnotationBatchDeleteService<B extends AbstractBatchOperation> {
 
     @NotNull
-    ServiceResponse<B> processBatchUpdate(B batchOperation);
+    ServiceResponse<B> processBatchDelete(B batchOperation);
 }

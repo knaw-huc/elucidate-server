@@ -19,18 +19,18 @@ import com.digirati.elucidate.infrastructure.batch.function.AnnotationBatchSearc
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.batch.AbstractBatchOperation;
-import com.digirati.elucidate.service.batch.AbstractAnnotationBatchDeleteService;
-import com.digirati.elucidate.service.query.AbstractAnnotationService;
-import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
+import com.digirati.elucidate.service.batch.AnnotationBatchDeleteService;
+import com.digirati.elucidate.service.query.AnnotationService;
+import com.digirati.elucidate.service.search.AnnotationSearchService;
 
-public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends AbstractAnnotation, B extends AbstractBatchOperation> implements AbstractAnnotationBatchDeleteService<B> {
+public abstract class AbstractAnnotationBatchDeleteServiceImpl<A extends AbstractAnnotation, B extends AbstractBatchOperation> implements AnnotationBatchDeleteService<B> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private final AbstractAnnotationService<A> annotationService;
-    private final AbstractAnnotationSearchService<A> annotationSearchService;
+    private final AnnotationService<A> annotationService;
+    private final AnnotationSearchService<A> annotationSearchService;
 
-    protected AbstractAnnotationBatchDeleteServiceImpl(AbstractAnnotationService<A> annotationService, AbstractAnnotationSearchService<A> annotationSearchService) {
+    protected AbstractAnnotationBatchDeleteServiceImpl(AnnotationService<A> annotationService, AnnotationSearchService<A> annotationSearchService) {
         this.annotationService = annotationService;
         this.annotationSearchService = annotationSearchService;
     }

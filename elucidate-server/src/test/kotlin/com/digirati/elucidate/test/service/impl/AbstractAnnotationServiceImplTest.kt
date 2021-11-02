@@ -7,7 +7,7 @@ import com.digirati.elucidate.common.service.IRIBuilderService
 import com.digirati.elucidate.common.test.AbstractTest
 import com.digirati.elucidate.model.ServiceResponse
 import com.digirati.elucidate.repository.AnnotationStoreRepository
-import com.digirati.elucidate.service.query.AbstractAnnotationService
+import com.digirati.elucidate.service.query.AnnotationService
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.Before
@@ -20,12 +20,12 @@ import java.util.*
 abstract class AbstractAnnotationServiceImplTest<A : AbstractAnnotation, C : AbstractAnnotationCollection> :
     AbstractTest() {
     private var annotationStoreRepository: AnnotationStoreRepository? = null
-    private var annotationService: AbstractAnnotationService<A>? = null
+    private var annotationService: AnnotationService<A>? = null
 
     protected abstract fun createAnnotationService(
         iriBuilderService: IRIBuilderService?,
         annotationStoreRepository: AnnotationStoreRepository?
-    ): AbstractAnnotationService<A>
+    ): AnnotationService<A>
 
     protected abstract fun validateConversionToAnnotation(w3cAnnotation: W3CAnnotation, targetAnnotation: A)
     protected abstract fun generateAnnotationWithJsonMapOnly(): A

@@ -25,9 +25,9 @@ import com.digirati.elucidate.infrastructure.search.function.AnnotationPageSearc
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
-import com.digirati.elucidate.service.search.AbstractAnnotationCollectionSearchService;
-import com.digirati.elucidate.service.search.AbstractAnnotationPageSearchService;
-import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
+import com.digirati.elucidate.service.search.AnnotationCollectionSearchService;
+import com.digirati.elucidate.service.search.AnnotationPageSearchService;
+import com.digirati.elucidate.service.search.AnnotationSearchService;
 
 public abstract class AbstractAnnotationSearchController<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> {
 
@@ -40,11 +40,11 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     private static final String PREFER_CONTAINED_IRIS = "http://www.w3.org/ns/oa#prefercontainediris";
     private static final String PREFER_CONTAINED_DESCRIPTIONS = "http://www.w3.org/ns/oa#prefercontaineddescriptions";
 
-    private final AbstractAnnotationSearchService<A> annotationSearchService;
-    private final AbstractAnnotationPageSearchService<A, P> annotationPageSearchService;
-    private final AbstractAnnotationCollectionSearchService<C> annotationCollectionSearchService;
+    private final AnnotationSearchService<A> annotationSearchService;
+    private final AnnotationPageSearchService<A, P> annotationPageSearchService;
+    private final AnnotationCollectionSearchService<C> annotationCollectionSearchService;
 
-    protected AbstractAnnotationSearchController(AbstractAnnotationSearchService<A> annotationSearchService, AbstractAnnotationPageSearchService<A, P> annotationPageSearchService, AbstractAnnotationCollectionSearchService<C> annotationCollectionSearchService) {
+    protected AbstractAnnotationSearchController(AnnotationSearchService<A> annotationSearchService, AnnotationPageSearchService<A, P> annotationPageSearchService, AnnotationCollectionSearchService<C> annotationCollectionSearchService) {
         this.annotationSearchService = annotationSearchService;
         this.annotationPageSearchService = annotationPageSearchService;
         this.annotationCollectionSearchService = annotationCollectionSearchService;

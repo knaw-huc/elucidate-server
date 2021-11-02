@@ -22,9 +22,9 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.annotation.selector.fragment.TFragmentSelector;
 import com.digirati.elucidate.model.annotation.selector.fragment.XYWHFragmentSelector;
 import com.digirati.elucidate.repository.AnnotationSearchRepository;
-import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
+import com.digirati.elucidate.service.search.AnnotationSearchService;
 
-public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnnotation> implements AbstractAnnotationSearchService<A> {
+public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnnotation> implements AnnotationSearchService<A> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 

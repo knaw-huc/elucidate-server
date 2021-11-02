@@ -21,9 +21,9 @@ import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
-import com.digirati.elucidate.service.query.AbstractAnnotationCollectionService;
-import com.digirati.elucidate.service.query.AbstractAnnotationPageService;
-import com.digirati.elucidate.service.query.AbstractAnnotationService;
+import com.digirati.elucidate.service.query.AnnotationCollectionService;
+import com.digirati.elucidate.service.query.AnnotationPageService;
+import com.digirati.elucidate.service.query.AnnotationService;
 
 public abstract class AbstractAnnotationContainerReadController<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> {
 
@@ -33,11 +33,11 @@ public abstract class AbstractAnnotationContainerReadController<A extends Abstra
     private static final String PREFER_CONTAINED_IRIS = "http://www.w3.org/ns/oa#prefercontainediris";
     private static final String PREFER_CONTAINED_DESCRIPTIONS = "http://www.w3.org/ns/oa#prefercontaineddescriptions";
 
-    private final AbstractAnnotationService<A> annotationService;
-    private final AbstractAnnotationPageService<A, P> annotationPageService;
-    private final AbstractAnnotationCollectionService<A, C> annotationCollectionService;
+    private final AnnotationService<A> annotationService;
+    private final AnnotationPageService<A, P> annotationPageService;
+    private final AnnotationCollectionService<A, C> annotationCollectionService;
 
-    protected AbstractAnnotationContainerReadController(AbstractAnnotationService<A> annotationService, AbstractAnnotationPageService<A, P> annotationPageService, AbstractAnnotationCollectionService<A, C> annotationCollectionService) {
+    protected AbstractAnnotationContainerReadController(AnnotationService<A> annotationService, AnnotationPageService<A, P> annotationPageService, AnnotationCollectionService<A, C> annotationCollectionService) {
         this.annotationService = annotationService;
         this.annotationPageService = annotationPageService;
         this.annotationCollectionService = annotationCollectionService;

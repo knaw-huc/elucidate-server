@@ -6,7 +6,7 @@ import com.digirati.elucidate.common.service.IRIBuilderService
 import com.digirati.elucidate.infrastructure.generator.IDGenerator
 import com.digirati.elucidate.infrastructure.security.impl.DefaultUserSecurityDetailsContext
 import com.digirati.elucidate.repository.AnnotationStoreRepository
-import com.digirati.elucidate.service.query.AbstractAnnotationService
+import com.digirati.elucidate.service.query.AnnotationService
 import com.digirati.elucidate.service.query.impl.W3CAnnotationServiceImpl
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
@@ -20,7 +20,7 @@ class W3CAnnotationServiceImplTest : AbstractAnnotationServiceImplTest<W3CAnnota
     override fun createAnnotationService(
         iriBuilderService: IRIBuilderService?,
         annotationStoreRepository: AnnotationStoreRepository?
-    ): AbstractAnnotationService<W3CAnnotation> {
+    ): AnnotationService<W3CAnnotation> {
         return W3CAnnotationServiceImpl(
             DefaultUserSecurityDetailsContext(),
             annotationStoreRepository,

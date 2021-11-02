@@ -9,7 +9,7 @@ import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.annotation.history.AbstractAnnotationHistory;
 
-public interface AbstractAnnotationHistoryService<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> {
+public interface AnnotationHistoryService<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> {
 
     @NotNull
     ServiceResponse<H> recordAnnotationHistory(A annotation);

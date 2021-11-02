@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.model.ServiceResponse;
 
-public interface AbstractAnnotationSearchService<A extends AbstractAnnotation> {
+public interface AnnotationSearchService<A extends AbstractAnnotation> {
 
     @Nullable
     ServiceResponse<List<A>> searchAnnotationsByBody(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri);

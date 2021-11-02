@@ -23,9 +23,9 @@ import com.digirati.elucidate.infrastructure.security.UserSecurityDetailsContext
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.repository.AnnotationStoreRepository;
-import com.digirati.elucidate.service.query.AbstractAnnotationService;
+import com.digirati.elucidate.service.query.AnnotationService;
 
-public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation> implements AbstractAnnotationService<A> {
+public abstract class AbstractAnnotationServiceImpl<A extends AbstractAnnotation> implements AnnotationService<A> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 

@@ -22,9 +22,9 @@ import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.statistics.AbstractStatisticsPage;
 import com.digirati.elucidate.repository.AnnotationStatisticsRepository;
-import com.digirati.elucidate.service.statistics.AbstractAnnotationStatisticsPageService;
+import com.digirati.elucidate.service.statistics.AnnotationStatisticsPageService;
 
-public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends AbstractStatisticsPage> implements AbstractAnnotationStatisticsPageService<S> {
+public abstract class AbstractAnnotationStatisticsPageServiceImpl<S extends AbstractStatisticsPage> implements AnnotationStatisticsPageService<S> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 

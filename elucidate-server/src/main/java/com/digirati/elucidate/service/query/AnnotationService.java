@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.model.ServiceResponse;
 
-public interface AbstractAnnotationService<A extends AbstractAnnotation> {
+public interface AnnotationService<A extends AbstractAnnotation> {
 
     @Nullable
     ServiceResponse<A> getAnnotation(String collectionId, String annotationId);

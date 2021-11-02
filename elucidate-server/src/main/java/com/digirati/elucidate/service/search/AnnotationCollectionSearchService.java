@@ -9,7 +9,7 @@ import com.digirati.elucidate.common.model.annotation.AbstractAnnotationCollecti
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
 
-public interface AbstractAnnotationCollectionSearchService<C extends AbstractAnnotationCollection> {
+public interface AnnotationCollectionSearchService<C extends AbstractAnnotationCollection> {
 
     @Nullable
     ServiceResponse<C> searchAnnotationCollectionByBody(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, ClientPreference clientPref);

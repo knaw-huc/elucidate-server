@@ -12,9 +12,9 @@ import com.digirati.elucidate.infrastructure.builder.AnnotationPageBuilder;
 import com.digirati.elucidate.infrastructure.builder.function.AnnotationCollectionIRIBuilder;
 import com.digirati.elucidate.infrastructure.builder.function.AnnotationPageIRIBuilder;
 import com.digirati.elucidate.model.ServiceResponse;
-import com.digirati.elucidate.service.query.AbstractAnnotationPageService;
+import com.digirati.elucidate.service.query.AnnotationPageService;
 
-public abstract class AbstractAnnotationPageServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage> implements AbstractAnnotationPageService<A, P> {
+public abstract class AbstractAnnotationPageServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage> implements AnnotationPageService<A, P> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 

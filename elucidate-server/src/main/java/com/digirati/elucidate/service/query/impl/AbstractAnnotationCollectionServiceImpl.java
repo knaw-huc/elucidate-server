@@ -26,10 +26,10 @@ import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
 import com.digirati.elucidate.repository.AnnotationCollectionStoreRepository;
-import com.digirati.elucidate.service.query.AbstractAnnotationCollectionService;
-import com.digirati.elucidate.service.query.AbstractAnnotationService;
+import com.digirati.elucidate.service.query.AnnotationCollectionService;
+import com.digirati.elucidate.service.query.AnnotationService;
 
-public abstract class AbstractAnnotationCollectionServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> implements AbstractAnnotationCollectionService<A, C> {
+public abstract class AbstractAnnotationCollectionServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> implements AnnotationCollectionService<A, C> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
@@ -37,7 +37,7 @@ public abstract class AbstractAnnotationCollectionServiceImpl<A extends Abstract
     private final IDGenerator idGenerator;
     private final int pageSize;
 
-    protected AbstractAnnotationCollectionServiceImpl(AnnotationCollectionStoreRepository annotationCollectionStoreRepository, AbstractAnnotationService<A> annotationService, IDGenerator idGenerator, int pageSize) {
+    protected AbstractAnnotationCollectionServiceImpl(AnnotationCollectionStoreRepository annotationCollectionStoreRepository, AnnotationService<A> annotationService, IDGenerator idGenerator, int pageSize) {
         this.annotationCollectionStoreRepository = annotationCollectionStoreRepository;
         this.idGenerator = idGenerator;
         this.pageSize = pageSize;

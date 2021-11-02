@@ -20,17 +20,17 @@ import com.digirati.elucidate.infrastructure.builder.function.FirstAnnotationPag
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.enumeration.ClientPreference;
-import com.digirati.elucidate.service.search.AbstractAnnotationCollectionSearchService;
-import com.digirati.elucidate.service.search.AbstractAnnotationSearchService;
+import com.digirati.elucidate.service.search.AnnotationCollectionSearchService;
+import com.digirati.elucidate.service.search.AnnotationSearchService;
 
-public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> implements AbstractAnnotationCollectionSearchService<C> {
+public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends AbstractAnnotation, P extends AbstractAnnotationPage, C extends AbstractAnnotationCollection> implements AnnotationCollectionSearchService<C> {
 
     protected final Logger LOGGER = Logger.getLogger(getClass());
 
-    private final AbstractAnnotationSearchService<A> annotationSearchService;
+    private final AnnotationSearchService<A> annotationSearchService;
     private final int pageSize;
 
-    protected AbstractAnnotationCollectionSearchServiceImpl(AbstractAnnotationSearchService<A> annotationSearchService, int pageSize) {
+    protected AbstractAnnotationCollectionSearchServiceImpl(AnnotationSearchService<A> annotationSearchService, int pageSize) {
         this.annotationSearchService = annotationSearchService;
         this.pageSize = pageSize;
     }

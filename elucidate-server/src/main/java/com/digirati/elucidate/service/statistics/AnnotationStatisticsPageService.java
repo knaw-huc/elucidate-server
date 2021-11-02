@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.statistics.AbstractStatisticsPage;
 
-public interface AbstractAnnotationStatisticsPageService<S extends AbstractStatisticsPage> {
+public interface AnnotationStatisticsPageService<S extends AbstractStatisticsPage> {
 
     @Nullable
     ServiceResponse<S> buildBodyStatisticsPage(String field, int page);

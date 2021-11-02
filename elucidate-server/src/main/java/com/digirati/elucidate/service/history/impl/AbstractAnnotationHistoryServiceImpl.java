@@ -17,9 +17,9 @@ import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.annotation.history.AbstractAnnotationHistory;
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
 import com.digirati.elucidate.repository.AnnotationHistoryRepository;
-import com.digirati.elucidate.service.history.AbstractAnnotationHistoryService;
+import com.digirati.elucidate.service.history.AnnotationHistoryService;
 
-public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> implements AbstractAnnotationHistoryService<A, H> {
+public abstract class AbstractAnnotationHistoryServiceImpl<A extends AbstractAnnotation, H extends AbstractAnnotationHistory> implements AnnotationHistoryService<A, H> {
 
     protected final Logger LOGGER = Logger.getLogger(AbstractAnnotationHistoryServiceImpl.class);
 

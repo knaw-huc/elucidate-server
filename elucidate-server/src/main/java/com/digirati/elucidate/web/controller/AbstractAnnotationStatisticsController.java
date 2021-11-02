@@ -11,16 +11,16 @@ import com.digirati.elucidate.common.infrastructure.constants.URLConstants;
 import com.digirati.elucidate.model.ServiceResponse;
 import com.digirati.elucidate.model.ServiceResponse.Status;
 import com.digirati.elucidate.model.statistics.AbstractStatisticsPage;
-import com.digirati.elucidate.service.statistics.AbstractAnnotationStatisticsPageService;
+import com.digirati.elucidate.service.statistics.AnnotationStatisticsPageService;
 
 public abstract class AbstractAnnotationStatisticsController<S extends AbstractStatisticsPage> {
 
     private static final String REQUEST_PATH_BODY = "/services/stats/body";
     private static final String REQUEST_PATH_TARGET = "/services/stats/target";
 
-    private final AbstractAnnotationStatisticsPageService<S> statisticsPageService;
+    private final AnnotationStatisticsPageService<S> statisticsPageService;
 
-    protected AbstractAnnotationStatisticsController(AbstractAnnotationStatisticsPageService<S> statisticsPageService) {
+    protected AbstractAnnotationStatisticsController(AnnotationStatisticsPageService<S> statisticsPageService) {
         this.statisticsPageService = statisticsPageService;
     }
 
