@@ -117,7 +117,7 @@ class AnnotationPageBuilder<A : AbstractAnnotation, P : AbstractAnnotationPage>(
                 }
             }
         }
-        val annotationPage = annotationPageConverter.convertToAnnotationPage(jsonMap.toMap())
+        val annotationPage = annotationPageConverter.convertToAnnotationPage(jsonMap.toMutableMap())
         return ServiceResponse(ServiceResponse.Status.OK, annotationPage)
     }
 
