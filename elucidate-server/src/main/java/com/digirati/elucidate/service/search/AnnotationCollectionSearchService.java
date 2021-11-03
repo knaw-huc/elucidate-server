@@ -27,5 +27,5 @@ public interface AnnotationCollectionSearchService<C extends AbstractAnnotationC
     ServiceResponse<C> searchAnnotationCollectionByTemporal(List<String> levels, List<String> types, Date since, ClientPreference clientPref);
 
     @Nullable
-    ServiceResponse<C> searchAnnotationCollectionByOverlap(int lowerLimit, int upperLimit, ClientPreference clientPref);
+    ServiceResponse<C> searchAnnotationCollectionByOverlap(String targetId, int lowerLimit, int upperLimit, ClientPreference clientPref);
 }

@@ -33,7 +33,7 @@ interface IRIBuilderService {
 
     fun buildOACollectionIri(collectionId: String): String
 
-    fun buildOACollectionOverlapSearchIri(lowerLevel: Int, upperLevel: Int): String
+    fun buildOACollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String
 
     fun buildOACollectionTargetSearchIri(
         fields: List<String>,
@@ -79,7 +79,13 @@ interface IRIBuilderService {
 
     fun buildOAPageIri(collectionId: String, page: Int, embeddedDescriptions: Boolean): String
 
-    fun buildOAPageOverlapSearchIri(lowerLevel: Int, upperLevel: Int, page: Int, embeddedDescriptions: Boolean): String
+    fun buildOAPageOverlapSearchIri(
+        targetId: String,
+        lowerLimit: Int,
+        upperLimit: Int,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
     fun buildOAPageTargetSearchIri(
         fields: List<String>,

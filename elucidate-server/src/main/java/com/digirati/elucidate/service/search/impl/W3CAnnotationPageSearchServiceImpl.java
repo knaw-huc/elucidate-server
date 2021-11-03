@@ -89,13 +89,13 @@ public class W3CAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSe
 
     @Nullable
     @Override
-    protected String buildOverlapSearchCollectionIri(int lowerLevel, int upperLevel) {
+    protected String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit) {
         return null;
     }
 
     @Nullable
     @Override
-    protected String buildOverlapSearchPageIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
+    protected String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
         return null;
     }
 }

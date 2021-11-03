@@ -196,10 +196,10 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
 
     @NotNull
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByOverlap(int lowerLevel, int upperLevel) {
+    public ServiceResponse<List<A>> searchAnnotationsByOverlap(String targetId, int lowerLimit, int upperLimit) {
 
-        LOGGER.info(String.format("Searching for Annotations by `overlap` using lowerLevel [%s] and upperLevel [%s]", lowerLevel, upperLevel));
-        List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByOverlap(lowerLevel, upperLevel);
+        LOGGER.info(String.format("Searching for Annotations by `overlap` using lowerLimit [%s] and upperLimit [%s]", lowerLimit, upperLimit));
+        List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByOverlap(targetId, lowerLimit, upperLimit);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
         LOGGER.info(String.format("Seaching for Annotations by `overlap` got [%s] hits", annotations.size()));

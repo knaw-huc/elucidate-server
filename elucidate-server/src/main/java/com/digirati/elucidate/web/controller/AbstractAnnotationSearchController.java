@@ -37,6 +37,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     private static final String REQUEST_PATH_GENERATOR = "/services/search/generator";
     private static final String REQUEST_PATH_TEMPORAL = "/services/search/temporal";
     private static final String REQUEST_PATH_OVERLAP = "/services/search/overlap";
+
     private static final String PREFER_MINIMAL_CONTAINER = "http://www.w3.org/ns/ldp#preferminimalcontainer";
     private static final String PREFER_CONTAINED_IRIS = "http://www.w3.org/ns/oa#prefercontainediris";
     private static final String PREFER_CONTAINED_DESCRIPTIONS = "http://www.w3.org/ns/oa#prefercontaineddescriptions";
@@ -45,7 +46,9 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     private final AnnotationPageSearchService<A, P> annotationPageSearchService;
     private final AnnotationCollectionSearchService<C> annotationCollectionSearchService;
 
-    protected AbstractAnnotationSearchController(AnnotationSearchService<A> annotationSearchService, AnnotationPageSearchService<A, P> annotationPageSearchService, AnnotationCollectionSearchService<C> annotationCollectionSearchService) {
+    protected AbstractAnnotationSearchController(AnnotationSearchService<A> annotationSearchService,
+                                                 AnnotationPageSearchService<A, P> annotationPageSearchService,
+                                                 AnnotationCollectionSearchService<C> annotationCollectionSearchService) {
         this.annotationSearchService = annotationSearchService;
         this.annotationPageSearchService = annotationPageSearchService;
         this.annotationCollectionSearchService = annotationCollectionSearchService;
@@ -65,26 +68,25 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                                            @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
                                            @NotNull HttpServletRequest request) {
         if (page == null) {
-
-            AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByBody(fields, value, strict, xywh, t, creatorIri, generatorIri, clientPref);
+            AnnotationCollectionSearch<C> annotationCollectionSearch =
+                    (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByBody(fields, value, strict, xywh, t, creatorIri, generatorIri, clientPref);
 
             return processCollectionSearchRequest(annotationCollectionSearch, request);
 
         } else {
+            AnnotationPageSearch<P> annotationPageSearch =
+                    (boolean embeddedDescriptions) -> {
+                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByBody(fields, value, strict, xywh, t, creatorIri, generatorIri);
+                        Status status = serviceResponse.getStatus();
 
-            AnnotationPageSearch<P> annotationPageSearch = (boolean embeddedDescriptions) -> {
+                        if (!status.equals(Status.OK)) {
+                            return new ServiceResponse<>(status, null);
+                        }
 
-                ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByBody(fields, value, strict, xywh, t, creatorIri, generatorIri);
-                Status status = serviceResponse.getStatus();
+                        List<A> annotations = serviceResponse.getObj();
 
-                if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<>(status, null);
-                }
-
-                List<A> annotations = serviceResponse.getObj();
-
-                return annotationPageSearchService.buildAnnotationPageByBody(annotations, fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
-            };
+                        return annotationPageSearchService.buildAnnotationPageByBody(annotations, fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
+                    };
 
             return processPageSearchRequest(annotationPageSearch, iris, descriptions);
         }
@@ -105,24 +107,25 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                                              @NotNull HttpServletRequest request) {
 
         if (page == null) {
-
-            AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByTarget(fields, value, strict, xywh, t, creatorIri, generatorIri, clientPref);
-
+            AnnotationCollectionSearch<C> annotationCollectionSearch =
+                    (ClientPreference clientPref) ->
+                            annotationCollectionSearchService.searchAnnotationCollectionByTarget(fields, value, strict, xywh, t, creatorIri, generatorIri, clientPref);
             return processCollectionSearchRequest(annotationCollectionSearch, request);
+
         } else {
-            AnnotationPageSearch<P> annotationPageSearch = (boolean embeddedDescriptions) -> {
+            AnnotationPageSearch<P> annotationPageSearch =
+                    (boolean embeddedDescriptions) -> {
+                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByTarget(fields, value, strict, xywh, t, creatorIri, generatorIri);
+                        Status status = serviceResponse.getStatus();
 
-                ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByTarget(fields, value, strict, xywh, t, creatorIri, generatorIri);
-                Status status = serviceResponse.getStatus();
+                        if (!status.equals(Status.OK)) {
+                            return new ServiceResponse<>(status, null);
+                        }
 
-                if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<>(status, null);
-                }
+                        List<A> annotations = serviceResponse.getObj();
 
-                List<A> annotations = serviceResponse.getObj();
-
-                return annotationPageSearchService.buildAnnotationPageByTarget(annotations, fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
-            };
+                        return annotationPageSearchService.buildAnnotationPageByTarget(annotations, fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
+                    };
 
             return processPageSearchRequest(annotationPageSearch, iris, descriptions);
         }
@@ -224,30 +227,33 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
     @NotNull
     @RequestMapping(value = REQUEST_PATH_OVERLAP, method = RequestMethod.GET)
-    public ResponseEntity<?> getSearchOverlap(@RequestParam(value = URLConstants.PARAM_LOWER_LEVEL, required = true) int lowerLevel,
-                                              @RequestParam(value = URLConstants.PARAM_UPPER_LEVEL, required = true) int upperLevel,
+    public ResponseEntity<?> getSearchOverlap(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
+                                              @RequestParam(value = URLConstants.PARAM_LOWER_LIMIT, required = true) int lowerLimit,
+                                              @RequestParam(value = URLConstants.PARAM_UPPER_LIMIT, required = true) int upperLevel,
                                               @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
                                               @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
                                               @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
                                               @NotNull HttpServletRequest request) {
         if (page == null) {
-            AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByOverlap(lowerLevel, upperLevel, clientPref);
+            AnnotationCollectionSearch<C> annotationCollectionSearch =
+                    (ClientPreference clientPref) ->
+                            annotationCollectionSearchService.searchAnnotationCollectionByOverlap(targetId, lowerLimit, upperLevel, clientPref);
             return processCollectionSearchRequest(annotationCollectionSearch, request);
 
         } else {
-            AnnotationPageSearch<P> annotationPageSearch = (boolean embeddedDescriptions) -> {
+            AnnotationPageSearch<P> annotationPageSearch =
+                    (boolean embeddedDescriptions) -> {
+                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(targetId, lowerLimit, upperLevel);
+                        Status status = serviceResponse.getStatus();
 
-                ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(lowerLevel, upperLevel);
-                Status status = serviceResponse.getStatus();
+                        if (!status.equals(Status.OK)) {
+                            return new ServiceResponse<>(status, null);
+                        }
 
-                if (!status.equals(Status.OK)) {
-                    return new ServiceResponse<>(status, null);
-                }
+                        List<A> annotations = serviceResponse.getObj();
 
-                List<A> annotations = serviceResponse.getObj();
-
-                return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, lowerLevel, upperLevel, page, embeddedDescriptions);
-            };
+                        return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, lowerLimit, upperLevel, page, embeddedDescriptions);
+                    };
 
             return processPageSearchRequest(annotationPageSearch, iris, descriptions);
         }
@@ -305,6 +311,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
         if (!StringUtils.startsWith(preferHeader, "return=representation")) {
             return ClientPreference.CONTAINED_DESCRIPTIONS;
         }
+
         preferHeader = StringUtils.stripStart(preferHeader, "return=representation;");
         preferHeader = StringUtils.strip(preferHeader);
         preferHeader = StringUtils.stripStart(preferHeader, "include=");

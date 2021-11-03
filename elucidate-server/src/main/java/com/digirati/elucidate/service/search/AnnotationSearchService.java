@@ -27,5 +27,5 @@ public interface AnnotationSearchService<A extends AbstractAnnotation> {
     ServiceResponse<List<A>> searchAnnotationsByTemporal(List<String> levels, List<String> types, Date since);
 
     @NotNull
-    ServiceResponse<List<A>> searchAnnotationsByOverlap(int lowerLimit, int upperLimit);
+    ServiceResponse<List<A>> searchAnnotationsByOverlap(String targetId, int lowerLimit, int upperLimit);
 }

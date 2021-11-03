@@ -609,23 +609,26 @@ class IRIBuilderServiceImpl
         })
     }
 
-    override fun buildOACollectionOverlapSearchIri(lowerLevel: Int, upperLevel: Int): String {
+    override fun buildOACollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String {
         val params = mapOf(
-            URLConstants.PARAM_LOWER_LEVEL to lowerLevel,
-            URLConstants.PARAM_UPPER_LEVEL to upperLevel
+            URLConstants.PARAM_TARGET_ID to targetId,
+            URLConstants.PARAM_LOWER_LIMIT to lowerLimit,
+            URLConstants.PARAM_UPPER_LIMIT to upperLimit
         )
         return buildIri("oa/services/search/overlap", params)
     }
 
     override fun buildOAPageOverlapSearchIri(
-        lowerLevel: Int,
-        upperLevel: Int,
+        targetId: String,
+        lowerLimit: Int,
+        upperLimit: Int,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
         val params = mutableMapOf(
-            URLConstants.PARAM_LOWER_LEVEL to lowerLevel,
-            URLConstants.PARAM_UPPER_LEVEL to upperLevel,
+            URLConstants.PARAM_TARGET_ID to targetId,
+            URLConstants.PARAM_LOWER_LIMIT to lowerLimit,
+            URLConstants.PARAM_UPPER_LIMIT to upperLimit,
             URLConstants.PARAM_PAGE to page
         )
         if (embeddedDescriptions) {

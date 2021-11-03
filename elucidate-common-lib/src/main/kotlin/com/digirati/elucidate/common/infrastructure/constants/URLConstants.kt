@@ -16,6 +16,7 @@ object URLConstants {
     const val PARAM_GENERATOR = "generator"
     const val PARAM_TYPES = "types"
     const val PARAM_SINCE = "since"
-    const val PARAM_LOWER_LEVEL = "lower_level"
-    const val PARAM_UPPER_LEVEL = "upper_level"
+    const val PARAM_TARGET_ID = "target_id"
+    const val PARAM_LOWER_LIMIT = "lower_limit"
+    const val PARAM_UPPER_LIMIT = "upper_limit"
 }

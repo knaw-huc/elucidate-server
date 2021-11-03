@@ -17,5 +17,5 @@ public interface AnnotationSearchRepository {
 
     List<W3CAnnotation> getAnnotationsByTemporal(boolean searchAnnotations, boolean searchBodies, boolean searchTargets, String[] types, Date since);
 
-    List<W3CAnnotation> getAnnotationsByOverlap(int lowerLevel, int upperLevel);
+    List<W3CAnnotation> getAnnotationsByOverlap(String targetId, int lowerLimit, int upperLevel);
 }

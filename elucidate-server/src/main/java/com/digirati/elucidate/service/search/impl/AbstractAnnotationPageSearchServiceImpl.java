@@ -95,18 +95,21 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     protected abstract String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
 
-        AnnotationCollectionIRIBuilder annotationCollectionIriBuilder = () -> buildOverlapSearchCollectionIri(lowerLevel, upperLevel);
-        AnnotationPageIRIBuilder annotationPageIriBuilder = (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(lowerLevel, upperLevel, page, embeddedDescriptions);
+        AnnotationCollectionIRIBuilder annotationCollectionIriBuilder =
+                () -> buildOverlapSearchCollectionIri(targetId, lowerLimit, upperLimit);
+        AnnotationPageIRIBuilder annotationPageIriBuilder =
+                (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
 
-        return new AnnotationPageBuilder<A, P>(this::convertToAnnotationPage, annotationCollectionIriBuilder, annotationPageIriBuilder).buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
+        return new AnnotationPageBuilder<A, P>(this::convertToAnnotationPage, annotationCollectionIriBuilder, annotationPageIriBuilder)
+                .buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
     }
 
     @Nullable
-    protected abstract String buildOverlapSearchCollectionIri(int lowerLevel, int upperLevel);
+    protected abstract String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit);
 
     @Nullable
-    protected abstract String buildOverlapSearchPageIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions);
+    protected abstract String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions);
 
 }
