@@ -36,6 +36,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     private static final String REQUEST_PATH_CREATOR = "/services/search/creator";
     private static final String REQUEST_PATH_GENERATOR = "/services/search/generator";
     private static final String REQUEST_PATH_TEMPORAL = "/services/search/temporal";
+    private static final String REQUEST_PATH_OVERLAP = "/services/search/overlap";
     private static final String PREFER_MINIMAL_CONTAINER = "http://www.w3.org/ns/ldp#preferminimalcontainer";
     private static final String PREFER_CONTAINED_IRIS = "http://www.w3.org/ns/oa#prefercontainediris";
     private static final String PREFER_CONTAINED_DESCRIPTIONS = "http://www.w3.org/ns/oa#prefercontaineddescriptions";
@@ -52,12 +53,23 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
     @NotNull
     @RequestMapping(value = REQUEST_PATH_BODY, method = RequestMethod.GET)
-    public ResponseEntity<?> getSearchBody(@RequestParam(value = URLConstants.PARAM_FIELDS, required = true) List<String> fields, @RequestParam(value = URLConstants.PARAM_VALUE, required = true) String value, @RequestParam(value = URLConstants.PARAM_STRICT, required = false, defaultValue = "false") boolean strict, @RequestParam(value = URLConstants.PARAM_XYWH, required = false) String xywh, @RequestParam(value = URLConstants.PARAM_T, required = false) String t, @RequestParam(value = URLConstants.PARAM_CREATOR, required = false) String creatorIri, @RequestParam(value = URLConstants.PARAM_GENERATOR, required = false) String generatorIri, @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page, @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris, @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions, @NotNull HttpServletRequest request) {
+    public ResponseEntity<?> getSearchBody(@RequestParam(value = URLConstants.PARAM_FIELDS, required = true) List<String> fields,
+                                           @RequestParam(value = URLConstants.PARAM_VALUE, required = true) String value,
+                                           @RequestParam(value = URLConstants.PARAM_STRICT, required = false, defaultValue = "false") boolean strict,
+                                           @RequestParam(value = URLConstants.PARAM_XYWH, required = false) String xywh,
+                                           @RequestParam(value = URLConstants.PARAM_T, required = false) String t,
+                                           @RequestParam(value = URLConstants.PARAM_CREATOR, required = false) String creatorIri,
+                                           @RequestParam(value = URLConstants.PARAM_GENERATOR, required = false) String generatorIri,
+                                           @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
+                                           @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
+                                           @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
+                                           @NotNull HttpServletRequest request) {
         if (page == null) {
 
             AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByBody(fields, value, strict, xywh, t, creatorIri, generatorIri, clientPref);
 
             return processCollectionSearchRequest(annotationCollectionSearch, request);
+
         } else {
 
             AnnotationPageSearch<P> annotationPageSearch = (boolean embeddedDescriptions) -> {
@@ -80,7 +92,18 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
     @NotNull
     @RequestMapping(value = REQUEST_PATH_TARGET, method = RequestMethod.GET)
-    public ResponseEntity<?> getSearchTarget(@RequestParam(value = URLConstants.PARAM_FIELDS, required = true) List<String> fields, @RequestParam(value = URLConstants.PARAM_VALUE, required = true) String value, @RequestParam(value = URLConstants.PARAM_STRICT, required = false, defaultValue = "false") boolean strict, @RequestParam(value = URLConstants.PARAM_XYWH, required = false) String xywh, @RequestParam(value = URLConstants.PARAM_T, required = false) String t, @RequestParam(value = URLConstants.PARAM_CREATOR, required = false) String creatorIri, @RequestParam(value = URLConstants.PARAM_GENERATOR, required = false) String generatorIri, @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page, @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris, @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions, @NotNull HttpServletRequest request) {
+    public ResponseEntity<?> getSearchTarget(@RequestParam(value = URLConstants.PARAM_FIELDS, required = true) List<String> fields,
+                                             @RequestParam(value = URLConstants.PARAM_VALUE, required = true) String value,
+                                             @RequestParam(value = URLConstants.PARAM_STRICT, required = false, defaultValue = "false") boolean strict,
+                                             @RequestParam(value = URLConstants.PARAM_XYWH, required = false) String xywh,
+                                             @RequestParam(value = URLConstants.PARAM_T, required = false) String t,
+                                             @RequestParam(value = URLConstants.PARAM_CREATOR, required = false) String creatorIri,
+                                             @RequestParam(value = URLConstants.PARAM_GENERATOR, required = false) String generatorIri,
+                                             @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
+                                             @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
+                                             @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
+                                             @NotNull HttpServletRequest request) {
+
         if (page == null) {
 
             AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByTarget(fields, value, strict, xywh, t, creatorIri, generatorIri, clientPref);
@@ -107,7 +130,14 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
     @NotNull
     @RequestMapping(value = REQUEST_PATH_CREATOR, method = RequestMethod.GET)
-    public ResponseEntity<?> getSearchCreator(@RequestParam(value = URLConstants.PARAM_LEVELS, required = true) List<String> levels, @RequestParam(value = URLConstants.PARAM_TYPE, required = true) String type, @RequestParam(value = URLConstants.PARAM_VALUE, required = true) String value, @RequestParam(value = URLConstants.PARAM_STRICT, required = false, defaultValue = "false") boolean strict, @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page, @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris, @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions, @NotNull HttpServletRequest request) {
+    public ResponseEntity<?> getSearchCreator(@RequestParam(value = URLConstants.PARAM_LEVELS, required = true) List<String> levels,
+                                              @RequestParam(value = URLConstants.PARAM_TYPE, required = true) String type,
+                                              @RequestParam(value = URLConstants.PARAM_VALUE, required = true) String value,
+                                              @RequestParam(value = URLConstants.PARAM_STRICT, required = false, defaultValue = "false") boolean strict,
+                                              @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
+                                              @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
+                                              @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
+                                              @NotNull HttpServletRequest request) {
         if (page == null) {
 
             AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByCreator(levels, type, value, strict, clientPref);
@@ -161,7 +191,13 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
     @NotNull
     @RequestMapping(value = REQUEST_PATH_TEMPORAL, method = RequestMethod.GET)
-    public ResponseEntity<?> getSearchTemporal(@RequestParam(value = URLConstants.PARAM_LEVELS, required = true) List<String> levels, @RequestParam(value = URLConstants.PARAM_TYPES, required = true) List<String> types, @RequestParam(value = URLConstants.PARAM_SINCE, required = true) @DateTimeFormat(iso = ISO.DATE_TIME) Date since, @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page, @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris, @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions, @NotNull HttpServletRequest request) {
+    public ResponseEntity<?> getSearchTemporal(@RequestParam(value = URLConstants.PARAM_LEVELS, required = true) List<String> levels,
+                                               @RequestParam(value = URLConstants.PARAM_TYPES, required = true) List<String> types,
+                                               @RequestParam(value = URLConstants.PARAM_SINCE, required = true) @DateTimeFormat(iso = ISO.DATE_TIME) Date since,
+                                               @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
+                                               @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
+                                               @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
+                                               @NotNull HttpServletRequest request) {
         if (page == null) {
 
             AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByTemporal(levels, types, since, clientPref);
@@ -180,6 +216,37 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
                 List<A> annotations = serviceResponse.getObj();
 
                 return annotationPageSearchService.buildAnnotationPageByTemporal(annotations, levels, types, since, page, embeddedDescriptions);
+            };
+
+            return processPageSearchRequest(annotationPageSearch, iris, descriptions);
+        }
+    }
+
+    @NotNull
+    @RequestMapping(value = REQUEST_PATH_OVERLAP, method = RequestMethod.GET)
+    public ResponseEntity<?> getSearchOverlap(@RequestParam(value = URLConstants.PARAM_LOWER_LEVEL, required = true) int lowerLevel,
+                                              @RequestParam(value = URLConstants.PARAM_UPPER_LEVEL, required = true) int upperLevel,
+                                              @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
+                                              @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
+                                              @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
+                                              @NotNull HttpServletRequest request) {
+        if (page == null) {
+            AnnotationCollectionSearch<C> annotationCollectionSearch = (ClientPreference clientPref) -> annotationCollectionSearchService.searchAnnotationCollectionByOverlap(lowerLevel, upperLevel, clientPref);
+            return processCollectionSearchRequest(annotationCollectionSearch, request);
+
+        } else {
+            AnnotationPageSearch<P> annotationPageSearch = (boolean embeddedDescriptions) -> {
+
+                ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(lowerLevel, upperLevel);
+                Status status = serviceResponse.getStatus();
+
+                if (!status.equals(Status.OK)) {
+                    return new ServiceResponse<>(status, null);
+                }
+
+                List<A> annotations = serviceResponse.getObj();
+
+                return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, lowerLevel, upperLevel, page, embeddedDescriptions);
             };
 
             return processPageSearchRequest(annotationPageSearch, iris, descriptions);
