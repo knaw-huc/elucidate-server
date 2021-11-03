@@ -53,54 +53,74 @@ public class MVCConfig implements WebMvcConfigurer {
     @Autowired
     private Environment env;
 
+    // AnnotationMessageConverters
+
     @Autowired
     private JSONLDW3CAnnotationMessageConverter jsonLdW3CAnnotationMessageConverter;
     @Autowired
     private TurtleW3CAnnotationMessageConverter turtleW3CAnnotationMessageConverter;
     @Autowired
+    private JSONLDOAAnnotationMessageConverter jsonLdOAAnnotationMessageConverter;
+    @Autowired
+    private TurtleOAAnnotationMessageConverter turtleOAAnnotationMessageConverter;
+
+    // AnnotationCollectionMessageConverters
+
+    @Autowired
     private JSONLDW3CAnnotationCollectionMessageConverter jsonLdW3CAnnotationCollectionMessageConverter;
     @Autowired
     private TurtleW3CAnnotationCollectionMessageConverter turtleW3CAnnotationCollectionMessageConverter;
+    @Autowired
+    private JSONLDOAAnnotationCollectionMessageConverter jsonLdOAAnnotationCollectionMessageConverter;
+    @Autowired
+    private TurtleOAAnnotationCollectionMessageConverter turtleOAAnnotationCollectionMessageConverter;
+
+    //    AnnotationPageMessageConverters
+
     @Autowired
     private JSONLDW3CAnnotationPageMessageConverter jsonLdW3CAnnotationPageMessageConverter;
     @Autowired
     private TurtleW3CAnnotationPageMessageConverter turtleW3CAnnotationPageMessageConverter;
     @Autowired
+    private JSONLDOAAnnotationPageMessageConverter jsonLdOAAnnotationPageMessageConverter;
+    @Autowired
+    private TurtleOAAnnotationPageMessageConverter turtleOAAnnotationPageMessageConverter;
+
+    //    StatisticsPageMessageConverters
+
+    @Autowired
     private JSONLDW3CStatisticsPageMessageConverter jsonLdW3CStatisticsPageMessageConverter;
     @Autowired
     private TurtleW3CStatisticsPageMessageConverter turtleW3CStatisticsPageMessageConverter;
+    @Autowired
+    private JSONLDOAStatisticsPageMessageConverter jsonLdOAStatisticsPageMessageConverter;
+    @Autowired
+    private TurtleOAStatisticsPageMessageConverter turtleOAStatisticsPageMessageConverter;
+
+    //    BatchOperationMessageConverterS
+
     @Autowired
     private JSONLDW3CBatchOperationMessageConverter jsonLdW3CBatchOperationMessageConverter;
     @Autowired
     private TurtleW3CBatchOperationMessageConverter turtleW3CBatchOperationMessageConverter;
     @Autowired
+    private JSONLDOABatchOperationMessageConverter jsonLdOABatchOperationMessageConverter;
+    @Autowired
+    private TurtleOABatchOperationMessageConverter turtleOABatchOperationMessageConverter;
+
+    //    AnnotationHistoryMessageConverterS
+
+    @Autowired
     private JSONLDW3CAnnotationHistoryMessageConverter jsonldW3CAnnotationHistoryMessageConverter;
     @Autowired
     private TurtleW3CAnnotationHistoryMessageConverter turtleW3CAnnotationHistoryMessageConverter;
     @Autowired
-    private JSONLDOAAnnotationMessageConverter jsonLdOAAnnotationMessageConverter;
-    @Autowired
-    private TurtleOAAnnotationMessageConverter turtleOAAnnotationMessageConverter;
-    @Autowired
-    private JSONLDOAAnnotationCollectionMessageConverter jsonLdOAAnnotationCollectionMessageConverter;
-    @Autowired
-    private TurtleOAAnnotationCollectionMessageConverter turtleOAAnnotationCollectionMessageConverter;
-    @Autowired
-    private JSONLDOAAnnotationPageMessageConverter jsonLdOAAnnotationPageMessageConverter;
-    @Autowired
-    private TurtleOAAnnotationPageMessageConverter turtleOAAnnotationPageMessageConverter;
-    @Autowired
-    private JSONLDOAStatisticsPageMessageConverter jsonLdOAStatisticsPageMessageConverter;
-    @Autowired
-    private TurtleOAStatisticsPageMessageConverter turtleOAStatisticsPageMessageConverter;
-    @Autowired
-    private JSONLDOABatchOperationMessageConverter jsonLdOABatchOperationMessageConverter;
-    @Autowired
-    private TurtleOABatchOperationMessageConverter turtleOABatchOperationMessageConverter;
-    @Autowired
     private JSONLDOAAnnotationHistoryMessageConverter jsonLdOAAnnotationHistoryMessageConverter;
     @Autowired
     private TurtleOAAnnotationHistoryMessageConverter turtleOAAnnotationHistoryMessageConverter;
+
+    // MISC.
+
     @Autowired
     private JSONLDValidationErrorMessageConverter jsonLdValidationErrorMessageConverter;
     @Autowired
