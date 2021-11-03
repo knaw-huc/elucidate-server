@@ -1,71 +1,201 @@
-package com.digirati.elucidate.common.service;
+package com.digirati.elucidate.common.service
 
-import java.util.Date;
-import java.util.List;
+import java.util.*
 
-public interface IRIBuilderService {
+interface IRIBuilderService {
+    fun buildOAAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String
 
-    String buildOAAnnotationHistoryIri(String collectionId, String annotationId, int version);
+    fun buildOAAnnotationIri(collectionId: String, annotationId: String): String
 
-    String buildOAAnnotationIri(String collectionId, String annotationId);
+    fun buildOACollectionBodySearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String
+    ): String
 
-    String buildOACollectionBodySearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri);
+    fun buildOACollectionCreatorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean
+    ): String
 
-    String buildOACollectionCreatorSearchIri(List<String> levels, String type, String value, boolean strict);
+    fun buildOACollectionGeneratorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean
+    ): String
 
-    String buildOACollectionGeneratorSearchIri(List<String> levels, String type, String value, boolean strict);
+    fun buildOACollectionIri(collectionId: String): String
 
-    String buildOACollectionIri(String collectionId);
+    fun buildOACollectionOverlapSearchIri(lowerLevel: Int, upperLevel: Int): String
 
-    String buildOACollectionOverlapSearchIri(int lowerLevel, int upperLevel);
+    fun buildOACollectionTargetSearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String
+    ): String
 
-    String buildOACollectionTargetSearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri);
+    fun buildOACollectionTemporalSearchIri(levels: List<String>, types: List<String>, since: Date): String
 
-    String buildOACollectionTemporalSearchIri(List<String> levels, List<String> types, Date since);
+    fun buildOAPageBodySearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildOAPageBodySearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
+    fun buildOAPageCreatorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildOAPageCreatorSearchIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
+    fun buildOAPageGeneratorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildOAPageGeneratorSearchIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
+    fun buildOAPageIri(collectionId: String, page: Int, embeddedDescriptions: Boolean): String
 
-    String buildOAPageIri(String collectionId, int page, boolean embeddedDescriptions);
+    fun buildOAPageOverlapSearchIri(lowerLevel: Int, upperLevel: Int, page: Int, embeddedDescriptions: Boolean): String
 
-    String buildOAPageOverlapSearchIri(int lowerLevel, int upperLevel, int page, boolean embeddedDescriptions);
+    fun buildOAPageTargetSearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildOAPageTargetSearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
+    fun buildOAPageTemporalSearchIri(
+        levels: List<String>,
+        types: List<String>,
+        since: Date,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildOAPageTemporalSearchIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
+    fun buildOAStatisticsPageIri(type: String, field: String, page: Int): String
 
-    String buildOAStatisticsPageIri(String type, String field, int page);
+    fun buildW3CAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String
 
-    String buildW3CAnnotationHistoryIri(String collectionId, String annotationId, int version);
+    fun buildW3CAnnotationIri(collectionId: String, annotationId: String): String
 
-    String buildW3CAnnotationIri(String collectionId, String annotationId);
+    fun buildW3CCollectionBodySearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String
+    ): String
 
-    String buildW3CCollectionBodySearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri);
+    fun buildW3CCollectionCreatorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean
+    ): String
 
-    String buildW3CCollectionCreatorSearchIri(List<String> levels, String type, String value, boolean strict);
+    fun buildW3CCollectionGeneratorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean
+    ): String
 
-    String buildW3CCollectionGeneratorSearchIri(List<String> levels, String type, String value, boolean strict);
+    fun buildW3CCollectionIri(collectionId: String): String
 
-    String buildW3CCollectionIri(String collectionId);
+    fun buildW3CCollectionTargetSearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String
+    ): String
 
-    String buildW3CCollectionTargetSearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri);
+    fun buildW3CCollectionTemporalSearchIri(levels: List<String>, types: List<String>, since: Date): String
 
-    String buildW3CCollectionTemporalSearchIri(List<String> levels, List<String> types, Date since);
+    fun buildW3CPageBodySearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildW3CPageBodySearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
+    fun buildW3CPageCreatorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildW3CPageCreatorSearchIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
+    fun buildW3CPageGeneratorSearchIri(
+        levels: List<String>,
+        type: String,
+        value: String,
+        strict: Boolean,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildW3CPageGeneratorSearchIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions);
+    fun buildW3CPageIri(collectionId: String, page: Int, embeddedDescriptions: Boolean): String
 
-    String buildW3CPageIri(String collectionId, int page, boolean embeddedDescriptions);
+    fun buildW3CPageTargetSearchIri(
+        fields: List<String>,
+        value: String,
+        strict: Boolean,
+        xywh: String,
+        t: String,
+        creatorIri: String,
+        generatorIri: String,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildW3CPageTargetSearchIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions);
+    fun buildW3CPageTemporalSearchIri(
+        levels: List<String>,
+        types: List<String>,
+        since: Date,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 
-    String buildW3CPageTemporalSearchIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
-
-    String buildW3CStatisticsPageIri(String type, String field, int page);
+    fun buildW3CStatisticsPageIri(type: String, field: String, page: Int): String
 }
