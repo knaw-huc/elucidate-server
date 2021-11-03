@@ -121,29 +121,35 @@ public class MVCConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(@NotNull List<HttpMessageConverter<?>> converters) {
         converters.add(jsonLdW3CAnnotationMessageConverter);
+        converters.add(jsonLdOAAnnotationMessageConverter);
         converters.add(turtleW3CAnnotationMessageConverter);
+        converters.add(turtleOAAnnotationMessageConverter);
+
         converters.add(jsonLdW3CAnnotationCollectionMessageConverter);
         converters.add(turtleW3CAnnotationCollectionMessageConverter);
-        converters.add(jsonLdW3CAnnotationPageMessageConverter);
-        converters.add(turtleW3CAnnotationPageMessageConverter);
-        converters.add(jsonLdW3CStatisticsPageMessageConverter);
-        converters.add(turtleW3CStatisticsPageMessageConverter);
-        converters.add(jsonLdW3CBatchOperationMessageConverter);
-        converters.add(turtleW3CBatchOperationMessageConverter);
-        converters.add(jsonldW3CAnnotationHistoryMessageConverter);
-        converters.add(turtleW3CAnnotationHistoryMessageConverter);
-        converters.add(jsonLdOAAnnotationMessageConverter);
-        converters.add(turtleOAAnnotationMessageConverter);
         converters.add(jsonLdOAAnnotationCollectionMessageConverter);
         converters.add(turtleOAAnnotationCollectionMessageConverter);
+
+        converters.add(jsonLdW3CAnnotationPageMessageConverter);
+        converters.add(turtleW3CAnnotationPageMessageConverter);
         converters.add(jsonLdOAAnnotationPageMessageConverter);
         converters.add(turtleOAAnnotationPageMessageConverter);
+
+        converters.add(jsonLdW3CStatisticsPageMessageConverter);
+        converters.add(turtleW3CStatisticsPageMessageConverter);
         converters.add(jsonLdOAStatisticsPageMessageConverter);
         converters.add(turtleOAStatisticsPageMessageConverter);
+
+        converters.add(jsonLdW3CBatchOperationMessageConverter);
+        converters.add(turtleW3CBatchOperationMessageConverter);
         converters.add(jsonLdOABatchOperationMessageConverter);
         converters.add(turtleOABatchOperationMessageConverter);
+
+        converters.add(jsonldW3CAnnotationHistoryMessageConverter);
+        converters.add(turtleW3CAnnotationHistoryMessageConverter);
         converters.add(jsonLdOAAnnotationHistoryMessageConverter);
         converters.add(turtleOAAnnotationHistoryMessageConverter);
+
         converters.add(jsonLdValidationErrorMessageConverter);
         converters.add(userSecurityDetailsMessageConverter);
         converters.add(securityGroupMessageConverter);
