@@ -229,7 +229,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     @RequestMapping(value = REQUEST_PATH_OVERLAP, method = RequestMethod.GET)
     public ResponseEntity<?> getSearchOverlap(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
                                               @RequestParam(value = URLConstants.PARAM_LOWER_LIMIT, required = true) int lowerLimit,
-                                              @RequestParam(value = URLConstants.PARAM_UPPER_LIMIT, required = true) int upperLevel,
+                                              @RequestParam(value = URLConstants.PARAM_UPPER_LIMIT, required = true) int upperLimit,
                                               @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
                                               @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
                                               @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
@@ -237,13 +237,13 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
         if (page == null) {
             AnnotationCollectionSearch<C> annotationCollectionSearch =
                     (ClientPreference clientPref) ->
-                            annotationCollectionSearchService.searchAnnotationCollectionByOverlap(targetId, lowerLimit, upperLevel, clientPref);
+                            annotationCollectionSearchService.searchAnnotationCollectionByOverlap(targetId, lowerLimit, upperLimit, clientPref);
             return processCollectionSearchRequest(annotationCollectionSearch, request);
 
         } else {
             AnnotationPageSearch<P> annotationPageSearch =
                     (boolean embeddedDescriptions) -> {
-                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(targetId, lowerLimit, upperLevel);
+                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(targetId, lowerLimit, upperLimit);
                         Status status = serviceResponse.getStatus();
 
                         if (!status.equals(Status.OK)) {
@@ -252,7 +252,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
                         List<A> annotations = serviceResponse.getObj();
 
-                        return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, lowerLimit, upperLevel, page, embeddedDescriptions);
+                        return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
                     };
 
             return processPageSearchRequest(annotationPageSearch, iris, descriptions);
