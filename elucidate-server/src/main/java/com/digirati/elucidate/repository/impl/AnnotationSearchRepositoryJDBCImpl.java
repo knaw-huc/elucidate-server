@@ -74,12 +74,14 @@ public class AnnotationSearchRepositoryJDBCImpl extends AbstractRepositoryJDBCIm
         return queryForList(sql, params, sqlTypes, new W3CAnnotationRowMapper());
     }
 
+    static final String SELECTOR_TYPE = "urn:example:republic:TextAnchorSelector";
+
     @Override
     @Transactional(readOnly = true)
-    public List<W3CAnnotation> getAnnotationsByOverlap(String targetId, int lowerLimit, int upperLevel) {
-        String sql = "SELECT * FROM annotation_search_by_overlap(?, ?, ?)";
-        Object[] params = {targetId, upperLevel, lowerLimit};
-        int[] sqlTypes = {Types.VARCHAR, Types.INTEGER, Types.INTEGER};
+    public List<W3CAnnotation> getAnnotationsByOverlap(String targetId, int lowerLimit, int upperLimit) {
+        String sql = "SELECT * FROM annotation_search_by_overlap(?, ?, ?, ?)";
+        Object[] params = {targetId, SELECTOR_TYPE, lowerLimit, upperLimit};
+        int[] sqlTypes = {Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER};
 
         return queryForList(sql, params, sqlTypes, new W3CAnnotationRowMapper());
     }
