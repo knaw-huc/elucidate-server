@@ -516,5 +516,10 @@
                  relativeToChangelogFile="true"
                  path="sql/migrations/v003/01_change_id_column_type_to_text.sql"/>
     </changeSet>
+    <changeSet id="81" author="bramb">
+        <sqlFile splitStatements="false"
+                 relativeToChangelogFile="true"
+                 path="sql/migrations/v003/02_add_search_by_overlap.sql"/>
+    </changeSet>
 
 </databaseChangeLog>
