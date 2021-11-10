@@ -204,4 +204,14 @@ interface IRIBuilderService {
     ): String
 
     fun buildW3CStatisticsPageIri(type: String, field: String, page: Int): String
+
+    fun buildW3CCollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String
+
+    fun buildW3CPageOverlapSearchIri(
+        targetId: String,
+        lowerLimit: Int,
+        upperLimit: Int,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
 }

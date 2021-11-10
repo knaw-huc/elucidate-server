@@ -117,21 +117,18 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     @Nullable
     @Override
     protected String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit) {
-//        TODO
-        return null;
+        return iriBuilderService.buildW3CCollectionOverlapSearchIri(targetId, lowerLimit, upperLimit);
     }
 
     @Nullable
     @Override
     protected String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
-//        TODO
-        return null;
+        return iriBuilderService.buildW3CPageOverlapSearchIri(targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
     }
 
     @Nullable
     @Override
     protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, int lowerLimit, int upperLimit, ClientPreference clientPref) {
-//        TODO
-        return null;
+        return w3cAnnotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, lowerLimit, upperLimit, 0, useEmbeddedDescriptions(clientPref));
     }
 }
