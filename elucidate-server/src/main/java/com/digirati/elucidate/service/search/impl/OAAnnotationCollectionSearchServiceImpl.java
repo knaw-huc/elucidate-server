@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
@@ -69,12 +70,12 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected String buildBodySearchCollectionIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri) {
-        return iriBuilderService.buildOACollectionBodySearchIri(fields, value, strict, xywh, t, creatorIri, generatorIri);
+        return iriBuilderService.buildSearchByBodyIri(AnnotationFormat.OA, fields, value, strict, xywh, t, creatorIri, generatorIri);
     }
 
     @Override
     protected String buildBodySearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageBodySearchIri(fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByBodyPageIri(AnnotationFormat.OA, fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
     }
 
     // target
@@ -86,12 +87,12 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected String buildTargetSearchCollectionIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri) {
-        return iriBuilderService.buildOACollectionTargetSearchIri(fields, value, strict, xywh, t, creatorIri, generatorIri);
+        return iriBuilderService.buildSearchByTargetIri(AnnotationFormat.OA, fields, value, strict, xywh, t, creatorIri, generatorIri);
     }
 
     @Override
     protected String buildTargetSearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageTargetSearchIri(fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByTargetPageIri(AnnotationFormat.OA, fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
     }
 
     // creator
@@ -103,12 +104,12 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected String buildCreatorSearchCollectionIri(List<String> levels, String type, String value, boolean strict) {
-        return iriBuilderService.buildOACollectionCreatorSearchIri(levels, type, value, strict);
+        return iriBuilderService.buildSearchByCreatorIri(AnnotationFormat.OA, levels, type, value, strict);
     }
 
     @Override
     protected String buildCreatorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageCreatorSearchIri(levels, type, value, strict, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByCreatorPageIri(AnnotationFormat.OA, levels, type, value, strict, page, embeddedDescriptions);
     }
 
     // generator
@@ -120,12 +121,12 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected String buildGeneratorSearchCollectionIri(List<String> levels, String type, String value, boolean strict) {
-        return iriBuilderService.buildOACollectionGeneratorSearchIri(levels, type, value, strict);
+        return iriBuilderService.buildSearchByGeneratorIri(AnnotationFormat.OA, levels, type, value, strict);
     }
 
     @Override
     protected String buildGeneratorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageGeneratorSearchIri(levels, type, value, strict, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByGeneratorPageIri(AnnotationFormat.OA, levels, type, value, strict, page, embeddedDescriptions);
     }
 
     // temporal
@@ -137,24 +138,24 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected String buildTemporalSearchCollectionIri(List<String> levels, List<String> types, Date since) {
-        return iriBuilderService.buildOACollectionTemporalSearchIri(levels, types, since);
+        return iriBuilderService.buildSearchByTemporalIri(AnnotationFormat.OA, levels, types, since);
     }
 
     @Override
     protected String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByTemporalPageIri(AnnotationFormat.OA, levels, types, since, page, embeddedDescriptions);
     }
 
     // range
 
     @Override
     protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
-        return iriBuilderService.buildOACollectionRangeSearchIri(targetId, rangeStart, rangeEnd);
+        return iriBuilderService.buildSearchByRangeIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd);
     }
 
     @Override
     protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageRangeSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByRangePageIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
     @Override
@@ -171,11 +172,11 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
 
     @Override
     protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
-        return iriBuilderService.buildOACollectionOverlapSearchIri(targetId, rangeStart, rangeEnd);
+        return iriBuilderService.buildSearchByOverlapIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd);
     }
 
     @Override
     protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageOverlapSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
+        return iriBuilderService.buildSearchByOverlapPageIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 }

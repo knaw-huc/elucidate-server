@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.converter.OAToW3CAnnotationPageConverter;
 import com.digirati.elucidate.model.statistics.OAStatisticsPage;
@@ -45,6 +46,6 @@ public class OAAnnotationStatisticsPageServiceImpl extends AbstractAnnotationSta
 
     @Override
     protected String buildPageIri(String type, String field, int page) {
-        return iriBuilderService.buildOAStatisticsPageIri(type, field, page);
+        return iriBuilderService.buildStatisticsPageIri(AnnotationFormat.OA, type, field, page);
     }
 }

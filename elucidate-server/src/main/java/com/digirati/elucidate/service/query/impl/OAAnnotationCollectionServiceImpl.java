@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotationPage;
@@ -92,12 +93,12 @@ public class OAAnnotationCollectionServiceImpl extends AbstractAnnotationCollect
 
     @Override
     protected String buildCollectionIri(String searchQuery) {
-        return iriBuilderService.buildOACollectionIri(searchQuery);
+        return iriBuilderService.buildCollectionIri(AnnotationFormat.OA, searchQuery);
     }
 
     @Override
     protected String buildPageIri(String searchQuery, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageIri(searchQuery, page, embeddedDescriptions);
+        return iriBuilderService.buildCollectionPageIri(AnnotationFormat.OA, searchQuery, page, embeddedDescriptions);
     }
 
 }

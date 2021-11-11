@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.ServiceResponse;
@@ -64,7 +65,7 @@ public abstract class AbstractW3CAnnotationMessageConverter extends AbstractMess
 
         if (status.equals(Status.OK)) {
             W3CAnnotationHistory w3cAnnotationHistory = serviceResponse.getObj();
-            String urlStr = iriBuilderService.buildW3CAnnotationHistoryIri(collectionId, annotationId, w3cAnnotationHistory.getVersion());
+            String urlStr = iriBuilderService.buildAnnotationHistoryIri(AnnotationFormat.W3C, collectionId, annotationId, w3cAnnotationHistory.getVersion());
             String dateStr = MEMENTO_DATE_FORMAT.format(w3cAnnotationHistory.getCreatedDateTime());
             outputMessage.getHeaders().add(HttpHeaders.LINK, String.format("<%s>; rel=\"prev memento\"; datetime=\"%s\"", urlStr, dateStr));
         }

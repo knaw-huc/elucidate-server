@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationCollection;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotationPage;
@@ -53,11 +54,11 @@ public class W3CAnnotationCollectionServiceImpl extends AbstractAnnotationCollec
 
     @Override
     protected String buildCollectionIri(String searchQuery) {
-        return iriBuilderService.buildW3CCollectionIri(searchQuery);
+        return iriBuilderService.buildCollectionIri(AnnotationFormat.W3C, searchQuery);
     }
 
     @Override
     protected String buildPageIri(String searchQuery, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildW3CPageIri(searchQuery, page, embeddedDescriptions);
+        return iriBuilderService.buildCollectionPageIri(AnnotationFormat.W3C, searchQuery, page, embeddedDescriptions);
     }
 }

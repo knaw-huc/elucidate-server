@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.statistics.W3CStatisticsPage;
 import com.digirati.elucidate.repository.AnnotationStatisticsRepository;
@@ -36,6 +37,6 @@ public class W3CAnnotationStatisticsPageServiceImpl extends AbstractAnnotationSt
 
     @Override
     protected String buildPageIri(String type, String field, int page) {
-        return iriBuilderService.buildW3CStatisticsPageIri(type, field, page);
+        return iriBuilderService.buildStatisticsPageIri(AnnotationFormat.W3C, type, field, page);
     }
 }

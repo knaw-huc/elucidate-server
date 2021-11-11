@@ -44,65 +44,34 @@ class IRIBuilderServiceImpl
 
     private val baseUrl: String
 
+    override fun buildCollectionIri(format: AnnotationFormat, collectionId: String): String =
+        buildIri("${format.prefix()}/$collectionId/")
+
+    override fun buildCollectionPageIri(
+        format: AnnotationFormat,
+        collectionId: String,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String {
+        val param = if (embeddedDescriptions) PARAM_DESC else PARAM_IRIS
+        return buildIri("${format.prefix()}/$collectionId/", mapOf(PARAM_PAGE to page, param to 1))
+    }
+
     override fun buildAnnotationIri(format: AnnotationFormat, collectionId: String, annotationId: String): String =
         buildIri("${format.prefix()}/$collectionId/$annotationId")
 
-    //------------------------------------------------//
-
-    override fun buildOACollectionIri(collectionId: String): String =
-        buildIri("oa/$collectionId/")
-
-    override fun buildW3CCollectionIri(collectionId: String): String =
-        buildIri("w3c/$collectionId/")
-
-    //------------------------------------------------//
-
-    override fun buildOAPageIri(collectionId: String, page: Int, embeddedDescriptions: Boolean): String {
-        val param = if (embeddedDescriptions) PARAM_DESC else PARAM_IRIS
-        return buildIri("oa/$collectionId/", mapOf(PARAM_PAGE to page, param to 1))
-    }
-
-    override fun buildW3CPageIri(collectionId: String, page: Int, embeddedDescriptions: Boolean): String {
-        val param = if (embeddedDescriptions) PARAM_DESC else PARAM_IRIS
-        return buildIri("w3c/$collectionId/", mapOf(PARAM_PAGE to page, param to 1))
-    }
+    override fun buildAnnotationHistoryIri(
+        format: AnnotationFormat,
+        collectionId: String,
+        annotationId: String,
+        version: Int
+    ): String =
+        buildIri("${format.prefix()}/services/history/$collectionId/$annotationId/$version")
 
     //------------------------------------------------//
 
-    override fun buildOACollectionBodySearchIri(
-        fields: List<String>,
-        value: String,
-        strict: Boolean?,
-        xywh: String?,
-        t: String?,
-        creatorIri: String?,
-        generatorIri: String?
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_FIELDS, StringUtils.join(fields, ","))
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh!!)
-                }
-                if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t!!)
-                }
-                if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri!!)
-                }
-                if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri!!)
-                }
-            }
-        }
-        return buildIri("oa/services/search/body", params)
-    }
-
-    override fun buildW3CCollectionBodySearchIri(
+    override fun buildSearchByBodyIri(
+        format: AnnotationFormat,
         fields: List<String>,
         value: String,
         strict: Boolean?,
@@ -130,12 +99,11 @@ class IRIBuilderServiceImpl
         if (StringUtils.isNotBlank(generatorIri)) {
             params[PARAM_GENERATOR] = generatorIri!!
         }
-        return buildIri("w3c/services/search/body", params)
+        return buildIri("${format.prefix()}/services/search/body", params)
     }
 
-    //------------------------------------------------//
-
-    override fun buildOAPageBodySearchIri(
+    override fun buildSearchByBodyPageIri(
+        format: AnnotationFormat,
         fields: List<String>,
         value: String,
         strict: Boolean?,
@@ -146,113 +114,36 @@ class IRIBuilderServiceImpl
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_FIELDS, StringUtils.join(fields, ","))
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh!!)
-                }
-                if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t!!)
-                }
-                if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri!!)
-                }
-                if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri!!)
-                }
-                put(PARAM_PAGE, page)
-                if (embeddedDescriptions) {
-                    put(PARAM_DESC, 1)
-                } else {
-                    put(PARAM_IRIS, 1)
-                }
-            }
+        val params = mutableMapOf<String, Any>(
+            PARAM_FIELDS to StringUtils.join(fields, ","),
+            PARAM_VALUE to value
+        )
+        if (strict != null && strict) {
+            params[PARAM_STRICT] = strict
         }
-        return buildIri("oa/services/search/body", params)
+        if (StringUtils.isNotBlank(xywh)) {
+            params[PARAM_XYWH] = xywh!!
+        }
+        if (StringUtils.isNotBlank(t)) {
+            params[PARAM_T] = t!!
+        }
+        if (StringUtils.isNotBlank(creatorIri)) {
+            params[PARAM_CREATOR] = creatorIri!!
+        }
+        if (StringUtils.isNotBlank(generatorIri)) {
+            params[PARAM_GENERATOR] = generatorIri!!
+        }
+        params[PARAM_PAGE] = page
+        if (embeddedDescriptions) {
+            params[PARAM_DESC] = 1
+        } else {
+            params[PARAM_IRIS] = 1
+        }
+        return buildIri("${format.prefix()}/services/search/body", params)
     }
 
-    override fun buildW3CPageBodySearchIri(
-        fields: List<String>,
-        value: String,
-        strict: Boolean?,
-        xywh: String?,
-        t: String?,
-        creatorIri: String?,
-        generatorIri: String?,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_FIELDS, StringUtils.join(fields, ","))
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh!!)
-                }
-                if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t!!)
-                }
-                if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri!!)
-                }
-                if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri!!)
-                }
-                put(PARAM_PAGE, page)
-                if (embeddedDescriptions) {
-                    put(PARAM_DESC, 1)
-                } else {
-                    put(PARAM_IRIS, 1)
-                }
-            }
-        }
-        return buildIri("w3c/services/search/body", params)
-    }
-
-    //------------------------------------------------//
-
-    override fun buildOACollectionTargetSearchIri(
-        fields: List<String>,
-        value: String,
-        strict: Boolean?,
-        xywh: String?,
-        t: String?,
-        creatorIri: String?,
-        generatorIri: String?
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_FIELDS, StringUtils.join(fields, ","))
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh!!)
-                }
-                if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t!!)
-                }
-                if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri!!)
-                }
-                if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri!!)
-                }
-            }
-        }
-        return buildIri("oa/services/search/target", params)
-    }
-
-    override fun buildW3CCollectionTargetSearchIri(
+    override fun buildSearchByTargetIri(
+        format: AnnotationFormat,
         fields: List<String>,
         value: String,
         strict: Boolean?,
@@ -280,12 +171,11 @@ class IRIBuilderServiceImpl
         if (StringUtils.isNotBlank(generatorIri)) {
             params[PARAM_GENERATOR] = generatorIri!!
         }
-        return buildIri("w3c/services/search/target", params)
+        return buildIri("${format.prefix()}/services/search/target", params)
     }
 
-    //------------------------------------------------//
-
-    override fun buildOAPageTargetSearchIri(
+    override fun buildSearchByTargetPageIri(
+        format: AnnotationFormat,
         fields: List<String>,
         value: String,
         strict: Boolean?,
@@ -323,53 +213,11 @@ class IRIBuilderServiceImpl
                 }
             }
         }
-        return buildIri("oa/services/search/target", params)
+        return buildIri("${format.prefix()}/services/search/target", params)
     }
 
-    override fun buildW3CPageTargetSearchIri(
-        fields: List<String>,
-        value: String,
-        strict: Boolean?,
-        xywh: String?,
-        t: String?,
-        creatorIri: String?,
-        generatorIri: String?,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_FIELDS, StringUtils.join(fields, ","))
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh!!)
-                }
-                if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t!!)
-                }
-                if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri!!)
-                }
-                if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri!!)
-                }
-                put(PARAM_PAGE, page)
-                if (embeddedDescriptions) {
-                    put(PARAM_DESC, 1)
-                } else {
-                    put(PARAM_IRIS, 1)
-                }
-            }
-        }
-        return buildIri("w3c/services/search/target", params)
-    }
-
-    //------------------------------------------------//
-
-    override fun buildOACollectionCreatorSearchIri(
+    override fun buildSearchByCreatorIri(
+        format: AnnotationFormat,
         levels: List<String>,
         type: String,
         value: String,
@@ -385,31 +233,11 @@ class IRIBuilderServiceImpl
                 }
             }
         }
-        return buildIri("oa/services/search/creator", params)
+        return buildIri("${format.prefix()}/services/search/creator", params)
     }
 
-    override fun buildW3CCollectionCreatorSearchIri(
-        levels: List<String>,
-        type: String,
-        value: String,
-        strict: Boolean?
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_LEVELS, StringUtils.join(levels, ","))
-                put(PARAM_TYPE, type)
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-            }
-        }
-        return buildIri("w3c/services/search/creator", params)
-    }
-
-    //------------------------------------------------//
-
-    override fun buildOAPageCreatorSearchIri(
+    override fun buildSearchByCreatorPageIri(
+        format: AnnotationFormat,
         levels: List<String>,
         type: String,
         value: String,
@@ -433,58 +261,11 @@ class IRIBuilderServiceImpl
                 }
             }
         }
-        return buildIri("oa/services/search/creator", params)
+        return buildIri("${format.prefix()}/services/search/creator", params)
     }
 
-    override fun buildW3CPageCreatorSearchIri(
-        levels: List<String>,
-        type: String,
-        value: String,
-        strict: Boolean?,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_LEVELS, StringUtils.join(levels, ","))
-                put(PARAM_TYPE, type)
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                put(PARAM_PAGE, page)
-                if (embeddedDescriptions) {
-                    put(PARAM_DESC, 1)
-                } else {
-                    put(PARAM_IRIS, 1)
-                }
-            }
-        }
-        return buildIri("w3c/services/search/creator", params)
-    }
-
-    //------------------------------------------------//
-
-    override fun buildOACollectionGeneratorSearchIri(
-        levels: List<String>,
-        type: String,
-        value: String,
-        strict: Boolean?
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_LEVELS, StringUtils.join(levels, ","))
-                put(PARAM_TYPE, type)
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-            }
-        }
-        return buildIri("oa/services/search/generator", params)
-    }
-
-    override fun buildW3CCollectionGeneratorSearchIri(
+    override fun buildSearchByGeneratorIri(
+        format: AnnotationFormat,
         levels: List<String>,
         type: String,
         value: String,
@@ -498,12 +279,11 @@ class IRIBuilderServiceImpl
         if (strict != null && strict) {
             params[PARAM_STRICT] = strict
         }
-        return buildIri("w3c/services/search/generator", params)
+        return buildIri("${format.prefix()}/services/search/generator", params)
     }
 
-    //------------------------------------------------//
-
-    override fun buildOAPageGeneratorSearchIri(
+    override fun buildSearchByGeneratorPageIri(
+        format: AnnotationFormat,
         levels: List<String>,
         type: String,
         value: String,
@@ -527,44 +307,17 @@ class IRIBuilderServiceImpl
                 }
             }
         }
-        return buildIri("oa/services/search/generator", params)
+        return buildIri("${format.prefix()}/services/search/generator", params)
     }
 
-    override fun buildW3CPageGeneratorSearchIri(
-        levels: List<String>,
-        type: String,
-        value: String,
-        strict: Boolean?,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_LEVELS, StringUtils.join(levels, ","))
-                put(PARAM_TYPE, type)
-                put(PARAM_VALUE, value)
-                if (strict != null && strict) {
-                    put(PARAM_STRICT, strict)
-                }
-                put(PARAM_PAGE, page)
-                if (embeddedDescriptions) {
-                    put(PARAM_DESC, 1)
-                } else {
-                    put(PARAM_IRIS, 1)
-                }
-            }
-        }
-        return buildIri("w3c/services/search/generator", params)
-    }
-
-
-    // search by range
-
-    //------------------------------------------------//
-
-    override fun buildOACollectionRangeSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String =
+    override fun buildSearchByRangeIri(
+        format: AnnotationFormat,
+        targetId: String,
+        rangeStart: Int,
+        rangeEnd: Int
+    ): String =
         buildIri(
-            "oa/services/search/range",
+            "${format.prefix()}/services/search/range",
             mapOf<String, Any>(
                 PARAM_TARGET_ID to targetId,
                 PARAM_RANGE_START to rangeStart,
@@ -572,19 +325,8 @@ class IRIBuilderServiceImpl
             )
         )
 
-    override fun buildW3CCollectionRangeSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String =
-        buildIri(
-            "w3c/services/search/range",
-            mapOf<String, Any>(
-                PARAM_TARGET_ID to targetId,
-                PARAM_RANGE_START to rangeStart,
-                PARAM_RANGE_END to rangeEnd
-            )
-        )
-
-    //------------------------------------------------//
-
-    override fun buildOAPageRangeSearchIri(
+    override fun buildSearchByRangePageIri(
+        format: AnnotationFormat,
         targetId: String,
         rangeStart: Int,
         rangeEnd: Int,
@@ -602,46 +344,17 @@ class IRIBuilderServiceImpl
         } else {
             params[PARAM_IRIS] = 1
         }
-        return buildIri("oa/services/search/range", params)
+        return buildIri("${format.prefix()}/services/search/range", params)
     }
 
-    override fun buildW3CPageRangeSearchIri(
+    override fun buildSearchByOverlapIri(
+        format: AnnotationFormat,
         targetId: String,
         rangeStart: Int,
-        rangeEnd: Int,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = mutableMapOf<String, Any>(
-            PARAM_TARGET_ID to targetId,
-            PARAM_RANGE_START to rangeStart,
-            PARAM_RANGE_END to rangeEnd,
-            PARAM_PAGE to page
-        )
-        if (embeddedDescriptions) {
-            params[PARAM_DESC] = 1
-        } else {
-            params[PARAM_IRIS] = 1
-        }
-        return buildIri("w3c/services/search/range", params)
-    }
-
-    // search by overlap
-
-    //------------------------------------------------//
-
-    override fun buildOACollectionOverlapSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String {
-        val params = mapOf(
-            PARAM_TARGET_ID to targetId,
-            PARAM_RANGE_START to rangeStart,
-            PARAM_RANGE_END to rangeEnd
-        )
-        return buildIri("oa/services/search/overlap", params)
-    }
-
-    override fun buildW3CCollectionOverlapSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String =
+        rangeEnd: Int
+    ): String =
         buildIri(
-            "w3c/services/search/overlap",
+            "${format.prefix()}/services/search/overlap",
             mapOf<String, Any>(
                 PARAM_TARGET_ID to targetId,
                 PARAM_RANGE_START to rangeStart,
@@ -649,9 +362,8 @@ class IRIBuilderServiceImpl
             )
         )
 
-    //------------------------------------------------//
-
-    override fun buildOAPageOverlapSearchIri(
+    override fun buildSearchByOverlapPageIri(
+        format: AnnotationFormat,
         targetId: String,
         rangeStart: Int,
         rangeEnd: Int,
@@ -669,57 +381,17 @@ class IRIBuilderServiceImpl
         } else {
             params[PARAM_IRIS] = 1
         }
-        return buildIri("oa/services/search/overlap", params)
+        return buildIri("${format.prefix()}/services/search/overlap", params)
     }
 
-    override fun buildW3CPageOverlapSearchIri(
-        targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = mutableMapOf<String, Any>(
-            PARAM_TARGET_ID to targetId,
-            PARAM_RANGE_START to rangeStart,
-            PARAM_RANGE_END to rangeEnd,
-            PARAM_PAGE to page
-        )
-        if (embeddedDescriptions) {
-            params[PARAM_DESC] = 1
-        } else {
-            params[PARAM_IRIS] = 1
-        }
-        return buildIri("w3c/services/search/overlap", params)
-    }
-
-
-    // search by temporal
-
-    //------------------------------------------------//
-
-    override fun buildOACollectionTemporalSearchIri(
-        levels: List<String>,
-        types: List<String>,
-        since: Date
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_LEVELS, StringUtils.join(levels, ","))
-                put(PARAM_TYPES, StringUtils.join(types, ","))
-                put(PARAM_SINCE, toString(since))
-            }
-        }
-        return buildIri("oa/services/search/temporal", params)
-    }
-
-    override fun buildW3CCollectionTemporalSearchIri(
+    override fun buildSearchByTemporalIri(
+        format: AnnotationFormat,
         levels: List<String>,
         types: List<String>,
         since: Date
     ): String =
         buildIri(
-            "w3c/services/search/temporal",
+            "${format.prefix()}/services/search/temporal",
             mapOf(
                 PARAM_LEVELS to StringUtils.join(levels, ","),
                 PARAM_TYPES to StringUtils.join(types, ","),
@@ -727,33 +399,8 @@ class IRIBuilderServiceImpl
             )
         )
 
-
-    //------------------------------------------------//
-
-    override fun buildOAPageTemporalSearchIri(
-        levels: List<String>,
-        types: List<String>,
-        since: Date,
-        page: Int,
-        embeddedDescriptions: Boolean
-    ): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_LEVELS, StringUtils.join(levels, ","))
-                put(PARAM_TYPES, StringUtils.join(types, ","))
-                put(PARAM_SINCE, toString(since))
-                put(PARAM_PAGE, page)
-                if (embeddedDescriptions) {
-                    put(PARAM_DESC, 1)
-                } else {
-                    put(PARAM_IRIS, 1)
-                }
-            }
-        }
-        return buildIri("oa/services/search/temporal", params)
-    }
-
-    override fun buildW3CPageTemporalSearchIri(
+    override fun buildSearchByTemporalPageIri(
+        format: AnnotationFormat,
         levels: List<String>,
         types: List<String>,
         since: Date,
@@ -771,39 +418,17 @@ class IRIBuilderServiceImpl
         } else {
             params[PARAM_IRIS] = 1
         }
-        return buildIri("w3c/services/search/temporal", params)
+        return buildIri("${format.prefix()}/services/search/temporal", params)
     }
 
-    //------------------------------------------------//
-
-    override fun buildOAStatisticsPageIri(type: String, field: String, page: Int): String {
-        val params = object : HashMap<String, Any>() {
-            init {
-                put(PARAM_FIELD, field)
-                put(PARAM_PAGE, page)
-            }
-        }
-        return buildIri("oa/services/stats/$type", params)
-    }
-
-    override fun buildW3CStatisticsPageIri(type: String, field: String, page: Int): String =
+    override fun buildStatisticsPageIri(format: AnnotationFormat, type: String, field: String, page: Int): String =
         buildIri(
-            "w3c/services/stats/$type",
+            "${format.prefix()}/services/stats/$type",
             mapOf(
                 PARAM_FIELD to field,
                 PARAM_PAGE to page
             )
         )
-
-    //------------------------------------------------//
-
-    override fun buildOAAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String =
-        buildIri("oa/services/history/$collectionId/$annotationId/$version")
-
-    override fun buildW3CAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String =
-        buildIri("w3c/services/history/$collectionId/$annotationId/$version")
-
-    //------------------------------------------------//
 
     private fun buildIri(id: String, params: Map<String, Any>? = null): String =
         try {

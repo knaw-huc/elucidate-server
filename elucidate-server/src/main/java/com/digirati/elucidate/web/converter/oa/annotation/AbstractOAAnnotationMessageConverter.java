@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.ServiceResponse;
@@ -64,7 +65,7 @@ public abstract class AbstractOAAnnotationMessageConverter extends AbstractMessa
 
         if (status.equals(Status.OK)) {
             OAAnnotationHistory oaAnnotationHistory = serviceResponse.getObj();
-            String urlStr = iriBuilderService.buildOAAnnotationHistoryIri(collectionId, annotationId, oaAnnotationHistory.getVersion());
+            String urlStr = iriBuilderService.buildAnnotationHistoryIri(AnnotationFormat.OA, collectionId, annotationId, oaAnnotationHistory.getVersion());
             String dateStr = MEMENTO_DATE_FORMAT.format(oaAnnotationHistory.getCreatedDateTime());
             outputMessage.getHeaders().add(HttpHeaders.LINK, String.format("<%s>; rel=\"prev memento\"; datetime=\"%s\"", urlStr, dateStr));
         }
