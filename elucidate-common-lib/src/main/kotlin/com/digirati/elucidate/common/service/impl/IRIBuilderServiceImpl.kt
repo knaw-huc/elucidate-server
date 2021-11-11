@@ -35,7 +35,7 @@ import java.util.*
 class IRIBuilderServiceImpl
 @Autowired constructor(
     @Value("\${base.scheme}") baseScheme: String,
-    @Value("\${base.host}") baseHost: String,
+    @Value("\${base.host}") baseHost: String?,
     @Value("\${base.port}") basePort: Int,
     @Value("\${base.path}") basePath: String
 ) : IRIBuilderService {
@@ -56,30 +56,30 @@ class IRIBuilderServiceImpl
     override fun buildW3CCollectionBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String {
         val params = mutableMapOf<String, Any>(
             PARAM_FIELDS to StringUtils.join(fields, ","),
             PARAM_VALUE to value
         )
-        if (strict) {
+        if (strict != null && strict) {
             params[PARAM_STRICT] = strict
         }
         if (StringUtils.isNotBlank(xywh)) {
-            params[PARAM_XYWH] = xywh
+            params[PARAM_XYWH] = xywh!!
         }
         if (StringUtils.isNotBlank(t)) {
-            params[PARAM_T] = t
+            params[PARAM_T] = t!!
         }
         if (StringUtils.isNotBlank(creatorIri)) {
-            params[PARAM_CREATOR] = creatorIri
+            params[PARAM_CREATOR] = creatorIri!!
         }
         if (StringUtils.isNotBlank(generatorIri)) {
-            params[PARAM_GENERATOR] = generatorIri
+            params[PARAM_GENERATOR] = generatorIri!!
         }
         return buildIri("w3c/services/search/body", params)
     }
@@ -87,11 +87,11 @@ class IRIBuilderServiceImpl
     override fun buildW3CPageBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -99,20 +99,20 @@ class IRIBuilderServiceImpl
             init {
                 put(PARAM_FIELDS, StringUtils.join(fields, ","))
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh)
+                    put(PARAM_XYWH, xywh!!)
                 }
                 if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t)
+                    put(PARAM_T, t!!)
                 }
                 if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri)
+                    put(PARAM_CREATOR, creatorIri!!)
                 }
                 if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri)
+                    put(PARAM_GENERATOR, generatorIri!!)
                 }
                 put(PARAM_PAGE, page)
                 if (embeddedDescriptions) {
@@ -128,30 +128,30 @@ class IRIBuilderServiceImpl
     override fun buildW3CCollectionTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String {
         val params = mutableMapOf<String, Any>(
             PARAM_FIELDS to StringUtils.join(fields, ","),
             PARAM_VALUE to value
         )
-        if (strict) {
+        if (strict != null && strict) {
             params[PARAM_STRICT] = strict
         }
         if (StringUtils.isNotBlank(xywh)) {
-            params[PARAM_XYWH] = xywh
+            params[PARAM_XYWH] = xywh!!
         }
         if (StringUtils.isNotBlank(t)) {
-            params[PARAM_T] = t
+            params[PARAM_T] = t!!
         }
         if (StringUtils.isNotBlank(creatorIri)) {
-            params[PARAM_CREATOR] = creatorIri
+            params[PARAM_CREATOR] = creatorIri!!
         }
         if (StringUtils.isNotBlank(generatorIri)) {
-            params[PARAM_GENERATOR] = generatorIri
+            params[PARAM_GENERATOR] = generatorIri!!
         }
         return buildIri("w3c/services/search/target", params)
     }
@@ -159,11 +159,11 @@ class IRIBuilderServiceImpl
     override fun buildW3CPageTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -171,20 +171,20 @@ class IRIBuilderServiceImpl
             init {
                 put(PARAM_FIELDS, StringUtils.join(fields, ","))
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh)
+                    put(PARAM_XYWH, xywh!!)
                 }
                 if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t)
+                    put(PARAM_T, t!!)
                 }
                 if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri)
+                    put(PARAM_CREATOR, creatorIri!!)
                 }
                 if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri)
+                    put(PARAM_GENERATOR, generatorIri!!)
                 }
                 put(PARAM_PAGE, page)
                 if (embeddedDescriptions) {
@@ -201,14 +201,14 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String {
         val params = object : HashMap<String, Any>() {
             init {
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
             }
@@ -220,7 +220,7 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -229,7 +229,7 @@ class IRIBuilderServiceImpl
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 put(PARAM_PAGE, page)
@@ -247,14 +247,14 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String {
         val params = mutableMapOf<String, Any>(
             PARAM_LEVELS to StringUtils.join(levels, ","),
             PARAM_TYPE to type,
             PARAM_VALUE to value
         )
-        if (strict) {
+        if (strict != null && strict) {
             params[PARAM_STRICT] = strict
         }
         return buildIri("w3c/services/search/generator", params)
@@ -264,7 +264,7 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -273,7 +273,7 @@ class IRIBuilderServiceImpl
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 put(PARAM_PAGE, page)
@@ -374,30 +374,30 @@ class IRIBuilderServiceImpl
     override fun buildOACollectionBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String {
         val params = object : HashMap<String, Any>() {
             init {
                 put(PARAM_FIELDS, StringUtils.join(fields, ","))
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh)
+                    put(PARAM_XYWH, xywh!!)
                 }
                 if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t)
+                    put(PARAM_T, t!!)
                 }
                 if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri)
+                    put(PARAM_CREATOR, creatorIri!!)
                 }
                 if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri)
+                    put(PARAM_GENERATOR, generatorIri!!)
                 }
             }
         }
@@ -407,11 +407,11 @@ class IRIBuilderServiceImpl
     override fun buildOAPageBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -419,20 +419,20 @@ class IRIBuilderServiceImpl
             init {
                 put(PARAM_FIELDS, StringUtils.join(fields, ","))
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh)
+                    put(PARAM_XYWH, xywh!!)
                 }
                 if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t)
+                    put(PARAM_T, t!!)
                 }
                 if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri)
+                    put(PARAM_CREATOR, creatorIri!!)
                 }
                 if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri)
+                    put(PARAM_GENERATOR, generatorIri!!)
                 }
                 put(PARAM_PAGE, page)
                 if (embeddedDescriptions) {
@@ -448,30 +448,30 @@ class IRIBuilderServiceImpl
     override fun buildOACollectionTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String {
         val params = object : HashMap<String, Any>() {
             init {
                 put(PARAM_FIELDS, StringUtils.join(fields, ","))
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh)
+                    put(PARAM_XYWH, xywh!!)
                 }
                 if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t)
+                    put(PARAM_T, t!!)
                 }
                 if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri)
+                    put(PARAM_CREATOR, creatorIri!!)
                 }
                 if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri)
+                    put(PARAM_GENERATOR, generatorIri!!)
                 }
             }
         }
@@ -481,11 +481,11 @@ class IRIBuilderServiceImpl
     override fun buildOAPageTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -493,20 +493,20 @@ class IRIBuilderServiceImpl
             init {
                 put(PARAM_FIELDS, StringUtils.join(fields, ","))
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 if (StringUtils.isNotBlank(xywh)) {
-                    put(PARAM_XYWH, xywh)
+                    put(PARAM_XYWH, xywh!!)
                 }
                 if (StringUtils.isNotBlank(t)) {
-                    put(PARAM_T, t)
+                    put(PARAM_T, t!!)
                 }
                 if (StringUtils.isNotBlank(creatorIri)) {
-                    put(PARAM_CREATOR, creatorIri)
+                    put(PARAM_CREATOR, creatorIri!!)
                 }
                 if (StringUtils.isNotBlank(generatorIri)) {
-                    put(PARAM_GENERATOR, generatorIri)
+                    put(PARAM_GENERATOR, generatorIri!!)
                 }
                 put(PARAM_PAGE, page)
                 if (embeddedDescriptions) {
@@ -523,14 +523,14 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String {
         val params = object : HashMap<String, Any>() {
             init {
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
             }
@@ -542,7 +542,7 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -551,7 +551,7 @@ class IRIBuilderServiceImpl
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 put(PARAM_PAGE, page)
@@ -569,14 +569,14 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String {
         val params = object : HashMap<String, Any>() {
             init {
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
             }
@@ -588,7 +588,7 @@ class IRIBuilderServiceImpl
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -597,7 +597,7 @@ class IRIBuilderServiceImpl
                 put(PARAM_LEVELS, StringUtils.join(levels, ","))
                 put(PARAM_TYPE, type)
                 put(PARAM_VALUE, value)
-                if (strict) {
+                if (strict != null && strict) {
                     put(PARAM_STRICT, strict)
                 }
                 put(PARAM_PAGE, page)
@@ -723,7 +723,7 @@ class IRIBuilderServiceImpl
         }
 
     companion object {
-        val DATE_FORMAT = DateTimeFormatter.ISO_DATE_TIME
+        private val DATE_FORMAT: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
         const val SERVICE_NAME = "iriBuilderServiceImpl"
 
         fun toString(since: Date): String =

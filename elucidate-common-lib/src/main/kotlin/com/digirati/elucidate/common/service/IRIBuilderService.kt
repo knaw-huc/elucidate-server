@@ -10,25 +10,25 @@ interface IRIBuilderService {
     fun buildOACollectionBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String
 
     fun buildOACollectionCreatorSearchIri(
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String
 
     fun buildOACollectionGeneratorSearchIri(
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String
 
     fun buildOACollectionIri(collectionId: String): String
@@ -38,11 +38,11 @@ interface IRIBuilderService {
     fun buildOACollectionTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String
 
     fun buildOACollectionTemporalSearchIri(levels: List<String>, types: List<String>, since: Date): String
@@ -50,11 +50,11 @@ interface IRIBuilderService {
     fun buildOAPageBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -63,7 +63,7 @@ interface IRIBuilderService {
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -72,7 +72,7 @@ interface IRIBuilderService {
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -90,11 +90,11 @@ interface IRIBuilderService {
     fun buildOAPageTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -116,25 +116,25 @@ interface IRIBuilderService {
     fun buildW3CCollectionBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String
 
     fun buildW3CCollectionCreatorSearchIri(
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String
 
     fun buildW3CCollectionGeneratorSearchIri(
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean
+        strict: Boolean?
     ): String
 
     fun buildW3CCollectionIri(collectionId: String): String
@@ -142,11 +142,11 @@ interface IRIBuilderService {
     fun buildW3CCollectionTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?
     ): String
 
     fun buildW3CCollectionTemporalSearchIri(levels: List<String>, types: List<String>, since: Date): String
@@ -154,11 +154,11 @@ interface IRIBuilderService {
     fun buildW3CPageBodySearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -167,7 +167,7 @@ interface IRIBuilderService {
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -176,7 +176,7 @@ interface IRIBuilderService {
         levels: List<String>,
         type: String,
         value: String,
-        strict: Boolean,
+        strict: Boolean?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -186,11 +186,11 @@ interface IRIBuilderService {
     fun buildW3CPageTargetSearchIri(
         fields: List<String>,
         value: String,
-        strict: Boolean,
-        xywh: String,
-        t: String,
-        creatorIri: String,
-        generatorIri: String,
+        strict: Boolean?,
+        xywh: String?,
+        t: String?,
+        creatorIri: String?,
+        generatorIri: String?,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
