@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.oa.OAAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.converter.W3CToOAAnnotationCollectionConverter;
@@ -55,6 +56,6 @@ public class OAAnnotationHistoryServiceImpl extends AbstractAnnotationHistorySer
 
     @Override
     protected String buildAnnotationIri(String collectionId, String annotationId) {
-        return iriBuilderService.buildOAAnnotationIri(collectionId, annotationId);
+        return iriBuilderService.buildAnnotationIri(AnnotationFormat.OA, collectionId, annotationId);
     }
 }

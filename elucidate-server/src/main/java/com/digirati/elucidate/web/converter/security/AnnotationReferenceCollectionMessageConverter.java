@@ -13,6 +13,7 @@ import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.annotation.AnnotationReferenceCollection;
 import com.digirati.elucidate.web.converter.AbstractMessageConverter;
@@ -41,7 +42,7 @@ public class AnnotationReferenceCollectionMessageConverter extends
             throws Exception {
         Map<String, Object> jsonMap = new HashMap<>();
         List<String> iris = obj.getAnnotations().stream()
-                .map(ref -> iriBuilder.buildW3CAnnotationIri(ref.getCollectionId(), ref.getId()))
+                .map(ref -> iriBuilder.buildAnnotationIri(AnnotationFormat.W3C, ref.getCollectionId(), ref.getId()))
                 .collect(Collectors.toList());
 
         jsonMap.put("annotations", iris);

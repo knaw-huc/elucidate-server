@@ -20,6 +20,8 @@ import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_XYWH
 import com.digirati.elucidate.common.infrastructure.exception.InvalidIRIException
 import com.digirati.elucidate.common.infrastructure.util.URIUtils.buildBaseUrl
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat
+import com.digirati.elucidate.common.model.annotation.prefix
 import com.digirati.elucidate.common.service.IRIBuilderService
 import org.apache.commons.lang3.StringUtils
 import org.apache.http.client.utils.URIBuilder
@@ -42,13 +44,8 @@ class IRIBuilderServiceImpl
 
     private val baseUrl: String
 
-    //------------------------------------------------//
-
-    override fun buildOAAnnotationIri(collectionId: String, annotationId: String): String =
-        buildIri("oa/$collectionId/$annotationId")
-
-    override fun buildW3CAnnotationIri(collectionId: String, annotationId: String): String =
-        buildIri("w3c/$collectionId/$annotationId")
+    override fun buildAnnotationIri(format: AnnotationFormat, collectionId: String, annotationId: String): String =
+        buildIri("${format.prefix()}/$collectionId/$annotationId")
 
     //------------------------------------------------//
 

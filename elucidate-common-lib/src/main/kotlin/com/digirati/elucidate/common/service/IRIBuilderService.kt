@@ -1,11 +1,12 @@
 package com.digirati.elucidate.common.service
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat
 import java.util.*
 
 interface IRIBuilderService {
-    fun buildOAAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String
+    fun buildAnnotationIri(format: AnnotationFormat, collectionId: String, annotationId: String): String
 
-    fun buildOAAnnotationIri(collectionId: String, annotationId: String): String
+    fun buildOAAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String
 
     fun buildOACollectionBodySearchIri(
         fields: List<String>,
@@ -110,8 +111,6 @@ interface IRIBuilderService {
     fun buildOAStatisticsPageIri(type: String, field: String, page: Int): String
 
     fun buildW3CAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String
-
-    fun buildW3CAnnotationIri(collectionId: String, annotationId: String): String
 
     fun buildW3CCollectionBodySearchIri(
         fields: List<String>,

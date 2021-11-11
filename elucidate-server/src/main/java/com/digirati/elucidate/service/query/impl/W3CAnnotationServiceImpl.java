@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.infrastructure.generator.IDGenerator;
@@ -36,6 +37,6 @@ public class W3CAnnotationServiceImpl extends AbstractAnnotationServiceImpl<W3CA
 
     @Override
     protected String buildAnnotationIri(String collectionId, String annotationId) {
-        return iriBuilderService.buildW3CAnnotationIri(collectionId, annotationId);
+        return iriBuilderService.buildAnnotationIri(AnnotationFormat.W3C, collectionId, annotationId);
     }
 }

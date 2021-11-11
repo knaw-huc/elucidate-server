@@ -3,6 +3,7 @@ package com.digirati.elucidate.service.history.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.digirati.elucidate.common.model.annotation.AnnotationFormat;
 import com.digirati.elucidate.common.model.annotation.w3c.W3CAnnotation;
 import com.digirati.elucidate.common.service.IRIBuilderService;
 import com.digirati.elucidate.model.annotation.history.W3CAnnotationHistory;
@@ -29,6 +30,6 @@ public class W3CAnnotationHistoryServiceImpl extends AbstractAnnotationHistorySe
 
     @Override
     protected String buildAnnotationIri(String collectionId, String annotationId) {
-        return iriBuilderService.buildW3CAnnotationIri(collectionId, annotationId);
+        return iriBuilderService.buildAnnotationIri(AnnotationFormat.OA, collectionId, annotationId);
     }
 }
