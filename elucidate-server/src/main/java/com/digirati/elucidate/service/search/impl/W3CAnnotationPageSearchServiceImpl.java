@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -87,15 +86,13 @@ public class W3CAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSe
         return iriBuilderService.buildW3CPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
 
-    @Nullable
     @Override
     protected String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit) {
-        return null;
+        return iriBuilderService.buildW3CCollectionOverlapSearchIri(targetId, lowerLimit, upperLimit);
     }
 
-    @Nullable
     @Override
     protected String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
-        return null;
+        return iriBuilderService.buildW3CPageOverlapSearchIri(targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
     }
 }
