@@ -1,9 +1,12 @@
 --DROP FUNCTION public.annotation_search_by_overlap(character varying, character varying, integer, integer);
+
+-- annotation-start should be before range-end and, and annotation-end should be after range-start
+
 CREATE FUNCTION public.annotation_search_by_overlap(
         _targetid character varying,
         _selectortype character varying,
-        _lowerlimit integer,
-        _upperlimit integer)
+        _rangestart integer,
+        _rangeend integer)
     RETURNS SETOF public.annotation_get AS
 $BODY$
     BEGIN
@@ -31,10 +34,10 @@ $BODY$
                 AND JSONB_PATH_EXISTS(
                         at.json,
                         format(
-                            '$."http://www.w3.org/ns/oa#hasSelector"[*] ? (@."@type" == "%s" && @."http://www.w3.org/ns/oa#start"[0]."@value" >= %s && @."http://www.w3.org/ns/oa#end"[0]."@value" <= %s)',
+                            '$."http://www.w3.org/ns/oa#hasSelector"[*] ? (@."@type" == "%s" && @."http://www.w3.org/ns/oa#start"[0]."@value" < %s && @."http://www.w3.org/ns/oa#end"[0]."@value" > %s)',
                             _selectortype,
-                            _lowerlimit,
-                            _upperlimit
+                            _rangeend,
+                            _rangestart
                         )::jsonpath
                 )
                 AND a.deleted = false
@@ -49,5 +52,5 @@ GRANT EXECUTE ON FUNCTION public.annotation_search_by_overlap(character varying,
 REVOKE ALL    ON FUNCTION public.annotation_search_by_overlap(character varying, character varying, integer, integer) FROM public;
 
 -- usage example:
--- select * from public.annotation_search_by_overlap('https://demorepo.tt.di.huc.knaw.nl/task/find/volume-1728/contents', 'urn:example:republic:TextAnchorSelector', 55900, 55990);
+-- select * from public.annotation_search_by_overlap('https://demorepo.tt.di.huc.knaw.nl/task/find/volume-1728/contents', 'urn:example:republic:TextAnchorSelector', 55900, 55910);
 --

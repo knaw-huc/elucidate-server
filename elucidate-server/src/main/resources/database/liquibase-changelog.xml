@@ -521,5 +521,10 @@
                  relativeToChangelogFile="true"
                  path="sql/migrations/v003/02_add_search_by_overlap.sql"/>
     </changeSet>
+    <changeSet id="82" author="bramb">
+        <sqlFile splitStatements="false"
+                 relativeToChangelogFile="true"
+                 path="sql/migrations/v003/03_add_search_by_range.sql"/>
+    </changeSet>
 
 </databaseChangeLog>

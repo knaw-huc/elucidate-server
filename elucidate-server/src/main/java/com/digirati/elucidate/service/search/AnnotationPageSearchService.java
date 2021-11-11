@@ -19,5 +19,7 @@ public interface AnnotationPageSearchService<A extends AbstractAnnotation, P ext
 
     ServiceResponse<P> buildAnnotationPageByTemporal(List<A> annotations, List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
 
-    ServiceResponse<P> buildAnnotationPageByOverlap(List<A> annotations, String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions);
+    ServiceResponse<P> buildAnnotationPageByRange(List<A> annotations, String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
+
+    ServiceResponse<P> buildAnnotationPageByOverlap(List<A> annotations, String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
 }

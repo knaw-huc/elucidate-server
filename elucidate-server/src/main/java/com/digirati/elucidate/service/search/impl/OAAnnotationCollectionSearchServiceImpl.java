@@ -60,6 +60,8 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
         return oaAnnotationCollection;
     }
 
+    // body
+
     @Override
     protected ServiceResponse<OAAnnotationPage> buildBodySearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
         return oaAnnotationPageSearchService.buildAnnotationPageByBody(oaAnnotations, fields, value, strict, xywh, t, creatorIri, generatorIri, 0, useEmbeddedDescriptions(clientPref));
@@ -74,6 +76,8 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
     protected String buildBodySearchPageIri(List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildOAPageBodySearchIri(fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
     }
+
+    // target
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildTargetSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> fields, String value, boolean strict, String xywh, String t, String creatorIri, String generatorIri, @NotNull ClientPreference clientPref) {
@@ -90,6 +94,8 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
         return iriBuilderService.buildOAPageTargetSearchIri(fields, value, strict, xywh, t, creatorIri, generatorIri, page, embeddedDescriptions);
     }
 
+    // creator
+
     @Override
     protected ServiceResponse<OAAnnotationPage> buildCreatorSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
         return oaAnnotationPageSearchService.buildAnnotationPageByCreator(oaAnnotations, levels, type, value, strict, 0, useEmbeddedDescriptions(clientPref));
@@ -104,6 +110,8 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
     protected String buildCreatorSearchPageIri(List<String> levels, String type, String value, boolean strict, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildOAPageCreatorSearchIri(levels, type, value, strict, page, embeddedDescriptions);
     }
+
+    // generator
 
     @Override
     protected ServiceResponse<OAAnnotationPage> buildGeneratorSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> levels, String type, String value, boolean strict, @NotNull ClientPreference clientPref) {
@@ -120,6 +128,8 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
         return iriBuilderService.buildOAPageGeneratorSearchIri(levels, type, value, strict, page, embeddedDescriptions);
     }
 
+    // temporal
+
     @Override
     protected ServiceResponse<OAAnnotationPage> buildTemporalSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, List<String> levels, List<String> types, Date since, @NotNull ClientPreference clientPref) {
         return oaAnnotationPageSearchService.buildAnnotationPageByTemporal(oaAnnotations, levels, types, since, 0, useEmbeddedDescriptions(clientPref));
@@ -135,18 +145,37 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
         return iriBuilderService.buildOAPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
 
+    // range
+
     @Override
-    protected ServiceResponse<OAAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String targetId, int lowerLimit, int upperLimit, @NotNull ClientPreference clientPref) {
-        return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, targetId, lowerLimit, upperLimit, 0, useEmbeddedDescriptions(clientPref));
+    protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+        return iriBuilderService.buildOACollectionRangeSearchIri(targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit) {
-        return iriBuilderService.buildOACollectionOverlapSearchIri(targetId, lowerLimit, upperLimit);
+    protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildOAPageRangeSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
     @Override
-    protected String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildOAPageOverlapSearchIri(targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
+    protected ServiceResponse<OAAnnotationPage> buildRangeSearchFirstAnnotationPage(List<OAAnnotation> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref) {
+        return oaAnnotationPageSearchService.buildAnnotationPageByRange(annotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
+    }
+
+    // overlap
+
+    @Override
+    protected ServiceResponse<OAAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String targetId, int rangeStart, int rangeEnd, @NotNull ClientPreference clientPref) {
+        return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
+    }
+
+    @Override
+    protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+        return iriBuilderService.buildOACollectionOverlapSearchIri(targetId, rangeStart, rangeEnd);
+    }
+
+    @Override
+    protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildOAPageOverlapSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 }

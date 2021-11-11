@@ -7,7 +7,6 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -96,15 +95,27 @@ public class OAAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSea
         return iriBuilderService.buildOAPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
 
-    @Nullable
+    // range
+
     @Override
-    protected String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit) {
-        return null;
+    protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+        return iriBuilderService.buildOACollectionRangeSearchIri(targetId, rangeStart, rangeEnd);
     }
 
-    @Nullable
     @Override
-    protected String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
-        return null;
+    protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildOAPageRangeSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
+    }
+
+    // overlap
+
+    @Override
+    protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+        return iriBuilderService.buildOACollectionOverlapSearchIri(targetId, rangeStart, rangeEnd);
+    }
+
+    @Override
+    protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildOAPageOverlapSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 }

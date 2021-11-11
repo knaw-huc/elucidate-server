@@ -29,7 +29,9 @@
 	- [Search by `target`](#search-by-target)
 	- [Search by `creator`](#search-by-creator)
 	- [Search by `generator`](#search-by-generator)
-	- [Search by `created`, `modified`, `generated`](#search-by-created-modified-generated)
+  - [Search by `created`, `modified`, `generated`](#search-by-created-modified-generated)
+  - [Search by annotation range](#search-by-annotation-range)
+  - [Search by annotation overlap](#search-by-annotation-overlap)
 - [Statistics](#statistics)
 	- [Body Statistics](#body-statistics)
 	- [Target Statistics](#target-statistics)
@@ -420,6 +422,46 @@ Base URL: `GET http://example.org/w3c/services/search/temporal HTTP/1.1`
 | `levels`  | Yes       | `annotation`,`body`,`target`     | The levels within the annotation against which the search for a temporal value will be made. |
 | `types`   | Yes       | `created`,`modified`,`generated` | The types of temporal fields within that will be searched against.                           |
 | `since`   | Yes       | ISO8601 timestamp                | The timestamp that search results will be returned from.                                     |
+
+### Search by annotation range
+
+Base URL: `GET http://example.org/w3c/services/search/range HTTP/1.1`
+
+For annotations that use the `urn:example:republic:TextAnchorSelector` selector in their target, this search can be used to find all those annotations within a given range:
+annotations that `start` at or after the given `lower_limit` and `end` before or at the given `upper_limit`
+
+The `target` of the annotation should have a section with a selector like this:
+```
+{
+  "source": "https://demorepo.tt.di.huc.knaw.nl/task/find/volume-1728/contents",
+  "type": "Text",
+  "selector": {
+    "type": "urn:example:republic:TextAnchorSelector",
+    "start": 56212,
+    "end": 56213
+    }
+}
+```
+
+| Parameter     | Mandatory | Valid Values           | Description                                                 |
+|---------------|-----------|------------------------|-------------------------------------------------------------|
+| `target_id`   | Yes       | Percent-encoded string | The value (usually a URI) of the `target` `id` or `source`  |
+| `range_start` | Yes       | integer                | The TextAnchor number where the range starts.               |
+| `range_end`   | Yes       | integer                | The TextAnchor number where the range ends.                 |
+
+### Search by annotation overlap
+
+Base URL: `GET http://example.org/w3c/services/search/overlap HTTP/1.1`
+
+For annotations that use the `urn:example:republic:TextAnchorSelector` selector in their target, this search can be used to find all those annotations that overlap with the given range:
+annotations that `start` before or at the given `range_start` and `end` at or after the given `range_end`
+
+
+| Parameter     | Mandatory | Valid Values           | Description                                                 |
+|---------------|-----------|------------------------|-------------------------------------------------------------|
+| `target_id`   | Yes       | Percent-encoded string | The value (usually a URI) of the `target` `id` or `source`  |
+| `range_start` | Yes       | integer                | The TextAnchor number where the range starts.               |
+| `range_end`   | Yes       | integer                | The TextAnchor number where the range ends.                 |
 
 ## Statistics
 

@@ -36,6 +36,7 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     private static final String REQUEST_PATH_CREATOR = "/services/search/creator";
     private static final String REQUEST_PATH_GENERATOR = "/services/search/generator";
     private static final String REQUEST_PATH_TEMPORAL = "/services/search/temporal";
+    private static final String REQUEST_PATH_RANGE = "/services/search/range";
     private static final String REQUEST_PATH_OVERLAP = "/services/search/overlap";
 
     private static final String PREFER_MINIMAL_CONTAINER = "http://www.w3.org/ns/ldp#preferminimalcontainer";
@@ -226,10 +227,10 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     }
 
     @NotNull
-    @RequestMapping(value = REQUEST_PATH_OVERLAP, method = RequestMethod.GET)
-    public ResponseEntity<?> getSearchOverlap(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
-                                              @RequestParam(value = URLConstants.PARAM_LOWER_LIMIT, required = true) int lowerLimit,
-                                              @RequestParam(value = URLConstants.PARAM_UPPER_LIMIT, required = true) int upperLimit,
+    @RequestMapping(value = REQUEST_PATH_RANGE, method = RequestMethod.GET)
+    public ResponseEntity<?> getSearchByRange(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
+                                              @RequestParam(value = URLConstants.PARAM_RANGE_START, required = true) int rangeStart,
+                                              @RequestParam(value = URLConstants.PARAM_RANGE_END, required = true) int rangeEnd,
                                               @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
                                               @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
                                               @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
@@ -237,13 +238,13 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
         if (page == null) {
             AnnotationCollectionSearch<C> annotationCollectionSearch =
                     (ClientPreference clientPref) ->
-                            annotationCollectionSearchService.searchAnnotationCollectionByOverlap(targetId, lowerLimit, upperLimit, clientPref);
+                            annotationCollectionSearchService.searchAnnotationCollectionByRange(targetId, rangeStart, rangeEnd, clientPref);
             return processCollectionSearchRequest(annotationCollectionSearch, request);
 
         } else {
             AnnotationPageSearch<P> annotationPageSearch =
                     (boolean embeddedDescriptions) -> {
-                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(targetId, lowerLimit, upperLimit);
+                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByRange(targetId, rangeStart, rangeEnd);
                         Status status = serviceResponse.getStatus();
 
                         if (!status.equals(Status.OK)) {
@@ -252,7 +253,41 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
 
                         List<A> annotations = serviceResponse.getObj();
 
-                        return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
+                        return annotationPageSearchService.buildAnnotationPageByRange(annotations, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
+                    };
+
+            return processPageSearchRequest(annotationPageSearch, iris, descriptions);
+        }
+    }
+
+    @NotNull
+    @RequestMapping(value = REQUEST_PATH_OVERLAP, method = RequestMethod.GET)
+    public ResponseEntity<?> getSearchByOverlap(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
+                                                @RequestParam(value = URLConstants.PARAM_RANGE_START, required = true) int rangeStart,
+                                                @RequestParam(value = URLConstants.PARAM_RANGE_END, required = true) int rangeEnd,
+                                                @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
+                                                @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
+                                                @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
+                                                @NotNull HttpServletRequest request) {
+        if (page == null) {
+            AnnotationCollectionSearch<C> annotationCollectionSearch =
+                    (ClientPreference clientPref) ->
+                            annotationCollectionSearchService.searchAnnotationCollectionByOverlap(targetId, rangeStart, rangeEnd, clientPref);
+            return processCollectionSearchRequest(annotationCollectionSearch, request);
+
+        } else {
+            AnnotationPageSearch<P> annotationPageSearch =
+                    (boolean embeddedDescriptions) -> {
+                        ServiceResponse<List<A>> serviceResponse = annotationSearchService.searchAnnotationsByOverlap(targetId, rangeStart, rangeEnd);
+                        Status status = serviceResponse.getStatus();
+
+                        if (!status.equals(Status.OK)) {
+                            return new ServiceResponse<>(status, null);
+                        }
+
+                        List<A> annotations = serviceResponse.getObj();
+
+                        return annotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
                     };
 
             return processPageSearchRequest(annotationPageSearch, iris, descriptions);

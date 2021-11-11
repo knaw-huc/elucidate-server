@@ -58,7 +58,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByBody(searchIds, searchSources, value, strict, xywhParameters[0], xywhParameters[1], xywhParameters[2], xywhParameters[3], tParameters[0], tParameters[1], creatorIri, generatorIri);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
-        LOGGER.info(String.format("Seaching for Annotations by `body` got [%s] hits", annotations.size()));
+        LOGGER.info(String.format("Searching for Annotations by `body` got [%s] hits", annotations.size()));
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
@@ -80,7 +80,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByTarget(searchIds, searchSources, value, strict, xywhParameters[0], xywhParameters[1], xywhParameters[2], xywhParameters[3], tParameters[0], tParameters[1], creatorIri, generatorIri);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
-        LOGGER.info(String.format("Seaching for Annotations by `target` got [%s] hits", annotations.size()));
+        LOGGER.info(String.format("Searching for Annotations by `target` got [%s] hits", annotations.size()));
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
@@ -138,7 +138,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByCreator(searchAnnotations, searchBodies, searchTargets, type, value, strict);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
-        LOGGER.info(String.format("Seaching for Annotations by `creator` got [%s] hits", annotations.size()));
+        LOGGER.info(String.format("Searching for Annotations by `creator` got [%s] hits", annotations.size()));
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
@@ -164,7 +164,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByGenerator(searchAnnotations, searchBodies, searchTargets, type, value, strict);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
-        LOGGER.info(String.format("Seaching for Annotations by `generator` got [%s] hits", annotations.size()));
+        LOGGER.info(String.format("Searching for Annotations by `generator` got [%s] hits", annotations.size()));
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
@@ -190,19 +190,31 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByTemporal(searchAnnotations, searchBodies, searchTargets, types.toArray(new String[0]), since);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
-        LOGGER.info(String.format("Seaching for Annotations by `temporal` got [%s] hits", annotations.size()));
+        LOGGER.info(String.format("Searching for Annotations by `temporal` got [%s] hits", annotations.size()));
         return new ServiceResponse<>(Status.OK, annotations);
     }
 
     @NotNull
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByOverlap(String targetId, int lowerLimit, int upperLimit) {
+    public ServiceResponse<List<A>> searchAnnotationsByRange(String targetId, int rangeStart, int rangeEnd) {
 
-        LOGGER.info(String.format("Searching for Annotations by `overlap` using lowerLimit [%s] and upperLimit [%s]", lowerLimit, upperLimit));
-        List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByOverlap(targetId, lowerLimit, upperLimit);
+        LOGGER.info(String.format("Searching for Annotations by `range` using rangeStart [%s] and rangeEnd [%s]", rangeStart, rangeEnd));
+        List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByRange(targetId, rangeStart, rangeEnd);
 
         List<A> annotations = convertAnnotations(w3cAnnotations);
-        LOGGER.info(String.format("Seaching for Annotations by `overlap` got [%s] hits", annotations.size()));
+        LOGGER.info(String.format("Searching for Annotations by `range` got [%s] hits", annotations.size()));
+        return new ServiceResponse<>(Status.OK, annotations);
+    }
+
+    @NotNull
+    @Override
+    public ServiceResponse<List<A>> searchAnnotationsByOverlap(String targetId, int rangeStart, int rangeEnd) {
+
+        LOGGER.info(String.format("Searching for Annotations by `overlap` using rangeStart [%s] and rangeEnd [%s]", rangeStart, rangeEnd));
+        List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByOverlap(targetId, rangeStart, rangeEnd);
+
+        List<A> annotations = convertAnnotations(w3cAnnotations);
+        LOGGER.info(String.format("Searching for Annotations by `overlap` got [%s] hits", annotations.size()));
         return new ServiceResponse<>(Status.OK, annotations);
     }
 

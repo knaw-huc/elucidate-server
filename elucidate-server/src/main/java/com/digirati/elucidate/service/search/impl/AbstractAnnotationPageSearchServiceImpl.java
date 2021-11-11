@@ -93,20 +93,40 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
 
     protected abstract String buildTemporalSearchPageIri(List<String> levels, List<String> types, Date since, int page, boolean embeddedDescriptions);
 
+    // range
+
     @Override
-    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByRange(@NotNull List<A> annotations, String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder =
-                () -> buildOverlapSearchCollectionIri(targetId, lowerLimit, upperLimit);
+                () -> buildRangeSearchCollectionIri(targetId, rangeStart, rangeEnd);
         AnnotationPageIRIBuilder annotationPageIriBuilder =
-                (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
+                (int _page, boolean _embeddedDescriptions) -> buildRangeSearchPageIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
 
         return new AnnotationPageBuilder<A, P>(this::convertToAnnotationPage, annotationCollectionIriBuilder, annotationPageIriBuilder)
                 .buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
     }
 
-    protected abstract String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit);
+    protected abstract String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd);
 
-    protected abstract String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions);
+    protected abstract String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
+
+    // overlap
+
+    @Override
+    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+
+        AnnotationCollectionIRIBuilder annotationCollectionIriBuilder =
+                () -> buildOverlapSearchCollectionIri(targetId, rangeStart, rangeEnd);
+        AnnotationPageIRIBuilder annotationPageIriBuilder =
+                (int _page, boolean _embeddedDescriptions) -> buildOverlapSearchPageIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
+
+        return new AnnotationPageBuilder<A, P>(this::convertToAnnotationPage, annotationCollectionIriBuilder, annotationPageIriBuilder)
+                .buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
+    }
+
+    protected abstract String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd);
+
+    protected abstract String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
 
 }

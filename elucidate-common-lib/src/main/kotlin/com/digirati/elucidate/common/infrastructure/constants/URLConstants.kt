@@ -17,6 +17,6 @@ object URLConstants {
     const val PARAM_TYPES = "types"
     const val PARAM_SINCE = "since"
     const val PARAM_TARGET_ID = "target_id"
-    const val PARAM_LOWER_LIMIT = "lower_limit"
-    const val PARAM_UPPER_LIMIT = "upper_limit"
+    const val PARAM_RANGE_START = "range_start"
+    const val PARAM_RANGE_END = "range_end"
 }

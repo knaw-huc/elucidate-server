@@ -1,5 +1,7 @@
 package com.digirati.elucidate.infrastructure.config;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,29 +38,29 @@ public class ServicesConfig {
 
     @NotNull
     @Bean(name = "annotationIdGenerator")
-    public IDGenerator annotationIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public IDGenerator annotationIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class<?> clazz = Class.forName(environment.getProperty("annotation.id.generator"));
-        return (IDGenerator) clazz.newInstance();
+        return (IDGenerator) clazz.getDeclaredConstructor().newInstance();
     }
 
     @NotNull
     @Bean(name = "collectionIdGenerator")
-    public IDGenerator collectionIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public IDGenerator collectionIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class<?> clazz = Class.forName(environment.getProperty("annotation.collection.id.generator"));
-        return (IDGenerator) clazz.newInstance();
+        return (IDGenerator) clazz.getDeclaredConstructor().newInstance();
     }
 
     @NotNull
     @Bean(name = "userIdGenerator")
-    public IDGenerator userIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public IDGenerator userIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class<?> clazz = Class.forName(environment.getProperty("annotation.user.id.generator"));
-        return (IDGenerator) clazz.newInstance();
+        return (IDGenerator) clazz.getDeclaredConstructor().newInstance();
     }
 
     @NotNull
     @Bean(name = "groupIdGenerator")
-    public IDGenerator groupIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public IDGenerator groupIdGenerator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class<?> clazz = Class.forName(environment.getProperty("annotation.group.id.generator"));
-        return (IDGenerator) clazz.newInstance();
+        return (IDGenerator) clazz.getDeclaredConstructor().newInstance();
     }
 }

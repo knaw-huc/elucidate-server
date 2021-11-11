@@ -33,7 +33,7 @@ interface IRIBuilderService {
 
     fun buildOACollectionIri(collectionId: String): String
 
-    fun buildOACollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String
+    fun buildOACollectionOverlapSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String
 
     fun buildOACollectionTargetSearchIri(
         fields: List<String>,
@@ -81,8 +81,8 @@ interface IRIBuilderService {
 
     fun buildOAPageOverlapSearchIri(
         targetId: String,
-        lowerLimit: Int,
-        upperLimit: Int,
+        rangeStart: Int,
+        rangeEnd: Int,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
@@ -205,12 +205,32 @@ interface IRIBuilderService {
 
     fun buildW3CStatisticsPageIri(type: String, field: String, page: Int): String
 
-    fun buildW3CCollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String
+    fun buildW3CCollectionOverlapSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String
 
     fun buildW3CPageOverlapSearchIri(
         targetId: String,
-        lowerLimit: Int,
-        upperLimit: Int,
+        rangeStart: Int,
+        rangeEnd: Int,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
+
+    fun buildW3CCollectionRangeSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String
+
+    fun buildW3CPageRangeSearchIri(
+        targetId: String,
+        rangeStart: Int,
+        rangeEnd: Int,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String
+
+    fun buildOACollectionRangeSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String
+
+    fun buildOAPageRangeSearchIri(
+        targetId: String,
+        rangeStart: Int,
+        rangeEnd: Int,
         page: Int,
         embeddedDescriptions: Boolean
     ): String

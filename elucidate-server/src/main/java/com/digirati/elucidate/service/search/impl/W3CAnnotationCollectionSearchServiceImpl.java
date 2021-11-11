@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -114,21 +113,37 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
         return iriBuilderService.buildW3CPageTemporalSearchIri(levels, types, since, page, embeddedDescriptions);
     }
 
-    @Nullable
+    // search by range
+
     @Override
-    protected String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit) {
-        return iriBuilderService.buildW3CCollectionOverlapSearchIri(targetId, lowerLimit, upperLimit);
+    protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+        return iriBuilderService.buildW3CCollectionRangeSearchIri(targetId, rangeStart, rangeEnd);
     }
 
-    @Nullable
     @Override
-    protected String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions) {
-        return iriBuilderService.buildW3CPageOverlapSearchIri(targetId, lowerLimit, upperLimit, page, embeddedDescriptions);
+    protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildW3CPageRangeSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
-    @Nullable
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, int lowerLimit, int upperLimit, ClientPreference clientPref) {
-        return w3cAnnotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, lowerLimit, upperLimit, 0, useEmbeddedDescriptions(clientPref));
+    protected ServiceResponse<W3CAnnotationPage> buildRangeSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref) {
+        return w3cAnnotationPageSearchService.buildAnnotationPageByRange(annotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
+    }
+
+    // search by overlap
+
+    @Override
+    protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+        return iriBuilderService.buildW3CCollectionOverlapSearchIri(targetId, rangeStart, rangeEnd);
+    }
+
+    @Override
+    protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+        return iriBuilderService.buildW3CPageOverlapSearchIri(targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
+    }
+
+    @Override
+    protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref) {
+        return w3cAnnotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
     }
 }

@@ -7,15 +7,15 @@ import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_GENERATOR
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_IRIS
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_LEVELS
-import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_LOWER_LIMIT
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_PAGE
+import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_RANGE_END
+import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_RANGE_START
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_SINCE
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_STRICT
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_T
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_TARGET_ID
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_TYPE
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_TYPES
-import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_UPPER_LIMIT
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_VALUE
 import com.digirati.elucidate.common.infrastructure.constants.URLConstants.PARAM_XYWH
 import com.digirati.elucidate.common.infrastructure.exception.InvalidIRIException
@@ -296,27 +296,94 @@ class IRIBuilderServiceImpl
             )
         )
 
-    override fun buildW3CCollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String =
+    // search by range
+
+    override fun buildW3CCollectionRangeSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String =
         buildIri(
-            "w3c/services/search/overlap",
+            "w3c/services/search/range",
             mapOf<String, Any>(
                 PARAM_TARGET_ID to targetId,
-                PARAM_LOWER_LIMIT to lowerLimit,
-                PARAM_UPPER_LIMIT to upperLimit
+                PARAM_RANGE_START to rangeStart,
+                PARAM_RANGE_END to rangeEnd
             )
         )
 
-    override fun buildW3CPageOverlapSearchIri(
+    override fun buildW3CPageRangeSearchIri(
         targetId: String,
-        lowerLimit: Int,
-        upperLimit: Int,
+        rangeStart: Int,
+        rangeEnd: Int,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
         val params = mutableMapOf<String, Any>(
             PARAM_TARGET_ID to targetId,
-            PARAM_LOWER_LIMIT to lowerLimit,
-            PARAM_UPPER_LIMIT to upperLimit,
+            PARAM_RANGE_START to rangeStart,
+            PARAM_RANGE_END to rangeEnd,
+            PARAM_PAGE to page
+        )
+        if (embeddedDescriptions) {
+            params[PARAM_DESC] = 1
+        } else {
+            params[PARAM_IRIS] = 1
+        }
+        return buildIri("w3c/services/search/range", params)
+    }
+
+    override fun buildOACollectionRangeSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String =
+        buildIri(
+            "oa/services/search/range",
+            mapOf<String, Any>(
+                PARAM_TARGET_ID to targetId,
+                PARAM_RANGE_START to rangeStart,
+                PARAM_RANGE_END to rangeEnd
+            )
+        )
+
+
+    override fun buildOAPageRangeSearchIri(
+        targetId: String,
+        rangeStart: Int,
+        rangeEnd: Int,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String {
+        val params = mutableMapOf<String, Any>(
+            PARAM_TARGET_ID to targetId,
+            PARAM_RANGE_START to rangeStart,
+            PARAM_RANGE_END to rangeEnd,
+            PARAM_PAGE to page
+        )
+        if (embeddedDescriptions) {
+            params[PARAM_DESC] = 1
+        } else {
+            params[PARAM_IRIS] = 1
+        }
+        return buildIri("oa/services/search/range", params)
+    }
+
+    // search by overlap
+
+    override fun buildW3CCollectionOverlapSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String =
+        buildIri(
+            "w3c/services/search/overlap",
+            mapOf<String, Any>(
+                PARAM_TARGET_ID to targetId,
+                PARAM_RANGE_START to rangeStart,
+                PARAM_RANGE_END to rangeEnd
+            )
+        )
+
+    override fun buildW3CPageOverlapSearchIri(
+        targetId: String,
+        rangeStart: Int,
+        rangeEnd: Int,
+        page: Int,
+        embeddedDescriptions: Boolean
+    ): String {
+        val params = mutableMapOf<String, Any>(
+            PARAM_TARGET_ID to targetId,
+            PARAM_RANGE_START to rangeStart,
+            PARAM_RANGE_END to rangeEnd,
             PARAM_PAGE to page
         )
         if (embeddedDescriptions) {
@@ -327,8 +394,13 @@ class IRIBuilderServiceImpl
         return buildIri("w3c/services/search/overlap", params)
     }
 
+    // history
+
     override fun buildW3CAnnotationHistoryIri(collectionId: String, annotationId: String, version: Int): String =
         buildIri("w3c/services/history/$collectionId/$annotationId/$version")
+
+
+    // search by temporal
 
     override fun buildW3CPageTemporalSearchIri(
         levels: List<String>,
@@ -662,26 +734,26 @@ class IRIBuilderServiceImpl
         return buildIri("oa/services/search/temporal", params)
     }
 
-    override fun buildOACollectionOverlapSearchIri(targetId: String, lowerLimit: Int, upperLimit: Int): String {
+    override fun buildOACollectionOverlapSearchIri(targetId: String, rangeStart: Int, rangeEnd: Int): String {
         val params = mapOf(
             PARAM_TARGET_ID to targetId,
-            PARAM_LOWER_LIMIT to lowerLimit,
-            PARAM_UPPER_LIMIT to upperLimit
+            PARAM_RANGE_START to rangeStart,
+            PARAM_RANGE_END to rangeEnd
         )
         return buildIri("oa/services/search/overlap", params)
     }
 
     override fun buildOAPageOverlapSearchIri(
         targetId: String,
-        lowerLimit: Int,
-        upperLimit: Int,
+        rangeStart: Int,
+        rangeEnd: Int,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
         val params = mutableMapOf(
             PARAM_TARGET_ID to targetId,
-            PARAM_LOWER_LIMIT to lowerLimit,
-            PARAM_UPPER_LIMIT to upperLimit,
+            PARAM_RANGE_START to rangeStart,
+            PARAM_RANGE_END to rangeEnd,
             PARAM_PAGE to page
         )
         if (embeddedDescriptions) {
