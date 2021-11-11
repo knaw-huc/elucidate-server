@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotation;
 import com.digirati.elucidate.common.model.annotation.AbstractAnnotationPage;
@@ -106,10 +105,8 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
                 .buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
     }
 
-    @Nullable
     protected abstract String buildOverlapSearchCollectionIri(String targetId, int lowerLimit, int upperLimit);
 
-    @Nullable
     protected abstract String buildOverlapSearchPageIri(String targetId, int lowerLimit, int upperLimit, int page, boolean embeddedDescriptions);
 
 }
