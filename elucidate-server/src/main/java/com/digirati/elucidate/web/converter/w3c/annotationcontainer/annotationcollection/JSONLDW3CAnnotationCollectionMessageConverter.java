@@ -21,6 +21,8 @@ import com.digirati.elucidate.model.JSONLDProfile.Format;
 @Component
 public class JSONLDW3CAnnotationCollectionMessageConverter extends AbstractW3CAnnotationCollectionMessageConverter {
 
+//    private static final Logger LOG = LoggerFactory.getLogger(JSONLDW3CAnnotationCollectionMessageConverter.class);
+
     @NotNull
     private final String[] defaultContexts;
 
