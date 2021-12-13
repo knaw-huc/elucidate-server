@@ -19,7 +19,7 @@ public interface AnnotationCollectionSearchService<C extends AbstractAnnotationC
 
     ServiceResponse<C> searchAnnotationCollectionByTemporal(List<String> levels, List<String> types, Date since, ClientPreference clientPref);
 
-    ServiceResponse<C> searchAnnotationCollectionByRange(String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref);
+    ServiceResponse<C> searchAnnotationCollectionByRange(String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref);
 
-    ServiceResponse<C> searchAnnotationCollectionByOverlap(String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref);
+    ServiceResponse<C> searchAnnotationCollectionByOverlap(String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref);
 }

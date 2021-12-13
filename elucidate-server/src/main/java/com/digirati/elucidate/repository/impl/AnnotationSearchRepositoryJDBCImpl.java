@@ -78,20 +78,20 @@ public class AnnotationSearchRepositoryJDBCImpl extends AbstractRepositoryJDBCIm
 
     @Override
     @Transactional(readOnly = true)
-    public List<W3CAnnotation> getAnnotationsByRange(String targetId, int rangeStart, int rangeEnd) {
+    public List<W3CAnnotation> getAnnotationsByRange(String targetId, float rangeStart, float rangeEnd) {
         String sql = "SELECT * FROM annotation_search_by_range(?, ?, ?, ?)";
         Object[] params = {targetId, SELECTOR_TYPE, rangeStart, rangeEnd};
-        int[] sqlTypes = {Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER};
+        int[] sqlTypes = {Types.VARCHAR, Types.VARCHAR, Types.FLOAT, Types.FLOAT};
 
         return queryForList(sql, params, sqlTypes, new W3CAnnotationRowMapper());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<W3CAnnotation> getAnnotationsByOverlap(String targetId, int rangeStart, int rangeEnd) {
+    public List<W3CAnnotation> getAnnotationsByOverlap(String targetId, float rangeStart, float rangeEnd) {
         String sql = "SELECT * FROM annotation_search_by_overlap(?, ?, ?, ?)";
         Object[] params = {targetId, SELECTOR_TYPE, rangeStart, rangeEnd};
-        int[] sqlTypes = {Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER};
+        int[] sqlTypes = {Types.VARCHAR, Types.VARCHAR, Types.FLOAT, Types.FLOAT};
 
         return queryForList(sql, params, sqlTypes, new W3CAnnotationRowMapper());
     }

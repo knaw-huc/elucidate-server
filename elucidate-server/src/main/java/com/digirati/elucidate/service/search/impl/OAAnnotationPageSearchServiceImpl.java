@@ -99,24 +99,24 @@ public class OAAnnotationPageSearchServiceImpl extends AbstractAnnotationPageSea
     // range
 
     @Override
-    protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+    protected String buildRangeSearchCollectionIri(String targetId, float rangeStart, float rangeEnd) {
         return iriBuilderService.buildSearchByRangeIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    protected String buildRangeSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildSearchByRangePageIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
     // overlap
 
     @Override
-    protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+    protected String buildOverlapSearchCollectionIri(String targetId, float rangeStart, float rangeEnd) {
         return iriBuilderService.buildSearchByOverlapIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    protected String buildOverlapSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildSearchByOverlapPageIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 }

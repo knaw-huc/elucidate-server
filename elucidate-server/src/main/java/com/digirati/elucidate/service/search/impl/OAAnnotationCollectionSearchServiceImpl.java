@@ -149,34 +149,34 @@ public class OAAnnotationCollectionSearchServiceImpl extends AbstractAnnotationC
     // range
 
     @Override
-    protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+    protected String buildRangeSearchCollectionIri(String targetId, float rangeStart, float rangeEnd) {
         return iriBuilderService.buildSearchByRangeIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    protected String buildRangeSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildSearchByRangePageIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
     @Override
-    protected ServiceResponse<OAAnnotationPage> buildRangeSearchFirstAnnotationPage(List<OAAnnotation> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref) {
+    protected ServiceResponse<OAAnnotationPage> buildRangeSearchFirstAnnotationPage(List<OAAnnotation> annotations, String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref) {
         return oaAnnotationPageSearchService.buildAnnotationPageByRange(annotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
     }
 
     // overlap
 
     @Override
-    protected ServiceResponse<OAAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String targetId, int rangeStart, int rangeEnd, @NotNull ClientPreference clientPref) {
+    protected ServiceResponse<OAAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<OAAnnotation> oaAnnotations, String targetId, float rangeStart, float rangeEnd, @NotNull ClientPreference clientPref) {
         return oaAnnotationPageSearchService.buildAnnotationPageByOverlap(oaAnnotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
     }
 
     @Override
-    protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+    protected String buildOverlapSearchCollectionIri(String targetId, float rangeStart, float rangeEnd) {
         return iriBuilderService.buildSearchByOverlapIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    protected String buildOverlapSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildSearchByOverlapPageIri(AnnotationFormat.OA, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 }

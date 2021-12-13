@@ -196,7 +196,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
 
     @NotNull
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByRange(String targetId, int rangeStart, int rangeEnd) {
+    public ServiceResponse<List<A>> searchAnnotationsByRange(String targetId, float rangeStart, float rangeEnd) {
 
         LOGGER.info(String.format("Searching for Annotations by `range` using rangeStart [%s] and rangeEnd [%s]", rangeStart, rangeEnd));
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByRange(targetId, rangeStart, rangeEnd);
@@ -208,7 +208,7 @@ public abstract class AbstractAnnotationSearchServiceImpl<A extends AbstractAnno
 
     @NotNull
     @Override
-    public ServiceResponse<List<A>> searchAnnotationsByOverlap(String targetId, int rangeStart, int rangeEnd) {
+    public ServiceResponse<List<A>> searchAnnotationsByOverlap(String targetId, float rangeStart, float rangeEnd) {
 
         LOGGER.info(String.format("Searching for Annotations by `overlap` using rangeStart [%s] and rangeEnd [%s]", rangeStart, rangeEnd));
         List<W3CAnnotation> w3cAnnotations = annotationSearchRepository.getAnnotationsByOverlap(targetId, rangeStart, rangeEnd);

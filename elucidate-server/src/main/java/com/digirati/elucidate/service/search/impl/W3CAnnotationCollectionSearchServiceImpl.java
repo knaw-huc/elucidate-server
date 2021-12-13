@@ -118,34 +118,34 @@ public class W3CAnnotationCollectionSearchServiceImpl extends AbstractAnnotation
     // search by range
 
     @Override
-    protected String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+    protected String buildRangeSearchCollectionIri(String targetId, float rangeStart, float rangeEnd) {
         return iriBuilderService.buildSearchByRangeIri(FORMAT, targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    protected String buildRangeSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildSearchByRangePageIri(FORMAT, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildRangeSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildRangeSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref) {
         return w3cAnnotationPageSearchService.buildAnnotationPageByRange(annotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
     }
 
     // search by overlap
 
     @Override
-    protected String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd) {
+    protected String buildOverlapSearchCollectionIri(String targetId, float rangeStart, float rangeEnd) {
         return iriBuilderService.buildSearchByOverlapIri(FORMAT, targetId, rangeStart, rangeEnd);
     }
 
     @Override
-    protected String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    protected String buildOverlapSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
         return iriBuilderService.buildSearchByOverlapPageIri(FORMAT, targetId, rangeStart, rangeEnd, page, embeddedDescriptions);
     }
 
     @Override
-    protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref) {
+    protected ServiceResponse<W3CAnnotationPage> buildOverlapSearchFirstAnnotationPage(List<W3CAnnotation> annotations, String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref) {
         return w3cAnnotationPageSearchService.buildAnnotationPageByOverlap(annotations, targetId, rangeStart, rangeEnd, 0, useEmbeddedDescriptions(clientPref));
     }
 }

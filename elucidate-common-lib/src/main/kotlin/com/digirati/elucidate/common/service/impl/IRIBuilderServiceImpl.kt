@@ -313,8 +313,8 @@ class IRIBuilderServiceImpl
     override fun buildSearchByRangeIri(
         format: AnnotationFormat,
         targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int
+        rangeStart: Float,
+        rangeEnd: Float
     ): String =
         buildIri(
             "${format.prefix()}/services/search/range",
@@ -328,8 +328,8 @@ class IRIBuilderServiceImpl
     override fun buildSearchByRangePageIri(
         format: AnnotationFormat,
         targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int,
+        rangeStart: Float,
+        rangeEnd: Float,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
@@ -350,8 +350,8 @@ class IRIBuilderServiceImpl
     override fun buildSearchByOverlapIri(
         format: AnnotationFormat,
         targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int
+        rangeStart: Float,
+        rangeEnd: Float
     ): String =
         buildIri(
             "${format.prefix()}/services/search/overlap",
@@ -365,8 +365,8 @@ class IRIBuilderServiceImpl
     override fun buildSearchByOverlapPageIri(
         format: AnnotationFormat,
         targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int,
+        rangeStart: Float,
+        rangeEnd: Float,
         page: Int,
         embeddedDescriptions: Boolean
     ): String {
