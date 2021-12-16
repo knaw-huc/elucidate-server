@@ -46,7 +46,7 @@ public abstract class AbstractMessageConverter<T> extends AbstractHttpMessageCon
     protected static final MediaType APPLICATION_JSON_LD = MediaType.valueOf("application/ld+json");
     protected static final MediaType APPLICATION_TURTLE = MediaType.valueOf("application/x-turtle");
 
-    protected JsonLdOptions jsonLdOptions;
+    protected final JsonLdOptions jsonLdOptions;
 
     protected AbstractMessageConverter(MediaType... supportedMediaTypes) {
         super(supportedMediaTypes);

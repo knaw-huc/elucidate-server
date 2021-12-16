@@ -13,7 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod
 @RequestMapping(value = ["/_es"])
 class ESIndexController {
 
-    var objectMapper = ObjectMapper()
+    companion object {
+        const val CONTROLLER_NAME = "esIndexController"
+
+        private const val REQUEST_PATH_BASE = ""
+        private const val REQUEST_PATH_ABOUT = "/about"
+
+        private val objectMapper = ObjectMapper()
+    }
 
     @Autowired
     lateinit var env: Environment
@@ -45,10 +52,4 @@ class ESIndexController {
         return ResponseEntity.ok(body)
     }
 
-    companion object {
-        const val CONTROLLER_NAME = "esIndexController"
-
-        private const val REQUEST_PATH_BASE = ""
-        private const val REQUEST_PATH_ABOUT = "/about"
-    }
 }

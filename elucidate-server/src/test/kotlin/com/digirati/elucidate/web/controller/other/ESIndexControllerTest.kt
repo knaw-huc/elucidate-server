@@ -1,6 +1,5 @@
 package com.digirati.elucidate.web.controller.other
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +20,7 @@ class ESIndexControllerTest {
 
     @Autowired
     lateinit var webApplicationContext: WebApplicationContext
-    lateinit var mockMvc: MockMvc
+    private lateinit var mockMvc: MockMvc
 
     @Before
     fun setUp() {
@@ -30,25 +29,23 @@ class ESIndexControllerTest {
 
     @Test
     fun testBase() {
-        val r = mockMvc.get("/_es")
+        mockMvc.get("/_es")
             .andExpect {
                 status { isOk() }
                 content { string("""{"about":"/_es/about","es_url":["http://example.org/elasticsearch-url"]}""") }
+                header { string("content-type", "application/json") }
             }
             .andDo { print() }
-            .andReturn()
-        assertThat(r.response.contentType).isEqualTo("application/json")
     }
 
     @Test
     fun testAbout() {
-        val r = mockMvc.get("/_es/about")
+        mockMvc.get("/_es/about")
             .andExpect {
                 status { isOk() }
                 content { string("about") }
+                header { string("content-type", "text/plain;charset=utf-8") }
             }
             .andDo { print() }
-            .andReturn()
-        assertThat(r.response.contentType).isEqualTo("text/plain;charset=utf-8")
     }
 }
