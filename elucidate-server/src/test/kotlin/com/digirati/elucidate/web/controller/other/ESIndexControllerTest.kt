@@ -8,13 +8,18 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.put
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(
     classes = [ESIndexController::class],
-    properties = ["elasticsearch.url=http://example.org/elasticsearch-url"]
+    properties = [
+        "elasticsearch.protocol=http",
+        "elasticsearch.host=localhost",
+        "elasticsearch.port=9200"
+    ]
 )
 class ESIndexControllerTest {
 
@@ -32,19 +37,25 @@ class ESIndexControllerTest {
         mockMvc.get("/_es")
             .andExpect {
                 status { isOk() }
-                content { string("""{"about":"/_es/about","es_url":["http://example.org/elasticsearch-url"]}""") }
+                content {
+                    json(
+                        """{
+                    |"reindex":"/_es/reindex",
+                    |"es_url":"http://localhost:9200"
+                    |}""".trimMargin()
+                    )
+                }
                 header { string("content-type", "application/json") }
             }
             .andDo { print() }
     }
 
     @Test
-    fun testAbout() {
-        mockMvc.get("/_es/about")
+    fun testReIndex() {
+        mockMvc.put("/_es/reindex")
             .andExpect {
                 status { isOk() }
-                content { string("about") }
-                header { string("content-type", "text/plain;charset=utf-8") }
+                content { string("reindexing started") }
             }
             .andDo { print() }
     }
