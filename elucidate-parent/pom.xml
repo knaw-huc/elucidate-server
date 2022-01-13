@@ -32,7 +32,7 @@
         <jsonld-java-version>0.13.3</jsonld-java-version>
         <jstl-version>1.2</jstl-version>
         <junit-version>4.13.2</junit-version>
-        <log4j-version>2.15.0</log4j-version>
+        <log4j-version>2.17.1</log4j-version>
         <mockito-version>3.9.0</mockito-version>
         <postgresql-version>42.2.13.jre6</postgresql-version>
         <powermock-version>2.0.9</powermock-version>
