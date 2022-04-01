@@ -107,24 +107,24 @@ interface IRIBuilderService {
         embeddedDescriptions: Boolean
     ): String
 
-    fun buildSearchByRangeIri(format: AnnotationFormat, targetId: String, rangeStart: Int, rangeEnd: Int): String
+    fun buildSearchByRangeIri(format: AnnotationFormat, targetId: String, rangeStart: Float, rangeEnd: Float): String
 
     fun buildSearchByRangePageIri(
         format: AnnotationFormat,
         targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int,
+        rangeStart: Float,
+        rangeEnd: Float,
         page: Int,
         embeddedDescriptions: Boolean
     ): String
 
-    fun buildSearchByOverlapIri(format: AnnotationFormat, targetId: String, rangeStart: Int, rangeEnd: Int): String
+    fun buildSearchByOverlapIri(format: AnnotationFormat, targetId: String, rangeStart: Float, rangeEnd: Float): String
 
     fun buildSearchByOverlapPageIri(
         format: AnnotationFormat,
         targetId: String,
-        rangeStart: Int,
-        rangeEnd: Int,
+        rangeStart: Float,
+        rangeEnd: Float,
         page: Int,
         embeddedDescriptions: Boolean
     ): String

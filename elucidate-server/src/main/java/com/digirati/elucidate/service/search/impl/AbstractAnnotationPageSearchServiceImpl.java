@@ -96,7 +96,7 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
     // range
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByRange(@NotNull List<A> annotations, String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByRange(@NotNull List<A> annotations, String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder =
                 () -> buildRangeSearchCollectionIri(targetId, rangeStart, rangeEnd);
@@ -107,14 +107,14 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
                 .buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
     }
 
-    protected abstract String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd);
+    protected abstract String buildRangeSearchCollectionIri(String targetId, float rangeStart, float rangeEnd);
 
-    protected abstract String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
+    protected abstract String buildRangeSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions);
 
     // overlap
 
     @Override
-    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions) {
+    public ServiceResponse<P> buildAnnotationPageByOverlap(@NotNull List<A> annotations, String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions) {
 
         AnnotationCollectionIRIBuilder annotationCollectionIriBuilder =
                 () -> buildOverlapSearchCollectionIri(targetId, rangeStart, rangeEnd);
@@ -125,8 +125,8 @@ public abstract class AbstractAnnotationPageSearchServiceImpl<A extends Abstract
                 .buildAnnotationPage(annotations, page, embeddedDescriptions, pageSize);
     }
 
-    protected abstract String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd);
+    protected abstract String buildOverlapSearchCollectionIri(String targetId, float rangeStart, float rangeEnd);
 
-    protected abstract String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
+    protected abstract String buildOverlapSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions);
 
 }

@@ -198,7 +198,7 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
 
     @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByRange(String targetId, int rangeStart, int rangeEnd, @NotNull ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByRange(String targetId, float rangeStart, float rangeEnd, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -222,15 +222,15 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
                 .buildAnnotationCollection(w3cAnnotationCollection, annotations, pageSize, clientPref);
     }
 
-    protected abstract String buildRangeSearchCollectionIri(String targetId, int rangeStart, int rangeEnd);
+    protected abstract String buildRangeSearchCollectionIri(String targetId, float rangeStart, float rangeEnd);
 
-    protected abstract String buildRangeSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
+    protected abstract String buildRangeSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions);
 
-    protected abstract ServiceResponse<P> buildRangeSearchFirstAnnotationPage(List<A> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref);
+    protected abstract ServiceResponse<P> buildRangeSearchFirstAnnotationPage(List<A> annotations, String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref);
 
     @Nullable
     @Override
-    public ServiceResponse<C> searchAnnotationCollectionByOverlap(String targetId, int rangeStart, int rangeEnd, @NotNull ClientPreference clientPref) {
+    public ServiceResponse<C> searchAnnotationCollectionByOverlap(String targetId, float rangeStart, float rangeEnd, @NotNull ClientPreference clientPref) {
 
         W3CAnnotationCollection w3cAnnotationCollection = new W3CAnnotationCollection();
         w3cAnnotationCollection.setJsonMap(new HashMap<>());
@@ -254,10 +254,10 @@ public abstract class AbstractAnnotationCollectionSearchServiceImpl<A extends Ab
                 .buildAnnotationCollection(w3cAnnotationCollection, annotations, pageSize, clientPref);
     }
 
-    protected abstract String buildOverlapSearchCollectionIri(String targetId, int rangeStart, int rangeEnd);
+    protected abstract String buildOverlapSearchCollectionIri(String targetId, float rangeStart, float rangeEnd);
 
-    protected abstract String buildOverlapSearchPageIri(String targetId, int rangeStart, int rangeEnd, int page, boolean embeddedDescriptions);
+    protected abstract String buildOverlapSearchPageIri(String targetId, float rangeStart, float rangeEnd, int page, boolean embeddedDescriptions);
 
-    protected abstract ServiceResponse<P> buildOverlapSearchFirstAnnotationPage(List<A> annotations, String targetId, int rangeStart, int rangeEnd, ClientPreference clientPref);
+    protected abstract ServiceResponse<P> buildOverlapSearchFirstAnnotationPage(List<A> annotations, String targetId, float rangeStart, float rangeEnd, ClientPreference clientPref);
 
 }

@@ -526,5 +526,10 @@
                  relativeToChangelogFile="true"
                  path="sql/migrations/v003/03_add_search_by_range.sql"/>
     </changeSet>
+    <changeSet id="83" author="bramb">
+        <sqlFile splitStatements="false"
+                 relativeToChangelogFile="true"
+                 path="sql/migrations/v003/04_change_int_to_float.sql"/>
+    </changeSet>
 
 </databaseChangeLog>

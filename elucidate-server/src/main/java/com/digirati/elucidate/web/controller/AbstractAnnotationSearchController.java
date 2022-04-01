@@ -229,8 +229,8 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     @NotNull
     @RequestMapping(value = REQUEST_PATH_RANGE, method = RequestMethod.GET)
     public ResponseEntity<?> getSearchByRange(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
-                                              @RequestParam(value = URLConstants.PARAM_RANGE_START, required = true) int rangeStart,
-                                              @RequestParam(value = URLConstants.PARAM_RANGE_END, required = true) int rangeEnd,
+                                              @RequestParam(value = URLConstants.PARAM_RANGE_START, required = true) float rangeStart,
+                                              @RequestParam(value = URLConstants.PARAM_RANGE_END, required = true) float rangeEnd,
                                               @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
                                               @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
                                               @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
@@ -263,8 +263,8 @@ public abstract class AbstractAnnotationSearchController<A extends AbstractAnnot
     @NotNull
     @RequestMapping(value = REQUEST_PATH_OVERLAP, method = RequestMethod.GET)
     public ResponseEntity<?> getSearchByOverlap(@RequestParam(value = URLConstants.PARAM_TARGET_ID, required = true) String targetId,
-                                                @RequestParam(value = URLConstants.PARAM_RANGE_START, required = true) int rangeStart,
-                                                @RequestParam(value = URLConstants.PARAM_RANGE_END, required = true) int rangeEnd,
+                                                @RequestParam(value = URLConstants.PARAM_RANGE_START, required = true) float rangeStart,
+                                                @RequestParam(value = URLConstants.PARAM_RANGE_END, required = true) float rangeEnd,
                                                 @Nullable @RequestParam(value = URLConstants.PARAM_PAGE, required = false) Integer page,
                                                 @RequestParam(value = URLConstants.PARAM_IRIS, required = false, defaultValue = "false") boolean iris,
                                                 @RequestParam(value = URLConstants.PARAM_DESC, required = false, defaultValue = "false") boolean descriptions,
