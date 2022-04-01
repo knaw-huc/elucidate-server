@@ -58,17 +58,25 @@ public abstract class AbstractAnnotationWriteController<A extends AbstractAnnota
         Status annotationStatus = annotationServiceResponse.getStatus();
 
         if (annotationStatus.equals(Status.ALREADY_EXISTS)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .header("X-Message", "this entity already exists")
+                    .body(null);
         }
 
         if (annotationStatus.equals(Status.NON_CONFORMANT)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
         }
 
         if (annotationStatus.equals(Status.OK)) {
             annotation = annotationServiceResponse.getObj();
             response.setHeader(HttpHeaders.LOCATION, (String) annotation.getJsonMap().get(JSONLDConstants.ATTRIBUTE_ID));
-            return ResponseEntity.status(HttpStatus.CREATED).body(annotation);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .header("X-Message","this is a test")
+                    .body(annotation);
         }
 
         throw new IllegalArgumentException(String.format("Unexpected service response status [%s]", annotationStatus));

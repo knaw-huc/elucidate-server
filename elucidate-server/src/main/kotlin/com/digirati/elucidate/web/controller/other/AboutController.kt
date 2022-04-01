@@ -1,5 +1,6 @@
 package com.digirati.elucidate.web.controller.other
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
@@ -8,10 +9,11 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import java.time.Instant
 import java.util.*
 
 @Controller(AboutController.CONTROLLER_NAME)
-@RequestMapping(value = ["/_about"])
+@RequestMapping(value = ["/_about2"])
 class AboutController {
 
     companion object {
@@ -21,6 +23,12 @@ class AboutController {
         private val objectMapper = ObjectMapper()
     }
 
+    data class About(
+        val version: String,
+        val startedAt: Instant,
+        val authEnabled: Boolean
+    )
+
     @Autowired
     lateinit var env: Environment
 
@@ -28,19 +36,19 @@ class AboutController {
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getAbout(): ResponseEntity<Any> {
-        val version = "v1.0.0"
-        val map: Map<String, Any> = mapOf(
-            "version" to version,
-            "startedAt" to startDate.toInstant().toString(),
-            "authEnabled" to env.getRequiredProperty(
-                "auth.enabled",
-                Boolean::class.java
+    fun getAbout(): ResponseEntity<About> =
+        ResponseEntity
+            .ok()
+            .header("X-Message", "Listen carefully, I will say this only once!")
+            .body(
+                About(
+                    version = "v1.0.0",
+                    startedAt = startDate.toInstant(),
+                    authEnabled = env.getRequiredProperty(
+                        "auth.enabled",
+                        Boolean::class.java
+                    )
+                )
             )
-
-        )
-        val json = objectMapper.writeValueAsString(map)
-        return ResponseEntity.ok(json)
-    }
 
 }

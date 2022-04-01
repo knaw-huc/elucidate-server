@@ -53,6 +53,6 @@ public abstract class AbstractAnnotationBatchController<B extends AbstractBatchO
         }
 
         batchOperation = serviceResponse.getObj();
-        return ResponseEntity.status(HttpStatus.OK).body(batchOperation);
+        return ResponseEntity.ok().body(batchOperation);
     }
 }

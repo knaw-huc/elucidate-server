@@ -65,6 +65,12 @@
             <groupId>com.github.jsonld-java</groupId>
             <artifactId>jsonld-java</artifactId>
             <version>${jsonld-java-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- JSON Dependencies -->
         <dependency>
@@ -234,11 +240,26 @@
         </dependency>
         <!-- elasticsearch dependencies -->
         <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>7.16.3</version>
+<!--            <version>${elasticsearch.version}</version>-->
+        </dependency>
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>7.16.3</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.jillesvangurp</groupId>
             <artifactId>es-kotlin-client</artifactId>
-            <version>1.1.9</version>
+            <version>${es-kotlin-client.version}</version>
         </dependency>
-
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch</groupId>-->
+<!--            <artifactId>elasticsearch</artifactId>-->
+<!--            <version>7.6.2</version>-->
+<!--        </dependency>-->
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>junit</groupId>
